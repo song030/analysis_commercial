@@ -1,0 +1,6 @@
+{
+  "host": "10.10.20.117",
+  "database": "db_test",
+  "user": "postgres",
+  "password": "1234"
+}
