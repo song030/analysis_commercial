@@ -130,16 +130,19 @@
   <data name="icon_combo_chart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_combo-chart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon_filter" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_filter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="icon_forward" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_forward.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_map" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_map.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_table" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_table.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sample_chart" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sample_chart.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
