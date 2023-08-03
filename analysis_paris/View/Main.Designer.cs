@@ -23,7 +23,7 @@
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
         private void InitializeComponent() {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnModeView = new System.Windows.Forms.Button();
@@ -134,6 +134,7 @@
             this.btnModeView.TabIndex = 0;
             this.btnModeView.Text = ">";
             this.btnModeView.UseVisualStyleBackColor = true;
+            this.btnModeView.Click += new System.EventHandler(this.btnModeView_Click);
             // 
             // btnMode1
             // 
@@ -228,7 +229,7 @@
             this.tblModeMenuWide.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tblModeMenuWide.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tblModeMenuWide.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModeMenuWide.Size = new System.Drawing.Size(160, 100);
+            this.tblModeMenuWide.Size = new System.Drawing.Size(160, 694);
             this.tblModeMenuWide.TabIndex = 0;
             // 
             // label1
@@ -475,8 +476,8 @@
             // 
             // Column1
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ControlDark;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.Column1.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column1.HeaderText = "Column1";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;

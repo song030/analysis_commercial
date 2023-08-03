@@ -6,5 +6,8 @@ namespace analysis_paris {
             InitializeComponent();
         }
 
+        private void btnModeView_Click(object sender, System.EventArgs e) {
+
+        }
     }
 }
