@@ -9,3 +9,14 @@ C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\analysis_par
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\analysis_paris.pdb
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.exe
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.pdb
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\bin\Debug\analysis_paris.exe.config
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\bin\Debug\analysis_paris.exe
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\bin\Debug\analysis_paris.pdb
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.AssemblyReference.cache
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.SuggestedBindingRedirects.cache
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.Main.resources
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.Properties.Resources.resources
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.GenerateResource.cache
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.CoreCompileInputs.cache
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.exe
+C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.pdb

@@ -8,12 +8,15 @@ namespace analysis_paris {
         private Button currentButton;
         private Timer gifTimer;
 
-        private bool hasPlayedOnce = false;
-
         public Main() {
             InitializeComponent();
+
+            // Gif 설정 이후 애니메이션 1회 재생
+            Gif_Start("sample_chart", new PictureBox());
+
         }
 
+        // 버튼 클릭 구현
         public void SetSelectedButtonUI(object button) {
             var btn = (Button)button;
             //Highlight Button
@@ -28,7 +31,6 @@ namespace analysis_paris {
             currentButton = btn;
         }
 
-        // methods
         /// <summary>
         /// 스플리터 슬라이드 애니메이션
         /// </summary>
@@ -105,17 +107,13 @@ namespace analysis_paris {
             catch (Exception e) { Console.WriteLine(e.Message); }
         }
 
-        private void Main_Load(object sender, EventArgs e) {
-            // Gif 설정 이후 애니메이션 1회 재생
-            Gif_Start();
-        }
-
-        private void Gif_Start() {
+        // gif 재생
+        private void Gif_Start(string gifName, PictureBox picture) {
             // GIF 파일을 리소스에서 가져오기
-            System.Drawing.Image gifImage = Properties.Resources.sample_chart; // 리소스 이름에 맞게 변경
+            Image gifImage = (Image)Properties.Resources.ResourceManager.GetObject($"{gifName}", System.Globalization.CultureInfo.CurrentUICulture);
 
             // PictureBox에 GIF 이미지 설정
-            pictureBox1.Image = gifImage;
+            picture.Image = gifImage;
 
             // Timer 설정
             gifTimer = new Timer();
@@ -126,10 +124,12 @@ namespace analysis_paris {
             gifTimer.Enabled = true;
         }
 
+        // 타이머 종료 시 gif 정지
         private void GifTimer_Tick(object sender, EventArgs e) {
             // Timer 중지
             gifTimer.Enabled = false;
-            pictureBox1.Enabled = false;
+            chartGifBox.Enabled = false;
         }
+
     }
 }
