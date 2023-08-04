@@ -6,10 +6,12 @@ using System.Windows.Forms;
 
 namespace analysis_paris.View {
     public partial class CheckedButton : Button {
+
         #region Properties
         private int _borderRadius;
         private bool _checkable;
         private bool _checked;
+
         private Color _checkedBackColor;
         private Color _uncheckedBackColor;
         private Color _checkedForeColor;
@@ -105,7 +107,7 @@ namespace analysis_paris.View {
         public CheckedButton() {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
-            this.Size = new Size(125, 40);
+            this.Size = new Size(150, 80);
 
             _uncheckedBackColor = Color.White;
             _uncheckedForeColor = Color.Black;
@@ -117,6 +119,8 @@ namespace analysis_paris.View {
         private void CheckedButton_Resize(object sender, EventArgs e) {
             if (_borderRadius > this.Height)
                 _borderRadius = this.Height;
+
+            this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, _borderRadius, _borderRadius));
         }
 
         // Methods

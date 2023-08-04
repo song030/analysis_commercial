@@ -25,33 +25,33 @@
         private void InitializeComponent() {
             this.splitMainBoard = new System.Windows.Forms.SplitContainer();
             this.splitModeMenu = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnMenuCollapse = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.lblSelectedBar = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnMenuCollapse = new System.Windows.Forms.Button();
             this.lblMainTableTitle = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
+            this.lblSubTableTitle = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.mapBrowser = new System.Windows.Forms.WebBrowser();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chartGifBox = new System.Windows.Forms.PictureBox();
             this.headPanel = new System.Windows.Forms.Panel();
             this.lblCurrentTitle = new System.Windows.Forms.Label();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.lblSubTableTitle = new System.Windows.Forms.Label();
-            this.mapBrowser = new System.Windows.Forms.WebBrowser();
-            this.chartGifBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkedButton1 = new analysis_paris.View.CheckedButton();
-            this.checkedButton3 = new analysis_paris.View.CheckedButton();
-            this.checkedButton2 = new analysis_paris.View.CheckedButton();
-            this.checkedButton6 = new analysis_paris.View.CheckedButton();
-            this.checkedButton4 = new analysis_paris.View.CheckedButton();
-            this.checkedButton5 = new analysis_paris.View.CheckedButton();
             this.checkedButton9 = new analysis_paris.View.CheckedButton();
             this.checkedButton8 = new analysis_paris.View.CheckedButton();
             this.checkedButton7 = new analysis_paris.View.CheckedButton();
-            this.lblSelectedBar = new System.Windows.Forms.Label();
+            this.checkedButton1 = new analysis_paris.View.CheckedButton();
+            this.checkedButton2 = new analysis_paris.View.CheckedButton();
+            this.checkedButton3 = new analysis_paris.View.CheckedButton();
+            this.checkedButton4 = new analysis_paris.View.CheckedButton();
+            this.checkedButton5 = new analysis_paris.View.CheckedButton();
+            this.checkedButton6 = new analysis_paris.View.CheckedButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
             this.splitMainBoard.Panel2.SuspendLayout();
@@ -60,6 +60,8 @@
             this.splitModeMenu.Panel1.SuspendLayout();
             this.splitModeMenu.Panel2.SuspendLayout();
             this.splitModeMenu.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -74,11 +76,9 @@
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            this.headPanel.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartGifBox)).BeginInit();
+            this.headPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitMainBoard
@@ -105,7 +105,7 @@
             this.splitModeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.splitModeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitModeMenu.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitModeMenu.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.splitModeMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.splitModeMenu.ForeColor = System.Drawing.Color.White;
             this.splitModeMenu.Location = new System.Drawing.Point(0, 0);
             this.splitModeMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -122,6 +122,96 @@
             this.splitModeMenu.SplitterDistance = 94;
             this.splitModeMenu.SplitterWidth = 1;
             this.splitModeMenu.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.btnMenuCollapse, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnExit, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.lblSelectedBar, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.checkedButton1, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.checkedButton2, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.checkedButton3, 1, 4);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 7;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 280F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(94, 603);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // btnMenuCollapse
+            // 
+            this.btnMenuCollapse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMenuCollapse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatAppearance.BorderSize = 0;
+            this.btnMenuCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMenuCollapse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.btnMenuCollapse.Location = new System.Drawing.Point(11, 8);
+            this.btnMenuCollapse.Name = "btnMenuCollapse";
+            this.btnMenuCollapse.Size = new System.Drawing.Size(80, 33);
+            this.btnMenuCollapse.TabIndex = 0;
+            this.btnMenuCollapse.Text = "메뉴";
+            this.btnMenuCollapse.UseVisualStyleBackColor = true;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.btnExit.Location = new System.Drawing.Point(11, 561);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(80, 33);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "종료";
+            this.btnExit.UseVisualStyleBackColor = true;
+            // 
+            // lblSelectedBar
+            // 
+            this.lblSelectedBar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSelectedBar.AutoSize = true;
+            this.lblSelectedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.lblSelectedBar.Location = new System.Drawing.Point(0, 113);
+            this.lblSelectedBar.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSelectedBar.MaximumSize = new System.Drawing.Size(4, 48);
+            this.lblSelectedBar.MinimumSize = new System.Drawing.Size(4, 48);
+            this.lblSelectedBar.Name = "lblSelectedBar";
+            this.lblSelectedBar.Size = new System.Drawing.Size(4, 48);
+            this.lblSelectedBar.TabIndex = 5;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.checkedButton4, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.checkedButton5, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.checkedButton6, 0, 3);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 330F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(137, 603);
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
@@ -157,46 +247,14 @@
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.Tag = "276";
             // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.btnExit.Location = new System.Drawing.Point(11, 561);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(80, 33);
-            this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "종료";
-            this.btnExit.UseVisualStyleBackColor = true;
-            // 
-            // btnMenuCollapse
-            // 
-            this.btnMenuCollapse.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMenuCollapse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatAppearance.BorderSize = 0;
-            this.btnMenuCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenuCollapse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnMenuCollapse.Location = new System.Drawing.Point(11, 8);
-            this.btnMenuCollapse.Name = "btnMenuCollapse";
-            this.btnMenuCollapse.Size = new System.Drawing.Size(80, 33);
-            this.btnMenuCollapse.TabIndex = 0;
-            this.btnMenuCollapse.Text = "메뉴";
-            this.btnMenuCollapse.UseVisualStyleBackColor = true;
-            // 
             // lblMainTableTitle
             // 
             this.lblMainTableTitle.AutoSize = true;
-            this.lblMainTableTitle.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblMainTableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMainTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.lblMainTableTitle.Location = new System.Drawing.Point(3, 0);
             this.lblMainTableTitle.Name = "lblMainTableTitle";
-            this.lblMainTableTitle.Size = new System.Drawing.Size(68, 17);
+            this.lblMainTableTitle.Size = new System.Drawing.Size(64, 18);
             this.lblMainTableTitle.TabIndex = 1;
             this.lblMainTableTitle.Text = "검색 결과";
             // 
@@ -225,7 +283,7 @@
             this.splitContainer3.Panel2.Controls.Add(this.label1);
             this.splitContainer3.Panel2.Controls.Add(this.chartGifBox);
             this.splitContainer3.Size = new System.Drawing.Size(550, 552);
-            this.splitContainer3.SplitterDistance = 220;
+            this.splitContainer3.SplitterDistance = 219;
             this.splitContainer3.TabIndex = 0;
             this.splitContainer3.Tag = "220";
             // 
@@ -243,10 +301,61 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.mapBrowser);
-            this.splitContainer4.Size = new System.Drawing.Size(550, 220);
+            this.splitContainer4.Size = new System.Drawing.Size(550, 219);
             this.splitContainer4.SplitterDistance = 292;
             this.splitContainer4.TabIndex = 0;
             this.splitContainer4.Tag = "292";
+            // 
+            // lblSubTableTitle
+            // 
+            this.lblSubTableTitle.AutoSize = true;
+            this.lblSubTableTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSubTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.lblSubTableTitle.Location = new System.Drawing.Point(3, 3);
+            this.lblSubTableTitle.Name = "lblSubTableTitle";
+            this.lblSubTableTitle.Size = new System.Drawing.Size(64, 18);
+            this.lblSubTableTitle.TabIndex = 1;
+            this.lblSubTableTitle.Text = "주변 정보";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(1, 32);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(290, 188);
+            this.dataGridView2.TabIndex = 0;
+            // 
+            // mapBrowser
+            // 
+            this.mapBrowser.Dock = System.Windows.Forms.DockStyle.Right;
+            this.mapBrowser.Location = new System.Drawing.Point(4, 0);
+            this.mapBrowser.Margin = new System.Windows.Forms.Padding(0);
+            this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.mapBrowser.Name = "mapBrowser";
+            this.mapBrowser.Size = new System.Drawing.Size(250, 219);
+            this.mapBrowser.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 18);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "분석 차트";
+            // 
+            // chartGifBox
+            // 
+            this.chartGifBox.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.chartGifBox.Location = new System.Drawing.Point(0, 38);
+            this.chartGifBox.Name = "chartGifBox";
+            this.chartGifBox.Size = new System.Drawing.Size(550, 291);
+            this.chartGifBox.TabIndex = 0;
+            this.chartGifBox.TabStop = false;
             // 
             // headPanel
             // 
@@ -264,247 +373,14 @@
             // 
             this.lblCurrentTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblCurrentTitle.AutoSize = true;
-            this.lblCurrentTitle.Font = new System.Drawing.Font("나눔고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblCurrentTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblCurrentTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.lblCurrentTitle.Location = new System.Drawing.Point(3, 10);
             this.lblCurrentTitle.Name = "lblCurrentTitle";
-            this.lblCurrentTitle.Size = new System.Drawing.Size(107, 19);
+            this.lblCurrentTitle.Size = new System.Drawing.Size(89, 20);
             this.lblCurrentTitle.TabIndex = 1;
             this.lblCurrentTitle.Text = "검색 모드 제목";
             this.lblCurrentTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.btnMenuCollapse, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnExit, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.checkedButton1, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.checkedButton3, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.checkedButton2, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.lblSelectedBar, 0, 2);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 7;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 280F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(94, 603);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.checkedButton6, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.checkedButton4, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.checkedButton5, 0, 2);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 5;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 330F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(137, 603);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(1, 32);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(290, 188);
-            this.dataGridView2.TabIndex = 0;
-            // 
-            // lblSubTableTitle
-            // 
-            this.lblSubTableTitle.AutoSize = true;
-            this.lblSubTableTitle.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblSubTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblSubTableTitle.Location = new System.Drawing.Point(3, 3);
-            this.lblSubTableTitle.Name = "lblSubTableTitle";
-            this.lblSubTableTitle.Size = new System.Drawing.Size(68, 17);
-            this.lblSubTableTitle.TabIndex = 1;
-            this.lblSubTableTitle.Text = "주변 정보";
-            // 
-            // mapBrowser
-            // 
-            this.mapBrowser.Dock = System.Windows.Forms.DockStyle.Right;
-            this.mapBrowser.Location = new System.Drawing.Point(4, 0);
-            this.mapBrowser.Margin = new System.Windows.Forms.Padding(0);
-            this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.mapBrowser.Name = "mapBrowser";
-            this.mapBrowser.Size = new System.Drawing.Size(250, 220);
-            this.mapBrowser.TabIndex = 0;
-            // 
-            // chartGifBox
-            // 
-            this.chartGifBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.chartGifBox.Location = new System.Drawing.Point(0, 37);
-            this.chartGifBox.Name = "chartGifBox";
-            this.chartGifBox.Size = new System.Drawing.Size(550, 291);
-            this.chartGifBox.TabIndex = 0;
-            this.chartGifBox.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 17);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "분석 차트";
-            // 
-            // checkedButton1
-            // 
-            this.checkedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton1.BorderRadius = 0;
-            this.checkedButton1.Checkable = true;
-            this.checkedButton1.Checked = false;
-            this.checkedButton1.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton1.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton1.FlatAppearance.BorderSize = 0;
-            this.checkedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton1.ForeColor = System.Drawing.Color.White;
-            this.checkedButton1.Location = new System.Drawing.Point(8, 110);
-            this.checkedButton1.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton1.Name = "checkedButton1";
-            this.checkedButton1.Size = new System.Drawing.Size(86, 40);
-            this.checkedButton1.TabIndex = 1;
-            this.checkedButton1.TabStop = false;
-            this.checkedButton1.Text = "Mode";
-            this.checkedButton1.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton1.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton1.UseVisualStyleBackColor = false;
-            // 
-            // checkedButton3
-            // 
-            this.checkedButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton3.BorderRadius = 0;
-            this.checkedButton3.Checkable = true;
-            this.checkedButton3.Checked = false;
-            this.checkedButton3.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton3.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton3.FlatAppearance.BorderSize = 0;
-            this.checkedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton3.ForeColor = System.Drawing.Color.White;
-            this.checkedButton3.Location = new System.Drawing.Point(8, 218);
-            this.checkedButton3.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton3.Name = "checkedButton3";
-            this.checkedButton3.Size = new System.Drawing.Size(86, 40);
-            this.checkedButton3.TabIndex = 3;
-            this.checkedButton3.TabStop = false;
-            this.checkedButton3.Text = "Mode";
-            this.checkedButton3.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton3.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton3.UseVisualStyleBackColor = false;
-            // 
-            // checkedButton2
-            // 
-            this.checkedButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton2.BorderRadius = 0;
-            this.checkedButton2.Checkable = true;
-            this.checkedButton2.Checked = false;
-            this.checkedButton2.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton2.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton2.FlatAppearance.BorderSize = 0;
-            this.checkedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton2.ForeColor = System.Drawing.Color.White;
-            this.checkedButton2.Location = new System.Drawing.Point(8, 164);
-            this.checkedButton2.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton2.Name = "checkedButton2";
-            this.checkedButton2.Size = new System.Drawing.Size(86, 40);
-            this.checkedButton2.TabIndex = 2;
-            this.checkedButton2.TabStop = false;
-            this.checkedButton2.Text = "Mode";
-            this.checkedButton2.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton2.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton2.UseVisualStyleBackColor = false;
-            // 
-            // checkedButton6
-            // 
-            this.checkedButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton6.BorderRadius = 0;
-            this.checkedButton6.Checkable = true;
-            this.checkedButton6.Checked = false;
-            this.checkedButton6.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton6.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton6.FlatAppearance.BorderSize = 0;
-            this.checkedButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton6.ForeColor = System.Drawing.Color.White;
-            this.checkedButton6.Location = new System.Drawing.Point(0, 218);
-            this.checkedButton6.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton6.Name = "checkedButton6";
-            this.checkedButton6.Size = new System.Drawing.Size(137, 40);
-            this.checkedButton6.TabIndex = 2;
-            this.checkedButton6.TabStop = false;
-            this.checkedButton6.Text = "checkedButton6";
-            this.checkedButton6.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton6.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton6.UseVisualStyleBackColor = false;
-            // 
-            // checkedButton4
-            // 
-            this.checkedButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton4.BorderRadius = 0;
-            this.checkedButton4.Checkable = true;
-            this.checkedButton4.Checked = false;
-            this.checkedButton4.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton4.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton4.FlatAppearance.BorderSize = 0;
-            this.checkedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton4.ForeColor = System.Drawing.Color.White;
-            this.checkedButton4.Location = new System.Drawing.Point(0, 110);
-            this.checkedButton4.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton4.Name = "checkedButton4";
-            this.checkedButton4.Size = new System.Drawing.Size(137, 40);
-            this.checkedButton4.TabIndex = 0;
-            this.checkedButton4.TabStop = false;
-            this.checkedButton4.Text = "checkedButton4";
-            this.checkedButton4.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton4.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton4.UseVisualStyleBackColor = false;
-            // 
-            // checkedButton5
-            // 
-            this.checkedButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton5.BorderRadius = 0;
-            this.checkedButton5.Checkable = true;
-            this.checkedButton5.Checked = false;
-            this.checkedButton5.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton5.CheckedForeColor = System.Drawing.Color.White;
-            this.checkedButton5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkedButton5.FlatAppearance.BorderSize = 0;
-            this.checkedButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton5.ForeColor = System.Drawing.Color.White;
-            this.checkedButton5.Location = new System.Drawing.Point(0, 164);
-            this.checkedButton5.Margin = new System.Windows.Forms.Padding(0);
-            this.checkedButton5.Name = "checkedButton5";
-            this.checkedButton5.Size = new System.Drawing.Size(137, 40);
-            this.checkedButton5.TabIndex = 1;
-            this.checkedButton5.TabStop = false;
-            this.checkedButton5.Text = "checkedButton5";
-            this.checkedButton5.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.checkedButton5.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.checkedButton5.UseVisualStyleBackColor = false;
             // 
             // checkedButton9
             // 
@@ -517,7 +393,7 @@
             this.checkedButton9.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.checkedButton9.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton9.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkedButton9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.checkedButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton9.Location = new System.Drawing.Point(529, 0);
             this.checkedButton9.Margin = new System.Windows.Forms.Padding(0);
@@ -540,7 +416,7 @@
             this.checkedButton8.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.checkedButton8.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton8.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkedButton8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.checkedButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton8.Location = new System.Drawing.Point(629, 0);
             this.checkedButton8.Margin = new System.Windows.Forms.Padding(0);
@@ -563,7 +439,7 @@
             this.checkedButton7.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.checkedButton7.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkedButton7.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.checkedButton7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.checkedButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton7.Location = new System.Drawing.Point(729, 0);
             this.checkedButton7.Margin = new System.Windows.Forms.Padding(0);
@@ -575,16 +451,125 @@
             this.checkedButton7.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.checkedButton7.UseVisualStyleBackColor = false;
             // 
-            // lblSelectedBar
+            // checkedButton1
             // 
-            this.lblSelectedBar.AutoSize = true;
-            this.lblSelectedBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.lblSelectedBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSelectedBar.Location = new System.Drawing.Point(0, 110);
-            this.lblSelectedBar.Margin = new System.Windows.Forms.Padding(0);
-            this.lblSelectedBar.Name = "lblSelectedBar";
-            this.lblSelectedBar.Size = new System.Drawing.Size(8, 54);
-            this.lblSelectedBar.TabIndex = 5;
+            this.checkedButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton1.BorderRadius = 0;
+            this.checkedButton1.Checkable = false;
+            this.checkedButton1.Checked = false;
+            this.checkedButton1.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton1.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton1.FlatAppearance.BorderSize = 0;
+            this.checkedButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton1.Location = new System.Drawing.Point(11, 113);
+            this.checkedButton1.Name = "checkedButton1";
+            this.checkedButton1.Size = new System.Drawing.Size(80, 48);
+            this.checkedButton1.TabIndex = 6;
+            this.checkedButton1.Text = "checkedButton1";
+            this.checkedButton1.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton1.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton1.UseVisualStyleBackColor = false;
+            // 
+            // checkedButton2
+            // 
+            this.checkedButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton2.BorderRadius = 0;
+            this.checkedButton2.Checkable = false;
+            this.checkedButton2.Checked = false;
+            this.checkedButton2.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton2.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton2.FlatAppearance.BorderSize = 0;
+            this.checkedButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton2.Location = new System.Drawing.Point(11, 167);
+            this.checkedButton2.Name = "checkedButton2";
+            this.checkedButton2.Size = new System.Drawing.Size(80, 48);
+            this.checkedButton2.TabIndex = 7;
+            this.checkedButton2.Text = "checkedButton2";
+            this.checkedButton2.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton2.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton2.UseVisualStyleBackColor = false;
+            // 
+            // checkedButton3
+            // 
+            this.checkedButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton3.BorderRadius = 0;
+            this.checkedButton3.Checkable = false;
+            this.checkedButton3.Checked = false;
+            this.checkedButton3.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton3.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton3.FlatAppearance.BorderSize = 0;
+            this.checkedButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton3.Location = new System.Drawing.Point(11, 221);
+            this.checkedButton3.Name = "checkedButton3";
+            this.checkedButton3.Size = new System.Drawing.Size(80, 48);
+            this.checkedButton3.TabIndex = 8;
+            this.checkedButton3.Text = "checkedButton3";
+            this.checkedButton3.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton3.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton3.UseVisualStyleBackColor = false;
+            // 
+            // checkedButton4
+            // 
+            this.checkedButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton4.BorderRadius = 0;
+            this.checkedButton4.Checkable = false;
+            this.checkedButton4.Checked = false;
+            this.checkedButton4.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton4.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton4.FlatAppearance.BorderSize = 0;
+            this.checkedButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton4.Location = new System.Drawing.Point(3, 113);
+            this.checkedButton4.Name = "checkedButton4";
+            this.checkedButton4.Size = new System.Drawing.Size(131, 48);
+            this.checkedButton4.TabIndex = 3;
+            this.checkedButton4.Text = "checkedButton4";
+            this.checkedButton4.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton4.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton4.UseVisualStyleBackColor = false;
+            // 
+            // checkedButton5
+            // 
+            this.checkedButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton5.BorderRadius = 0;
+            this.checkedButton5.Checkable = false;
+            this.checkedButton5.Checked = false;
+            this.checkedButton5.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton5.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton5.FlatAppearance.BorderSize = 0;
+            this.checkedButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton5.Location = new System.Drawing.Point(3, 167);
+            this.checkedButton5.Name = "checkedButton5";
+            this.checkedButton5.Size = new System.Drawing.Size(131, 48);
+            this.checkedButton5.TabIndex = 4;
+            this.checkedButton5.Text = "checkedButton5";
+            this.checkedButton5.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton5.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton5.UseVisualStyleBackColor = false;
+            // 
+            // checkedButton6
+            // 
+            this.checkedButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton6.BorderRadius = 0;
+            this.checkedButton6.Checkable = false;
+            this.checkedButton6.Checked = false;
+            this.checkedButton6.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton6.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton6.FlatAppearance.BorderSize = 0;
+            this.checkedButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkedButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton6.Location = new System.Drawing.Point(3, 221);
+            this.checkedButton6.Name = "checkedButton6";
+            this.checkedButton6.Size = new System.Drawing.Size(131, 48);
+            this.checkedButton6.TabIndex = 5;
+            this.checkedButton6.Text = "checkedButton6";
+            this.checkedButton6.UncheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.checkedButton6.UncheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.checkedButton6.UseVisualStyleBackColor = false;
             // 
             // Main
             // 
@@ -608,6 +593,9 @@
             this.splitModeMenu.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitModeMenu)).EndInit();
             this.splitModeMenu.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
@@ -625,13 +613,10 @@
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            this.headPanel.ResumeLayout(false);
-            this.headPanel.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartGifBox)).EndInit();
+            this.headPanel.ResumeLayout(false);
+            this.headPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -644,14 +629,8 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private View.CheckedButton checkedButton3;
-        private View.CheckedButton checkedButton2;
-        private View.CheckedButton checkedButton1;
         private System.Windows.Forms.Button btnMenuCollapse;
         private System.Windows.Forms.Button btnExit;
-        private View.CheckedButton checkedButton6;
-        private View.CheckedButton checkedButton5;
-        private View.CheckedButton checkedButton4;
         private System.Windows.Forms.Panel headPanel;
         private System.Windows.Forms.Label lblCurrentTitle;
         private System.Windows.Forms.Label lblMainTableTitle;
@@ -667,6 +646,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox chartGifBox;
         private System.Windows.Forms.Label lblSelectedBar;
+        private View.CheckedButton checkedButton1;
+        private View.CheckedButton checkedButton2;
+        private View.CheckedButton checkedButton3;
+        private View.CheckedButton checkedButton4;
+        private View.CheckedButton checkedButton5;
+        private View.CheckedButton checkedButton6;
     }
 }
 
