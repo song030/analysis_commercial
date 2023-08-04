@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MarkeAnalysis.Factory {
+namespace analysis_paris.Factory {
     // Product (제품) 인터페이스
     public interface IButton {
         void Render();

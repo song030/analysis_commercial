@@ -1,107 +1,26 @@
-﻿using System;
+﻿using analysis_paris.View;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace analysis_paris {
     public partial class Main : Form {
 
-        private Button currentMode;
+        private CheckedButton currentMode;
         private Timer gifTimer;
 
+        // Constructor
         public Main() {
             InitializeComponent();
-
-            // Gif 설정 이후 애니메이션 1회 재생
-            Gif_Start("sample_chart", new PictureBox());
-
         }
 
-        // 버튼 클릭 구현
-        public void ModeSelected(object button) {
-            var btn = (Button)button;
+        // 화면 출력 시 초기화
+        private void Main_Load(object sender, EventArgs e) {
+            btnTable.Checked = true;
+            splitTableMap.Panel2Collapsed = true;
+            splitChart.Panel2Collapsed = true;
 
-            // button comparison
-            if (currentMode != null && currentMode != btn) {
-
-                currentMode = btn;
-            }
-
-        }
-
-        /// <summary>
-        /// 스플리터 슬라이드 애니메이션
-        /// </summary>
-        /// <param name="splitter">대상 스플리터</param>
-        /// <param name="isTargetPanel1">슬라이드할 패널이 1인지 여부</param>
-        /// <param name="stepSize">슬라이드 간격 : 클수록 빨라짐</param>
-        public void SplitterAnimationCollapse(SplitContainer splitter, bool isTargetPanel1, int stepSize) {
-            try {
-                int originalDistance = Convert.ToInt32(splitter.Tag); // 태그에 저장한 스플리터 기준 위치
-                int currentDistance = splitter.SplitterDistance; // 현재 스플리터 위치
-
-                if (isTargetPanel1) { // panel1 토글
-
-                    if (splitter.Panel1Collapsed) { // panel1 펼치기
-                        splitter.Panel1Collapsed = false;
-                        while (true) {
-                            currentDistance += stepSize;
-
-                            if (currentDistance >= originalDistance) {
-                                splitter.SplitterDistance = originalDistance;
-                                break;
-                            }
-
-                            splitter.SplitterDistance = currentDistance;
-                            Application.DoEvents();
-                        }
-                    }
-                    else { // panel1 접기
-                        while (true) {
-                            currentDistance -= stepSize;
-
-                            if (currentDistance <= 0) {
-                                splitter.Panel1Collapsed = true;
-                                break;
-                            }
-
-                            splitter.SplitterDistance = currentDistance;
-                            Application.DoEvents();
-                        }
-                    }
-                }
-                else { // panel2 토글
-
-                    if (splitter.Panel2Collapsed) { // panel2 펼치기
-                        splitter.Panel2Collapsed = false;
-                        splitter.SplitterDistance = splitter.Width;
-
-                        while (true) {
-                            currentDistance -= stepSize;
-
-                            if (currentDistance <= originalDistance) {
-                                splitter.SplitterDistance = originalDistance;
-                                break;
-                            }
-
-                            splitter.SplitterDistance = currentDistance;
-                            Application.DoEvents();
-                        }
-                    }
-                    else { // panel2 접기
-                        while (true) {
-                            currentDistance += stepSize;
-
-                            if (currentDistance >= splitter.Width) {
-                                splitter.Panel2Collapsed = true;
-                            }
-
-                            splitter.SplitterDistance = currentDistance;
-                            Application.DoEvents();
-                        }
-                    }
-                }
-            }
-            catch (Exception e) { Console.WriteLine(e.Message); }
+            mapBrowser.Navigate("http://song030s.dothome.co.kr/map_test.html");
         }
 
         // gif 재생
@@ -128,10 +47,122 @@ namespace analysis_paris {
             chartGifBox.Enabled = false;
         }
 
+        // 와이드 메뉴 활성화 상태 전환
+        private void btnMenuCollapse_Click(object sender, EventArgs e) {
+            if (splitMainBoard.Panel1Collapsed) {
+                splitMainBoard.Panel1Collapsed = false;
+            }
+            else {
+                splitMainBoard.Panel1Collapsed = true;
+            }
+        }
+
+        // 그래프 활성화 상태 전환
         private void btnChart_Click(object sender, EventArgs e) {
-            if (btnChart.Checked && ) {
+            if (btnChart.Checked && splitChart.Panel2Collapsed) {
+                // 전체 비활성화 상태였을 때
+                if (splitDataBoard.Panel2Collapsed) {
+                    splitChart.Panel1Collapsed = true;
+                    splitDataBoard.Panel2Collapsed = false;
+                }
+
+                splitChart.Panel2Collapsed = false;
+            }
+            else if (!btnChart.Checked && !splitChart.Panel2Collapsed) {
+                splitChart.Panel2Collapsed = true;
+
+                // 선택 상태 확인
+                if (!btnMap.Checked && !btnTable.Checked) {
+                    splitDataBoard.Panel2Collapsed = true;
+                    return;
+                }
+            }
+        }
+
+        // 맵 브라우저 활성화 상태 전환
+        private void btnMap_Click(object sender, EventArgs e) {
+            if (btnMap.Checked && splitTableMap.Panel2Collapsed) {
+                // 전체 비활성화 상태였을 때
+                if (splitDataBoard.Panel2Collapsed) {
+                    splitTableMap.Panel1Collapsed = true;
+                    splitDataBoard.Panel2Collapsed = false;
+                }
+
+                splitTableMap.Panel2Collapsed = false;
+            }
+            else if (!btnMap.Checked && !splitTableMap.Panel2Collapsed) {
+                splitTableMap.Panel2Collapsed = true;
+
+                // 선택 상태 확인
+                if (!btnTable.Checked && !btnChart.Checked) {
+                    splitDataBoard.Panel2Collapsed = true;
+                    return;
+                }
+            }
+        }
+
+        // 주변 정보 테이블 활성화 상태 전환
+        private void btnTable_Click(object sender, EventArgs e) {
+            if (btnTable.Checked && splitTableMap.Panel1Collapsed) {
+                // 전체 비활성화 상태였을 때
+                if (splitDataBoard.Panel2Collapsed) {
+                    splitTableMap.Panel2Collapsed = true;
+                    splitDataBoard.Panel2Collapsed = false;
+                }
+                splitTableMap.Panel1Collapsed = false;
+            }
+            else if (!btnTable.Checked && !splitTableMap.Panel1Collapsed) {
+                splitTableMap.Panel1Collapsed = true;
+
+                // 선택 상태 확인
+                if (!btnMap.Checked && !btnChart.Checked) {
+                    splitDataBoard.Panel2Collapsed = true;
+                    return;
+                }
+            }
+        }
+
+        // 현재 활성화된 버튼을 확인한 후 해당 영역을 활성화한다. → 버튼 클릭 이벤트 추려보기
+        //private void BoardCategory_Change() {
+        //    List<CheckedButton> categoryButtons = new List<CheckedButton> { btnTable, btnMap, btnChart };
+        //    foreach (var button in categoryButtons) {
+        //        if (!button.Checked) {
+
+        //        }
+        //    }
+        //}
+
+        // 좌표 검색 버튼 클릭 시 맵 브라우저를 전면 출력한다.
+        private void btnCoordinate_Click(object sender, EventArgs e) {
+
+            CheckedButton button = (CheckedButton)sender;
+
+            // 무조건 하나의 버튼이 클릭되어 있어야 한다.
+            if (button == currentMode) {
+                button.Checked = true;
+                return;
+            }
+            else if (button != currentMode) {
+                currentMode = button;
 
             }
+
+            // 하나의 모드를 선택 하면 다른 모드 버튼은 선택 해제한다.
+
+            // 좌표 검색 버튼 클릭 시 맵 브라우저 전체 출력
+            //if (btnCoordinate.Checked && !splitDataBoard.Panel1Collapsed) {
+            //    lblCoordinateBar.Visible = true;
+
+            //    btnTable.Checked = false;
+            //    btnMap.Checked = true;
+            //    btnChart.Checked = false;
+
+            //    splitTableMap.Panel1Collapsed = true;
+            //    splitTableMap.Panel2Collapsed = false;  // 지도만 보여주기
+            //    splitChart.Panel2Collapsed = true;
+            //    splitDataBoard.Panel1Collapsed = true;
+            //    splitMainBoard.Panel1Collapsed = true;
+            //}
         }
     }
 }

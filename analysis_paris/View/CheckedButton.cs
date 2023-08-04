@@ -27,10 +27,10 @@ namespace analysis_paris.View {
             set {
                 _checkable = value;
                 if (_checkable) {
-                    this.Click += CheckedChange;
+                    this.Click += Button_Click;
                 }
                 else {
-                    this.Click -= CheckedChange;
+                    this.Click -= Button_Click;
                 }
             }
         }
@@ -49,7 +49,10 @@ namespace analysis_paris.View {
         [Category("Custom Props")]
         public bool Checked {
             get { return _checked; }
-            set { _checked = value; }
+            set {
+                _checked = value;
+                CheckedChange();
+            }
         }
 
         [Category("Custom Props")]
@@ -102,6 +105,7 @@ namespace analysis_paris.View {
                 }
             }
         }
+        #endregion
 
         // Constructor
         public CheckedButton() {
@@ -116,6 +120,7 @@ namespace analysis_paris.View {
             this.Resize += CheckedButton_Resize;
         }
 
+        // Methods
         private void CheckedButton_Resize(object sender, EventArgs e) {
             if (_borderRadius > this.Height)
                 _borderRadius = this.Height;
@@ -123,20 +128,27 @@ namespace analysis_paris.View {
             this.Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, _borderRadius, _borderRadius));
         }
 
-        // Methods
-        private void CheckedChange(object sender, EventArgs e) {
+        private void Button_Click(object sender, EventArgs e) {
             if (_checked == true) {
                 this.Checked = false;
+            }
+            else {
+                this.Checked = true;
+            }
+
+            CheckedChange();
+        }
+
+        private void CheckedChange() {
+            if (_checked == false) {
                 this.BackColor = _uncheckedBackColor;
                 this.ForeColor = _uncheckedForeColor;
             }
             else {
-                this.Checked = true;
                 this.BackColor = _checkedBackColor;
                 this.ForeColor = _checkedForeColor;
             }
         }
-        #endregion
 
     }
 }

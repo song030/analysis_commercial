@@ -20,3 +20,4 @@ C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_pari
 C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.CoreCompileInputs.cache
 C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.exe
 C:\Users\user\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.pdb
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.ModeControl.resources
