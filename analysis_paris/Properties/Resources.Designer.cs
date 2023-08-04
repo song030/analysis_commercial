@@ -103,6 +103,16 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_eiffel {
+            get {
+                object obj = ResourceManager.GetObject("icon_eiffel", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_forward {
             get {
                 object obj = ResourceManager.GetObject("icon_forward", resourceCulture);
@@ -116,16 +126,6 @@ namespace analysis_paris.Properties {
         internal static System.Drawing.Bitmap icon_map {
             get {
                 object obj = ResourceManager.GetObject("icon_map", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_search {
-            get {
-                object obj = ResourceManager.GetObject("icon_search", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

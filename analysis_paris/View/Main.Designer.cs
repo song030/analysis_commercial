@@ -26,10 +26,15 @@
             this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.splitMainBoard = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonEventTest = new System.Windows.Forms.Button();
             this.layoutMainBoard = new System.Windows.Forms.TableLayoutPanel();
             this.splitDataBoard = new System.Windows.Forms.SplitContainer();
             this.layoutMainTable = new System.Windows.Forms.TableLayoutPanel();
             this.lblMainTableTitle = new System.Windows.Forms.Label();
+            this.flowSearchList = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnSearch = new CustomControls.RoundedButton();
+            this.searchBox = new System.Windows.Forms.TextBox();
             this.splitChart = new System.Windows.Forms.SplitContainer();
             this.splitTableMap = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -40,27 +45,28 @@
             this.chartGifBox = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnMenuCollapse = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnChart = new analysis_paris.View.CheckedButton();
             this.btnTable = new analysis_paris.View.CheckedButton();
             this.btnMap = new analysis_paris.View.CheckedButton();
-            this.modeControl1 = new analysis_paris.View.ModeControl();
-            this.modeControl2 = new analysis_paris.View.ModeControl();
-            this.modeControl3 = new analysis_paris.View.ModeControl();
+            this.lblProjectTitle = new System.Windows.Forms.Label();
+            this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnMenuCollapse = new System.Windows.Forms.Button();
+            this.listItemControl1 = new analysis_paris.View.ListItemControl();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
             this.splitMainBoard.Panel2.SuspendLayout();
             this.splitMainBoard.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.layoutMainBoard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitDataBoard)).BeginInit();
             this.splitDataBoard.Panel1.SuspendLayout();
             this.splitDataBoard.Panel2.SuspendLayout();
             this.splitDataBoard.SuspendLayout();
             this.layoutMainTable.SuspendLayout();
+            this.flowSearchList.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitChart)).BeginInit();
             this.splitChart.Panel1.SuspendLayout();
             this.splitChart.Panel2.SuspendLayout();
@@ -91,7 +97,7 @@
             this.tableLayoutMain.Name = "tableLayoutMain";
             this.tableLayoutMain.RowCount = 1;
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.Size = new System.Drawing.Size(1072, 603);
+            this.tableLayoutMain.Size = new System.Drawing.Size(1152, 648);
             this.tableLayoutMain.TabIndex = 0;
             // 
             // splitMainBoard
@@ -109,8 +115,8 @@
             // splitMainBoard.Panel2
             // 
             this.splitMainBoard.Panel2.Controls.Add(this.layoutMainBoard);
-            this.splitMainBoard.Size = new System.Drawing.Size(1000, 603);
-            this.splitMainBoard.SplitterDistance = 144;
+            this.splitMainBoard.Size = new System.Drawing.Size(1080, 648);
+            this.splitMainBoard.SplitterDistance = 114;
             this.splitMainBoard.TabIndex = 144;
             this.splitMainBoard.Tag = "";
             // 
@@ -119,12 +125,14 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.buttonEventTest, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
+            this.tableLayoutPanel1.RowCount = 10;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
@@ -133,13 +141,31 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(144, 603);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(114, 648);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // buttonEventTest
+            // 
+            this.buttonEventTest.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.buttonEventTest.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.buttonEventTest.FlatAppearance.BorderSize = 0;
+            this.buttonEventTest.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.buttonEventTest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.buttonEventTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEventTest.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.buttonEventTest.ForeColor = System.Drawing.Color.White;
+            this.buttonEventTest.Location = new System.Drawing.Point(19, 17);
+            this.buttonEventTest.Name = "buttonEventTest";
+            this.buttonEventTest.Size = new System.Drawing.Size(75, 26);
+            this.buttonEventTest.TabIndex = 0;
+            this.buttonEventTest.Text = "테스트용";
+            this.buttonEventTest.UseVisualStyleBackColor = true;
+            this.buttonEventTest.Click += new System.EventHandler(this.buttonEventTest_Click);
             // 
             // layoutMainBoard
             // 
             this.layoutMainBoard.ColumnCount = 1;
-            this.layoutMainBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutMainBoard.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMainBoard.Controls.Add(this.splitDataBoard, 0, 1);
             this.layoutMainBoard.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.layoutMainBoard.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -147,15 +173,15 @@
             this.layoutMainBoard.Margin = new System.Windows.Forms.Padding(0);
             this.layoutMainBoard.Name = "layoutMainBoard";
             this.layoutMainBoard.RowCount = 2;
-            this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.462687F));
-            this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.53732F));
-            this.layoutMainBoard.Size = new System.Drawing.Size(852, 603);
+            this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.layoutMainBoard.Size = new System.Drawing.Size(962, 648);
             this.layoutMainBoard.TabIndex = 0;
             // 
             // splitDataBoard
             // 
             this.splitDataBoard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitDataBoard.Location = new System.Drawing.Point(0, 45);
+            this.splitDataBoard.Location = new System.Drawing.Point(0, 62);
             this.splitDataBoard.Margin = new System.Windows.Forms.Padding(0);
             this.splitDataBoard.Name = "splitDataBoard";
             // 
@@ -168,27 +194,30 @@
             // 
             this.splitDataBoard.Panel2.Controls.Add(this.splitChart);
             this.splitDataBoard.Panel2.Padding = new System.Windows.Forms.Padding(16);
-            this.splitDataBoard.Size = new System.Drawing.Size(852, 558);
-            this.splitDataBoard.SplitterDistance = 280;
+            this.splitDataBoard.Size = new System.Drawing.Size(962, 586);
+            this.splitDataBoard.SplitterDistance = 341;
             this.splitDataBoard.SplitterWidth = 1;
             this.splitDataBoard.TabIndex = 0;
             this.splitDataBoard.Tag = "0";
             // 
             // layoutMainTable
             // 
+            this.layoutMainTable.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(15)))), ((int)(((byte)(255)))));
             this.layoutMainTable.ColumnCount = 1;
             this.layoutMainTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMainTable.Controls.Add(this.lblMainTableTitle, 0, 1);
-            this.layoutMainTable.Controls.Add(this.flowLayoutPanel1, 0, 2);
+            this.layoutMainTable.Controls.Add(this.lblMainTableTitle, 0, 2);
+            this.layoutMainTable.Controls.Add(this.flowSearchList, 0, 3);
+            this.layoutMainTable.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.layoutMainTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutMainTable.Location = new System.Drawing.Point(16, 16);
             this.layoutMainTable.Margin = new System.Windows.Forms.Padding(0);
             this.layoutMainTable.Name = "layoutMainTable";
-            this.layoutMainTable.RowCount = 3;
-            this.layoutMainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 82F));
+            this.layoutMainTable.RowCount = 4;
+            this.layoutMainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.layoutMainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.layoutMainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.layoutMainTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMainTable.Size = new System.Drawing.Size(248, 526);
+            this.layoutMainTable.Size = new System.Drawing.Size(309, 554);
             this.layoutMainTable.TabIndex = 0;
             // 
             // lblMainTableTitle
@@ -197,12 +226,81 @@
             this.lblMainTableTitle.AutoSize = true;
             this.lblMainTableTitle.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblMainTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblMainTableTitle.Location = new System.Drawing.Point(0, 95);
+            this.lblMainTableTitle.Location = new System.Drawing.Point(0, 75);
             this.lblMainTableTitle.Margin = new System.Windows.Forms.Padding(0);
             this.lblMainTableTitle.Name = "lblMainTableTitle";
             this.lblMainTableTitle.Size = new System.Drawing.Size(63, 16);
             this.lblMainTableTitle.TabIndex = 1;
             this.lblMainTableTitle.Text = "검색 결과";
+            // 
+            // flowSearchList
+            // 
+            this.flowSearchList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowSearchList.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.flowSearchList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.flowSearchList.Controls.Add(this.listItemControl1);
+            this.flowSearchList.Location = new System.Drawing.Point(0, 104);
+            this.flowSearchList.Margin = new System.Windows.Forms.Padding(0);
+            this.flowSearchList.Name = "flowSearchList";
+            this.flowSearchList.Size = new System.Drawing.Size(309, 450);
+            this.flowSearchList.TabIndex = 2;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 258F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 37F));
+            this.tableLayoutPanel5.Controls.Add(this.btnSearch, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.searchBox, 1, 0);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(309, 42);
+            this.tableLayoutPanel5.TabIndex = 3;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.BackgroundImage = global::analysis_paris.Properties.Resources.icon_eiffel;
+            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSearch.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.BorderRadius = 0;
+            this.btnSearch.BorderSize = 0;
+            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.ForeColor = System.Drawing.Color.White;
+            this.btnSearch.Location = new System.Drawing.Point(276, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(29, 34);
+            this.btnSearch.TabIndex = 0;
+            this.btnSearch.TextColor = System.Drawing.Color.White;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            // 
+            // searchBox
+            // 
+            this.searchBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBox.BackColor = System.Drawing.Color.White;
+            this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.searchBox.Font = new System.Drawing.Font("나눔고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.searchBox.Location = new System.Drawing.Point(14, 8);
+            this.searchBox.Margin = new System.Windows.Forms.Padding(0);
+            this.searchBox.MaxLength = 20;
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(258, 26);
+            this.searchBox.TabIndex = 1;
+            this.searchBox.WordWrap = false;
             // 
             // splitChart
             // 
@@ -219,8 +317,8 @@
             // splitChart.Panel2
             // 
             this.splitChart.Panel2.Controls.Add(this.tableLayoutPanel4);
-            this.splitChart.Size = new System.Drawing.Size(539, 526);
-            this.splitChart.SplitterDistance = 219;
+            this.splitChart.Size = new System.Drawing.Size(588, 554);
+            this.splitChart.SplitterDistance = 230;
             this.splitChart.SplitterWidth = 1;
             this.splitChart.TabIndex = 0;
             this.splitChart.Tag = "";
@@ -240,7 +338,7 @@
             // splitTableMap.Panel2
             // 
             this.splitTableMap.Panel2.Controls.Add(this.mapBrowser);
-            this.splitTableMap.Size = new System.Drawing.Size(539, 219);
+            this.splitTableMap.Size = new System.Drawing.Size(588, 230);
             this.splitTableMap.SplitterDistance = 292;
             this.splitTableMap.TabIndex = 0;
             this.splitTableMap.Tag = "292";
@@ -257,7 +355,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(292, 219);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(292, 230);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // dataGridView2
@@ -267,7 +365,7 @@
             this.dataGridView2.Location = new System.Drawing.Point(3, 45);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(286, 171);
+            this.dataGridView2.Size = new System.Drawing.Size(286, 182);
             this.dataGridView2.TabIndex = 1;
             // 
             // lblSubTableTitle
@@ -289,7 +387,7 @@
             this.mapBrowser.Margin = new System.Windows.Forms.Padding(0);
             this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mapBrowser.Name = "mapBrowser";
-            this.mapBrowser.Size = new System.Drawing.Size(243, 219);
+            this.mapBrowser.Size = new System.Drawing.Size(292, 230);
             this.mapBrowser.TabIndex = 0;
             // 
             // tableLayoutPanel4
@@ -304,7 +402,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(539, 306);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(588, 323);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // chartGifBox
@@ -315,7 +413,7 @@
             this.chartGifBox.Location = new System.Drawing.Point(0, 42);
             this.chartGifBox.Margin = new System.Windows.Forms.Padding(0);
             this.chartGifBox.Name = "chartGifBox";
-            this.chartGifBox.Size = new System.Drawing.Size(539, 264);
+            this.chartGifBox.Size = new System.Drawing.Size(588, 281);
             this.chartGifBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.chartGifBox.TabIndex = 0;
             this.chartGifBox.TabStop = false;
@@ -343,90 +441,15 @@
             this.tableLayoutPanel3.Controls.Add(this.btnChart, 3, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnTable, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnMap, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblProjectTitle, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 9);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(9);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(846, 39);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(944, 44);
             this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // tblModeMenu
-            // 
-            this.tblModeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.tblModeMenu.ColumnCount = 2;
-            this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModeMenu.Controls.Add(this.btnExit, 1, 8);
-            this.tblModeMenu.Controls.Add(this.btnMenuCollapse, 1, 0);
-            this.tblModeMenu.Controls.Add(this.modeControl1, 0, 1);
-            this.tblModeMenu.Controls.Add(this.modeControl2, 0, 2);
-            this.tblModeMenu.Controls.Add(this.modeControl3, 0, 3);
-            this.tblModeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tblModeMenu.Location = new System.Drawing.Point(0, 0);
-            this.tblModeMenu.Margin = new System.Windows.Forms.Padding(0);
-            this.tblModeMenu.Name = "tblModeMenu";
-            this.tblModeMenu.RowCount = 9;
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-            this.tblModeMenu.Size = new System.Drawing.Size(72, 603);
-            this.tblModeMenu.TabIndex = 0;
-            // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.btnExit.Location = new System.Drawing.Point(6, 556);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(66, 33);
-            this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "종료";
-            this.btnExit.UseVisualStyleBackColor = true;
-            // 
-            // btnMenuCollapse
-            // 
-            this.btnMenuCollapse.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnMenuCollapse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatAppearance.BorderSize = 0;
-            this.btnMenuCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMenuCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMenuCollapse.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnMenuCollapse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnMenuCollapse.Location = new System.Drawing.Point(6, 13);
-            this.btnMenuCollapse.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMenuCollapse.Name = "btnMenuCollapse";
-            this.btnMenuCollapse.Size = new System.Drawing.Size(66, 33);
-            this.btnMenuCollapse.TabIndex = 0;
-            this.btnMenuCollapse.Text = "메뉴";
-            this.btnMenuCollapse.UseVisualStyleBackColor = true;
-            this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 124);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(248, 402);
-            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // btnChart
             // 
@@ -441,10 +464,9 @@
             this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChart.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnChart.ForeColor = System.Drawing.Color.Black;
-            this.btnChart.Location = new System.Drawing.Point(671, 0);
-            this.btnChart.Margin = new System.Windows.Forms.Padding(0);
+            this.btnChart.Location = new System.Drawing.Point(772, 3);
             this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(175, 39);
+            this.btnChart.Size = new System.Drawing.Size(169, 38);
             this.btnChart.TabIndex = 2;
             this.btnChart.Text = "그래프";
             this.btnChart.UncheckedBackColor = System.Drawing.Color.White;
@@ -465,10 +487,9 @@
             this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTable.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnTable.ForeColor = System.Drawing.Color.Black;
-            this.btnTable.Location = new System.Drawing.Point(321, 0);
-            this.btnTable.Margin = new System.Windows.Forms.Padding(0);
+            this.btnTable.Location = new System.Drawing.Point(422, 3);
             this.btnTable.Name = "btnTable";
-            this.btnTable.Size = new System.Drawing.Size(175, 39);
+            this.btnTable.Size = new System.Drawing.Size(169, 38);
             this.btnTable.TabIndex = 4;
             this.btnTable.Text = "표";
             this.btnTable.UncheckedBackColor = System.Drawing.Color.White;
@@ -489,10 +510,9 @@
             this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMap.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnMap.ForeColor = System.Drawing.Color.Black;
-            this.btnMap.Location = new System.Drawing.Point(496, 0);
-            this.btnMap.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMap.Location = new System.Drawing.Point(597, 3);
             this.btnMap.Name = "btnMap";
-            this.btnMap.Size = new System.Drawing.Size(175, 39);
+            this.btnMap.Size = new System.Drawing.Size(169, 38);
             this.btnMap.TabIndex = 3;
             this.btnMap.Text = "지도";
             this.btnMap.UncheckedBackColor = System.Drawing.Color.White;
@@ -500,60 +520,99 @@
             this.btnMap.UseVisualStyleBackColor = false;
             this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
-            // modeControl1
+            // lblProjectTitle
             // 
-            this.modeControl1.BaseColor = System.Drawing.Color.Empty;
-            this.modeControl1.Checked = false;
-            this.tblModeMenu.SetColumnSpan(this.modeControl1, 2);
-            this.modeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modeControl1.HighlightColor = System.Drawing.Color.Empty;
-            this.modeControl1.Location = new System.Drawing.Point(0, 60);
-            this.modeControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.modeControl1.ModeIcon = null;
-            this.modeControl1.ModeName = null;
-            this.modeControl1.ModeType = null;
-            this.modeControl1.Name = "modeControl1";
-            this.modeControl1.Size = new System.Drawing.Size(72, 48);
-            this.modeControl1.TabIndex = 5;
+            this.lblProjectTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblProjectTitle.AutoSize = true;
+            this.lblProjectTitle.Font = new System.Drawing.Font("KBO 다이아고딕 Bold", 13F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblProjectTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.lblProjectTitle.Location = new System.Drawing.Point(3, 11);
+            this.lblProjectTitle.Name = "lblProjectTitle";
+            this.lblProjectTitle.Size = new System.Drawing.Size(171, 22);
+            this.lblProjectTitle.TabIndex = 5;
+            this.lblProjectTitle.Text = "주팀장과 소금빵 공장";
             // 
-            // modeControl2
+            // tblModeMenu
             // 
-            this.modeControl2.BaseColor = System.Drawing.Color.Empty;
-            this.modeControl2.Checked = false;
-            this.tblModeMenu.SetColumnSpan(this.modeControl2, 2);
-            this.modeControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modeControl2.HighlightColor = System.Drawing.Color.Empty;
-            this.modeControl2.Location = new System.Drawing.Point(0, 108);
-            this.modeControl2.Margin = new System.Windows.Forms.Padding(0);
-            this.modeControl2.ModeIcon = null;
-            this.modeControl2.ModeName = null;
-            this.modeControl2.ModeType = null;
-            this.modeControl2.Name = "modeControl2";
-            this.modeControl2.Size = new System.Drawing.Size(72, 48);
-            this.modeControl2.TabIndex = 6;
+            this.tblModeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.tblModeMenu.ColumnCount = 2;
+            this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 6F));
+            this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblModeMenu.Controls.Add(this.btnExit, 1, 9);
+            this.tblModeMenu.Controls.Add(this.btnMenuCollapse, 1, 0);
+            this.tblModeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tblModeMenu.Location = new System.Drawing.Point(0, 0);
+            this.tblModeMenu.Margin = new System.Windows.Forms.Padding(0);
+            this.tblModeMenu.Name = "tblModeMenu";
+            this.tblModeMenu.RowCount = 10;
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tblModeMenu.Size = new System.Drawing.Size(72, 648);
+            this.tblModeMenu.TabIndex = 0;
             // 
-            // modeControl3
+            // btnExit
             // 
-            this.modeControl3.BaseColor = System.Drawing.Color.Empty;
-            this.modeControl3.Checked = false;
-            this.tblModeMenu.SetColumnSpan(this.modeControl3, 2);
-            this.modeControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.modeControl3.HighlightColor = System.Drawing.Color.Empty;
-            this.modeControl3.Location = new System.Drawing.Point(0, 156);
-            this.modeControl3.Margin = new System.Windows.Forms.Padding(0);
-            this.modeControl3.ModeIcon = null;
-            this.modeControl3.ModeName = null;
-            this.modeControl3.ModeType = null;
-            this.modeControl3.Name = "modeControl3";
-            this.modeControl3.Size = new System.Drawing.Size(72, 48);
-            this.modeControl3.TabIndex = 7;
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.btnExit.Location = new System.Drawing.Point(6, 601);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(66, 33);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "종료";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnMenuCollapse
+            // 
+            this.btnMenuCollapse.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMenuCollapse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatAppearance.BorderSize = 0;
+            this.btnMenuCollapse.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMenuCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMenuCollapse.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnMenuCollapse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.btnMenuCollapse.Location = new System.Drawing.Point(6, 13);
+            this.btnMenuCollapse.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMenuCollapse.Name = "btnMenuCollapse";
+            this.btnMenuCollapse.Size = new System.Drawing.Size(66, 33);
+            this.btnMenuCollapse.TabIndex = 0;
+            this.btnMenuCollapse.Text = "메뉴";
+            this.btnMenuCollapse.UseVisualStyleBackColor = true;
+            this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
+            // 
+            // listItemControl1
+            // 
+            this.listItemControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listItemControl1.BackColor = System.Drawing.Color.White;
+            this.listItemControl1.Location = new System.Drawing.Point(0, 0);
+            this.listItemControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.listItemControl1.Name = "listItemControl1";
+            this.listItemControl1.Size = new System.Drawing.Size(306, 60);
+            this.listItemControl1.TabIndex = 0;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1072, 603);
+            this.ClientSize = new System.Drawing.Size(1152, 648);
             this.Controls.Add(this.tableLayoutMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -568,6 +627,7 @@
             this.splitMainBoard.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).EndInit();
             this.splitMainBoard.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.layoutMainBoard.ResumeLayout(false);
             this.splitDataBoard.Panel1.ResumeLayout(false);
             this.splitDataBoard.Panel2.ResumeLayout(false);
@@ -575,6 +635,9 @@
             this.splitDataBoard.ResumeLayout(false);
             this.layoutMainTable.ResumeLayout(false);
             this.layoutMainTable.PerformLayout();
+            this.flowSearchList.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.splitChart.Panel1.ResumeLayout(false);
             this.splitChart.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitChart)).EndInit();
@@ -590,6 +653,7 @@
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartGifBox)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.tblModeMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -623,10 +687,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn _Id;
         private System.Windows.Forms.DataGridViewTextBoxColumn _Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn _Type;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private View.ModeControl modeControl1;
-        private View.ModeControl modeControl2;
-        private View.ModeControl modeControl3;
+        private System.Windows.Forms.FlowLayoutPanel flowSearchList;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private CustomControls.RoundedButton btnSearch;
+        private System.Windows.Forms.TextBox searchBox;
+        private System.Windows.Forms.Button buttonEventTest;
+        private System.Windows.Forms.Label lblProjectTitle;
+        private View.ListItemControl listItemControl1;
     }
 }
 

@@ -70,6 +70,12 @@
     <Compile Include="View\CheckedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\ListItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\ListItemControl.Designer.cs">
+      <DependentUpon>ListItemControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     <Compile Include="View\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="View\ListItemControl.resx">
+      <DependentUpon>ListItemControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,6 +166,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_eiffel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
