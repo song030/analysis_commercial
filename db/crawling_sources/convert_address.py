@@ -63,8 +63,8 @@ with open("new_address.txt", "r", encoding="utf-8") as file:
             address_id, address, x_pos, y_pos = line.split("|")
             query = f"""update "TB_SELLING_AREA" set
             "ADDRESS" = '{address}',
-            "latitude" = {x_pos},
-            "longitude" = {y_pos}
+            "latitude" = {y_pos},
+            "longitude" = {x_pos}
             where "SELLING_AREA_ID" = {address_id}"""
             c.execute(query)
     conn.commit()
