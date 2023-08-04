@@ -5,7 +5,7 @@ using System.Windows.Forms;
 namespace analysis_paris {
     public partial class Main : Form {
 
-        private Button currentButton;
+        private Button currentMode;
         private Timer gifTimer;
 
         public Main() {
@@ -17,18 +17,15 @@ namespace analysis_paris {
         }
 
         // 버튼 클릭 구현
-        public void SetSelectedButtonUI(object button) {
+        public void ModeSelected(object button) {
             var btn = (Button)button;
-            //Highlight Button
-            btn.BackColor = Color.FromArgb(107, 83, 255);
-            btn.ForeColor = Color.WhiteSmoke;
-            // Unhighlight Button
-            if (currentButton != null && currentButton != btn) {
-                currentButton.BackColor = this.BackColor;
-                currentButton.ForeColor = Color.FromArgb(124, 141, 181);
+
+            // button comparison
+            if (currentMode != null && currentMode != btn) {
+
+                currentMode = btn;
             }
 
-            currentButton = btn;
         }
 
         /// <summary>
@@ -131,5 +128,10 @@ namespace analysis_paris {
             chartGifBox.Enabled = false;
         }
 
+        private void btnChart_Click(object sender, EventArgs e) {
+            if (btnChart.Checked && ) {
+
+            }
+        }
     }
 }
