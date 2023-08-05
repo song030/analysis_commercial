@@ -1,7 +1,5 @@
 ﻿using analysis_paris.View;
 using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace analysis_paris {
@@ -20,7 +18,6 @@ namespace analysis_paris {
             splitTableMap.Panel2Collapsed = true;
             splitChart.Panel2Collapsed = true;
 
-            //Gif_Start("sample_chart", chartGifBox);
             mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map.html");
         }
 
@@ -30,17 +27,18 @@ namespace analysis_paris {
         }
 
         // gif 재생
-        private void Gif_Start(string gifName, PictureBox picture) {
+        private void Gif_Start(string imgUrl, PictureBox picture) {
             // GIF 파일을 리소스에서 가져오기
-            Image gifImage = (Image)Properties.Resources.ResourceManager.GetObject($"{gifName}", System.Globalization.CultureInfo.CurrentUICulture);
+            //Image gifImage = (Image)Properties.Resources.ResourceManager.GetObject($"{gifName}", System.Globalization.CultureInfo.CurrentUICulture);
 
             // PictureBox에 GIF 이미지 설정
-            picture.Image = gifImage;
+            picture.ImageLocation = imgUrl;
 
             // Timer 설정
             gifTimer = new Timer();
             // GIF 애니메이션 지속 시간 설정
-            gifTimer.Interval = gifImage.GetFrameCount(new System.Drawing.Imaging.FrameDimension(gifImage.FrameDimensionsList[0])) * 15;
+            //gifTimer.Interval = gifImage.GetFrameCount(new System.Drawing.Imaging.FrameDimension(gifImage.FrameDimensionsList[0])) * 15;
+            gifTimer.Interval = 3200;
             gifTimer.Tick += GifTimer_Tick;
 
             // Timer 시작
@@ -65,90 +63,59 @@ namespace analysis_paris {
             }
         }
 
-        // ============= 카테고리 버튼 클릭 시 화면 영역 바뀌는 부분 조건 분기 정리 필요 ===================
-        // 그래프 활성화 상태 전환
-        private void btnChart_Click(object sender, EventArgs e) {
-            // 전체 비활성화 상태였을 때
-            if (splitDataBoard.Panel2Collapsed) {
-                splitChart.Panel1Collapsed = true;
-                splitDataBoard.Panel2Collapsed = false;
-                splitChart.Panel2Collapsed = false;
-                return;
-            }
-
-            if (btnChart.Checked && splitChart.Panel2Collapsed) {
-                splitChart.Panel2Collapsed = false;
-                Gif_Start("sample_chart_2", chartGifBox);
-            }
-            else if (!btnChart.Checked && !splitChart.Panel2Collapsed) {
-                splitChart.Panel2Collapsed = true;
-
-                // 선택 상태 확인
-                if (!btnMap.Checked && !btnTable.Checked) {
-                    splitDataBoard.Panel2Collapsed = true;
-                    return;
-                }
-            }
+        // ======================================= 데이터 보드 영역 활성화 이벤트 ==========================================
+        private void Collapse_Event(object sender, EventArgs e) {
+            Board_Collapse();
+            Table_Map_Collapse();
         }
-
-        // 맵 브라우저 활성화 상태 전환
-        private void btnMap_Click(object sender, EventArgs e) {
-            // 전체 비활성화 상태였을 때
-            if (splitDataBoard.Panel2Collapsed) {
-                splitTableMap.Panel1Collapsed = true;
-                splitDataBoard.Panel2Collapsed = false;
-                splitTableMap.Panel2Collapsed = false;
-                return;
-            }
-
-            if (btnMap.Checked && splitTableMap.Panel2Collapsed) {
-                splitTableMap.Panel2Collapsed = false;
-            }
-            else if (!btnMap.Checked && !splitTableMap.Panel2Collapsed) {
-                splitTableMap.Panel2Collapsed = true;
-
-                // 선택 상태 확인
-                if (!btnTable.Checked && !btnChart.Checked) {
-                    splitDataBoard.Panel2Collapsed = true;
-                    return;
-                }
-            }
-        }
-
-        // 주변 정보 테이블 활성화 상태 전환
-        private void btnTable_Click(object sender, EventArgs e) {
-            // 전체 비활성화 상태였을 때
-            if (splitDataBoard.Panel2Collapsed) {
-                splitTableMap.Panel2Collapsed = true;
-                splitDataBoard.Panel2Collapsed = false;
-                splitTableMap.Panel1Collapsed = false;
-                return;
-            }
-
-            if (btnTable.Checked && splitTableMap.Panel1Collapsed) {
-                splitTableMap.Panel1Collapsed = false;
-            }
-            else if (!btnTable.Checked && !splitTableMap.Panel1Collapsed) {
-                splitTableMap.Panel1Collapsed = true;
-
-                // 선택 상태 확인
-                if (!btnMap.Checked && !btnChart.Checked) {
-                    splitDataBoard.Panel2Collapsed = true;
-                    return;
-                }
-            }
-        }
-        // ===============================================================================================
 
         // 현재 활성화된 버튼을 확인한 후 해당 영역을 활성화한다. → 버튼 클릭 이벤트 추려보기
-        private void BoardCategory_Change() {
-            List<CheckedButton> categoryButtons = new List<CheckedButton> { btnTable, btnMap, btnChart };
-            foreach (var button in categoryButtons) {
-                if (!button.Checked) {
+        private void Table_Map_Collapse() {
+            // 표/지도 체크 확인
+            var tableVisible = btnTable.Checked;
+            var mapVisible = btnMap.Checked;
 
+            if (!tableVisible && !mapVisible) {
+                splitChart.Panel1Collapsed = true;
+
+                if (!btnChart.Checked)
+                    splitDataBoard.Panel2Collapsed = true;
+            }
+            else {
+                splitDataBoard.Panel2Collapsed = false;
+                splitChart.Panel1Collapsed = false;
+
+                if (btnTable.Checked && !btnMap.Checked) {
+                    splitTableMap.Panel1Collapsed = false;
+                    splitTableMap.Panel2Collapsed = true;
+                }
+                else if (!btnTable.Checked && btnMap.Checked) {
+                    splitTableMap.Panel1Collapsed = true;
+                    splitTableMap.Panel2Collapsed = false;
+                }
+                else {
+                    splitTableMap.Panel1Collapsed = false;
+                    splitTableMap.Panel2Collapsed = false;
                 }
             }
         }
+
+        private void Board_Collapse() {
+            // 차트 체크 확인
+            if (!btnChart.Checked) {
+                if (!btnTable.Checked && !btnMap.Checked) {
+                    splitDataBoard.Panel2Collapsed = true;
+                    return;
+                }
+
+                splitChart.Panel2Collapsed = true;
+            }
+            else {
+                splitDataBoard.Panel2Collapsed = false;
+                splitChart.Panel2Collapsed = false;
+            }
+        }
+        // =================================================================================
 
         // 현재 좌표 검색 버튼 클릭 시 발생할 맵 브라우저 전체 출력 기능 임시 사용 중
         private void buttonEventTest_Click(object sender, EventArgs e) {

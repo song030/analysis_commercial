@@ -54,6 +54,7 @@
             // 
             this.modeControl1.BaseImage = "store";
             this.modeControl1.Checked = false;
+            this.modeControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modeControl1.Location = new System.Drawing.Point(0, 0);
             this.modeControl1.Margin = new System.Windows.Forms.Padding(0);
             this.modeControl1.Name = "modeControl1";
@@ -64,6 +65,7 @@
             // 
             this.modeControl2.BaseImage = "eiffel";
             this.modeControl2.Checked = false;
+            this.modeControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modeControl2.Location = new System.Drawing.Point(0, 49);
             this.modeControl2.Margin = new System.Windows.Forms.Padding(0);
             this.modeControl2.Name = "modeControl2";
@@ -74,6 +76,7 @@
             // 
             this.modeControl3.BaseImage = "pin";
             this.modeControl3.Checked = false;
+            this.modeControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.modeControl3.Location = new System.Drawing.Point(0, 98);
             this.modeControl3.Margin = new System.Windows.Forms.Padding(0);
             this.modeControl3.Name = "modeControl3";

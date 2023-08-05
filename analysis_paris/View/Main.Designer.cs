@@ -27,6 +27,9 @@
             this.splitMainBoard = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonEventTest = new System.Windows.Forms.Button();
+            this.lblSearchStore = new System.Windows.Forms.Label();
+            this.lblSearchEiffel = new System.Windows.Forms.Label();
+            this.lblSearchPin = new System.Windows.Forms.Label();
             this.layoutMainBoard = new System.Windows.Forms.TableLayoutPanel();
             this.splitDataBoard = new System.Windows.Forms.SplitContainer();
             this.layoutMainTable = new System.Windows.Forms.TableLayoutPanel();
@@ -52,6 +55,7 @@
             this.btnTable = new analysis_paris.View.CheckedButton();
             this.btnMap = new analysis_paris.View.CheckedButton();
             this.btnChart = new analysis_paris.View.CheckedButton();
+            this.modeGroupControl1 = new analysis_paris.View.ModeGroupControl();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
@@ -123,6 +127,9 @@
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.buttonEventTest, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lblSearchStore, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.lblSearchEiffel, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.lblSearchPin, 0, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -158,6 +165,48 @@
             this.buttonEventTest.Text = "테스트용";
             this.buttonEventTest.UseVisualStyleBackColor = true;
             this.buttonEventTest.Click += new System.EventHandler(this.buttonEventTest_Click);
+            // 
+            // lblSearchStore
+            // 
+            this.lblSearchStore.AutoSize = true;
+            this.lblSearchStore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSearchStore.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchStore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.lblSearchStore.Location = new System.Drawing.Point(0, 86);
+            this.lblSearchStore.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.lblSearchStore.Name = "lblSearchStore";
+            this.lblSearchStore.Size = new System.Drawing.Size(117, 48);
+            this.lblSearchStore.TabIndex = 1;
+            this.lblSearchStore.Text = "매물 검색";
+            this.lblSearchStore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSearchEiffel
+            // 
+            this.lblSearchEiffel.AutoSize = true;
+            this.lblSearchEiffel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSearchEiffel.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchEiffel.ForeColor = System.Drawing.Color.White;
+            this.lblSearchEiffel.Location = new System.Drawing.Point(0, 146);
+            this.lblSearchEiffel.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.lblSearchEiffel.Name = "lblSearchEiffel";
+            this.lblSearchEiffel.Size = new System.Drawing.Size(117, 48);
+            this.lblSearchEiffel.TabIndex = 2;
+            this.lblSearchEiffel.Text = "매장 검색";
+            this.lblSearchEiffel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblSearchPin
+            // 
+            this.lblSearchPin.AutoSize = true;
+            this.lblSearchPin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSearchPin.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchPin.ForeColor = System.Drawing.Color.White;
+            this.lblSearchPin.Location = new System.Drawing.Point(0, 206);
+            this.lblSearchPin.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
+            this.lblSearchPin.Name = "lblSearchPin";
+            this.lblSearchPin.Size = new System.Drawing.Size(117, 48);
+            this.lblSearchPin.TabIndex = 3;
+            this.lblSearchPin.Text = "좌표 검색";
+            this.lblSearchPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // layoutMainBoard
             // 
@@ -443,6 +492,7 @@
             this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tblModeMenu.Controls.Add(this.btnExit, 0, 4);
             this.tblModeMenu.Controls.Add(this.btnMenuCollapse, 0, 0);
+            this.tblModeMenu.Controls.Add(this.modeGroupControl1, 0, 2);
             this.tblModeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblModeMenu.Location = new System.Drawing.Point(0, 0);
             this.tblModeMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -522,7 +572,7 @@
             // 
             this.btnTable.BackColor = System.Drawing.Color.White;
             this.btnTable.BorderRadius = 0;
-            this.btnTable.Checkable = false;
+            this.btnTable.Checkable = true;
             this.btnTable.Checked = false;
             this.btnTable.CheckedBackColor = System.Drawing.Color.Empty;
             this.btnTable.CheckedForeColor = System.Drawing.Color.Empty;
@@ -530,7 +580,7 @@
             this.btnTable.FlatAppearance.BorderSize = 0;
             this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTable.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnTable.ForeColor = System.Drawing.Color.Black;
             this.btnTable.Location = new System.Drawing.Point(453, 3);
             this.btnTable.Name = "btnTable";
             this.btnTable.Size = new System.Drawing.Size(169, 38);
@@ -539,13 +589,13 @@
             this.btnTable.UncheckedBackColor = System.Drawing.Color.White;
             this.btnTable.UncheckedForeColor = System.Drawing.Color.Black;
             this.btnTable.UseVisualStyleBackColor = false;
-            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
+            this.btnTable.Click += new System.EventHandler(this.Collapse_Event);
             // 
             // btnMap
             // 
             this.btnMap.BackColor = System.Drawing.Color.White;
             this.btnMap.BorderRadius = 0;
-            this.btnMap.Checkable = false;
+            this.btnMap.Checkable = true;
             this.btnMap.Checked = false;
             this.btnMap.CheckedBackColor = System.Drawing.Color.Empty;
             this.btnMap.CheckedForeColor = System.Drawing.Color.Empty;
@@ -553,7 +603,7 @@
             this.btnMap.FlatAppearance.BorderSize = 0;
             this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMap.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMap.ForeColor = System.Drawing.Color.Black;
             this.btnMap.Location = new System.Drawing.Point(628, 3);
             this.btnMap.Name = "btnMap";
             this.btnMap.Size = new System.Drawing.Size(169, 38);
@@ -562,13 +612,13 @@
             this.btnMap.UncheckedBackColor = System.Drawing.Color.White;
             this.btnMap.UncheckedForeColor = System.Drawing.Color.Black;
             this.btnMap.UseVisualStyleBackColor = false;
-            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
+            this.btnMap.Click += new System.EventHandler(this.Collapse_Event);
             // 
             // btnChart
             // 
             this.btnChart.BackColor = System.Drawing.Color.White;
             this.btnChart.BorderRadius = 0;
-            this.btnChart.Checkable = false;
+            this.btnChart.Checkable = true;
             this.btnChart.Checked = false;
             this.btnChart.CheckedBackColor = System.Drawing.Color.Empty;
             this.btnChart.CheckedForeColor = System.Drawing.Color.Empty;
@@ -576,7 +626,7 @@
             this.btnChart.FlatAppearance.BorderSize = 0;
             this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChart.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnChart.ForeColor = System.Drawing.Color.Black;
             this.btnChart.Location = new System.Drawing.Point(803, 3);
             this.btnChart.Name = "btnChart";
             this.btnChart.Size = new System.Drawing.Size(169, 38);
@@ -585,7 +635,16 @@
             this.btnChart.UncheckedBackColor = System.Drawing.Color.White;
             this.btnChart.UncheckedForeColor = System.Drawing.Color.Black;
             this.btnChart.UseVisualStyleBackColor = false;
-            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
+            this.btnChart.Click += new System.EventHandler(this.Collapse_Event);
+            // 
+            // modeGroupControl1
+            // 
+            this.modeGroupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.modeGroupControl1.Location = new System.Drawing.Point(0, 80);
+            this.modeGroupControl1.Margin = new System.Windows.Forms.Padding(0);
+            this.modeGroupControl1.Name = "modeGroupControl1";
+            this.modeGroupControl1.Size = new System.Drawing.Size(86, 180);
+            this.modeGroupControl1.TabIndex = 5;
             // 
             // Main
             // 
@@ -608,6 +667,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).EndInit();
             this.splitMainBoard.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.layoutMainBoard.ResumeLayout(false);
             this.splitDataBoard.Panel1.ResumeLayout(false);
             this.splitDataBoard.Panel2.ResumeLayout(false);
@@ -669,6 +729,10 @@
         private View.CheckedButton btnTable;
         private View.CheckedButton btnMap;
         private View.CheckedButton btnChart;
+        private View.ModeGroupControl modeGroupControl1;
+        private System.Windows.Forms.Label lblSearchStore;
+        private System.Windows.Forms.Label lblSearchEiffel;
+        private System.Windows.Forms.Label lblSearchPin;
     }
 }
 

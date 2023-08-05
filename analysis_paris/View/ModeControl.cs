@@ -44,7 +44,7 @@ namespace analysis_paris.View {
         }
 
         public void Mode_Unselect() {
-            selectedMarker.BackColor = Color.FromArgb(255, 255, 255);
+            selectedMarker.BackColor = Color.FromArgb(2, 53, 134);
             iconBox.Image = (Image)Properties.Resources.ResourceManager.GetObject($"icon_{_baseImage}_w", System.Globalization.CultureInfo.CurrentUICulture);
             _checked = false;
         }
