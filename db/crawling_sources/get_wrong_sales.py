@@ -16,18 +16,126 @@ from selenium.webdriver.common.by import By
 
 def main():
     config_pd_option()
-    read_trimmed_paris_and_crawling()
+    # get_excel_from_db()
+    # read_new_paris_excel()
+    # read_trimmed_paris_and_crawling()
+    add_col_to_base()
 
+
+def add_col_to_base():
+    basic_read_file = pd.read_excel("_dummy_src/db_paris.xlsx", engine="openpyxl", index_col=0)
+    result_join_file = pd.read_excel("_dummy_src/result_join.xlsx", engine="openpyxl", index_col=0)
+    df_basic = pd.DataFrame(basic_read_file)
+    df_joined = pd.DataFrame(result_join_file)
+
+    df_basic['AREA_SIZE'] = 0
+    df_basic['OPEN_DATE'] = ""
+    df_basic['CLOSE_DATE'] = ""
+    df_basic['IS_OPEN_STATE'] = ""
+    result_list = list()
+    for idx, row in df_joined.iterrows():
+        if row['BASIC_IDX'] != -1:
+            df_basic.loc[df_basic.index == row['BASIC_IDX'], "AREA_SIZE"] = row.AREA_SIZE
+            df_basic.loc[df_basic.index == row['BASIC_IDX'], "OPEN_DATE"] = row.OPEN_DATE
+            df_basic.loc[df_basic.index == row['BASIC_IDX'], "CLOSE_DATE"] = row.CLOSE_DATE
+            df_basic.loc[df_basic.index == row['BASIC_IDX'], "IS_OPEN_STATE"] = row.IS_OPEN_STATE
+        else:
+            new_row = {
+                "PARIS_NAME": row.PARIS_NAME,
+                "PARIS_ADDRESS": row["ADDRESS"],
+                "LATITUDE": row["LATITUDE"],
+                "LONGITUDE": row["LONGITUDE"],
+                "RIVAL_CNT": 0,
+                "TOUR_CNT": 0,
+                "HOSPITAL_CNT": 0,
+                "STOP_CNT": 0,
+                "LIVING_CNT": 0,
+                "PARKING_CNT": 0,
+                "STATION_CNT": 0,
+                "SCHOOL_CNT": 0,
+                "ACADEMY_CNT": 0,
+                "CROSSWALK_CNT": 0,
+                "AVG_SALES": 0,
+                "AVG_MONTH_SALES": 0,
+                "AVG_YEAR_SALES": 0,
+                "AREA_SIZE": row.AREA_SIZE,
+                "OPEN_DATE": row.OPEN_DATE,
+                "CLOSE_DATE": row.CLOSE_DATE,
+                "IS_OPEN_STATE": row.IS_OPEN_STATE
+            }
+            new_df = pd.DataFrame([new_row])
+            result_list.append(new_df)
+
+    for i in result_list:
+        df_basic = pd.concat([df_basic, i], ignore_index=True)
+    df_basic.to_excel("_dummy_src/final_paris.xlsx")
+
+
+def get_excel_from_db():
+    conn = psycopg2.connect(
+        host="10.10.20.117",
+        database="db_test",
+        user="postgres",
+        password="1234")
+    c = conn.cursor()
+    query = """select * from "TB_PARIS" """
+    read_db = pd.read_sql(query, conn)
+    df = pd.DataFrame(read_db)
+    df.to_excel("_dummy_src/db_paris.xlsx")
 
 
 def read_trimmed_paris_and_crawling():
-    read_file = pd.read_excel("_dummy_src/trimmed_paris.xlsx", engine="openpyxl", index_col=0)
-    df = pd.DataFrame(read_file)
-    print(df[:10])
+    basic_read_file = pd.read_excel("_dummy_src/db_paris.xlsx", engine="openpyxl", index_col=0)
+    other_read_file = pd.read_excel("_dummy_src/trimmed_paris.xlsx", engine="openpyxl", index_col=0)
+    result_join_file = pd.read_excel("_dummy_src/result_join.xlsx", engine="openpyxl", index_col=0)
+    df_basic = pd.DataFrame(basic_read_file)
+    df_other = pd.DataFrame(other_read_file)
+    df_joined = pd.DataFrame(result_join_file)
+    basic_columns_name = ['PARIS_NAME', 'PARIS_ADDRESS', 'LATITUDE', 'LONGITUDE', 'PARIS_NO', 'RIVAL_CNT', 'TOUR_CNT',
+                          'HOSPITAL_CNT', 'STOP_CNT', 'LIVING_CNT', 'PARKING_CNT', 'STATION_CNT', 'SCHOOL_CNT',
+                          'ACADEMY_CNT', 'CROSSWALK_CNT', 'AVG_SALES', 'AVG_MONTH_SALES', 'AVG_YEAR_SALES']
+    other_columns_name = ['OTHER_TABLE_PARIS_ID', 'PARIS_NAME', 'IS_OPEN_STATE', 'AREA_SIZE', 'OPEN_DATE', 'CLOSE_DATE']
 
-    for idx, row in df.iterrows():
-        if row.LATITUDE == 0:
-            print(row.PARIS_NAME)
+    new_columns_name = ['BASIC_IDX', 'PARIS_NAME', 'IS_OPEN_STATE', 'AREA_SIZE', 'OPEN_DATE', 'CLOSE_DATE', 'ADDRESS',
+                        "LATITUDE", "LONGITUDE"]
+
+    # other에 새로운 아이디 부여
+    result_df = pd.DataFrame(columns=new_columns_name)
+    for other_idx, other_row in df_other.iterrows():
+        has_same_paris = False
+        for basic_idx, basic_row, in df_basic.iterrows():
+            if other_row["PARIS_NAME"] == basic_row["PARIS_NAME"]:
+                has_same_paris = True
+                new_row = {"BASIC_IDX": basic_idx,
+                           'PARIS_NAME': basic_row.PARIS_NAME,
+                           "IS_OPEN_STATE": other_row.IS_OPEN_STATE,
+                           "AREA_SIZE": other_row.AREA_SIZE,
+                           "OPEN_DATE": other_row.OPEN_DATE,
+                           "CLOSE_DATE": other_row.CLOSE_DATE,
+                           "ADDRESS": other_row.ADDRESS,
+                           "LATITUDE": other_row.LATITUDE,
+                           "LONGITUDE": other_row.LONGITUDE}
+                # print( f"{other_row['PARIS_NAME']}|{basic_row['PARIS_NAME']}", new_row)
+                new_df = pd.DataFrame([new_row])
+                result_df = pd.concat([result_df, new_df], ignore_index=True)
+                break
+        if has_same_paris is False:
+            new_row = {"BASIC_IDX": -1,
+                       'PARIS_NAME': other_row.PARIS_NAME,
+                       "IS_OPEN_STATE": other_row.IS_OPEN_STATE,
+                       "AREA_SIZE": other_row.AREA_SIZE,
+                       "OPEN_DATE": other_row.OPEN_DATE,
+                       "CLOSE_DATE": other_row.CLOSE_DATE,
+                       "ADDRESS": other_row.ADDRESS,
+                       "LATITUDE": other_row.LATITUDE,
+                       "LONGITUDE": other_row.LONGITUDE}
+            # print( f"{other_row['PARIS_NAME']}|{basic_row['PARIS_NAME']}", new_row)
+            new_df = pd.DataFrame([new_row])
+            result_df = pd.concat([result_df, new_df], ignore_index=True)
+    result_df.to_excel("_dummy_src/result_join.xlsx")
+    # # 인허가 날짜 추가
+    # result_join_file
+
 
 def read_new_paris_excel():
     read_file = pd.read_excel("_dummy_src/paris_excel.xlsx", engine="openpyxl")
@@ -37,12 +145,14 @@ def read_new_paris_excel():
                  '사업장명.1', 'Unnamed: 21', 'Unnamed: 22', 'Unnamed: 23', '최종수정시점', '데이터갱신구분', '데이터갱신일자', '업태구분명',
                  '좌표정보(X)', '좌표정보(Y)', '위생업태명', '남성종사자수', '여성종사자수', '영업장주변구분명', '급수시설구분명', '다중이용업소여부', '시설총규모']
 
-    new_col_list = ['Unnamed: 22', '상세영업상태명', '시설총규모', '도로명전체주소', '좌표정보(X)', '좌표정보(Y)', ]
+    new_col_list = ['Unnamed: 22', '상세영업상태명', '시설총규모', '인허가일자', '폐업일자', '도로명전체주소', '좌표정보(X)', '좌표정보(Y)']
     df = df[new_col_list]
     df.reset_index(inplace=True)
     df['index'] = df['index'] + 1
     df.rename(columns={'index': "OTHER_TABLE_PARIS_ID", "Unnamed: 22": "PARIS_NAME", "상세영업상태명": "IS_OPEN_STATE",
-                    "시설총규모": "AREA_SIZE", "도로명전체주소": "ADDRESS", "좌표정보(X)": "LATITUDE", "좌표정보(Y)": "LONGITUDE"}, inplace=True)
+                       "시설총규모": "AREA_SIZE", '인허가일자': 'OPEN_DATE', '폐업일자': 'CLOSE_DATE',
+                       '도로명전체주소': "ADDRESS", '좌표정보(X)': "LATITUDE", '좌표정보(Y)': "LONGITUDE"},
+              inplace=True)
     print(df)
     df.to_excel("_dummy_src/trimmed_paris.xlsx")
 

@@ -7,15 +7,24 @@ from sqlalchemy import create_engine
 
 def main():
     connector = DBConnector(test_option=True)
+    connector.config_pd_option()
 
-    connector.migration_TB_SALES()
+
+    # connector.save_paris_excel_on_db()
+    # connector.migration_TB_PARIS()
+    # connector.migration_TB_ATTRACTION_PLACE()
+    # connector.migration_TB_BUS_STOP()
+    # connector.migration_TB_STATION()
+    # connector.migration_TB_SELLING_AREA()
+    # connector.migration_TB_SCHOOL()
+    # connector.migration_TB_SALES()
     # connector.migration_TB_PARKING()
     # connector.migration_TB_LIVING_INFO()
-    # connector.config_pd_option()
     # connector.migration_TB_CROSSWALK()
-    # connector.create_table()
     # connector.migration_TB_HOSPITAL()
     # connector.migration_TB_ACADEMY()
+
+    # connector.create_table()
 
 
 class DBConnector:
@@ -213,6 +222,7 @@ class DBConnector:
         # 추가 칼럼(후에 사용할) 만들어 놓기
         df.to_sql("TB_ACADEMY", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_ACADEMY_ID_seq', 'TB_ACADEMY', 'ACADEMY_ID')
 
     def migration_TB_ACADEMY(self):
         """
@@ -262,6 +272,7 @@ class DBConnector:
 
         df.to_sql("TB_CROSSWALK", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_CROSSWALK_ID_seq', 'TB_CROSSWALK', 'CROSSWALK_ID')
 
     def migration_TB_HOSPITAL(self):
         """
@@ -289,6 +300,7 @@ class DBConnector:
 
         df.to_sql("TB_HOSPITAL", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_HOSPITAL_ID_seq', 'TB_HOSPITAL', 'HOSPITAL_ID')
 
     def migration_TB_LIVING_INFO(self):
         """
@@ -314,6 +326,7 @@ class DBConnector:
 
         df.to_sql("TB_LIVING_INFO", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_LIVING_INFO_ID_seq', 'TB_LIVING_INFO', 'LIVING_INFO_ID')
 
     def migration_TB_PARIS(self):
         """
@@ -321,26 +334,21 @@ class DBConnector:
         :return:
         """
         self.start_conn()
-        pstmt = """SELECT * FROM "TB_PARIS" """
+        pstmt = """SELECT * FROM "TB_PARIS_FINAL" """
         read_table = pd.read_sql(pstmt, self.origin_engine)
         df = pd.DataFrame(read_table)
-        print(df.columns)
-        # 칼럼 추출 + 순서 바꾸기
-        current_column_name_list = ['PARIS_NAME', 'PARIS_ADDRESS', 'LATITUDE', 'LONGITUDE', 'PARIS_NO',
-                                    'RIVAL_CNT', 'TOUR_CNT', 'HOSPITAL_CNT', 'STOP_CNT', 'LIVING_CNT',
-                                    'PARKING_CNT', 'STATION_CNT', 'SCHOOL_CNT', 'ACADEMY_CNT',
-                                    'CROSSWALK_CNT']
-
-        new_col_list = ['LVN_NO', 'LVN_NAME', 'LVN_COUNT', 'LVN_FAMILY', 'LVN_ADDRESS', 'LATITUDE', 'LONGITUDE']
-        df = df[new_col_list]
-
-        # 칼럼 이름 바꾸기
-        df.rename(columns={"LVN_NO": "LIVING_INFO_ID"}, inplace=True)
-
-        # 추가 칼럼(후에 사용할) 만들어 놓기
+        # print(df.columns)
+        # # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['PARIS_ID', 'PARIS_NAME', 'PARIS_ADDRESS', 'LATITUDE', 'LONGITUDE', 'AREA_SIZE',
+                                    'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE', 'RIVAL_COUNT_NEAR_500',
+                                    'RIVAL_COUNT_NEAR_1000', 'MONTHLY_SHOP_REVENUE',
+                                    'MONTHLY_SHOP_SALE_TRANSACTION_COUNT', 'DAILY_FLOATING_POPULATION',
+                                    'LIVING_WORKER_POPULATION', 'LIVING_WORKER_AVG_REVENUE', 'LIVING_POPULATION',
+                                    'LIVING_POPULATION_AVG_REVENUE']
 
         df.to_sql("TB_PARIS", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_PARIS_ID_seq', 'TB_PARIS', 'PARIS_ID')
 
     def migration_TB_PARKING(self):
         """
@@ -367,37 +375,272 @@ class DBConnector:
         #
         df.to_sql("TB_PARKING", self.engine, if_exists='fail', index=False)
         self.commit_db()
+        self.create_PK_query('TB_PARKING_ID_seq', 'TB_PARKING', 'PARKING_ID')
+
     def migration_TB_SALES(self):
         """
         db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
         :return:
         """
-        self.start_conn()
+        cursor = self.start_conn()
         pstmt = """SELECT * FROM "TB_SALES" """
+        read_table = pd.read_sql(pstmt, self.origin_engine)
+        df = pd.DataFrame(read_table)
+        print(df.columns)
+        # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['BASE_YEAR', 'BASE_QUARTER', 'COMM_ID', 'COMM_NAME', 'INDUSTRY_CODE',
+                                    'INDUSTRY_NAME', 'SALE_AMT', 'SALE_NUM', 'ROAD_ADDRESS', 'LATITUDE',
+                                    'LONGITUDE']
+
+        new_col_list = ['COMM_NAME', 'SALE_AMT', 'SALE_NUM', 'ROAD_ADDRESS', 'LATITUDE',
+                        'LONGITUDE']
+        df = df[new_col_list]
+
+        # 칼럼 이름 바꾸기
+        df = df.reset_index()
+        df["index"] = df["index"] + 1
+        df.rename(columns={'index': 'MARKET_ID', 'COMM_NAME': "MARKET_NAME"}, inplace=True)
+        #
+        # # 추가 칼럼(후에 사용할) 만들어 놓기
+        #
+        df.to_sql("TB_SALES_MARKET", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+
+        self.create_PK_query('TB_SALES_MARKET_ID_seq', 'TB_SALES_MARKET', 'MARKET_ID')
+
+        self.end_conn()
+
+    def migration_TB_SCHOOL(self):
+        """
+        db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
+        :return:
+        """
+        cursor = self.start_conn()
+        pstmt = """SELECT * FROM "TB_SCHOOL" """
         read_table = pd.read_sql(pstmt, self.origin_engine)
         df = pd.DataFrame(read_table)
         # print(df.columns)
         # 칼럼 추출 + 순서 바꾸기
-        current_column_name_list = ['MANAGE_NUMBER', 'PARKING_NAME', 'PARKING_CLASS', 'PARKING_TYPE',
-                                    'ROAD_ADDRESS', 'BRANCH_ADDRESS', 'PARKING_SAPCE', 'TEL', 'LATITUDE',
-                                    'LONGITUDE', 'ID']
+        current_column_name_list = ['FACILITY_EDU_CODE', 'FACILITY_EDU_NAME', 'OFFICE_EDU_CODE',
+                                    'OFFICE_EDU_NAME', 'DO_CODE', 'DO_NAME', 'CITY_CODE', 'CITY_NAME',
+                                    'SCHOOL_NAME', 'PUBLIC_PRIVATE', 'EST_TYPE', 'EST_DATE', 'SCHOOL_CHAR',
+                                    'DAY_NIGHT', 'NUM_CLASS', 'NUM_STUDENT', 'NUM_TEACHER',
+                                    'NUM_SPECIAL_CLASS', 'ROAD_ADDRESS', 'HOMEPAGE', 'TEL', 'FAX',
+                                    'MALE_FEMALE', 'ID', 'LATITUDE', 'LONGITUDE']
 
-        # new_col_list = ['ID', 'PARKING_NAME', 'ROAD_ADDRESS', 'PARKING_TYPE', 'PARKING_SAPCE', 'LATITUDE', 'LONGITUDE']
-        # df = df[new_col_list]
+        new_col_list = ['SCHOOL_NAME', 'PUBLIC_PRIVATE', 'EST_TYPE', 'EST_DATE', 'NUM_CLASS', 'NUM_STUDENT',
+                        'NUM_TEACHER', 'ROAD_ADDRESS', 'MALE_FEMALE', 'LATITUDE', 'LONGITUDE']
+        df = df[new_col_list]
+
+        # 칼럼 이름 바꾸기
+        df = df.reset_index()
+        df["index"] = df["index"] + 1
+        df.rename(columns={'index': "SCHOOL_ID", 'EST_TYPE': 'ESTABLISH_TYPE', 'MALE_FEMALE': 'GENDER_CONSTRAINTS'},
+                  inplace=True)
         #
-        # # 칼럼 이름 바꾸기
-        # df.rename(columns={"ID": "PARKING_ID"}, inplace=True)
+        # # 추가 칼럼(후에 사용할) 만들어 놓기
+        #
+        df.to_sql("TB_SCHOOL", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+
+        self.create_PK_query('TB_SCHOOL_ID_seq', 'TB_SCHOOL', 'SCHOOL_ID')
+
+        self.end_conn()
+
+    def migration_TB_SELLING_AREA(self):
+        """
+        db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
+        :return:
+        """
+        cursor = self.start_conn()
+        pstmt = """SELECT * FROM "TB_SELLING_AREA" """
+        read_table = pd.read_sql(pstmt, self.origin_engine)
+        df = pd.DataFrame(read_table)
+        print(df.columns)
+        # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['SELLING_AREA_ID', 'SELLING_TYPE', 'BUILDING_TYPE', 'CURRENT_STATE',
+                                    'ADDRESS', 'AREA_SIZE', 'FLOOR_INFO', 'DEPOSIT', 'RATE_PER_MONTH',
+                                    'PREMIUM', 'LATITUDE', 'LONGITUDE', 'RELATION_LINK', 'SELLING_PRICE',
+                                    'RIVAL_CNT_300', 'TOUR_CNT_300', 'HOSPITAL_CNT_300', 'STOP_CNT_300',
+                                    'LIVING_CNT_300', 'PARKING_CNT_300', 'STATION_CNT_300',
+                                    'SCHOOL_CNT_300', 'ACADEMY_CNT_300', 'CROSSWALK_CNT_300']
+
+        new_col_list = ['SELLING_AREA_ID', 'SELLING_TYPE', 'BUILDING_TYPE', 'CURRENT_STATE',
+                        'ADDRESS', 'AREA_SIZE', 'FLOOR_INFO', 'DEPOSIT', 'RATE_PER_MONTH',
+                        'PREMIUM', 'LATITUDE', 'LONGITUDE', 'RELATION_LINK', 'SELLING_PRICE', ]
+        df = df[new_col_list]
+
+        df.to_sql("TB_SELLING_AREA", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+
+        self.create_PK_query('TB_SELLING_AREA_ID_seq', 'TB_SELLING_AREA', 'SELLING_AREA_ID')
+
+        self.end_conn()
+
+    def migration_TB_STATION(self):
+        """
+        db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
+        :return:
+        """
+        cursor = self.start_conn()
+        pstmt = """SELECT * FROM "TB_STATION" """
+        read_table = pd.read_sql(pstmt, self.origin_engine)
+        df = pd.DataFrame(read_table)
+        # print(df.columns)
+        # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['STATION_LINE', 'STATION_NAME', 'BRANCH_ADDRESS', 'ROAD_ADDRESS',
+                                    'LATITUDE', 'LONGITUDE']
+        new_col_list = ['STATION_LINE', 'STATION_NAME', 'ROAD_ADDRESS', 'LATITUDE', 'LONGITUDE']
+        df = df[new_col_list]
+        # 칼럼 이름 바꾸기
+        df = df.reset_index()
+        df["index"] = df["index"] + 1
+        df.rename(columns={'index': "STATION_ID"}, inplace=True)
+
+        df.to_sql("TB_STATION", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+
+        self.create_PK_query('TB_STATION_ID_seq', 'TB_STATION', 'STATION_ID')
+
+        self.end_conn()
+
+    def migration_TB_BUS_STOP(self):
+        """
+        db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
+        :return:
+        """
+        cursor = self.start_conn()
+        pstmt = """SELECT * FROM "TB_STOP" """
+        read_table = pd.read_sql(pstmt, self.origin_engine)
+        df = pd.DataFrame(read_table)
+        print(df.columns)
+        # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['STOP_ID', 'CITY_NAME', 'STOP_NAME', 'LATITUDE', 'LONGITUDE']
+
+        new_col_list = ['CITY_NAME', 'STOP_NAME', 'LATITUDE', 'LONGITUDE']
+        df = df[new_col_list]
+
+        # 칼럼 이름 바꾸기
+        df = df.reset_index()
+        df["index"] = df["index"] + 1
+        df.rename(columns={'index': "BUS_STOP_ID"}, inplace=True)
         # #
         # # # 추가 칼럼(후에 사용할) 만들어 놓기
         # #
-        # df.to_sql("TB_SALES_MARKET", self.engine, if_exists='fail', index=False)
+        df.to_sql("TB_BUS_STOP", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+
+        self.create_PK_query('TB_BUS_STOP_ID_seq', 'TB_BUS_STOP', 'BUS_STOP_ID')
+
+        self.end_conn()
+
+    def migration_TB_ATTRACTION_PLACE(self):
+        """
+        db_TEST -> 'db_analysis_test' or 'db_analysis_main'으로 데이터 복사
+        :return:
+        """
+        cursor = self.start_conn()
+        pstmt = """SELECT * FROM "TB_TOUR" """
+        read_table = pd.read_sql(pstmt, self.origin_engine)
+        df = pd.DataFrame(read_table)
+        # print(df.columns)
+        # # 칼럼 추출 + 순서 바꾸기
+        current_column_name_list = ['TOUR_NAME', 'TOUR_ADDR_N', 'TOUR_ADDR_O', 'LATITUDE', 'LONGITUDE',
+                                    'TOUR_ID']
+
+        new_col_list = ['TOUR_NAME', 'TOUR_ADDR_N', 'LATITUDE', 'LONGITUDE']
+        df = df[new_col_list]
+
+        # 칼럼 이름 바꾸기
+        df = df.reset_index()
+        df["index"] = df["index"] + 1
+        df.rename(columns={'index': "ATTRACTION_ID"}, inplace=True)
+
+        # 추가 칼럼(후에 사용할) 만들어 놓기
+
+        df.to_sql("TB_ATTRACTION_PLACE", self.engine, if_exists='fail', index=False)
+        self.commit_db()
+        self.create_PK_query('TB_ATTRACTION_PLACE_ID_seq', 'TB_ATTRACTION_PLACE', 'ATTRACTION_ID')
+        self.end_conn()
+
+    def save_paris_excel_on_db(self):
+        """
+       RESULT_PARIS excel -> db 저장
+       :return:
+       """
+        self.start_conn()
+        cursor = self.origin_conn.cursor()
+        read_file = pd.read_excel("crawling_sources/_dummy_src/RESULT_PARIS.xlsx")
+        df = pd.DataFrame(read_file)
+        # df.rename(columns={"INDEX": "PARIS_ID"}, inplace=True)
+        # df.drop("PARIS_NO", axis='columns', inplace=True)
+        df.to_sql("TB_PARIS_FINAL", self.origin_engine, if_exists='replace', index=False)
+        create_pk_query = f"""
+            ALTER TABLE "TB_PARIS_FINAL" ADD PRIMARY KEY ("PARIS_ID");
+            CREATE SEQUENCE IF NOT EXISTS public."TB_PARIS_FINAL_PK"
+                INCREMENT 1
+                START 1
+                MINVALUE 1
+                MAXVALUE 2147483647
+                CACHE 1
+                OWNED BY "TB_PARIS_FINAL"."PARIS_ID";
+            ALTER SEQUENCE public."TB_PARIS_FINAL_PK"
+                OWNER TO postgres;"""
+        cursor.execute(create_pk_query)
+        self.origin_conn.commit()
+
+        # self.create_PK_query('TB_PARIS_FINAL_ID_seq', 'TB_PARIS_FINAL', 'FINAL_PARIS_ID')
+        #
+        #
+        # cursor = self.start_conn()
+        # pstmt = """SELECT * FROM "TB_TOUR" """
+        # read_table = pd.read_sql(pstmt, self.origin_engine)
+        # df = pd.DataFrame(read_table)
+        # # print(df.columns)
+        # # # 칼럼 추출 + 순서 바꾸기
+        # current_column_name_list = ['TOUR_NAME', 'TOUR_ADDR_N', 'TOUR_ADDR_O', 'LATITUDE', 'LONGITUDE',
+        #                             'TOUR_ID']
+        #
+        # new_col_list = ['TOUR_NAME', 'TOUR_ADDR_N', 'LATITUDE', 'LONGITUDE']
+        # df = df[new_col_list]
+        #
+        # # 칼럼 이름 바꾸기
+        # df = df.reset_index()
+        # df["index"] = df["index"] + 1
+        # df.rename(columns={'index': "ATTRACTION_ID"}, inplace=True)
+        #
+        # # 추가 칼럼(후에 사용할) 만들어 놓기
+        #
+        # df.to_sql("TB_ATTRACTION_PLACE", self.engine, if_exists='fail', index=False)
         # self.commit_db()
+        # self.create_PK_query('TB_ATTRACTION_PLACE_ID_seq', 'TB_ATTRACTION_PLACE', 'ATTRACTION_ID')
+        # self.end_conn()
+        #
+
+    def create_PK_query(self, sequence_name, table_name, id_name):
+        # pk_example_name : TB_PARKING_ID_seq
+        cursor = self.start_conn()
+        create_pk_query = f"""
+            ALTER TABLE "{table_name}" ADD PRIMARY KEY ("{id_name}");
+            CREATE SEQUENCE IF NOT EXISTS public."{sequence_name}"
+                INCREMENT 1
+                START 1
+                MINVALUE 1
+                MAXVALUE 2147483647
+                CACHE 1
+                OWNED BY "{table_name}"."{id_name}";
+            ALTER SEQUENCE public."{sequence_name}"
+                OWNER TO postgres;
+            """
+        cursor.execute(create_pk_query)
+        self.commit_db()
+        self.end_conn()
+
     @staticmethod
     def config_pd_option():
         # pandas 칼럼 다 보이게 설정
         pd.set_option('display.max_columns', None)
         pd.set_option('display.width', 1000)
-
 
 
 if __name__ == '__main__':
