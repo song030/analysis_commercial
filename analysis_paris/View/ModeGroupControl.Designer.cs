@@ -80,13 +80,13 @@
             this.modeControl3.Size = new System.Drawing.Size(80, 52);
             this.modeControl3.TabIndex = 2;
             // 
-            // ModeControlGroup
+            // ModeGroupControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.layoutFrame);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ModeControlGroup";
+            this.Name = "ModeGroupControl";
             this.Size = new System.Drawing.Size(80, 150);
             this.layoutFrame.ResumeLayout(false);
             this.ResumeLayout(false);

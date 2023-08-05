@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace analysis_paris.View {
 
     public partial class ModeGroupControl : UserControl {
 
-        #region Properties
         private List<ModeControl> _modeList = new List<ModeControl>();
-        private int _currentMode;
-
-        public int CurrentMode {
-            get { return _currentMode; }
-            set { _currentMode = value; }
-        }
-        #endregion
 
         public ModeGroupControl() {
             InitializeComponent();
@@ -23,13 +14,24 @@ namespace analysis_paris.View {
                 item.Click += mode_Click;
                 _modeList.Add(item);
             }
+
+            _modeList[0].Checked = true;
         }
 
         private void mode_Click(object sender, System.EventArgs e) {
             //throw new System.NotImplementedException();
             var mode = (ModeControl)sender;
 
-            Console.WriteLine(mode.GetType());
+            if (mode.Checked) {
+                return;
+            }
+
+            foreach (var item in _modeList) {
+                if (item == mode)
+                    item.Checked = true;
+                else
+                    item.Checked = false;
+            }
         }
     }
 }

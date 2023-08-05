@@ -6,7 +6,7 @@ namespace analysis_paris.View {
     public partial class ModeControl : UserControl {
         public ModeControl() {
             InitializeComponent();
-            this._checked = true;
+            this._checked = false;
         }
 
         #region Properties

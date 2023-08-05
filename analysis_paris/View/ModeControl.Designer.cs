@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.selectedMarker = new System.Windows.Forms.Label();
             this.iconBox = new System.Windows.Forms.PictureBox();
+            this.selectedMarker = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
             this.SuspendLayout();
@@ -47,17 +47,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 60);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // selectedMarker
-            // 
-            this.selectedMarker.AutoSize = true;
-            this.selectedMarker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.selectedMarker.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.selectedMarker.Location = new System.Drawing.Point(0, 0);
-            this.selectedMarker.Margin = new System.Windows.Forms.Padding(0);
-            this.selectedMarker.Name = "selectedMarker";
-            this.selectedMarker.Size = new System.Drawing.Size(8, 60);
-            this.selectedMarker.TabIndex = 1;
-            // 
             // iconBox
             // 
             this.iconBox.BackColor = System.Drawing.Color.Transparent;
@@ -71,6 +60,17 @@
             this.iconBox.TabStop = false;
             this.iconBox.Tag = "매물";
             this.iconBox.Click += new System.EventHandler(this.iconBox_Click);
+            // 
+            // selectedMarker
+            // 
+            this.selectedMarker.AutoSize = true;
+            this.selectedMarker.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.selectedMarker.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.selectedMarker.Location = new System.Drawing.Point(0, 0);
+            this.selectedMarker.Margin = new System.Windows.Forms.Padding(0);
+            this.selectedMarker.Name = "selectedMarker";
+            this.selectedMarker.Size = new System.Drawing.Size(8, 60);
+            this.selectedMarker.TabIndex = 1;
             // 
             // ModeControl
             // 

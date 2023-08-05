@@ -32,7 +32,6 @@
             this.layoutMainTable = new System.Windows.Forms.TableLayoutPanel();
             this.lblMainTableTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnSearch = new CustomControls.RoundedButton();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.flowSearchList = new System.Windows.Forms.FlowLayoutPanel();
             this.splitChart = new System.Windows.Forms.SplitContainer();
@@ -43,16 +42,16 @@
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.chartGifBox = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblChartTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnChart = new analysis_paris.View.CheckedButton();
-            this.btnTable = new analysis_paris.View.CheckedButton();
-            this.btnMap = new analysis_paris.View.CheckedButton();
             this.lblProjectTitle = new System.Windows.Forms.Label();
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
-            this.modeControl1 = new analysis_paris.View.ModeGroupControl();
+            this.btnSearch = new CustomControls.RoundedButton();
+            this.btnTable = new analysis_paris.View.CheckedButton();
+            this.btnMap = new analysis_paris.View.CheckedButton();
+            this.btnChart = new analysis_paris.View.CheckedButton();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
@@ -128,17 +127,17 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(117, 675);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -236,8 +235,8 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 280F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel5.Controls.Add(this.btnSearch, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.searchBox, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.btnSearch, 2, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
@@ -246,31 +245,6 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel5.Size = new System.Drawing.Size(340, 42);
             this.tableLayoutPanel5.TabIndex = 3;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSearch.BackColor = System.Drawing.Color.White;
-            this.btnSearch.BackgroundColor = System.Drawing.Color.White;
-            this.btnSearch.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSearch.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.BorderRadius = 4;
-            this.btnSearch.BorderSize = 2;
-            this.btnSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.FlatAppearance.BorderSize = 0;
-            this.btnSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSearch.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.Location = new System.Drawing.Point(309, 7);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(28, 28);
-            this.btnSearch.TabIndex = 0;
-            this.btnSearch.Text = "OK";
-            this.btnSearch.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // searchBox
             // 
@@ -395,7 +369,7 @@
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Controls.Add(this.chartGifBox, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.lblChartTitle, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -417,18 +391,18 @@
             this.chartGifBox.TabIndex = 0;
             this.chartGifBox.TabStop = false;
             // 
-            // label1
+            // lblChartTitle
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.label1.Location = new System.Drawing.Point(0, 13);
-            this.label1.Margin = new System.Windows.Forms.Padding(0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(63, 16);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "분석 차트";
+            this.lblChartTitle.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblChartTitle.AutoSize = true;
+            this.lblChartTitle.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblChartTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.lblChartTitle.Location = new System.Drawing.Point(0, 13);
+            this.lblChartTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.lblChartTitle.Name = "lblChartTitle";
+            this.lblChartTitle.Size = new System.Drawing.Size(63, 16);
+            this.lblChartTitle.TabIndex = 1;
+            this.lblChartTitle.Text = "분석 차트";
             // 
             // tableLayoutPanel3
             // 
@@ -437,10 +411,10 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 175F));
-            this.tableLayoutPanel3.Controls.Add(this.btnChart, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblProjectTitle, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnTable, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.btnMap, 2, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lblProjectTitle, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnChart, 3, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(9);
@@ -449,75 +423,6 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(975, 44);
             this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // btnChart
-            // 
-            this.btnChart.BackColor = System.Drawing.Color.White;
-            this.btnChart.BorderRadius = 0;
-            this.btnChart.Checkable = true;
-            this.btnChart.Checked = false;
-            this.btnChart.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnChart.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnChart.FlatAppearance.BorderSize = 0;
-            this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnChart.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnChart.ForeColor = System.Drawing.Color.Black;
-            this.btnChart.Location = new System.Drawing.Point(803, 3);
-            this.btnChart.Name = "btnChart";
-            this.btnChart.Size = new System.Drawing.Size(169, 38);
-            this.btnChart.TabIndex = 2;
-            this.btnChart.Text = "그래프";
-            this.btnChart.UncheckedBackColor = System.Drawing.Color.White;
-            this.btnChart.UncheckedForeColor = System.Drawing.Color.Black;
-            this.btnChart.UseVisualStyleBackColor = false;
-            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
-            // 
-            // btnTable
-            // 
-            this.btnTable.BackColor = System.Drawing.Color.White;
-            this.btnTable.BorderRadius = 0;
-            this.btnTable.Checkable = true;
-            this.btnTable.Checked = false;
-            this.btnTable.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnTable.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTable.FlatAppearance.BorderSize = 0;
-            this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTable.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnTable.ForeColor = System.Drawing.Color.Black;
-            this.btnTable.Location = new System.Drawing.Point(453, 3);
-            this.btnTable.Name = "btnTable";
-            this.btnTable.Size = new System.Drawing.Size(169, 38);
-            this.btnTable.TabIndex = 4;
-            this.btnTable.Text = "표";
-            this.btnTable.UncheckedBackColor = System.Drawing.Color.White;
-            this.btnTable.UncheckedForeColor = System.Drawing.Color.Black;
-            this.btnTable.UseVisualStyleBackColor = false;
-            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
-            // 
-            // btnMap
-            // 
-            this.btnMap.BackColor = System.Drawing.Color.White;
-            this.btnMap.BorderRadius = 0;
-            this.btnMap.Checkable = true;
-            this.btnMap.Checked = false;
-            this.btnMap.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMap.CheckedForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMap.FlatAppearance.BorderSize = 0;
-            this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMap.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnMap.ForeColor = System.Drawing.Color.Black;
-            this.btnMap.Location = new System.Drawing.Point(628, 3);
-            this.btnMap.Name = "btnMap";
-            this.btnMap.Size = new System.Drawing.Size(169, 38);
-            this.btnMap.TabIndex = 3;
-            this.btnMap.Text = "지도";
-            this.btnMap.UncheckedBackColor = System.Drawing.Color.White;
-            this.btnMap.UncheckedForeColor = System.Drawing.Color.Black;
-            this.btnMap.UseVisualStyleBackColor = false;
-            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
             // lblProjectTitle
             // 
@@ -534,26 +439,22 @@
             // tblModeMenu
             // 
             this.tblModeMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.tblModeMenu.ColumnCount = 2;
-            this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 6F));
+            this.tblModeMenu.ColumnCount = 1;
             this.tblModeMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModeMenu.Controls.Add(this.btnExit, 1, 9);
-            this.tblModeMenu.Controls.Add(this.btnMenuCollapse, 1, 0);
+            this.tblModeMenu.Controls.Add(this.btnExit, 0, 4);
+            this.tblModeMenu.Controls.Add(this.btnMenuCollapse, 0, 0);
             this.tblModeMenu.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tblModeMenu.Location = new System.Drawing.Point(0, 0);
             this.tblModeMenu.Margin = new System.Windows.Forms.Padding(0);
             this.tblModeMenu.Name = "tblModeMenu";
-            this.tblModeMenu.RowCount = 10;
+            this.tblModeMenu.RowCount = 5;
             this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tblModeMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tblModeMenu.Size = new System.Drawing.Size(86, 675);
             this.tblModeMenu.TabIndex = 0;
             // 
@@ -567,7 +468,7 @@
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.btnExit.Location = new System.Drawing.Point(13, 628);
+            this.btnExit.Location = new System.Drawing.Point(10, 628);
             this.btnExit.Margin = new System.Windows.Forms.Padding(0);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(66, 33);
@@ -586,7 +487,7 @@
             this.btnMenuCollapse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMenuCollapse.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnMenuCollapse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.btnMenuCollapse.Location = new System.Drawing.Point(13, 13);
+            this.btnMenuCollapse.Location = new System.Drawing.Point(10, 13);
             this.btnMenuCollapse.Margin = new System.Windows.Forms.Padding(0);
             this.btnMenuCollapse.Name = "btnMenuCollapse";
             this.btnMenuCollapse.Size = new System.Drawing.Size(66, 33);
@@ -595,14 +496,96 @@
             this.btnMenuCollapse.UseVisualStyleBackColor = true;
             this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
             // 
-            // modeControl1
+            // btnSearch
             // 
-            this.modeControl1.CurrentMode = 0;
-            this.modeControl1.Location = new System.Drawing.Point(0, 0);
-            this.modeControl1.Margin = new System.Windows.Forms.Padding(0);
-            this.modeControl1.Name = "modeControl1";
-            this.modeControl1.Size = new System.Drawing.Size(80, 150);
-            this.modeControl1.TabIndex = 0;
+            this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSearch.BackColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BackgroundColor = System.Drawing.Color.Transparent;
+            this.btnSearch.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.BorderRadius = 4;
+            this.btnSearch.BorderSize = 2;
+            this.btnSearch.FlatAppearance.BorderSize = 0;
+            this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearch.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.Location = new System.Drawing.Point(302, 7);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(28, 28);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.Text = "OK";
+            this.btnSearch.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnTable
+            // 
+            this.btnTable.BackColor = System.Drawing.Color.White;
+            this.btnTable.BorderRadius = 0;
+            this.btnTable.Checkable = false;
+            this.btnTable.Checked = false;
+            this.btnTable.CheckedBackColor = System.Drawing.Color.Empty;
+            this.btnTable.CheckedForeColor = System.Drawing.Color.Empty;
+            this.btnTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTable.FlatAppearance.BorderSize = 0;
+            this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTable.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnTable.Location = new System.Drawing.Point(453, 3);
+            this.btnTable.Name = "btnTable";
+            this.btnTable.Size = new System.Drawing.Size(169, 38);
+            this.btnTable.TabIndex = 6;
+            this.btnTable.Text = "표";
+            this.btnTable.UncheckedBackColor = System.Drawing.Color.White;
+            this.btnTable.UncheckedForeColor = System.Drawing.Color.Black;
+            this.btnTable.UseVisualStyleBackColor = false;
+            this.btnTable.Click += new System.EventHandler(this.btnTable_Click);
+            // 
+            // btnMap
+            // 
+            this.btnMap.BackColor = System.Drawing.Color.White;
+            this.btnMap.BorderRadius = 0;
+            this.btnMap.Checkable = false;
+            this.btnMap.Checked = false;
+            this.btnMap.CheckedBackColor = System.Drawing.Color.Empty;
+            this.btnMap.CheckedForeColor = System.Drawing.Color.Empty;
+            this.btnMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnMap.FlatAppearance.BorderSize = 0;
+            this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMap.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMap.Location = new System.Drawing.Point(628, 3);
+            this.btnMap.Name = "btnMap";
+            this.btnMap.Size = new System.Drawing.Size(169, 38);
+            this.btnMap.TabIndex = 7;
+            this.btnMap.Text = "지도";
+            this.btnMap.UncheckedBackColor = System.Drawing.Color.White;
+            this.btnMap.UncheckedForeColor = System.Drawing.Color.Black;
+            this.btnMap.UseVisualStyleBackColor = false;
+            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
+            // 
+            // btnChart
+            // 
+            this.btnChart.BackColor = System.Drawing.Color.White;
+            this.btnChart.BorderRadius = 0;
+            this.btnChart.Checkable = false;
+            this.btnChart.Checked = false;
+            this.btnChart.CheckedBackColor = System.Drawing.Color.Empty;
+            this.btnChart.CheckedForeColor = System.Drawing.Color.Empty;
+            this.btnChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnChart.FlatAppearance.BorderSize = 0;
+            this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChart.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnChart.Location = new System.Drawing.Point(803, 3);
+            this.btnChart.Name = "btnChart";
+            this.btnChart.Size = new System.Drawing.Size(169, 38);
+            this.btnChart.TabIndex = 8;
+            this.btnChart.Text = "차트";
+            this.btnChart.UncheckedBackColor = System.Drawing.Color.White;
+            this.btnChart.UncheckedForeColor = System.Drawing.Color.Black;
+            this.btnChart.UseVisualStyleBackColor = false;
+            this.btnChart.Click += new System.EventHandler(this.btnChart_Click);
             // 
             // Main
             // 
@@ -666,7 +649,7 @@
         private System.Windows.Forms.SplitContainer splitChart;
         private System.Windows.Forms.SplitContainer splitTableMap;
         private System.Windows.Forms.WebBrowser mapBrowser;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblChartTitle;
         private System.Windows.Forms.PictureBox chartGifBox;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMenuCollapse;
@@ -676,17 +659,16 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel layoutMainTable;
-        private View.CheckedButton btnTable;
-        private View.CheckedButton btnMap;
-        private View.CheckedButton btnChart;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
-        private CustomControls.RoundedButton btnSearch;
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Button buttonEventTest;
         private System.Windows.Forms.Label lblProjectTitle;
         private System.Windows.Forms.FlowLayoutPanel flowSearchList;
-        private View.ModeGroupControl modeControl1;
+        private CustomControls.RoundedButton btnSearch;
+        private View.CheckedButton btnTable;
+        private View.CheckedButton btnMap;
+        private View.CheckedButton btnChart;
     }
 }
 
