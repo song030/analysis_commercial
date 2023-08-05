@@ -20,7 +20,8 @@ namespace analysis_paris {
             splitTableMap.Panel2Collapsed = true;
             splitChart.Panel2Collapsed = true;
 
-            mapBrowser.Navigate("http://song030s.dothome.co.kr/map_test.html");
+            //Gif_Start("sample_chart", chartGifBox);
+            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map.html");
         }
 
         // 프로그램을 종료한다.
@@ -39,10 +40,11 @@ namespace analysis_paris {
             // Timer 설정
             gifTimer = new Timer();
             // GIF 애니메이션 지속 시간 설정
-            gifTimer.Interval = gifImage.GetFrameCount(new System.Drawing.Imaging.FrameDimension(gifImage.FrameDimensionsList[0])) * 10;
+            gifTimer.Interval = gifImage.GetFrameCount(new System.Drawing.Imaging.FrameDimension(gifImage.FrameDimensionsList[0])) * 15;
             gifTimer.Tick += GifTimer_Tick;
 
             // Timer 시작
+            chartGifBox.Enabled = true;
             gifTimer.Enabled = true;
         }
 
@@ -53,7 +55,7 @@ namespace analysis_paris {
             chartGifBox.Enabled = false;
         }
 
-        // 와이드 메뉴 활성화 상태 전환
+        // 메뉴 버튼 클릭 시 와이드 메뉴 활성화 상태 전환
         private void btnMenuCollapse_Click(object sender, EventArgs e) {
             if (splitMainBoard.Panel1Collapsed) {
                 splitMainBoard.Panel1Collapsed = false;
@@ -75,8 +77,8 @@ namespace analysis_paris {
             }
 
             if (btnChart.Checked && splitChart.Panel2Collapsed) {
-
                 splitChart.Panel2Collapsed = false;
+                Gif_Start("sample_chart_2", chartGifBox);
             }
             else if (!btnChart.Checked && !splitChart.Panel2Collapsed) {
                 splitChart.Panel2Collapsed = true;
@@ -122,7 +124,7 @@ namespace analysis_paris {
                 splitTableMap.Panel1Collapsed = false;
                 return;
             }
-            
+
             if (btnTable.Checked && splitTableMap.Panel1Collapsed) {
                 splitTableMap.Panel1Collapsed = false;
             }
@@ -150,16 +152,34 @@ namespace analysis_paris {
 
         // 현재 좌표 검색 버튼 클릭 시 발생할 맵 브라우저 전체 출력 기능 임시 사용 중
         private void buttonEventTest_Click(object sender, EventArgs e) {
-                btnTable.Checked = false;
-                btnMap.Checked = true;
-                btnChart.Checked = false;
+            btnTable.Checked = false;
+            btnMap.Checked = true;
+            btnChart.Checked = false;
 
-                splitTableMap.Panel1Collapsed = true;
-                splitTableMap.Panel2Collapsed = false;  // 지도만 보여주기
-                splitChart.Panel2Collapsed = true;
-                splitDataBoard.Panel1Collapsed = true;
-                splitMainBoard.Panel1Collapsed = true;
+            splitTableMap.Panel1Collapsed = true;
+            splitTableMap.Panel2Collapsed = false;  // 지도만 보여주기
+            splitChart.Panel2Collapsed = true;
+            splitDataBoard.Panel1Collapsed = true;
+            splitMainBoard.Panel1Collapsed = true;
         }
 
+        // 검색 결과 영역이 바뀔 때 컨트롤 사이즈 최적화
+        private void flowSearchList_SizeChanged(object sender, EventArgs e) {
+            flowSearchList.SuspendLayout();
+            foreach (ListItemControl listItem in flowSearchList.Controls) {
+                listItem.Width = flowSearchList.Width - 20;
+            }
+            flowSearchList.ResumeLayout();
+        }
+
+        // 검색 버튼 클릭 시
+        private void btnSearch_Click(object sender, EventArgs e) {
+            while (true) {
+                var item = new ListItemControl();
+                flowSearchList.Controls.Add(item);
+                if (flowSearchList.Controls.Count == 10)
+                    break;
+            }
+        }
     }
 }

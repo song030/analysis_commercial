@@ -70,6 +70,7 @@
     <Compile Include="View\CheckedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\ItemInfo.cs" />
     <Compile Include="View\ListItemControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -89,6 +90,12 @@
     </Compile>
     <Compile Include="View\ModeControl.Designer.cs">
       <DependentUpon>ModeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModeGroupControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\ModeGroupControl.Designer.cs">
+      <DependentUpon>ModeGroupControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\RoundedButton.cs">
       <SubType>Component</SubType>
@@ -111,6 +118,9 @@
     </Compile>
     <EmbeddedResource Include="View\ModeControl.resx">
       <DependentUpon>ModeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ModeGroupControl.resx">
+      <DependentUpon>ModeGroupControl.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -162,13 +172,43 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sample_chart.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\icon_search.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_eiffel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_eiffel_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_eiffel_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_eiffel_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_pin_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_pin_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_pin_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sample_chart.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sample_chart_2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_store_b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_store_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_store_y.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
