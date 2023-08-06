@@ -100,6 +100,12 @@
     <Compile Include="View\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\TestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\TestForm.Designer.cs">
+      <DependentUpon>TestForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\ListItemControl.resx">
       <DependentUpon>ListItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +127,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ModeGroupControl.resx">
       <DependentUpon>ModeGroupControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TestForm.resx">
+      <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -209,6 +218,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_store_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAO\" />
+    <Folder Include="DTO\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
