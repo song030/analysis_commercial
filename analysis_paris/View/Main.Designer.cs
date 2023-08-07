@@ -36,6 +36,7 @@
             this.layoutSearchBox = new System.Windows.Forms.TableLayoutPanel();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.lblModeName = new System.Windows.Forms.Label();
+            this.searchUnderbar = new System.Windows.Forms.Label();
             this.flowSearchList = new System.Windows.Forms.FlowLayoutPanel();
             this.splitChart = new System.Windows.Forms.SplitContainer();
             this.splitTableMap = new System.Windows.Forms.SplitContainer();
@@ -51,7 +52,6 @@
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
-            this.searchUnderbar = new System.Windows.Forms.Label();
             this.btnSearch = new CustomControls.RoundedButton();
             this.btnTable = new analysis_paris.View.CheckedButton();
             this.btnMap = new analysis_paris.View.CheckedButton();
@@ -314,6 +314,18 @@
             this.lblModeName.TabIndex = 6;
             this.lblModeName.Text = "주소 검색";
             // 
+            // searchUnderbar
+            // 
+            this.searchUnderbar.AutoSize = true;
+            this.searchUnderbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.layoutSearchBox.SetColumnSpan(this.searchUnderbar, 3);
+            this.searchUnderbar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchUnderbar.Location = new System.Drawing.Point(0, 89);
+            this.searchUnderbar.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.searchUnderbar.Name = "searchUnderbar";
+            this.searchUnderbar.Size = new System.Drawing.Size(333, 3);
+            this.searchUnderbar.TabIndex = 7;
+            // 
             // flowSearchList
             // 
             this.flowSearchList.AutoScroll = true;
@@ -551,18 +563,6 @@
             this.btnMenuCollapse.Text = "메뉴";
             this.btnMenuCollapse.UseVisualStyleBackColor = true;
             this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
-            // 
-            // searchUnderbar
-            // 
-            this.searchUnderbar.AutoSize = true;
-            this.searchUnderbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.layoutSearchBox.SetColumnSpan(this.searchUnderbar, 3);
-            this.searchUnderbar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchUnderbar.Location = new System.Drawing.Point(0, 89);
-            this.searchUnderbar.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.searchUnderbar.Name = "searchUnderbar";
-            this.searchUnderbar.Size = new System.Drawing.Size(333, 3);
-            this.searchUnderbar.TabIndex = 7;
             // 
             // btnSearch
             // 
