@@ -12,6 +12,68 @@
 # 예상 리턴은 관련 함수를 검색바랍니다.
 # -----------------------------------------------------------
 #
+""" 팀장님 추가해야하는 클래스 + 메서드
+    public class Paris {
+        public int PARIS_ID { get; set; }
+        public string PARIS_NAME { get; set; }
+        public string PARIS_ADDRESS { get; set; }
+        public double LATITUDE { get; set; }
+        public double LONGITUDE { get; set; }
+        public double AREA_SIZE { get; set; }
+        public DateTime? OPEN_DATE { get; set; }
+        public DateTime? CLOSE_DATE { get; set; }
+        public string IS_OPEN_STATE { get; set; }
+        public int RIVAL_COUNT_NEAR_500 { get; set; }
+        public int RIVAL_COUNT_NEAR_1000 { get; set; }
+        public int MONTHLY_SHOP_REVENUE { get; set; }
+        public int MONTHLY_SHOP_SALE_TRANSACTION_COUNT { get; set; }
+        public int DAILY_FLOATING_POPULATION { get; set; }
+        public int LIVING_WORKER_POPULATION { get; set; }
+        public int LIVING_WORKER_AVG_REVENUE { get; set; }
+        public int LIVING_POPULATION { get; set; }
+        public int LIVING_POPULATION_AVG_REVENUE { get; set; }
+    }
+
+    public class SellingArea {
+        public int SELLING_AREA_ID { get; set; }
+        public string SELLING_TYPE { get; set; }
+        public string BUILDING_TYPE { get; set; }
+        public string CURRENT_STATE { get; set; }
+        public string ADDRESS { get; set; }
+        public double AREA_SIZE { get; set; }
+        public string FLOOR_INFO { get; set; }
+        public long DEPOSIT { get; set; }
+        public long RATE_PER_MONTH { get; set; }
+        public long PREMIUM { get; set; }
+        public double LATITUDE { get; set; }
+        public double LONGITUDE { get; set; }
+        public string RELATION_LINK { get; set; }
+        public long SELLING_PRICE { get; set; }
+        public int RIVAL_CNT_300 { get; set; }
+        public int TOUR_CNT_300 { get; set; }
+        public int HOSPITAL_CNT_300 { get; set; }
+        public int STOP_CNT_300 { get; set; }
+        public int LIVING_CNT_300 { get; set; }
+        public int PARKING_CNT_300 { get; set; }
+        public int STATION_CNT_300 { get; set; }
+        public int SCHOOL_CNT_300 { get; set; }
+        public int ACADEMY_CNT_300 { get; set; }
+        public int CROSSWALK_CNT_300 { get; set; }
+    }
+
+    public List<Paris> JSONConverterParis(string json_str) {
+        var parisList = JsonConvert.DeserializeObject<List<Paris>>(json_str);
+        return parisList;
+    }
+    public List<SellingArea> JSONConverterSellingArea(string json_str) {
+        var parisList = JsonConvert.DeserializeObject<List<SellingArea>>(json_str);
+        return parisList;
+    }
+
+
+
+"""
+
 import os
 import sys
 
@@ -28,8 +90,10 @@ class Method:
     ## 함수 이름을 str로 저장해서 씁니다. (오탈자 예방용) calling_method_name_list ##
     get_all_paris_list = 'get_all_paris_list'
     get_paris_by_id = 'get_paris_by_id'
+    get_all_selling_area_list = 'get_all_selling_area_list'
     get_sale_area_report = 'get_sale_area_report'
     get_location_report = 'get_location_report'
+    get_location_information = 'get_location_information'
 
 
 def main():
@@ -41,7 +105,10 @@ def main():
     calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
     other_parameters = " ".join(other_parameters)  # string으로 다시 보낼 예정이라 join 필요
 
-    if calling_method_name in [Method.get_all_paris_list, Method.get_paris_by_id]:
+    if calling_method_name in [Method.get_all_paris_list,
+                               Method.get_paris_by_id,
+                               Method.get_all_selling_area_list,
+                               Method.get_location_information]:
         os.system(f"{Path.python_interpreter} {Path.db_connector_path} {calling_method_name} {other_parameters}")
 
     elif calling_method_name in [Method.get_sale_area_report, Method.get_location_report]:
