@@ -28,8 +28,10 @@ class Method:
     ## 함수 이름을 str로 저장해서 씁니다. (오탈자 예방용) calling_method_name_list ##
     get_all_paris_list = 'get_all_paris_list'
     get_paris_by_id = 'get_paris_by_id'
+    get_all_selling_area_list = 'get_all_selling_area_list'
     get_sale_area_report = 'get_sale_area_report'
     get_location_report = 'get_location_report'
+    get_location_information = 'get_location_information'
 
 
 def main():
@@ -41,7 +43,10 @@ def main():
     calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
     other_parameters = " ".join(other_parameters)  # string으로 다시 보낼 예정이라 join 필요
 
-    if calling_method_name in [Method.get_all_paris_list, Method.get_paris_by_id]:
+    if calling_method_name in [Method.get_all_paris_list,
+                               Method.get_paris_by_id,
+                               Method.get_all_selling_area_list,
+                               Method.get_location_information]:
         os.system(f"{Path.python_interpreter} {Path.db_connector_path} {calling_method_name} {other_parameters}")
 
     elif calling_method_name in [Method.get_sale_area_report, Method.get_location_report]:

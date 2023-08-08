@@ -5,6 +5,21 @@
 # 명령어 예시 :
 #       ex)
 # 예상 리턴은 관련 함수를 검색바랍니다.
+"""
+지도/맵 출력시 필요한 정보에 대해 정리해 보았습니다.
+
+[ 지도 ]
+필수 정보 : 위도, 경도
+가맹정 : 지점명
+매물조회시 : 주소
+
+[ 그래프 ]
+대상 : 선택 장소 정보, 점수 높은 매장의 정보, 점수 평균 매장 정보
+출력 항목 : 시연님이 지정하는 항목의 이름과 값(임시로 지하철500, 버스500, 횡단보도500, 주거단지500)
+조건 : 바로 출력할 값과 파이로 출력할 값의 구분이 필요함
+→ 내부 값들은 리스트가 좋음 (ex: 파이 그래프 컬럼 리스트 / 파이 그래프 값 리스트)
+"""
+
 # -----------------------------------------------------------
 import json
 import sys
@@ -19,7 +34,9 @@ import common
 class DBMethod:
     ## 함수 이름을 str로 저장해서 씁니다. (오탈자 예방용) calling_method_name_list ##
     get_all_paris_list = 'get_all_paris_list'
+    get_all_selling_area_list = 'get_all_selling_area_list'
     get_paris_by_id = 'get_paris_by_id'
+    get_location_information = 'get_location_information'
 
 
 def main():
@@ -29,9 +46,19 @@ def main():
         connector = DBConnector(test_option=True)
         connector.find_all_paris()
 
+    elif calling_method_name == DBMethod.get_all_selling_area_list:
+        connector = DBConnector(test_option=True)
+        connector.find_all_selling_area()
+
     elif calling_method_name == DBMethod.get_paris_by_id:
-        paris_id = int(other_parameters[0])
-        print(f"메소드 {DBMethod.get_paris_by_id} 호출됨. 전달된 빵집 아이디 : {paris_id}")
+        connector = DBConnector(test_option=True)
+        paris_id = other_parameters[0]
+        connector.find_paris_by_id(paris_id)
+
+    elif calling_method_name == DBMethod.get_location_information:
+        connector = DBConnector(test_option=True)
+        latitude, longitude = other_parameters
+        connector.calculate_location_score(latitude, longitude)
 
 
 class DBConnector:
@@ -102,12 +129,25 @@ class DBConnector:
         self.start_conn()
         pstmt = """select * from "TB_PARIS_FINAL" """
         df = pd.read_sql(pstmt, self.origin_engine)
-        # print(df.columns)
-        for i in df["PARIS_NAME"]:
-            print(i, end="|")
+        print(df.to_json(orient='records'))
+        self.end_conn()
 
+    def find_paris_by_id(self, paris_id):
+        self.start_conn()
+        pstmt = f"""select * from "TB_PARIS_FINAL" where "PARIS_ID" == {paris_id} """
+        df = pd.read_sql(pstmt, self.origin_engine)
+        print(df.to_json(orient='records'))
+        self.end_conn()
+
+    def find_all_selling_area(self):
+        self.start_conn()
+        pstmt = """select * from "TB_SELLING_AREA" """
+        df = pd.read_sql(pstmt, self.origin_engine)
+        print(df.to_json(orient='records'))
+        self.end_conn()
+
+    def calculate_location_score(self, latitude, longitude):
+        print("10점 만점에 10점")
 
 if __name__ == '__main__':
     main()
-    # conn = DBConnector()
-    # conn.find_all_paris()
