@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>지도 생성하기</title>
+        
+        <style>
+            html, body {width:100%;height:100%;margin:0;padding:0;}
+            .map_wrap {position:relative;overflow:hidden;width:100%;height:100%;}
+            // 지도 style
+            .radius_border{border:1px solid #919191;border-radius:5px;}
+            .custom_typecontrol {position:absolute;top:10px;right:10px;overflow:hidden;width:130px;height:30px;margin:0;padding:0;z-index:1;font-size:12px;font-family:'Malgun Gothic', '맑은 고딕', sans-serif;}
+            .custom_typecontrol span {display:block;width:65px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;}
+            .custom_typecontrol .btn {background:#fff;background:linear-gradient(#fff,  #e6e6e6);}
+            .custom_typecontrol .btn:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
+            .custom_typecontrol .btn:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}
+            .custom_typecontrol .selected_btn {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);}
+            .custom_typecontrol .selected_btn:hover {color:#fff;}
+            .custom_zoomcontrol {position:absolute;top:50px;right:10px;width:36px;height:80px;overflow:hidden;z-index:1;background-color:#f5f5f5;}
+            .custom_zoomcontrol span {display:block;width:36px;height:40px;text-align:center;cursor:pointer;}
+            .custom_zoomcontrol span img {width:15px;height:15px;padding:12px 0;border:none;}
+            .custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}
+                
+        </style>
+    </head>
+    
+    <body>
+    <div class="map_wrap">
+        <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+        <!-- 지도 컨트롤 div  -->
+                <div class="custom_typecontrol radius_border">
+            <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+            <span id="btnSkyview" class="btn" onclick="setMapType('skyview')">스카이뷰</span>
+        </div>
+
+        <div class="custom_zoomcontrol radius_border"> 
+            <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+            <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+        </div>
+                
+        <div id="clickLatlng"> </div>
+    </div>
+    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36e6f8ef91e206312c99c8be04e55526"></script>
+    <script>
+        
+        // 지도 컨트롤 함수
+        function setMapType(maptype){
+            var roadmapControl = document.getElementById('btnRoadmap');
+            var skyviewControl = document.getElementById('btnSkyview'); 
+            if (maptype === 'roadmap') {
+                map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+                roadmapControl.className = 'selected_btn';
+                skyviewControl.className = 'btn';
+            } else {
+                map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+                skyviewControl.className = 'selected_btn';
+                roadmapControl.className = 'btn';
+            }
+        }
+        
+        function zoomIn() {
+            map.setLevel(map.getLevel() - 1);
+        }
+        
+        function zoomOut() {
+            map.setLevel(map.getLevel() + 1);
+        }
+        
+        
+        function makeOverListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+        
+        function makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
+        }
+        
+    
+        // 지도 생성
+        var mapContainer = document.getElementById('map'),
+        mapOption = {
+            center: new kakao.maps.LatLng(36.9835439723529, 126.920112642654),
+            level: 3
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+        
+            kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+
+            var latlng = mouseEvent.latLng; 
+
+            marker.setPosition(latlng);
+
+            var message = latlng.getLat() + ',' + latlng.getLng();
+            
+            var resultDiv = document.getElementById('clickLatlng'); 
+            resultDiv.innerHTML = message;
+
+            });
+                            
+        // 커스텀 마커 생성
+        var positions = [
+            {
+                title: '현화중학교',
+                latlng: new kakao.maps.LatLng(36.9824163015563, 126.92003340131)
+            }
+            
+        ];
+        var imageSrc = "http://song030s.dothome.co.kr/Images/_markerStar.png"; 
+
+        for (var i=0; i<positions.length; i++){
+            var imageSize = new kakao.maps.Size(55, 62);
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: positions[i].latlng,
+                title: positions[i].title,
+                image: markerImage
+            });
+        }
+        
+        // 메인 마커 생성
+        var markerPosition = new kakao.maps.LatLng(36.9835439723529, 126.920112642654);
+        var marker = new kakao.maps.Marker({
+            title: '파리바게뜨 안중현화점', 
+            position: markerPosition
+        });
+        marker.setMap(map);
+        
+        // 마커의 인포 생성
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style = "padding:5px;">파리바게뜨 정보입니다.</div>'
+            });
+        
+        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                    
+        
+    </script>
+    </body>
+</html>
