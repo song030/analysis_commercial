@@ -2,15 +2,11 @@ import json
 
 import pandas as pd
 import psycopg2
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.linear_model import LogisticRegression, LinearRegression
-from sklearn.metrics import accuracy_score, mean_absolute_error, r2_score, mean_squared_error
-from sklearn.svm import SVR, SVC
+from sklearn.linear_model import LinearRegression
 from sqlalchemy import create_engine
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
-from class_db_connector import DBConnector
 from sklearn.model_selection import train_test_split, cross_val_score
 
 
