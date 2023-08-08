@@ -30,3 +30,4 @@ C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_par
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Newtonsoft.Json.dll
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Newtonsoft.Json.xml
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.CopyComplete
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.DetailsItemControl.resources

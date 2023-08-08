@@ -42,8 +42,8 @@
             this.splitChart = new System.Windows.Forms.SplitContainer();
             this.splitTableMap = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.lblSubTableTitle = new System.Windows.Forms.Label();
+            this.flowDetails = new System.Windows.Forms.FlowLayoutPanel();
             this.layoutMapBox = new System.Windows.Forms.TableLayoutPanel();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.btnMapSearch = new analysis_paris.View.GifImageButton();
@@ -83,7 +83,6 @@
             this.splitTableMap.Panel2.SuspendLayout();
             this.splitTableMap.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.layoutMapBox.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
@@ -125,7 +124,7 @@
             // 
             this.splitMainBoard.Panel2.Controls.Add(this.layoutMainBoard);
             this.splitMainBoard.Size = new System.Drawing.Size(1210, 729);
-            this.splitMainBoard.SplitterDistance = 127;
+            this.splitMainBoard.SplitterDistance = 126;
             this.splitMainBoard.TabIndex = 144;
             this.splitMainBoard.Tag = "";
             // 
@@ -152,7 +151,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(127, 729);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(126, 729);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // lblSearchStore
@@ -164,7 +163,7 @@
             this.lblSearchStore.Location = new System.Drawing.Point(0, 86);
             this.lblSearchStore.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblSearchStore.Name = "lblSearchStore";
-            this.lblSearchStore.Size = new System.Drawing.Size(127, 48);
+            this.lblSearchStore.Size = new System.Drawing.Size(126, 48);
             this.lblSearchStore.TabIndex = 1;
             this.lblSearchStore.Text = "매물 검색";
             this.lblSearchStore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,7 +178,7 @@
             this.lblSearchEiffel.Location = new System.Drawing.Point(0, 146);
             this.lblSearchEiffel.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblSearchEiffel.Name = "lblSearchEiffel";
-            this.lblSearchEiffel.Size = new System.Drawing.Size(127, 48);
+            this.lblSearchEiffel.Size = new System.Drawing.Size(126, 48);
             this.lblSearchEiffel.TabIndex = 2;
             this.lblSearchEiffel.Text = "매장 검색";
             this.lblSearchEiffel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -194,7 +193,7 @@
             this.lblSearchPin.Location = new System.Drawing.Point(0, 206);
             this.lblSearchPin.Margin = new System.Windows.Forms.Padding(0, 6, 0, 6);
             this.lblSearchPin.Name = "lblSearchPin";
-            this.lblSearchPin.Size = new System.Drawing.Size(127, 48);
+            this.lblSearchPin.Size = new System.Drawing.Size(126, 48);
             this.lblSearchPin.TabIndex = 3;
             this.lblSearchPin.Text = "좌표 검색";
             this.lblSearchPin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,7 +212,7 @@
             this.layoutMainBoard.RowCount = 2;
             this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
             this.layoutMainBoard.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMainBoard.Size = new System.Drawing.Size(1079, 729);
+            this.layoutMainBoard.Size = new System.Drawing.Size(1080, 729);
             this.layoutMainBoard.TabIndex = 0;
             // 
             // splitDataBoard
@@ -231,9 +230,9 @@
             // splitDataBoard.Panel2
             // 
             this.splitDataBoard.Panel2.Controls.Add(this.splitChart);
-            this.splitDataBoard.Size = new System.Drawing.Size(1039, 627);
-            this.splitDataBoard.SplitterDistance = 366;
-            this.splitDataBoard.SplitterWidth = 16;
+            this.splitDataBoard.Size = new System.Drawing.Size(1040, 627);
+            this.splitDataBoard.SplitterDistance = 371;
+            this.splitDataBoard.SplitterWidth = 8;
             this.splitDataBoard.TabIndex = 0;
             this.splitDataBoard.Tag = "0";
             // 
@@ -254,7 +253,7 @@
             this.layoutSearchResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.layoutSearchResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutSearchResult.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.layoutSearchResult.Size = new System.Drawing.Size(366, 627);
+            this.layoutSearchResult.Size = new System.Drawing.Size(371, 627);
             this.layoutSearchResult.TabIndex = 0;
             // 
             // lblSearchResult
@@ -290,7 +289,7 @@
             this.layoutSearchBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 4F));
             this.layoutSearchBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.layoutSearchBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
-            this.layoutSearchBox.Size = new System.Drawing.Size(366, 98);
+            this.layoutSearchBox.Size = new System.Drawing.Size(371, 98);
             this.layoutSearchBox.TabIndex = 3;
             // 
             // searchBox
@@ -299,7 +298,7 @@
             this.searchBox.BackColor = System.Drawing.Color.White;
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBox.Font = new System.Drawing.Font("나눔고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.searchBox.Location = new System.Drawing.Point(32, 50);
+            this.searchBox.Location = new System.Drawing.Point(37, 50);
             this.searchBox.Margin = new System.Windows.Forms.Padding(0);
             this.searchBox.MaxLength = 20;
             this.searchBox.Name = "searchBox";
@@ -319,7 +318,7 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.Location = new System.Drawing.Point(335, 49);
+            this.btnSearch.Location = new System.Drawing.Point(340, 49);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(28, 28);
@@ -327,7 +326,7 @@
             this.btnSearch.Text = "OK";
             this.btnSearch.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
             this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnSearch.Click += new System.EventHandler(this.SearchButton_Click);
             // 
             // lblModeName
             // 
@@ -352,7 +351,7 @@
             this.searchUnderbar.Location = new System.Drawing.Point(0, 89);
             this.searchUnderbar.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.searchUnderbar.Name = "searchUnderbar";
-            this.searchUnderbar.Size = new System.Drawing.Size(363, 3);
+            this.searchUnderbar.Size = new System.Drawing.Size(368, 3);
             this.searchUnderbar.TabIndex = 7;
             // 
             // flowSearchList
@@ -366,7 +365,7 @@
             this.flowSearchList.Location = new System.Drawing.Point(0, 140);
             this.flowSearchList.Margin = new System.Windows.Forms.Padding(0);
             this.flowSearchList.Name = "flowSearchList";
-            this.flowSearchList.Size = new System.Drawing.Size(366, 487);
+            this.flowSearchList.Size = new System.Drawing.Size(371, 487);
             this.flowSearchList.TabIndex = 4;
             this.flowSearchList.WrapContents = false;
             this.flowSearchList.SizeChanged += new System.EventHandler(this.flowSearchList_SizeChanged);
@@ -386,7 +385,7 @@
             // splitChart.Panel2
             // 
             this.splitChart.Panel2.Controls.Add(this.tableLayoutPanel4);
-            this.splitChart.Size = new System.Drawing.Size(657, 627);
+            this.splitChart.Size = new System.Drawing.Size(661, 627);
             this.splitChart.SplitterDistance = 259;
             this.splitChart.SplitterWidth = 1;
             this.splitChart.TabIndex = 0;
@@ -407,8 +406,8 @@
             // splitTableMap.Panel2
             // 
             this.splitTableMap.Panel2.Controls.Add(this.layoutMapBox);
-            this.splitTableMap.Size = new System.Drawing.Size(657, 259);
-            this.splitTableMap.SplitterDistance = 292;
+            this.splitTableMap.Size = new System.Drawing.Size(661, 259);
+            this.splitTableMap.SplitterDistance = 330;
             this.splitTableMap.SplitterWidth = 16;
             this.splitTableMap.TabIndex = 0;
             this.splitTableMap.Tag = "292";
@@ -417,26 +416,16 @@
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.dataGridView2, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.lblSubTableTitle, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.flowDetails, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(292, 259);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(330, 259);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(3, 45);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(286, 211);
-            this.dataGridView2.TabIndex = 1;
             // 
             // lblSubTableTitle
             // 
@@ -450,6 +439,21 @@
             this.lblSubTableTitle.TabIndex = 0;
             this.lblSubTableTitle.Text = "주변 정보";
             // 
+            // flowDetails
+            // 
+            this.flowDetails.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowDetails.AutoScroll = true;
+            this.flowDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowDetails.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowDetails.Location = new System.Drawing.Point(3, 45);
+            this.flowDetails.Name = "flowDetails";
+            this.flowDetails.Size = new System.Drawing.Size(324, 211);
+            this.flowDetails.TabIndex = 1;
+            this.flowDetails.WrapContents = false;
+            this.flowDetails.SizeChanged += new System.EventHandler(this.flowDetails_SizeChanged);
+            // 
             // layoutMapBox
             // 
             this.layoutMapBox.ColumnCount = 1;
@@ -462,7 +466,7 @@
             this.layoutMapBox.RowCount = 2;
             this.layoutMapBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.layoutMapBox.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutMapBox.Size = new System.Drawing.Size(349, 259);
+            this.layoutMapBox.Size = new System.Drawing.Size(315, 259);
             this.layoutMapBox.TabIndex = 0;
             // 
             // mapBrowser
@@ -471,12 +475,14 @@
             this.mapBrowser.Location = new System.Drawing.Point(3, 39);
             this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mapBrowser.Name = "mapBrowser";
-            this.mapBrowser.Size = new System.Drawing.Size(343, 217);
+            this.mapBrowser.Size = new System.Drawing.Size(309, 217);
             this.mapBrowser.TabIndex = 0;
             // 
             // btnMapSearch
             // 
-            this.btnMapSearch.Location = new System.Drawing.Point(3, 3);
+            this.btnMapSearch.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnMapSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.btnMapSearch.Location = new System.Drawing.Point(14, 3);
             this.btnMapSearch.Name = "btnMapSearch";
             this.btnMapSearch.Size = new System.Drawing.Size(287, 30);
             this.btnMapSearch.TabIndex = 1;
@@ -493,7 +499,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(657, 367);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(661, 367);
             this.tableLayoutPanel4.TabIndex = 0;
             // 
             // lblChartTitle
@@ -521,7 +527,7 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(651, 319);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(655, 319);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // graphBoxBar
@@ -529,7 +535,7 @@
             this.graphBoxBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphBoxBar.Location = new System.Drawing.Point(3, 3);
             this.graphBoxBar.Name = "graphBoxBar";
-            this.graphBoxBar.Size = new System.Drawing.Size(319, 313);
+            this.graphBoxBar.Size = new System.Drawing.Size(321, 313);
             this.graphBoxBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.graphBoxBar.TabIndex = 0;
             this.graphBoxBar.TabStop = false;
@@ -537,9 +543,9 @@
             // graphBoxPie
             // 
             this.graphBoxPie.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphBoxPie.Location = new System.Drawing.Point(328, 3);
+            this.graphBoxPie.Location = new System.Drawing.Point(330, 3);
             this.graphBoxPie.Name = "graphBoxPie";
-            this.graphBoxPie.Size = new System.Drawing.Size(320, 313);
+            this.graphBoxPie.Size = new System.Drawing.Size(322, 313);
             this.graphBoxPie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.graphBoxPie.TabIndex = 1;
             this.graphBoxPie.TabStop = false;
@@ -561,7 +567,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1061, 44);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1062, 44);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // lblProjectTitle
@@ -589,7 +595,7 @@
             this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTable.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnTable.Location = new System.Drawing.Point(539, 3);
+            this.btnTable.Location = new System.Drawing.Point(540, 3);
             this.btnTable.Name = "btnTable";
             this.btnTable.Size = new System.Drawing.Size(169, 38);
             this.btnTable.TabIndex = 6;
@@ -612,7 +618,7 @@
             this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMap.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnMap.Location = new System.Drawing.Point(714, 3);
+            this.btnMap.Location = new System.Drawing.Point(715, 3);
             this.btnMap.Name = "btnMap";
             this.btnMap.Size = new System.Drawing.Size(169, 38);
             this.btnMap.TabIndex = 7;
@@ -635,7 +641,7 @@
             this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChart.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnChart.Location = new System.Drawing.Point(889, 3);
+            this.btnChart.Location = new System.Drawing.Point(890, 3);
             this.btnChart.Name = "btnChart";
             this.btnChart.Size = new System.Drawing.Size(169, 38);
             this.btnChart.TabIndex = 8;
@@ -724,7 +730,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1296, 729);
             this.Controls.Add(this.tableLayoutMain);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Main";
@@ -758,7 +764,6 @@
             this.splitTableMap.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.layoutMapBox.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
@@ -788,7 +793,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label lblSubTableTitle;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.TableLayoutPanel layoutSearchResult;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
@@ -812,6 +816,7 @@
         private System.Windows.Forms.PictureBox graphBoxBar;
         private System.Windows.Forms.PictureBox graphBoxPie;
         private View.GifImageButton btnMapSearch;
+        private System.Windows.Forms.FlowLayoutPanel flowDetails;
     }
 }
 

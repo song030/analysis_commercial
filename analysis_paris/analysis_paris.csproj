@@ -69,10 +69,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\DataClass.cs" />
-    <Compile Include="Factory\ButtonFactory.cs" />
+    <Compile Include="Factory\TriggerFactory.cs" />
     <Compile Include="View\Animation.cs" />
     <Compile Include="View\CheckedButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\DetailsItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\DetailsItemControl.Designer.cs">
+      <DependentUpon>DetailsItemControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\GifImageButton.cs">
       <SubType>UserControl</SubType>
@@ -116,6 +122,9 @@
     <Compile Include="View\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\DetailsItemControl.resx">
+      <DependentUpon>DetailsItemControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\GifImageButton.resx">
       <DependentUpon>GifImageButton.cs</DependentUpon>
     </EmbeddedResource>

@@ -134,7 +134,7 @@ class DBConnector:
 
     def find_paris_by_id(self, paris_id):
         self.start_conn()
-        pstmt = f"""select * from "TB_PARIS_FINAL" where "PARIS_ID" == {paris_id} """
+        pstmt = f"""select * from "TB_PARIS_FINAL" where "PARIS_ID" = {paris_id} """
         df = pd.read_sql(pstmt, self.origin_engine)
         print(df.to_json(orient='records'))
         self.end_conn()
