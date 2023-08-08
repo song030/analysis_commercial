@@ -34,7 +34,7 @@ class FTP:
 
     def save_file(self, file_path: str):
         # 입력한 경로에서 파일이름만 분리
-        file_name = file_path.split('/')
+        file_name = file_path.split("\\")
         file_name = file_name[-1]
         # print("ftp - 저장 파일 이름 : "+file_name)
 
