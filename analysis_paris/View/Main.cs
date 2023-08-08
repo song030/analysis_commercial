@@ -1,6 +1,8 @@
-﻿using analysis_paris.View;
+﻿using analysis_paris.DAO;
+using analysis_paris.View;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -130,11 +132,13 @@ namespace analysis_paris {
 
         // 검색 버튼 클릭 시
         private void btnSearch_Click(object sender, EventArgs e) {
-            while (true) {
-                var item = new ListItemControl();
-                flowSearchList.Controls.Add(item);
-                if (flowSearchList.Controls.Count == 10)
-                    break;
+            string ret = TestClass.RunPythonScript("get_all_paris_list");
+            List<Paris> target = JSONConverter.JSONConverterParis(ret);
+            //int itemId, string itemType, string itemAddr, double itemArea, int itemScore
+            foreach (Paris item in target) {
+                var itemControl = new ListItemControl(item);
+                flowSearchList.Controls.Add(itemControl);
+
             }
         }
         #endregion
@@ -248,6 +252,40 @@ namespace analysis_paris {
 
         #endregion
 
+    }
 
+    public class TestClass {
+        public static string RunPythonScript(string parameters) {
+            string scriptPath = @"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
+            // ProcessStartInfo 생성
+            ProcessStartInfo startInfo = new ProcessStartInfo {
+                FileName = @"C:\Users\kdt99\Desktop\analysis_paris\venv\Scripts\python.exe",
+                Arguments = $"{scriptPath} {parameters}",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+            Console.WriteLine("startInfo ready");
+
+            // Process 실행
+            using (Process process = new Process { StartInfo = startInfo }) {
+                process.Start();
+
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
+
+                // 프로세스 종료 대기
+                process.WaitForExit();
+
+                if (!string.IsNullOrEmpty(error)) {
+                    Console.WriteLine(error);
+                    throw new Exception($"Error occurred: {error}");
+                }
+                // Python script 실행 결과 반환
+
+                return output;
+            }
+        }
     }
 }

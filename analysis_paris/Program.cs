@@ -10,8 +10,8 @@ namespace analysis_paris {
         static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new Main());
-            Application.Run(new View.TestForm());
+            Application.Run(new Main());
+            //Application.Run(new View.TestForm());
         }
     }
 }

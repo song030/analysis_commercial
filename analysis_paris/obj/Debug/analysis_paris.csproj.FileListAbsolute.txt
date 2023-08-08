@@ -27,3 +27,6 @@ C:\Users\kdt99\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_par
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.ModeGroupControl.resources
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.TestForm.resources
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.GifImageButton.resources
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Newtonsoft.Json.dll
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Newtonsoft.Json.xml
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.csproj.CopyComplete

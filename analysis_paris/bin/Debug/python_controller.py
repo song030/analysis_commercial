@@ -81,9 +81,9 @@ import common
 
 
 class Path:
-    python_interpreter = """C:\\Users\\KDT107\\Desktop\\analysis_commercial\\venv\\Scripts\\python.exe"""
-    db_connector_path = """C:\\Users\\KDT107\\Desktop\\analysis_commercial\\analysis_paris\\bin\\Debug\\db_connector.py"""
-    analysis_report_factory = """C:\\Users\\KDT107\\Desktop\\analysis_commercial\\analysis_paris\\bin\Debug\\analysis_report_factory.py"""
+    python_interpreter = r"""C:\Users\kdt99\Desktop\analysis_paris\venv\Scripts\python.exe"""
+    db_connector_path = r"""C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\db_connector.py"""
+    analysis_report_factory = r"""C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\analysis_report_factory.py"""
 
 
 class Method:

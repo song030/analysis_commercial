@@ -64,7 +64,7 @@ def main():
 class DBConnector:
     # ===================== BASIC ============================ #
     _instance = None
-    CONFIG_PATH = r"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\db_configuration.json"
+    CONFIG_PATH = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\db_configuration.json"
 
     def read_config(self):
         """db 접속 정보는 config file에서 관리함, json으로 읽어서 dictionary 로 반환함 """
