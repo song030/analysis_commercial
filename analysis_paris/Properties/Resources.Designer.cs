@@ -223,6 +223,26 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
+        internal static System.Drawing.Bitmap magnifying_glass {
+            get {
+                object obj = ResourceManager.GetObject("magnifying_glass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap magnifying_glass_stop {
+            get {
+                object obj = ResourceManager.GetObject("magnifying_glass_stop", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
         internal static System.Drawing.Bitmap sample_chart {
             get {
                 object obj = ResourceManager.GetObject("sample_chart", resourceCulture);
@@ -236,6 +256,36 @@ namespace analysis_paris.Properties {
         internal static System.Drawing.Bitmap sample_chart_2 {
             get {
                 object obj = ResourceManager.GetObject("sample_chart_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_bar {
+            get {
+                object obj = ResourceManager.GetObject("test_bar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_pie {
+            get {
+                object obj = ResourceManager.GetObject("test_pie", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap test_pie_21 {
+            get {
+                object obj = ResourceManager.GetObject("test_pie_21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

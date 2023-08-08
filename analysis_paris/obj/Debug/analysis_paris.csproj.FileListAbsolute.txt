@@ -26,3 +26,4 @@ C:\Users\user\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_pari
 C:\Users\kdt99\Source\Repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.ListItemControl.resources
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.ModeGroupControl.resources
 C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.TestForm.resources
+C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\obj\Debug\analysis_paris.View.GifImageButton.resources

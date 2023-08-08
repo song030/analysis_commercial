@@ -70,6 +70,12 @@
     <Compile Include="View\CheckedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\GifImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\GifImageButton.Designer.cs">
+      <DependentUpon>GifImageButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ItemInfo.cs" />
     <Compile Include="View\ListItemControl.cs">
       <SubType>UserControl</SubType>
@@ -106,6 +112,9 @@
     <Compile Include="View\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\GifImageButton.resx">
+      <DependentUpon>GifImageButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ListItemControl.resx">
       <DependentUpon>ListItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -222,6 +231,24 @@
   <ItemGroup>
     <Folder Include="DAO\" />
     <Folder Include="DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_bar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_pie.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_pie_21.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_button.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass_stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
