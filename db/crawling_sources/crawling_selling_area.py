@@ -13,7 +13,19 @@ from sqlalchemy import create_engine
 def main():
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', 1000)
-    integrate_infos()
+    get_integrated_xlsx()
+
+
+def get_integrated_xlsx():
+    df = pd.read_excel("Integrated_infos.xlsx")
+    idx_to_research = list()
+
+    for idx, row in df.iterrows():
+        if isinstance(row["MONTHLY_SHOP_REVENUE"], float) or row['MONTHLY_SHOP_REVENUE'] == '0':
+            idx_to_research.append(idx)
+
+    get_selling_area_infos(1, idx_to_research)
+
 
 def integrate_infos():
     whole_line = None
@@ -58,6 +70,7 @@ def integrate_infos():
     result_df.drop_duplicates("SELLING_AREA_ID", keep="first", inplace=True)
     result_df.to_excel("Integrated_infos.xlsx", index=False, index_label=False)
 
+
 def test_2(start_idx):
     read_file = pd.read_excel("infos.xlsx", engine="openpyxl", index_col=0)
     df = pd.DataFrame(read_file)
@@ -95,7 +108,7 @@ def save_sale_area_excel():
     df.to_excel("infos.xlsx", index=False, index_label=False)
 
 
-def get_selling_area_infos(start_idx):
+def get_selling_area_infos(start_idx, list_to_research):
     # 화면 작으면 분석 안보임, 크기 키우기
     opts = ChromeOptions()
     opts.add_argument("--window-size=1300,900")
@@ -165,13 +178,12 @@ def get_selling_area_infos(start_idx):
     confirm_btn.click()
     time.sleep(3)
 
-    read_file = pd.read_excel("infos.xlsx", engine="openpyxl", index_col=0)
+    read_file = pd.read_excel("Integrated_infos.xlsx", engine="openpyxl")
     df = pd.DataFrame(read_file)
-    for row in df.itertuples():
-        if row[0] < start_idx:
+    for idx, row in df.iterrows():
+        if row["SELLING_AREA_ID"] < start_idx or row["SELLING_AREA_ID"] not in list_to_research:
             continue
         try:
-
             searching_address = row[4]
             # 검색창 클릭
             container = driver.find_element(By.ID, "container")
@@ -237,23 +249,17 @@ def get_selling_area_infos(start_idx):
             living_population = "0"
             living_population_avg_revenue = "0"
 
-        temp_list = list()
-        for item in row:
-            temp_list.append(str(item))
-        temp_list.append(rival_count_near_500)
-        temp_list.append(rival_count_near_1000)
-        temp_list.append(monthly_shop_revenue)
-        temp_list.append(monthly_shop_sale_transaction_count)
-        temp_list.append(daily_floating_population)
-        temp_list.append(living_worker_population)
-        temp_list.append(living_worker_avg_revenue)
-        temp_list.append(living_population)
-        temp_list.append(living_population_avg_revenue)
-        line = "|".join(temp_list)
-        with open("infos_result.txt", "a", encoding="utf-8") as file:
-            file.write(f"{line}\n")
-            print(line)
+        df.at[idx, 'rival_count_near_500'] = rival_count_near_500
+        df.at[idx, 'rival_count_near_1000'] = rival_count_near_1000
+        df.at[idx, 'monthly_shop_revenue'] = monthly_shop_revenue
+        df.at[idx, 'monthly_shop_sale_transaction_count'] = monthly_shop_sale_transaction_count
+        df.at[idx, 'daily_floating_population'] = daily_floating_population
+        df.at[idx, 'living_worker_population'] = living_worker_population
+        df.at[idx, 'living_worker_avg_revenue'] = living_worker_avg_revenue
+        df.at[idx, 'living_population'] = living_population
+        df.at[idx, 'living_population_avg_revenue'] = living_population_avg_revenue
 
+    df.to_excel("result_integrated_infos.xlsx", index_label=False, index=False)
     while True:
         pass
 
