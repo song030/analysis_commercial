@@ -11,7 +11,7 @@ namespace analysis_paris {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
-            //Application.Run(new TestForm());
+            //Application.Run(new View.TestForm());
         }
     }
 }

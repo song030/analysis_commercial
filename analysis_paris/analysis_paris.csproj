@@ -51,6 +51,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -65,10 +68,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factory\ButtonFactory.cs" />
+    <Compile Include="DAO\DataClass.cs" />
+    <Compile Include="Factory\TriggerFactory.cs" />
     <Compile Include="View\Animation.cs" />
     <Compile Include="View\CheckedButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\DetailsItemControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\DetailsItemControl.Designer.cs">
+      <DependentUpon>DetailsItemControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\GifImageButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\GifImageButton.Designer.cs">
+      <DependentUpon>GifImageButton.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ItemInfo.cs" />
     <Compile Include="View\ListItemControl.cs">
@@ -106,6 +122,12 @@
     <Compile Include="View\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\DetailsItemControl.resx">
+      <DependentUpon>DetailsItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\GifImageButton.resx">
+      <DependentUpon>GifImageButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\ListItemControl.resx">
       <DependentUpon>ListItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +153,7 @@
     <EmbeddedResource Include="View\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -220,8 +243,25 @@
     <None Include="Resources\icon_store_y.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAO\" />
     <Folder Include="DTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_bar.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_pie.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\test_pie_21.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search_button.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnifying-glass_stop.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

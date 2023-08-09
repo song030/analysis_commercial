@@ -146,7 +146,6 @@ def main():
 class DBConnector:
     # ===================== BASIC ============================ #
     _instance = None
-
     def read_config(self):
         """db 접속 정보는 config file에서 관리함, json으로 읽어서 dictionary 로 반환함 """
         with open(self.CONFIG_PATH, 'r', encoding='utf-8') as config_file:
@@ -217,8 +216,10 @@ class DBConnector:
 
     def find_paris_by_id(self, paris_id):
         self.start_conn()
+
         pstmt = f"""select * from "TB_PARIS" where "PARIS_ID" = {paris_id} """
         df = pd.read_sql(pstmt, self.engine)
+
         print(df.to_json(orient='records'))
         self.end_conn()
         return df

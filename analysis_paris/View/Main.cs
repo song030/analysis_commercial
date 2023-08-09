@@ -1,4 +1,6 @@
-﻿using analysis_paris.View;
+﻿using analysis_paris.DAO;
+using analysis_paris.Factory;
+using analysis_paris.View;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +10,9 @@ using System.Windows.Forms;
 namespace analysis_paris {
     public partial class Main : Form {
 
-        private Timer gifTimer;
+        private bool gifAnimated = false;
+        private Timer gifBarTimer;
+        private Timer gifPieTimer;
         List<Label> ModeLabelList = new List<Label>();
 
         // Constructor
@@ -24,12 +28,23 @@ namespace analysis_paris {
             ModeLabelList.Add(lblSearchPin);
 
             // 화면 영역 Collapse 설정
+            layoutMapBox.RowStyles[0].Height = 0;
             btnTable.Checked = true;
             splitTableMap.Panel2Collapsed = true;
             splitChart.Panel2Collapsed = true;
 
+            gifBarTimer = new Timer();
+            gifBarTimer.Interval = 2600;
+            gifBarTimer.Tick += GifBar_Stop;
+
+            gifPieTimer = new Timer();
+            gifPieTimer.Interval = 2650;
+            gifPieTimer.Tick += GifPie_Stop;
+
             // 맵 브라우저 설정
             mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map.html");
+
+
         }
 
         // 검색 모드 선택 메뉴 영역
@@ -79,11 +94,13 @@ namespace analysis_paris {
             }
         }
 
+        // 검색 모드 변경 시 적용할 내용
         private void SetSearchMode(int modeIndex) {
             btnTable.Checked = false;
             btnMap.Checked = false;
             btnChart.Checked = false;
 
+            layoutMapBox.RowStyles[0].Height = 0;
             layoutSearchResult.RowStyles[0].Height = 98;
 
             switch (modeIndex) {
@@ -101,7 +118,7 @@ namespace analysis_paris {
 
                 case 2:
                     layoutSearchResult.RowStyles[0].Height = 0;
-
+                    layoutMapBox.RowStyles[0].Height = 36;
                     btnMap.Checked = true;
                     DataBoard_Collapse();
                     splitDataBoard.Panel1Collapsed = true;
@@ -122,13 +139,79 @@ namespace analysis_paris {
         }
 
         // 검색 버튼 클릭 시
-        private void btnSearch_Click(object sender, EventArgs e) {
-            while (true) {
-                var item = new ListItemControl();
-                flowSearchList.Controls.Add(item);
-                if (flowSearchList.Controls.Count == 10)
+        private void SearchButton_Click(object sender, EventArgs e) {
+            int currentSearchMode = modeIconGroup.CurrentChedckedIndex;
+            string searchKeyword = string.Empty;
+
+            switch (currentSearchMode) {
+                case 0:
+                    SellingArea_Search(searchKeyword);
+                    break;
+                case 1:
+                    searchKeyword = searchBox.Text;
+                    Paris_Search(searchKeyword);
+                    break;
+                default:
                     break;
             }
+        }
+
+        // 매물 검색 시 ListItemControl 생성
+        private void SellingArea_Search(string searchKeyword) {
+            string resultString = Percussion.GetScriptResult(TriggerType.AllSellingArea, searchKeyword);
+
+            List<SellingArea> target = JSONConverter.JSONConverterSellingArea(resultString);
+
+            foreach (SellingArea item in target) {
+                ListItemControl itemControl = new ListItemControl(item);
+                flowSearchList.Controls.Add(itemControl);
+            }
+        }
+
+        // 기존 매장 검색 시 ListItemControl 생성
+        private void Paris_Search(string searchKeyword) {
+            string resultString = Percussion.GetScriptResult(TriggerType.ParisById, searchKeyword);
+
+            List<Paris> target = JSONConverter.JSONConverterParis(resultString);
+
+            foreach (Paris item in target) {
+                ListItemControl itemcontrol = new ListItemControl(item);
+                itemcontrol.Click += ListItem_Click;
+                flowSearchList.Controls.Add(itemcontrol);
+            }
+        }
+
+        // 리스트 아이템 클릭 시 주변 정보 리스트 업데이트
+        private void ListItem_Click(object sender, EventArgs e) {
+            ListItemControl target = (ListItemControl)sender;
+
+            // 기존 매장 항목 클릭 시
+            if (target.SellingArea is null) {
+                Console.WriteLine("파리 바게뜨 매장 검색");
+
+                DetailsItemControl detail = new DetailsItemControl();
+                flowDetails.Controls.Add(detail);
+                DetailsItemControl detail_1 = new DetailsItemControl();
+                flowDetails.Controls.Add(detail_1);
+                DetailsItemControl detail_2 = new DetailsItemControl();
+                flowDetails.Controls.Add(detail_2);
+            }
+
+            // 임시 차트 이미지 설정
+            SetGraphUrl("http://song030s.dothome.co.kr/Graph/test_bar.gif", "http://song030s.dothome.co.kr/Graph/test_pie.gif");
+            gifAnimated = false;
+            // 임시 gif 시작!
+            GifBar_Start();
+            GifPie_Start();
+        }
+
+        // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
+        private void flowDetails_SizeChanged(object sender, EventArgs e) {
+            flowDetails.SuspendLayout();
+            foreach (DetailsItemControl detail in flowDetails.Controls) {
+                detail.Width = flowDetails.Width - 20;
+            }
+            flowDetails.ResumeLayout();
         }
         #endregion
 
@@ -152,13 +235,11 @@ namespace analysis_paris {
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = false;
                 TableMapBoard_Collapse();
-                Gif_Start("http://song030s.dothome.co.kr/Graph/test_graph.gif", chartGifBox);
             }
             else if (chartCheck && !otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = true;
-                Gif_Start("http://song030s.dothome.co.kr/Graph/test_graph.gif", chartGifBox);
             }
             else if (!chartCheck && otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
@@ -194,32 +275,44 @@ namespace analysis_paris {
 
         // 그래프 gif 재생 제한
         #region GifTimerEvent
-        // gif 재생
-        private void Gif_Start(string imgUrl, PictureBox picture) {
-            // GIF 파일을 리소스에서 가져오기
-            //Image gifImage = (Image)Properties.Resources.ResourceManager.GetObject($"{gifName}", System.Globalization.CultureInfo.CurrentUICulture);
+        // gif Url 설정
+        private void SetGraphUrl(string barUrl, string pieUrl) {
+            graphBoxBar.ImageLocation = $"{barUrl}";
+            graphBoxPie.ImageLocation = $"{pieUrl}";
+        }
 
-            // PictureBox에 GIF 이미지 설정
-            picture.ImageLocation = imgUrl;
-
-            // Timer 설정
-            gifTimer = new Timer();
-            // GIF 애니메이션 지속 시간 설정
-            //gifTimer.Interval = gifImage.GetFrameCount(new System.Drawing.Imaging.FrameDimension(gifImage.FrameDimensionsList[0])) * 15;
-            gifTimer.Interval = 3200;
-            gifTimer.Tick += GifTimer_Tick;
+        // gifBar gif 재생
+        private void GifBar_Start() {
+            if (gifAnimated) { return; }
 
             // Timer 시작
-            chartGifBox.Enabled = true;
-            gifTimer.Enabled = true;
+            graphBoxBar.Enabled = true;
+            gifBarTimer.Enabled = true;
+        }
+
+        // gifPie 재생
+        private void GifPie_Start() {
+            if (gifAnimated) { return; }
+
+            graphBoxPie.Enabled = true;
+            gifPieTimer.Enabled = true;
         }
 
         // 타이머 종료 시 gif 정지
-        private void GifTimer_Tick(object sender, EventArgs e) {
+        private void GifBar_Stop(object sender, EventArgs e) {
             // Timer 중지
-            gifTimer.Enabled = false;
-            chartGifBox.Enabled = false;
+            gifBarTimer.Enabled = false;
+            graphBoxBar.Enabled = false;
+            gifAnimated = true;
         }
+        private void GifPie_Stop(object sender, EventArgs e) {
+            // Timer 중지
+            gifPieTimer.Enabled = false;
+            graphBoxPie.Enabled = false;
+            gifAnimated = true;
+        }
+
         #endregion
+
     }
 }

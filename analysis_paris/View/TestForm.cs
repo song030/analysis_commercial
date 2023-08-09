@@ -12,16 +12,11 @@ namespace analysis_paris.View {
 
         public TestForm() {
             InitializeComponent();
-
-            ModeLabelList.Add(label1);
-            ModeLabelList.Add(label2);
-            ModeLabelList.Add(label3);
         }
 
         private void modeLabel_Click(object sender, EventArgs e) {
             Label target = (Label)sender;
             int targetIndex = ModeLabelList.IndexOf(target);
-            modeGroupControl1.SetSelectedMode(targetIndex);
             SelectedLabelChange(targetIndex);
         }
 

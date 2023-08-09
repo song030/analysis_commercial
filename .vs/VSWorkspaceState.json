@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\analysis_paris",
+    "\\analysis_paris\\bin",
+    "\\analysis_paris\\DAO",
+    "\\analysis_paris\\Factory",
+    "\\analysis_paris\\View"
   ],
-  "SelectedNode": "\\analysis_paris.sln",
+  "SelectedNode": "\\analysis_paris\\View\\ListItemControl.cs",
   "PreviewInSolutionExplorer": false
 }
