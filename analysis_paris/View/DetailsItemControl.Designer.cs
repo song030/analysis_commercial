@@ -24,8 +24,8 @@
         /// </summary>
         private void InitializeComponent() {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.DetailName = new System.Windows.Forms.Label();
-            this.DetailValue = new System.Windows.Forms.Label();
+            this.lblDetailName = new System.Windows.Forms.Label();
+            this.lblDetailValue = new System.Windows.Forms.Label();
             this.underBar = new System.Windows.Forms.Label();
             this.upperbar = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
@@ -37,8 +37,8 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48F));
-            this.tableLayoutPanel1.Controls.Add(this.DetailName, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.DetailValue, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblDetailName, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblDetailValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.underBar, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.upperbar, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -51,31 +51,31 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(641, 36);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // DetailName
+            // lblDetailName
             // 
-            this.DetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DetailName.AutoSize = true;
-            this.DetailName.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DetailName.Location = new System.Drawing.Point(147, 13);
-            this.DetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.DetailName.Name = "DetailName";
-            this.DetailName.Size = new System.Drawing.Size(38, 15);
-            this.DetailName.TabIndex = 0;
-            this.DetailName.Text = "학교?";
-            this.DetailName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDetailName.AutoSize = true;
+            this.lblDetailName.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDetailName.Location = new System.Drawing.Point(147, 13);
+            this.lblDetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.lblDetailName.Name = "lblDetailName";
+            this.lblDetailName.Size = new System.Drawing.Size(38, 15);
+            this.lblDetailName.TabIndex = 0;
+            this.lblDetailName.Text = "학교?";
+            this.lblDetailName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DetailValue
+            // lblDetailValue
             // 
-            this.DetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.DetailValue.AutoSize = true;
-            this.DetailValue.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DetailValue.Location = new System.Drawing.Point(466, 13);
-            this.DetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
-            this.DetailValue.Name = "DetailValue";
-            this.DetailValue.Size = new System.Drawing.Size(42, 15);
-            this.DetailValue.TabIndex = 1;
-            this.DetailValue.Text = "몇 개?";
-            this.DetailValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblDetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.lblDetailValue.AutoSize = true;
+            this.lblDetailValue.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDetailValue.Location = new System.Drawing.Point(466, 13);
+            this.lblDetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.lblDetailValue.Name = "lblDetailValue";
+            this.lblDetailValue.Size = new System.Drawing.Size(42, 15);
+            this.lblDetailValue.TabIndex = 1;
+            this.lblDetailValue.Text = "몇 개?";
+            this.lblDetailValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // underBar
             // 
@@ -119,8 +119,8 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label DetailName;
-        private System.Windows.Forms.Label DetailValue;
+        private System.Windows.Forms.Label lblDetailName;
+        private System.Windows.Forms.Label lblDetailValue;
         private System.Windows.Forms.Label underBar;
         private System.Windows.Forms.Label upperbar;
     }

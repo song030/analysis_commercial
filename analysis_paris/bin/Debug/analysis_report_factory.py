@@ -27,15 +27,15 @@ class ReportMethod:
 
 
 def main():
-    # calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
-    calling_method_name, other_parameters = (ReportMethod.get_selling_area_report, 10)
+    calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    # calling_method_name, other_parameters = (ReportMethod.get_selling_area_report, 10)
     factory = MapFactory()
     result = pd.DataFrame
 
     # 가맹점 조회
     if calling_method_name == ReportMethod.get_selling_area_report:
         # ========== 가맹점/매물정보 분기점 만들기
-        selling_area_id = int(other_parameters)
+        selling_area_id = int(other_parameters[0])
         factory.get_selling_area_report(selling_area_id)
         print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
 

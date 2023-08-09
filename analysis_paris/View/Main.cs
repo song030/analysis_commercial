@@ -36,8 +36,6 @@ namespace analysis_paris {
             graphGifTimer = new System.Windows.Forms.Timer();
             graphGifTimer.Interval = 2620;
             graphGifTimer.Tick += Graph_Stop;
-
-
         }
 
         // 검색 모드 선택 메뉴 영역
@@ -344,7 +342,9 @@ namespace analysis_paris {
         #region GifTimerEvent
         // gif Url 설정
         private void SetGraphUrl(string barUrl, string pieUrl) {
+            graphBoxBar.ImageLocation = "";
             graphBoxBar.ImageLocation = $"{barUrl}";
+            graphBoxPie.ImageLocation = "";
             graphBoxPie.ImageLocation = $"{pieUrl}";
         }
 

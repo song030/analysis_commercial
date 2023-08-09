@@ -34,7 +34,7 @@ namespace analysis_paris.Factory {
                     Console.WriteLine(error);
                     throw new Exception($"Error occurred: {error}");
                 }
-
+                Console.WriteLine($"여기는 Process 실행 : {output}");
                 // Python script 실행 결과 반환
                 return output;
             }
@@ -95,7 +95,7 @@ namespace analysis_paris.Factory {
             string scriptParameter = $"get_sale_area_report {parameters}";
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
 
-            Console.WriteLine(scriptResult);
+            Console.WriteLine($"여기는 report : {scriptResult}");
 
             return scriptResult;
         }
