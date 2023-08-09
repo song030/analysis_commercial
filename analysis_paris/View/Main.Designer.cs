@@ -43,6 +43,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.lblSubTableTitle = new System.Windows.Forms.Label();
             this.flowDetails = new System.Windows.Forms.FlowLayoutPanel();
+            this.locationInfoUnderBar = new System.Windows.Forms.Label();
             this.layoutMapBox = new System.Windows.Forms.TableLayoutPanel();
             this.mapBrowser = new System.Windows.Forms.WebBrowser();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -56,12 +57,11 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
             this.btnSearch = new CustomControls.RoundedButton();
+            this.mapSearchButton = new analysis_paris.View.GifImageButton();
             this.btnTable = new analysis_paris.View.CheckedButton();
             this.btnMap = new analysis_paris.View.CheckedButton();
             this.btnChart = new analysis_paris.View.CheckedButton();
             this.modeIconGroup = new analysis_paris.View.ModeGroupControl();
-            this.mapSearchButton = new analysis_paris.View.GifImageButton();
-            this.locationInfoUnderBar = new System.Windows.Forms.Label();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
@@ -306,6 +306,7 @@
             this.searchBox.Size = new System.Drawing.Size(318, 26);
             this.searchBox.TabIndex = 1;
             this.searchBox.WordWrap = false;
+            this.searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.searchBox_KeyDown);
             // 
             // lblModeName
             // 
@@ -434,6 +435,19 @@
             this.flowDetails.TabIndex = 1;
             this.flowDetails.WrapContents = false;
             this.flowDetails.SizeChanged += new System.EventHandler(this.flowDetails_SizeChanged);
+            // 
+            // locationInfoUnderBar
+            // 
+            this.locationInfoUnderBar.AutoSize = true;
+            this.locationInfoUnderBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.locationInfoUnderBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationInfoUnderBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.locationInfoUnderBar.Location = new System.Drawing.Point(10, 40);
+            this.locationInfoUnderBar.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.locationInfoUnderBar.Name = "locationInfoUnderBar";
+            this.locationInfoUnderBar.Size = new System.Drawing.Size(310, 3);
+            this.locationInfoUnderBar.TabIndex = 2;
+            this.locationInfoUnderBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // layoutMapBox
             // 
@@ -639,6 +653,15 @@
             this.btnSearch.UseVisualStyleBackColor = false;
             this.btnSearch.Click += new System.EventHandler(this.SearchButton_Click);
             // 
+            // mapSearchButton
+            // 
+            this.mapSearchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mapSearchButton.Location = new System.Drawing.Point(7, 3);
+            this.mapSearchButton.Name = "mapSearchButton";
+            this.mapSearchButton.Size = new System.Drawing.Size(300, 54);
+            this.mapSearchButton.TabIndex = 1;
+            this.mapSearchButton.Click += new System.EventHandler(this.mapSearchButton_Click);
+            // 
             // btnTable
             // 
             this.btnTable.BackColor = System.Drawing.Color.White;
@@ -718,28 +741,6 @@
             this.modeIconGroup.Size = new System.Drawing.Size(86, 180);
             this.modeIconGroup.TabIndex = 5;
             this.modeIconGroup.Click += new System.EventHandler(this.modeGroup_Click);
-            // 
-            // mapSearchButton
-            // 
-            this.mapSearchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.mapSearchButton.Location = new System.Drawing.Point(7, 3);
-            this.mapSearchButton.Name = "mapSearchButton";
-            this.mapSearchButton.Size = new System.Drawing.Size(300, 54);
-            this.mapSearchButton.TabIndex = 1;
-            this.mapSearchButton.Click += new System.EventHandler(this.mapSearchButton_Click);
-            // 
-            // locationInfoUnderBar
-            // 
-            this.locationInfoUnderBar.AutoSize = true;
-            this.locationInfoUnderBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.locationInfoUnderBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.locationInfoUnderBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.locationInfoUnderBar.Location = new System.Drawing.Point(10, 40);
-            this.locationInfoUnderBar.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
-            this.locationInfoUnderBar.Name = "locationInfoUnderBar";
-            this.locationInfoUnderBar.Size = new System.Drawing.Size(310, 3);
-            this.locationInfoUnderBar.TabIndex = 2;
-            this.locationInfoUnderBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Main
             // 

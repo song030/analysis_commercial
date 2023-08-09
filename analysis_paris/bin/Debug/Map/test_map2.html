@@ -39,7 +39,7 @@
             <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
         </div>
                 
-        <div id="clickLatlng">37.737457 127.042202</div>
+        <div id="clickLatlng">37.2561828811233 126.962854921935</div>
     </div>
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36e6f8ef91e206312c99c8be04e55526"></script>
@@ -73,15 +73,15 @@
         // 지도 생성
         var mapContainer = document.getElementById('map'),
         mapOption = {
-            center: new kakao.maps.LatLng(37.737457, 127.042202),
+            center: new kakao.maps.LatLng(37.2561828811233, 126.962854921935),
             level: 3
         };
         var map = new kakao.maps.Map(mapContainer, mapOption);
         
             // 메인 마커 생성
-            var markerPosition = new kakao.maps.LatLng(37.737457, 127.042202);
+            var markerPosition = new kakao.maps.LatLng(37.2561828811233, 126.962854921935);
             var marker = new kakao.maps.Marker({
-                title: '경기도 포천시 일동면 화동로 1026 (기산리)', 
+                title: '경기도 수원시 권선구 호매실동 1406-2 106호', 
                 position: markerPosition
             });
             marker.setMap(map);

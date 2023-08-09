@@ -37,14 +37,14 @@ def main():
         # ========== 가맹점/매물정보 분기점 만들기
         selling_area_id = int(other_parameters[0])
         factory.get_selling_area_report(selling_area_id)
-        print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
+        # print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
 
     elif calling_method_name == ReportMethod.get_location_report:
         latitude, longitude = map(float, other_parameters[0], other_parameters[1])
         factory.get_location_report(latitude, longitude)
-        print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
+        # print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
-    factory.get_graph()
+    factory.get_graph(selling_area_id)
 
 
 class MapFactory:
@@ -71,13 +71,17 @@ class MapFactory:
         file_path = self.file_path+r"\Map\test_map2.html"
 
         kakao_map.save_map(file_path)
+        self.ftp.save_file(file_path)
 
     def get_location_report(self, latitude, longitude):
         pass
 
-    def get_graph(self):
+    def get_graph(self, selling_area_id):
         # ----- 그래프 생성&업로드
         # --- bar test
+        df = self.conn.get_selling_area_by_id(selling_area_id)
+        df:pd.DataFrame
+
         models = ['model A', 'model B', 'model C']
         ticks = ["횡단보도수", "인근 정거장수", "인근 지하철수", "인근 주거 세대수"]
         _range = [45, 150, 6, 76]
@@ -85,6 +89,7 @@ class MapFactory:
         data = dict()
         for i in range(len(models)):
             data[models[i]] = np.random.randint(0, _range, size=len(ticks))
+
         graph = Graph(700, 500)
         graph.set_ticks(ticks)
         graph.set_data(data)
@@ -104,10 +109,5 @@ class MapFactory:
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
 
-
 if __name__ == '__main__':
     main()
-    # factory = MapFactory()
-    # factory.get_selling_area_report(12)
-    # factory.get_location_report(12,345)
-    # factory.get_graph()

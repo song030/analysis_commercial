@@ -34,7 +34,7 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 2620;
+            graphGifTimer.Interval = 2580;
             graphGifTimer.Tick += Graph_Stop;
         }
 
@@ -167,13 +167,17 @@ namespace analysis_paris {
         // 매물 검색 → ListItemControl 생성
         private void SellingArea_Search(string searchKeyword) {
             string resultString = null;
+            Console.WriteLine(searchKeyword);
 
             if (searchKeyword == string.Empty)
                 resultString = Percussion.GetScriptResult(TriggerType.AllSellingArea, searchKeyword);
             else
                 resultString = Percussion.GetScriptResult(TriggerType.SellingAreaAddress, searchKeyword);
 
+
             List<SellingArea> target = JSONConverter.JSONConverterSellingArea(resultString);
+
+
 
             if (target.Count == 0) {
                 ListItemControl listItemControl = new ListItemControl();
@@ -266,6 +270,7 @@ namespace analysis_paris {
 
             // 맵 브라우저 설정
             mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map2.html");
+            mapBrowser.Refresh();
 
             // 임시 차트 이미지 설정
             SetGraphUrl("http://song030s.dothome.co.kr/Graph/test_bar.gif", "http://song030s.dothome.co.kr/Graph/test_pie.gif");
@@ -365,7 +370,13 @@ namespace analysis_paris {
             graphBoxBar.Enabled = false;
             graphBoxPie.Enabled = false;
         }
+
         #endregion
 
+        private void searchBox_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                SearchButton_Click(sender, e);
+            }
+        }
     }
 }

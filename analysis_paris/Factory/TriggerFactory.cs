@@ -17,7 +17,7 @@ namespace analysis_paris.Factory {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = false
             };
 
             // Process 실행
@@ -34,7 +34,6 @@ namespace analysis_paris.Factory {
                     Console.WriteLine(error);
                     throw new Exception($"Error occurred: {error}");
                 }
-                Console.WriteLine($"여기는 Process 실행 : {output}");
                 // Python script 실행 결과 반환
                 return output;
             }
@@ -92,10 +91,10 @@ namespace analysis_paris.Factory {
 
     public class StoreReport : ITrigger { // 리포트 검색
         public override string RunScript(string parameters) {
-            string scriptParameter = $"get_sale_area_report {parameters}";
+            Console.WriteLine($"Store Report parameter : {parameters}");
+            string scriptParameter = $"get_selling_area_report {parameters}";
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
-
-            Console.WriteLine($"여기는 report : {scriptResult}");
+            Console.WriteLine($"Store Report scriptResult : {scriptResult}");
 
             return scriptResult;
         }

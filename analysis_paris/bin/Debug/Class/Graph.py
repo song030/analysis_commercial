@@ -81,6 +81,7 @@ class Graph:
         self.graph_type = graph_type
         if graph_type == "bar":
             plt.bar([], [])
+            self.interval = 0.02
 
         elif graph_type == "pie":
 
