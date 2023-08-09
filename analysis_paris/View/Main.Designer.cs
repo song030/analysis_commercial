@@ -56,6 +56,9 @@
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
+            this.btnSearchClose = new System.Windows.Forms.Button();
+            this.searchBoxHead = new System.Windows.Forms.TableLayoutPanel();
+            this.lblSearchAlert = new System.Windows.Forms.Label();
             this.btnSearch = new CustomControls.RoundedButton();
             this.mapSearchButton = new analysis_paris.View.GifImageButton();
             this.btnTable = new analysis_paris.View.CheckedButton();
@@ -91,6 +94,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.graphBoxPie)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tblModeMenu.SuspendLayout();
+            this.searchBoxHead.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutMain
@@ -242,9 +246,9 @@
             this.layoutSearchResult.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(15)))), ((int)(((byte)(255)))));
             this.layoutSearchResult.ColumnCount = 1;
             this.layoutSearchResult.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutSearchResult.Controls.Add(this.lblSearchResult, 0, 1);
             this.layoutSearchResult.Controls.Add(this.layoutSearchBox, 0, 0);
             this.layoutSearchResult.Controls.Add(this.flowSearchList, 0, 2);
+            this.layoutSearchResult.Controls.Add(this.searchBoxHead, 0, 1);
             this.layoutSearchResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutSearchResult.Location = new System.Drawing.Point(0, 0);
             this.layoutSearchResult.Margin = new System.Windows.Forms.Padding(0);
@@ -263,7 +267,7 @@
             this.lblSearchResult.AutoSize = true;
             this.lblSearchResult.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSearchResult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblSearchResult.Location = new System.Drawing.Point(0, 111);
+            this.lblSearchResult.Location = new System.Drawing.Point(0, 10);
             this.lblSearchResult.Margin = new System.Windows.Forms.Padding(0);
             this.lblSearchResult.Name = "lblSearchResult";
             this.lblSearchResult.Size = new System.Drawing.Size(63, 16);
@@ -280,6 +284,7 @@
             this.layoutSearchBox.Controls.Add(this.btnSearch, 2, 1);
             this.layoutSearchBox.Controls.Add(this.lblModeName, 0, 0);
             this.layoutSearchBox.Controls.Add(this.searchUnderbar, 0, 3);
+            this.layoutSearchBox.Controls.Add(this.btnSearchClose, 2, 0);
             this.layoutSearchBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutSearchBox.Location = new System.Drawing.Point(0, 0);
             this.layoutSearchBox.Margin = new System.Windows.Forms.Padding(0);
@@ -631,6 +636,46 @@
             this.btnMenuCollapse.UseVisualStyleBackColor = true;
             this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
             // 
+            // btnSearchClose
+            // 
+            this.btnSearchClose.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSearchClose.Location = new System.Drawing.Point(331, 5);
+            this.btnSearchClose.Name = "btnSearchClose";
+            this.btnSearchClose.Size = new System.Drawing.Size(32, 32);
+            this.btnSearchClose.TabIndex = 8;
+            this.btnSearchClose.Text = "X";
+            this.btnSearchClose.UseVisualStyleBackColor = true;
+            this.btnSearchClose.Click += new System.EventHandler(this.btnSearchClose_Click);
+            // 
+            // searchBoxHead
+            // 
+            this.searchBoxHead.ColumnCount = 2;
+            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxHead.Controls.Add(this.lblSearchResult, 0, 0);
+            this.searchBoxHead.Controls.Add(this.lblSearchAlert, 1, 0);
+            this.searchBoxHead.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchBoxHead.Location = new System.Drawing.Point(3, 101);
+            this.searchBoxHead.Name = "searchBoxHead";
+            this.searchBoxHead.RowCount = 1;
+            this.searchBoxHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxHead.Size = new System.Drawing.Size(365, 36);
+            this.searchBoxHead.TabIndex = 5;
+            // 
+            // lblSearchAlert
+            // 
+            this.lblSearchAlert.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSearchAlert.AutoSize = true;
+            this.lblSearchAlert.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchAlert.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.lblSearchAlert.Location = new System.Drawing.Point(86, 10);
+            this.lblSearchAlert.Margin = new System.Windows.Forms.Padding(18, 0, 3, 0);
+            this.lblSearchAlert.Name = "lblSearchAlert";
+            this.lblSearchAlert.Size = new System.Drawing.Size(155, 16);
+            this.lblSearchAlert.TabIndex = 2;
+            this.lblSearchAlert.Text = "! 검색어를 입력해주세요.";
+            this.lblSearchAlert.Visible = false;
+            // 
             // btnSearch
             // 
             this.btnSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
@@ -770,7 +815,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitDataBoard)).EndInit();
             this.splitDataBoard.ResumeLayout(false);
             this.layoutSearchResult.ResumeLayout(false);
-            this.layoutSearchResult.PerformLayout();
             this.layoutSearchBox.ResumeLayout(false);
             this.layoutSearchBox.PerformLayout();
             this.splitChart.Panel1.ResumeLayout(false);
@@ -792,6 +836,8 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tblModeMenu.ResumeLayout(false);
+            this.searchBoxHead.ResumeLayout(false);
+            this.searchBoxHead.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -837,6 +883,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowDetails;
         private View.GifImageButton mapSearchButton;
         private System.Windows.Forms.Label locationInfoUnderBar;
+        private System.Windows.Forms.Button btnSearchClose;
+        private System.Windows.Forms.TableLayoutPanel searchBoxHead;
+        private System.Windows.Forms.Label lblSearchAlert;
     }
 }
 
