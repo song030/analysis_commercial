@@ -39,9 +39,9 @@ class Path:
         elif user_name == "kdt117":
             self.debug_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug"
             self.python_interpreter = r"C:\Users\kdt117\AppData\Local\Programs\Python\Python311\python.exe"
-            self.db_connector_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\db_connector.py"
-            self.analysis_report_factory = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\analysis_report_factory.py"
-            self.CONFIG_PATH = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\db_configuration.json"
+            self.db_connector_path = r"D:\SMJ\PYTHON\0410\Analysiscommericial\analysis_paris\bin\Debug\db_connector.py"
+            self.analysis_report_factory = r"D:\SMJ\PYTHON\0410\Analysiscommericial\analysis_paris\bin\Debug\analysis_report_factory.py"
+            self.CONFIG_PATH = r"D:\SMJ\PYTHON\0410\Analysiscommericial\analysis_paris\bin\Debug\db_configuration.json"
         elif user_name == "kdt112":
             self.debug_path = r"C:\Users\kdt112\Desktop\analysis_commercial\analysis_paris\bin\Debug"
             self.python_interpreter = r"C:\Users\kdt112\AppData\Local\Programs\Python\Python311\python.exe"

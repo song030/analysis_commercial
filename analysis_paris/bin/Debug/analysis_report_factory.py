@@ -8,12 +8,10 @@
 # -----------------------------------------------------------
 
 import sys
-import os
 
 import pandas as pd
 
 import common
-import numpy as np
 
 from Class.FTP import *
 from Class.Graph import Graph
@@ -44,7 +42,7 @@ def main():
         factory.get_location_report(latitude, longitude)
         # print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
-    factory.get_graph(selling_area_id)
+    factory.get_graph()
 
 
 class MapFactory:
@@ -61,7 +59,6 @@ class MapFactory:
     def get_selling_area_report(self, selling_area_id):
         # ----- 검색 결과 가져오기
         self.result = self.conn.get_selling_area_by_id(selling_area_id)
-
         # ----- 지도 생성&업로드
         kakao_map = KakaoMap()
 
@@ -76,23 +73,21 @@ class MapFactory:
     def get_location_report(self, latitude, longitude):
         pass
 
-    def get_graph(self, selling_area_id):
+    def get_graph(self):
         # ----- 그래프 생성&업로드
         # --- bar test
-        df = self.conn.get_selling_area_by_id(selling_area_id)
-        df:pd.DataFrame
-
-        models = ['model A', 'model B', 'model C']
-        ticks = ["횡단보도수", "인근 정거장수", "인근 지하철수", "인근 주거 세대수"]
-        _range = [45, 150, 6, 76]
-
-        data = dict()
-        for i in range(len(models)):
-            data[models[i]] = np.random.randint(0, _range, size=len(ticks))
+        model1 = self.conn.get_selling_area_by_id(13)
+        model2 = self.conn.get_selling_area_by_id(25)
 
         graph = Graph(700, 500)
-        graph.set_ticks(ticks)
-        graph.set_data(data)
+
+        # ========== 그래프데이터 수정하는곳!!
+        # graph.set_data([비교대상 df 3개][출력할 컬럼명])
+        # df는 원하는 출력순으로 넣어주시면 됩니다.
+        # 출력할 컬럼명에 상호 이름(해당 장소를 구분할수 있는 이름)이 와야합니다. 데이터가 dict 형식으로 저장돼
+        graph.set_data([self.result, model1, model2], ['SELLING_AREA_ID', 'RIVAL_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_1000'])
+        graph.set_ticks(["학원 500", "버스정거장 500", "횡단보도 500"])
+
         file_path = self.file_path+r"\Graph\test_bar.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
@@ -108,6 +103,7 @@ class MapFactory:
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
+
 
 if __name__ == '__main__':
     main()
