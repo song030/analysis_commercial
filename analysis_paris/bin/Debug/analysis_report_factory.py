@@ -27,13 +27,14 @@ class ReportMethod:
 
 
 def main():
-    # calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
-    calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
+    calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    # calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
+    print(other_parameters)
 
     ftp = FTP()
     ftp.connect()
 
-    from analysis_paris.bin.Debug.db_connector import DBConnector
+    from db_connector import DBConnector
     conn = DBConnector(test_option=True)
 
     result = pd.DataFrame
@@ -44,7 +45,7 @@ def main():
         # ========== 가맹정/매물정보 분기점 만들기
 
         # ----- 검색 결과 가져오기
-        sale_area_id = int(other_parameters)
+        sale_area_id = int(other_parameters[0])
         result = conn.find_paris_by_id(sale_area_id)
         print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 가맹점 아이디 : {sale_area_id}")
 
@@ -54,7 +55,7 @@ def main():
         kakao_map.create_map(result["LATITUDE"][0], result["LONGITUDE"][0], level=3, title=result["PARIS_NAME"][0])
         kakao_map.set_control(True)
 
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Map\test_map2.html"
+        file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Map\test_map2.html"
         kakao_map.save_map(file_path)
         ftp.save_file(file_path)
 
@@ -79,7 +80,7 @@ def main():
     graph = Graph(700, 500)
     graph.set_ticks(ticks)
     graph.set_data(data)
-    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
+    file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Graph\test_bar.gif"
     graph.save_gif(file_path)
     ftp.save_file(file_path)
 
@@ -90,7 +91,7 @@ def main():
     graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
     graph.set_data(data)
 
-    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
+    file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Graph\test_pie.gif"
     graph.save_gif(file_path)
     ftp.save_file(file_path)
 

@@ -37,6 +37,8 @@
             this.roundedButton.BorderRadius = 24;
             this.roundedButton.BorderSize = 2;
             this.roundedButton.FlatAppearance.BorderSize = 0;
+            this.roundedButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.roundedButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.roundedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.roundedButton.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.roundedButton.ForeColor = System.Drawing.Color.White;
@@ -52,11 +54,11 @@
             // 
             // gifBox
             // 
-            this.gifBox.BackColor = System.Drawing.Color.White;
-            this.gifBox.Location = new System.Drawing.Point(50, 6);
+            this.gifBox.BackColor = System.Drawing.Color.Transparent;
+            this.gifBox.Location = new System.Drawing.Point(50, 8);
             this.gifBox.Margin = new System.Windows.Forms.Padding(6);
             this.gifBox.Name = "gifBox";
-            this.gifBox.Size = new System.Drawing.Size(62, 42);
+            this.gifBox.Size = new System.Drawing.Size(62, 40);
             this.gifBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.gifBox.TabIndex = 1;
             this.gifBox.TabStop = false;
@@ -66,7 +68,8 @@
             // gifButtonTitle
             // 
             this.gifButtonTitle.AutoSize = true;
-            this.gifButtonTitle.BackColor = System.Drawing.Color.White;
+            this.gifButtonTitle.BackColor = System.Drawing.Color.Transparent;
+            this.gifButtonTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gifButtonTitle.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.gifButtonTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
             this.gifButtonTitle.Location = new System.Drawing.Point(133, 18);

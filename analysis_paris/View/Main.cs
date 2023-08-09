@@ -10,10 +10,9 @@ using System.Windows.Forms;
 namespace analysis_paris {
     public partial class Main : Form {
 
-        private bool gifAnimated = false;
-        private Timer gifBarTimer;
-        private Timer gifPieTimer;
-        List<Label> ModeLabelList = new List<Label>();
+        private bool gifAnimated = false;   // 그래프 GIF 재생 확인
+        private System.Windows.Forms.Timer graphGifTimer;   // 그래프 GIf 타이머
+        List<Label> ModeLabelList = new List<Label>();  // 검색 모드 라벨 리스트
 
         // Constructor
         public Main() {
@@ -33,16 +32,10 @@ namespace analysis_paris {
             splitTableMap.Panel2Collapsed = true;
             splitChart.Panel2Collapsed = true;
 
-            gifBarTimer = new Timer();
-            gifBarTimer.Interval = 2600;
-            gifBarTimer.Tick += GifBar_Stop;
-
-            gifPieTimer = new Timer();
-            gifPieTimer.Interval = 2650;
-            gifPieTimer.Tick += GifPie_Stop;
-
-            // 맵 브라우저 설정
-            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map.html");
+            // 그래프 타이머 설정
+            graphGifTimer = new System.Windows.Forms.Timer();
+            graphGifTimer.Interval = 2620;
+            graphGifTimer.Tick += Graph_Stop;
 
 
         }
@@ -117,6 +110,8 @@ namespace analysis_paris {
                     break;
 
                 case 2:
+                    // 좌표 검색 화면으로 전환
+                    mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/search.html");
                     layoutSearchResult.RowStyles[0].Height = 0;
                     layoutMapBox.RowStyles[0].Height = 60;
                     btnMap.Checked = true;
@@ -141,10 +136,13 @@ namespace analysis_paris {
         // 검색 버튼 클릭 시
         private void SearchButton_Click(object sender, EventArgs e) {
             int currentSearchMode = modeIconGroup.CurrentChedckedIndex;
-            string searchKeyword = string.Empty;
+            string searchKeyword = searchBox.Text;
+
+            flowSearchList.Controls.Clear();
 
             switch (currentSearchMode) {
                 case 0:
+                    searchKeyword = searchBox.Text;
                     SellingArea_Search(searchKeyword);
                     break;
                 case 1:
@@ -154,55 +152,6 @@ namespace analysis_paris {
                 default:
                     break;
             }
-        }
-
-        // 매물 검색 시 ListItemControl 생성
-        private void SellingArea_Search(string searchKeyword) {
-            string resultString = Percussion.GetScriptResult(TriggerType.AllSellingArea, searchKeyword);
-
-            List<SellingArea> target = JSONConverter.JSONConverterSellingArea(resultString);
-
-            foreach (SellingArea item in target) {
-                ListItemControl itemControl = new ListItemControl(item);
-                flowSearchList.Controls.Add(itemControl);
-            }
-        }
-
-        // 기존 매장 검색 시 ListItemControl 생성
-        private void Paris_Search(string searchKeyword) {
-            string resultString = Percussion.GetScriptResult(TriggerType.ParisById, searchKeyword);
-
-            List<Paris> target = JSONConverter.JSONConverterParis(resultString);
-
-            foreach (Paris item in target) {
-                ListItemControl itemcontrol = new ListItemControl(item);
-                itemcontrol.Click += ListItem_Click;
-                flowSearchList.Controls.Add(itemcontrol);
-            }
-        }
-
-        // 리스트 아이템 클릭 시 주변 정보 리스트 업데이트
-        private void ListItem_Click(object sender, EventArgs e) {
-            ListItemControl target = (ListItemControl)sender;
-
-            // 기존 매장 항목 클릭 시
-            if (target.SellingArea is null) {
-                Console.WriteLine("파리 바게뜨 매장 검색");
-
-                DetailsItemControl detail = new DetailsItemControl();
-                flowDetails.Controls.Add(detail);
-                DetailsItemControl detail_1 = new DetailsItemControl();
-                flowDetails.Controls.Add(detail_1);
-                DetailsItemControl detail_2 = new DetailsItemControl();
-                flowDetails.Controls.Add(detail_2);
-            }
-
-            // 임시 차트 이미지 설정
-            SetGraphUrl("http://song030s.dothome.co.kr/Graph/test_bar.gif", "http://song030s.dothome.co.kr/Graph/test_pie.gif");
-            gifAnimated = false;
-            // 임시 gif 시작!
-            GifBar_Start();
-            GifPie_Start();
         }
 
         // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
@@ -215,7 +164,118 @@ namespace analysis_paris {
         }
         #endregion
 
-        // 데이터 보드 영역
+        // 파이썬 스크립트 실행 후 반환 결과 출력 관련 영역
+        #region 
+        // 매물 검색 → ListItemControl 생성
+        private void SellingArea_Search(string searchKeyword) {
+            string resultString = null;
+
+            if (searchKeyword == string.Empty)
+                resultString = Percussion.GetScriptResult(TriggerType.AllSellingArea, searchKeyword);
+            else
+                resultString = Percussion.GetScriptResult(TriggerType.SellingAreaAddress, searchKeyword);
+
+            List<SellingArea> target = JSONConverter.JSONConverterSellingArea(resultString);
+
+            if (target.Count == 0) {
+                ListItemControl listItemControl = new ListItemControl();
+                flowSearchList.Controls.Add(listItemControl);
+            }
+            else {
+                foreach (SellingArea item in target) {
+                    ListItemControl itemControl = new ListItemControl(item);
+                    itemControl.Click += ListItem_Click;
+                    flowSearchList.Controls.Add(itemControl);
+                }
+            }
+        }
+
+        // 매장 검색 → ListItemControl 생성
+        private void Paris_Search(string searchKeyword) {
+            string resultString = null;
+
+            if (searchKeyword == string.Empty)
+                resultString = Percussion.GetScriptResult(TriggerType.AllParis, searchKeyword);
+            else
+                resultString = Percussion.GetScriptResult(TriggerType.ParisById, searchKeyword);
+
+            List<Paris> target = JSONConverter.JSONConverterParis(resultString);
+            if (target.Count == 0) {
+                ListItemControl listItemControl = new ListItemControl();
+                flowSearchList.Controls.Add(listItemControl);
+            }
+            else {
+                foreach (Paris item in target) {
+                    ListItemControl itemControl = new ListItemControl(item);
+                    itemControl.Click += ListItem_Click;
+                    flowSearchList.Controls.Add(itemControl);
+                }
+            }
+        }
+
+        // 선택한 좌표로 검색 시 → 검색 결과를 지도에만 띄울지?
+        private void mapSearchButton_Click(object sender, EventArgs e) {
+            try {
+                string targetLocation = mapBrowser.Document.GetElementById("clickLatlng").InnerHtml;
+                string resultString = Percussion.GetScriptResult(TriggerType.LocationInfo, targetLocation);
+
+                // 좌표 검색 결과 => 현재 10점 만점에 10점
+                Console.WriteLine(resultString);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+            }
+        }
+
+        // 리스트 아이템 클릭 시 주변 정보 리스트 업데이트
+        private void ListItem_Click(object sender, EventArgs e) {
+            ListItemControl target = (ListItemControl)sender;
+            int targetId = new int();
+
+            // 기존 매장 항목 클릭 시
+            if (target.SellingArea is null) {
+                Console.WriteLine("매장 주변 검색");
+                targetId = target.ParisInfo.PARIS_ID;
+
+                //while (true) {
+                //    DetailsItemControl detail = new DetailsItemControl();
+                //    flowDetails.Controls.Add(detail);
+
+                //    if (flowDetails.Controls.Count > 20)
+                //        break;
+                //}
+            }
+            // 매물 항목 클릭 시
+            else {
+                Console.WriteLine("매물 주변 검색");
+                targetId = target.SellingArea.SELLING_AREA_ID;
+                //while (true) {
+                //    DetailsItemControl detail = new DetailsItemControl();
+                //    flowDetails.Controls.Add(detail);
+
+                //    if (flowDetails.Controls.Count > 20)
+                //        break;
+                //}
+            }
+
+            Report_Update(targetId);
+        }
+
+        // 선택 항목에 대한 지도 및 차트 갱신
+        private void Report_Update(int targetId) {
+            Console.WriteLine(targetId);
+            Percussion.GetScriptResult(TriggerType.StoreReport, targetId.ToString());
+
+            // 맵 브라우저 설정
+            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map2.html");
+
+            // 임시 차트 이미지 설정
+            SetGraphUrl("http://song030s.dothome.co.kr/Graph/test_bar.gif", "http://song030s.dothome.co.kr/Graph/test_pie.gif");
+            gifAnimated = false;
+        }
+        #endregion
+
+        // 데이터 보드 활성화 관련 이벤트 영역
         #region DataBoardCollapse
         // 데이터 버튼 클릭 이벤트
         private void Collapse_Event(object sender, EventArgs e) {
@@ -235,11 +295,17 @@ namespace analysis_paris {
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = false;
                 TableMapBoard_Collapse();
+
+                // 임시 gif 시작!
+                Graph_Start();
             }
             else if (chartCheck && !otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = true;
+
+                // 임시 gif 시작!
+                Graph_Start();
             }
             else if (!chartCheck && otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
@@ -273,6 +339,7 @@ namespace analysis_paris {
         }
         #endregion
 
+
         // 그래프 gif 재생 제한
         #region GifTimerEvent
         // gif Url 설정
@@ -281,37 +348,23 @@ namespace analysis_paris {
             graphBoxPie.ImageLocation = $"{pieUrl}";
         }
 
-        // gifBar gif 재생
-        private void GifBar_Start() {
-            if (gifAnimated) { return; }
+        // graph gif 재생
+        private void Graph_Start() {
+            if (gifAnimated)
+                return;
 
-            // Timer 시작
-            graphBoxBar.Enabled = true;
-            gifBarTimer.Enabled = true;
-        }
-
-        // gifPie 재생
-        private void GifPie_Start() {
-            if (gifAnimated) { return; }
-
+            graphGifTimer.Start();
             graphBoxPie.Enabled = true;
-            gifPieTimer.Enabled = true;
+            graphBoxBar.Enabled = true;
+            gifAnimated = true;
         }
 
-        // 타이머 종료 시 gif 정지
-        private void GifBar_Stop(object sender, EventArgs e) {
-            // Timer 중지
-            gifBarTimer.Enabled = false;
+        // 타이머 종료 및 gif 정지
+        private void Graph_Stop(object sender, EventArgs e) {
+            graphGifTimer.Stop();
             graphBoxBar.Enabled = false;
-            gifAnimated = true;
-        }
-        private void GifPie_Stop(object sender, EventArgs e) {
-            // Timer 중지
-            gifPieTimer.Enabled = false;
             graphBoxPie.Enabled = false;
-            gifAnimated = true;
         }
-
         #endregion
 
     }

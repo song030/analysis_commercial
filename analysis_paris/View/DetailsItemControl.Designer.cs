@@ -35,8 +35,8 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48F));
             this.tableLayoutPanel1.Controls.Add(this.DetailName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.DetailValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.underBar, 0, 2);
@@ -48,31 +48,31 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 1F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(304, 42);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(641, 36);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // DetailName
             // 
-            this.DetailName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.DetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DetailName.AutoSize = true;
-            this.DetailName.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DetailName.Location = new System.Drawing.Point(30, 12);
-            this.DetailName.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
+            this.DetailName.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DetailName.Location = new System.Drawing.Point(147, 13);
+            this.DetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.DetailName.Name = "DetailName";
-            this.DetailName.Size = new System.Drawing.Size(44, 17);
+            this.DetailName.Size = new System.Drawing.Size(38, 15);
             this.DetailName.TabIndex = 0;
             this.DetailName.Text = "학교?";
             this.DetailName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DetailValue
             // 
-            this.DetailValue.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.DetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.DetailValue.AutoSize = true;
-            this.DetailValue.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.DetailValue.Location = new System.Drawing.Point(226, 12);
-            this.DetailValue.Margin = new System.Windows.Forms.Padding(30, 0, 30, 0);
+            this.DetailValue.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.DetailValue.Location = new System.Drawing.Point(466, 13);
+            this.DetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.DetailValue.Name = "DetailValue";
-            this.DetailValue.Size = new System.Drawing.Size(48, 17);
+            this.DetailValue.Size = new System.Drawing.Size(42, 15);
             this.DetailValue.TabIndex = 1;
             this.DetailValue.Text = "몇 개?";
             this.DetailValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -80,15 +80,14 @@
             // underBar
             // 
             this.underBar.AutoSize = true;
-            this.underBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            this.underBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(172)))), ((int)(((byte)(172)))));
             this.tableLayoutPanel1.SetColumnSpan(this.underBar, 2);
             this.underBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.underBar.Location = new System.Drawing.Point(6, 41);
-            this.underBar.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.underBar.Location = new System.Drawing.Point(20, 35);
+            this.underBar.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
             this.underBar.Name = "underBar";
-            this.underBar.Size = new System.Drawing.Size(292, 1);
+            this.underBar.Size = new System.Drawing.Size(621, 1);
             this.underBar.TabIndex = 2;
-            this.underBar.Visible = false;
             // 
             // upperbar
             // 
@@ -99,7 +98,7 @@
             this.upperbar.Location = new System.Drawing.Point(6, 0);
             this.upperbar.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.upperbar.Name = "upperbar";
-            this.upperbar.Size = new System.Drawing.Size(292, 1);
+            this.upperbar.Size = new System.Drawing.Size(629, 1);
             this.upperbar.TabIndex = 3;
             this.upperbar.Visible = false;
             // 
@@ -110,7 +109,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "DetailsItemControl";
-            this.Size = new System.Drawing.Size(304, 42);
+            this.Size = new System.Drawing.Size(641, 36);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

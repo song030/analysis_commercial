@@ -22,6 +22,37 @@ namespace analysis_paris.DAO {
         public int LIVING_WORKER_AVG_REVENUE { get; set; }
         public int LIVING_POPULATION { get; set; }
         public int LIVING_POPULATION_AVG_REVENUE { get; set; }
+        public int ATTRACTION_COUNT_NEAR_500 { get; set; }
+        public int ATTRACTION_COUNT_NEAR_1000 { get; set; }
+        public int ACADEMY_COUNT_NEAR_500 { get; set; }
+        public int ACADEMY_COUNT_NEAR_1000 { get; set; }
+        public int STOP_COUNT_NEAR_500 { get; set; }
+        public int STOP_COUNT_NEAR_1000 { get; set; }
+        public int CROSSWALK_COUNT_NEAR_500 { get; set; }
+        public int CROSSWALK_COUNT_NEAR_1000 { get; set; }
+        public int HOSPITAL_COUNT_NEAR_500 { get; set; }
+        public int HOSPITAL_COUNT_NEAR_1000 { get; set; }
+        public int PARKING_COUNT_NEAR_500 { get; set; }
+        public int PARKING_COUNT_NEAR_1000 { get; set; }
+        public int SCHOOL_COUNT_NEAR_500 { get; set; }
+        public int SCHOOL_COUNT_NEAR_1000 { get; set; }
+        public int STATION_COUNT_NEAR_500 { get; set; }
+        public int STATION_COUNT_NEAR_1000 { get; set; }
+        public int LIVING_COUNT_NEAR_500 { get; set; }
+        public int LIVING_COUNT_NEAR_1000 { get; set; }
+        public int RIVAL_NEAR_DISTANCE { get; set; }
+        public int LIVING_NEAR_DISTANCE { get; set; }
+        public int SCHOOL_NEAR_DISTANCE { get; set; }
+        public int ACADEMY_NEAR_DISTANCE { get; set; }
+        public int HOSPITAL_NEAR_DISTANCE { get; set; }
+        public int STATION_NEAR_DISTANCE { get; set; }
+        public int STOP_NEAR_DISTANCE { get; set; }
+        public int PARKING_NEAR_DISTANCE { get; set; }
+        public int ATTRACTION_NEAR_DISTANCE { get; set; }
+        public int CROSSWALK_NEAR_DISTANCE { get; set; }
+        public int LEISURE_COUNT_NEAR_500 { get; set; }
+        public int LEISURE_COUNT_NEAR_1000 { get; set; }
+        public int LEISURE_NEAR_DISTANCE { get; set; }
     }
 
     public class SellingArea {
