@@ -18,12 +18,15 @@
 
 
 import matplotlib.pyplot as plt
+import pandas as pd
 from matplotlib import rcParams
 from matplotlib.animation import FuncAnimation, PillowWriter, HTMLWriter
 
 import numpy as np
 import warnings
 
+pd.set_option("display.max_columns", None)
+pd.set_option("display.max_rows", None)
 
 # 한글 환경 설정
 def setting_styles_basic():
@@ -40,39 +43,40 @@ def inch_to_pixel(inch):
 warnings.filterwarnings(action='ignore')
 
 class Graph:
-    # ----- 정보 관련 변수
-    # 비교 대상 이름
-    models = list()
-    
-    # --- 표현 종류
-    # 라벨 (X)
-    ticks = list()      # 이름 리스트
-    ticks_size = 0      # x 갯수
-    values_x = list()   # x 위치
-
-    # 값 (Y)
-    original_data = {}
-    # 애니메이션용 값 정보
-    ani_data = {}
-    max_y = 0
-    # 본래 값 정보 리스트
-
-    # ----- 그래프 관련 변수
-    graph_type = "bar"
-    flg = None
-    # frame = 26 → 11 → 21
-    total_frame = 11
-    interval = 0.01
-    width = 0.25
-    add = 0
-
-    # 그래프 표현 색상
-    colors = ['#181C3F', '#494B6F', '#6B53FF', '#f1A08B', '#eFBC00', '#01DCCD', '#5D99FE', '#2A2D56']
-    # 비어있는 파이 표현 색상
-    blank_color = "white"
-
     def __init__(self, width: int, height: int, graph_type="bar"):
         setting_styles_basic()
+
+        # ----- 정보 관련 변수
+        # 비교 대상 이름
+        self.models = list()
+
+        # --- 표현 종류
+        # 라벨 (X)
+        self.ticks = list()  # 이름 리스트
+        self.ticks_size = 0  # x 갯수
+        self.values_x = list()  # x 위치
+
+        # 값 (Y)
+        self.original_data = {}
+        # 애니메이션용 값 정보
+        self.ani_data = {}
+        self.max_y = 0
+        # 본래 값 정보 리스트
+
+        # ----- 그래프 관련 변수
+        self.graph_type = "bar"
+        self.flg = None
+        # frame = 26 → 11 → 21
+        self.total_frame = 11
+        self.interval = 0.01
+        self.width = 0.25
+        self.add = 0
+        self.delay_frame = 8
+
+        # 그래프 표현 색상
+        self.colors = ['#181C3F', '#494B6F', '#6B53FF', '#f1A08B', '#eFBC00', '#01DCCD', '#5D99FE', '#2A2D56']
+        # 비어있는 파이 표현 색상
+        self.blank_color = "white"
 
         # 크기 설정 (인치단위)
         self.flg = plt.figure(figsize=(inch_to_pixel(width), inch_to_pixel(height)))
@@ -101,16 +105,26 @@ class Graph:
         self.values_x = [i for i in range(self.ticks_size)]
 
     # 정보 설정
-    def set_data(self, data: dict):
-        self.original_data = data
-        self.models = list(data.keys())
-
+    def set_data(self, data, columns:list[str]=None):
         if self.graph_type == "bar":
+            # [ df, df, df ]
+            data: list
+
+            self.original_data = {}
+            self.models = list()
             self.max_y = 0
-            for key, value in data.items():
+
+            for idx, value in enumerate(data):
+                model = value[columns[0]][0]
+                df = value[columns[1:]]
+                value = df.values[0]
+                self.models.append(model)
+                self.original_data[model] = value
+
                 max_value = max(value)
                 if max_value > self.max_y:
                     self.max_y = max_value
+
             self.max_y += 5
             plt.ylim(0.1, self.max_y)
             plt.xlim(-1, self.ticks_size * len(self.models))
@@ -119,8 +133,11 @@ class Graph:
                 self.ani_data[self.models[i]] = [0 for _ in range(self.ticks_size)]
 
         elif self.graph_type == "pie":
+            data: dict
+            self.original_data = data
+            self.models = list(data.keys())
             self.ani_data = list(data.values())
-            # plt.pie(self.ani_data, labels=self.models, autopct='%.1f%%', shadow=True)
+            plt.pie(self.ani_data, labels=self.models, autopct='%.1f%%', shadow=True)
 
     # bar graph - 모델, 요소 종류에 따른 위치 계산
     def compute_pos(self, i):
@@ -196,8 +213,6 @@ class Graph:
                 colors = self.colors
 
             if frame >= self.total_frame * self.add:
-                print(list(self.original_data.values()))
-                print(type(list(self.original_data.values())))
                 plt.pie(list(self.original_data.values()), labels=models, autopct=autopct, shadow=True, colors=colors)
             else:
                 plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)
@@ -206,14 +221,13 @@ class Graph:
     # gif 저장
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
         # 그래프 애니메이션 생성
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+10, interval=self.interval, repeat=repeat)
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+self.delay_frame, interval=self.interval, repeat=repeat)
         graph_ani.save(file_path, dpi=100, fps=int(self.interval*1000))
-
         print("그래프 저장 완료")
 
 
     # 그래프 출력
     def show_plt(self, repeat=False):
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+10, interval=self.interval, repeat=repeat)
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+self.delay_frame, interval=self.interval, repeat=repeat)
         plt.show()
 
