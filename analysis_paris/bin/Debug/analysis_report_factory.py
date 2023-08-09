@@ -69,6 +69,7 @@ class MapFactory:
         kakao_map.set_control(True)
 
         file_path = self.file_path+r"\Map\test_map2.html"
+
         kakao_map.save_map(file_path)
 
     def get_location_report(self, latitude, longitude):
@@ -102,10 +103,3 @@ class MapFactory:
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
-
-
-if __name__ == '__main__':
-    main()
-    # factory = MapFactory()
-    # factory.get_selling_area_report(52)
-    # factory.get_location_report(2314.122, 12312.234)

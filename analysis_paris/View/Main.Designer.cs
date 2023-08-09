@@ -60,6 +60,8 @@
             this.btnMap = new analysis_paris.View.CheckedButton();
             this.btnChart = new analysis_paris.View.CheckedButton();
             this.modeIconGroup = new analysis_paris.View.ModeGroupControl();
+            this.mapSearchButton = new analysis_paris.View.GifImageButton();
+            this.locationInfoUnderBar = new System.Windows.Forms.Label();
             this.tableLayoutMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitMainBoard)).BeginInit();
             this.splitMainBoard.Panel1.SuspendLayout();
@@ -272,7 +274,7 @@
             // 
             this.layoutSearchBox.ColumnCount = 3;
             this.layoutSearchBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.layoutSearchBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 286F));
+            this.layoutSearchBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 318F));
             this.layoutSearchBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 48F));
             this.layoutSearchBox.Controls.Add(this.searchBox, 1, 1);
             this.layoutSearchBox.Controls.Add(this.btnSearch, 2, 1);
@@ -297,11 +299,11 @@
             this.searchBox.BackColor = System.Drawing.Color.White;
             this.searchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.searchBox.Font = new System.Drawing.Font("나눔고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.searchBox.Location = new System.Drawing.Point(37, 50);
+            this.searchBox.Location = new System.Drawing.Point(5, 50);
             this.searchBox.Margin = new System.Windows.Forms.Padding(0);
             this.searchBox.MaxLength = 20;
             this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(286, 26);
+            this.searchBox.Size = new System.Drawing.Size(318, 26);
             this.searchBox.TabIndex = 1;
             this.searchBox.WordWrap = false;
             // 
@@ -394,12 +396,14 @@
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.lblSubTableTitle, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.flowDetails, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.flowDetails, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.locationInfoUnderBar, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 3F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(330, 259);
             this.tableLayoutPanel2.TabIndex = 0;
@@ -410,7 +414,8 @@
             this.lblSubTableTitle.AutoSize = true;
             this.lblSubTableTitle.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblSubTableTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblSubTableTitle.Location = new System.Drawing.Point(3, 13);
+            this.lblSubTableTitle.Location = new System.Drawing.Point(10, 12);
+            this.lblSubTableTitle.Margin = new System.Windows.Forms.Padding(10, 0, 3, 0);
             this.lblSubTableTitle.Name = "lblSubTableTitle";
             this.lblSubTableTitle.Size = new System.Drawing.Size(63, 16);
             this.lblSubTableTitle.TabIndex = 0;
@@ -422,11 +427,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowDetails.AutoScroll = true;
-            this.flowDetails.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowDetails.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowDetails.Location = new System.Drawing.Point(3, 45);
+            this.flowDetails.Location = new System.Drawing.Point(3, 46);
             this.flowDetails.Name = "flowDetails";
-            this.flowDetails.Size = new System.Drawing.Size(324, 211);
+            this.flowDetails.Size = new System.Drawing.Size(324, 210);
             this.flowDetails.TabIndex = 1;
             this.flowDetails.WrapContents = false;
             this.flowDetails.SizeChanged += new System.EventHandler(this.flowDetails_SizeChanged);
@@ -436,6 +440,7 @@
             this.layoutMapBox.ColumnCount = 1;
             this.layoutMapBox.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.layoutMapBox.Controls.Add(this.mapBrowser, 0, 1);
+            this.layoutMapBox.Controls.Add(this.mapSearchButton, 0, 0);
             this.layoutMapBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layoutMapBox.Location = new System.Drawing.Point(0, 0);
             this.layoutMapBox.Name = "layoutMapBox";
@@ -451,6 +456,8 @@
             this.mapBrowser.Location = new System.Drawing.Point(3, 63);
             this.mapBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.mapBrowser.Name = "mapBrowser";
+            this.mapBrowser.ScriptErrorsSuppressed = true;
+            this.mapBrowser.ScrollBarsEnabled = false;
             this.mapBrowser.Size = new System.Drawing.Size(309, 193);
             this.mapBrowser.TabIndex = 0;
             // 
@@ -475,8 +482,8 @@
             this.lblChartTitle.AutoSize = true;
             this.lblChartTitle.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblChartTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblChartTitle.Location = new System.Drawing.Point(0, 13);
-            this.lblChartTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.lblChartTitle.Location = new System.Drawing.Point(10, 13);
+            this.lblChartTitle.Margin = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.lblChartTitle.Name = "lblChartTitle";
             this.lblChartTitle.Size = new System.Drawing.Size(63, 16);
             this.lblChartTitle.TabIndex = 1;
@@ -622,8 +629,8 @@
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSearch.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSearch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnSearch.Location = new System.Drawing.Point(340, 49);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.btnSearch.Location = new System.Drawing.Point(337, 49);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(0, 0, 6, 0);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(28, 28);
             this.btnSearch.TabIndex = 2;
@@ -711,6 +718,28 @@
             this.modeIconGroup.Size = new System.Drawing.Size(86, 180);
             this.modeIconGroup.TabIndex = 5;
             this.modeIconGroup.Click += new System.EventHandler(this.modeGroup_Click);
+            // 
+            // mapSearchButton
+            // 
+            this.mapSearchButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.mapSearchButton.Location = new System.Drawing.Point(7, 3);
+            this.mapSearchButton.Name = "mapSearchButton";
+            this.mapSearchButton.Size = new System.Drawing.Size(300, 54);
+            this.mapSearchButton.TabIndex = 1;
+            this.mapSearchButton.Click += new System.EventHandler(this.mapSearchButton_Click);
+            // 
+            // locationInfoUnderBar
+            // 
+            this.locationInfoUnderBar.AutoSize = true;
+            this.locationInfoUnderBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.locationInfoUnderBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationInfoUnderBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.locationInfoUnderBar.Location = new System.Drawing.Point(10, 40);
+            this.locationInfoUnderBar.Margin = new System.Windows.Forms.Padding(10, 0, 10, 0);
+            this.locationInfoUnderBar.Name = "locationInfoUnderBar";
+            this.locationInfoUnderBar.Size = new System.Drawing.Size(310, 3);
+            this.locationInfoUnderBar.TabIndex = 2;
+            this.locationInfoUnderBar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Main
             // 
@@ -805,6 +834,8 @@
         private System.Windows.Forms.PictureBox graphBoxBar;
         private System.Windows.Forms.PictureBox graphBoxPie;
         private System.Windows.Forms.FlowLayoutPanel flowDetails;
+        private View.GifImageButton mapSearchButton;
+        private System.Windows.Forms.Label locationInfoUnderBar;
     }
 }
 

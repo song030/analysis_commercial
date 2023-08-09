@@ -3,6 +3,7 @@ using System.Diagnostics;
 
 namespace analysis_paris.Factory {
     // ========================== Product 관련 클래스
+    #region Product
     // IButton 추상 클래스
     public abstract class ITrigger {
         // 파이썬 스크립트 실행 메소드
@@ -47,7 +48,6 @@ namespace analysis_paris.Factory {
     public class AllParis : ITrigger {  // 파리바게뜨 전체 매장 검색
         public override string RunScript(string parameters) {
             string scriptParameter = "get_all_paris_list";
-            Console.WriteLine("[ scriptParameter ] ", scriptParameter);
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
 
             return scriptResult;
@@ -57,7 +57,6 @@ namespace analysis_paris.Factory {
     public class AllSellingArea : ITrigger {    // 전체 매물 검색
         public override string RunScript(string parameters) {
             string scriptParameter = "get_all_selling_area_list";
-            Console.WriteLine("[ scriptParameter ] ", scriptParameter);
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
 
             return scriptResult;
@@ -67,12 +66,41 @@ namespace analysis_paris.Factory {
     public class ParisById : ITrigger { // 특정 Id로 파리바게뜨 매장 검색
         public override string RunScript(string parameters) {
             string scriptParameter = $"get_paris_by_id {parameters}";
-            Console.WriteLine("[ scriptParameter ] ", scriptParameter);
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
 
             return scriptResult;
         }
     }
+
+    public class LocationInfo : ITrigger { // 좌표로 주변 정보?????  검색
+        public override string RunScript(string parameters) {
+            string scriptParameter = $"get_location_information {parameters}";
+            string scriptResult = RunPythonScript(scriptPath, scriptParameter);
+
+            return scriptResult;
+        }
+    }
+
+    public class SellingAreaAddress : ITrigger { // 주소로 매물 검색
+        public override string RunScript(string parameters) {
+            string scriptParameter = $"find_selling_area_by_address {parameters}";
+            string scriptResult = RunPythonScript(scriptPath, scriptParameter);
+
+            return scriptResult;
+        }
+    }
+
+    public class StoreReport : ITrigger { // 리포트 검색
+        public override string RunScript(string parameters) {
+            string scriptParameter = $"get_sale_area_report {parameters}";
+            string scriptResult = RunPythonScript(scriptPath, scriptParameter);
+
+            Console.WriteLine(scriptResult);
+
+            return scriptResult;
+        }
+    }
+    #endregion
 
     // ========================== Factory class
     // Product (제품) 인터페이스
@@ -84,7 +112,10 @@ namespace analysis_paris.Factory {
     public enum TriggerType {
         AllParis,
         AllSellingArea,
-        ParisById
+        ParisById,
+        LocationInfo,
+        SellingAreaAddress,
+        StoreReport
     }
 
     // Creator (생성자) 클래스 (팩토리 메서드를 정의하는 클래스)
@@ -98,6 +129,12 @@ namespace analysis_paris.Factory {
                     return new AllSellingArea();
                 case TriggerType.ParisById:
                     return new ParisById();
+                case TriggerType.LocationInfo:
+                    return new LocationInfo();
+                case TriggerType.SellingAreaAddress:
+                    return new SellingAreaAddress();
+                case TriggerType.StoreReport:
+                    return new StoreReport();
                 default:
                     throw new ArgumentException("Type Error");
             }
@@ -107,8 +144,8 @@ namespace analysis_paris.Factory {
     // Percussion 클래스를 통해 팩토리로 생성한 Product를 실행, 결과를 반환한다.
     public class Percussion {
         public static string GetScriptResult(TriggerType type, string otherParameter) {
-            ITrigger button = TriggerFactory.SetTrigger(type);
-            string scriptResult = button.RunScript(otherParameter);
+            ITrigger trigger = TriggerFactory.SetTrigger(type);
+            string scriptResult = trigger.RunScript(otherParameter);
             return scriptResult;
         }
 

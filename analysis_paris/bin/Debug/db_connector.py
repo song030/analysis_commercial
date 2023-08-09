@@ -79,7 +79,8 @@ public class Paris {
         public string CURRENT_STATE { get; set; }
         public string ADDRESS { get; set; }
         public double AREA_SIZE { get; set; }
-        public string FLOOR_INFO { get; set; }
+        public int FLOOR_INFO { get; set; }
+        public int TOTAL_FLOOR { get; set; }
         public long DEPOSIT { get; set; }
         public long RATE_PER_MONTH { get; set; }
         public long PREMIUM { get; set; }
@@ -87,16 +88,37 @@ public class Paris {
         public double LONGITUDE { get; set; }
         public string RELATION_LINK { get; set; }
         public long SELLING_PRICE { get; set; }
-        public int RIVAL_CNT_300 { get; set; }
-        public int TOUR_CNT_300 { get; set; }
-        public int HOSPITAL_CNT_300 { get; set; }
-        public int STOP_CNT_300 { get; set; }
-        public int LIVING_CNT_300 { get; set; }
-        public int PARKING_CNT_300 { get; set; }
-        public int STATION_CNT_300 { get; set; }
-        public int SCHOOL_CNT_300 { get; set; }
-        public int ACADEMY_CNT_300 { get; set; }
-        public int CROSSWALK_CNT_300 { get; set; }
+        public int RIVAL_COUNT_NEAR_500 { get; set; }
+        public int RIVAL_COUNT_NEAR_1000 { get; set; }
+        public int MONTHLY_SHOP_REVENUE { get; set; }
+        public int MONTHLY_SHOP_SALE_TRANSACTION_COUNT { get; set; }
+        public int DAILY_FLOATING_POPULATION { get; set; }
+        public int LIVING_WORKER_POPULATION { get; set; }
+        public int LIVING_WORKER_AVG_REVENUE { get; set; }
+        public int LIVING_POPULATION { get; set; }
+        public int LIVING_POPULATION_AVG_REVENUE { get; set; }
+        public int ATTRACTION_COUNT_NEAR_500 { get; set; }
+        public int ATTRACTION_COUNT_NEAR_1000 { get; set; }
+        public int ACADEMY_COUNT_NEAR_500 { get; set; }
+        public int ACADEMY_COUNT_NEAR_1000 { get; set; }
+        public int STOP_COUNT_NEAR_500 { get; set; }
+        public int STOP_COUNT_NEAR_1000 { get; set; }
+        public int CROSSWALK_COUNT_NEAR_500 { get; set; }
+        public int CROSSWALK_COUNT_NEAR_1000 { get; set; }
+        public int HOSPITAL_COUNT_NEAR_500 { get; set; }
+        public int HOSPITAL_COUNT_NEAR_1000 { get; set; }
+        public int PARKING_COUNT_NEAR_500 { get; set; }
+        public int PARKING_COUNT_NEAR_1000 { get; set; }
+        public int SCHOOL_COUNT_NEAR_500 { get; set; }
+        public int SCHOOL_COUNT_NEAR_1000 { get; set; }
+        public int STATION_COUNT_NEAR_500 { get; set; }
+        public int STATION_COUNT_NEAR_1000 { get; set; }
+        public int LIVING_COUNT_NEAR_500 { get; set; }
+        public int LIVING_COUNT_NEAR_1000 { get; set; }
+        public int LEISURE_COUNT_NEAR_500 { get; set; }
+        public int LEISURE_COUNT_NEAR_1000 { get; set; }
+        public int SCORE { get; set; }
+
     }
 
 """
@@ -116,13 +138,15 @@ class DBMethod:
     get_all_paris_list = 'get_all_paris_list'
     get_all_selling_area_list = 'get_all_selling_area_list'
     get_paris_by_id = 'get_paris_by_id'
+    get_selling_area_by_id = 'get_selling_area_by_id'
     get_location_information = 'get_location_information'
+    find_paris_by_address = 'find_paris_by_address'
     find_selling_area_by_address = 'find_selling_area_by_address'
 
 
 def main():
     calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
-    from python_controller import Path # Path만 가져옴
+    from python_controller import Path  # Path만 가져옴
     connector = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
     if calling_method_name == DBMethod.get_all_paris_list:
         connector.find_all_paris()
@@ -134,6 +158,10 @@ def main():
         paris_id = other_parameters[0]
         connector.find_paris_by_id(paris_id)
 
+    elif calling_method_name == DBMethod.get_selling_area_by_id:
+        selling_area_id = other_parameters[0]
+        connector.get_selling_area_by_id(selling_area_id)
+
     elif calling_method_name == DBMethod.get_location_information:
         latitude, longitude = other_parameters
         connector.calculate_location_score(latitude, longitude)
@@ -141,6 +169,10 @@ def main():
     elif calling_method_name == DBMethod.find_selling_area_by_address:
         search_word = " ".join(other_parameters[0:])
         connector.find_selling_area_by_address(search_word)
+
+    elif calling_method_name == DBMethod.find_paris_by_address:
+        search_word = " ".join(other_parameters[0:])
+        connector.find_paris_by_address(search_word)
 
 
 class DBConnector:
@@ -224,6 +256,14 @@ class DBConnector:
         self.end_conn()
         return df
 
+    def get_selling_area_by_id(self, selling_area_id):
+        self.start_conn()
+        pstmt = f"""select * from "TB_SELLING_AREA" where "SELLING_AREA_ID" = {selling_area_id} """
+        df = pd.read_sql(pstmt, self.engine)
+        print(df.to_json(orient='records'))
+        self.end_conn()
+        return df
+
     def find_all_selling_area(self):
         self.start_conn()
         pstmt = """select * from "TB_SELLING_AREA" """
@@ -243,9 +283,24 @@ class DBConnector:
             word = word.replace(w, '')
         word_list = word.split(" ")
         for w in word_list:
-            if not w.isdigit(): # 숫자만 이뤄진 검색어는 제외시키고 검색단어 설정 하기
+            if not w.isdigit():  # 숫자만 이뤄진 검색어는 제외시키고 검색단어 설정 하기
                 result_list.append(w)
         return result_list
+
+    def find_paris_by_address(self, word):
+        self.start_conn()
+        # 단어를 찢어서 검색하고, 중복되는 것은 제거해야함
+        searching_word_list = self.search_word_cleaning(word)
+        total_df = pd.DataFrame()
+        for w in searching_word_list[::-1]:
+            pstmt = f"""select * from "TB_PARIS" where "PARIS_ADDRESS" like %s """
+            params = f"%{w}%"
+            df = pd.read_sql(pstmt, self.engine, params=(params,))
+            total_df = pd.concat([total_df, df])
+            total_df.drop_duplicates(["PARIS_ID"], keep="first")
+        print(total_df.to_json(orient='records'))
+        self.end_conn()
+        return total_df
 
     def find_selling_area_by_address(self, word):
         self.start_conn()
@@ -265,5 +320,6 @@ class DBConnector:
 
 if __name__ == '__main__':
     main()
-    # conn = DBConnector(test_option=True)
-    # conn.find_selling_area_by_address("수원시 권선구")
+    # from python_controller import Path
+    # conn = DBConnector(test_option=True,config_path=Path().CONFIG_PATH)
+    # conn.get_selling_area_by_id(11)

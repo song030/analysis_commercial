@@ -642,6 +642,15 @@ class DBConnector:
         pd.set_option('display.max_columns', None)
         pd.set_option('display.width', 1000)
 
+    def create_TB_rival_business(self):
+        df = pd.read_csv(r"crawling_sources/_dummy_src/가맹점 주변 경쟁업체.csv")
+        print(df)
+        # with open(r"crawling_sources/_dummy_src/가맹점 주변 경쟁업체.csv", 'r', encoding='utf-8')
+
 
 if __name__ == '__main__':
     main()
+    conn = DBConnector(test_option=True)
+    conn.create_TB_rival_business()
+
+

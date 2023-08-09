@@ -13,23 +13,63 @@ from sqlalchemy import create_engine
 def main():
     pd.set_option('display.max_columns', None)
     pd.set_option('display.width', 1000)
-    get_integrated_xlsx()
+    # convert_xlsx()
+    # get_integrated_xlsx()
+    get_selling_area_TB()
+
+
+def get_selling_area_TB():
+    engine_param = f'postgresql://postgres:1234@10.10.20.117:5432/db_analysis_test'
+    engine = create_engine(engine_param)
+    df = pd.read_sql("""select * from "TB_SELLING_AREA" """, engine)
+
+    for col in df.columns:
+        print(f"public  {col} {{ get; set; }}")
+
+def convert_xlsx():
+    df = pd.read_excel(r"_dummy_src/selling_area_not_convert.xlsx")
+    new_df = df.copy(deep=True)
+    for idx, row in df.iterrows():
+        for element in row.items():
+            value = element[1]
+            if isinstance(value, str):
+                value = value.replace("개", "").replace("건", "").replace(",", "").replace("명", "").replace("만원",
+                                                                                                          "0000").strip()
+                new_df.at[idx, element[0]] = value
+    new_df.to_excel(r"_dummy_src/selling_area_convert.xlsx", index_label=False, index=False)
 
 
 def get_integrated_xlsx():
-    df = pd.read_excel("Integrated_infos.xlsx")
-    idx_to_research = list()
-
-    for idx, row in df.iterrows():
-        if isinstance(row["MONTHLY_SHOP_REVENUE"], float) or row['MONTHLY_SHOP_REVENUE'] == '0':
-            idx_to_research.append(idx)
-
-    get_selling_area_infos(1, idx_to_research)
+    # df = pd.read_excel(r"_dummy_src/selling_area_convert.xlsx")
+    conn = psycopg2.connect(
+        host="10.10.20.117",
+        database="db_analysis_test",
+        user="postgres",
+        password="1234")
+    # engine_param = f'postgresql://postgres:1234@10.10.20.117:5432/db_analysis_test'
+    # engine = create_engine(engine_param)
+    # df.to_sql("TB_SELLING_AREA", engine, if_exists='replace', index=False)
+    cursor = conn.cursor()
+    cursor.execute("""
+        ALTER TABLE "TB_SELLING_AREA" ADD PRIMARY KEY ("SELLING_AREA_ID");
+        CREATE SEQUENCE IF NOT EXISTS public."TB_SELLING_AREA_ID_seq"
+            INCREMENT 1
+            START 1
+            MINVALUE 1
+            MAXVALUE 2147483647
+            CACHE 1
+            OWNED BY "TB_SELLING_AREA"."SELLING_AREA_ID";
+        ALTER SEQUENCE public."TB_SELLING_AREA_ID_seq"
+            OWNER TO postgres;"""
+                   )
+    conn.commit()
+    conn.close()
 
 
 def integrate_infos():
     whole_line = None
-    with open('integerated_infos.txt', 'r', encoding='utf-8') as file:
+
+    with open('../backup_dummy/integerated_infos.txt', 'r', encoding='utf-8') as file:
         whole_line = file.read().split("\n")[:-1]
     assert isinstance(whole_line, list)
 
@@ -106,6 +146,29 @@ def save_sale_area_excel():
     df.rename(columns={"index": "SELLING_AREA_ID"}, inplace=True)
     df["SELLING_AREA_ID"] = df["SELLING_AREA_ID"] + 1
     df.to_excel("infos.xlsx", index=False, index_label=False)
+
+
+def korean_to_number(korean_str):
+    num_map = {
+        '일': 1, '이': 2, '삼': 3, '사': 4, '오': 5,
+        '육': 6, '칠': 7, '팔': 8, '구': 9, '십': 10,
+        '백': 100, '천': 1000, '만': 10000, '억': 100000000
+    }
+
+    number = 0
+    partial_sum = 0
+
+    for word in korean_str.split():
+        if word in num_map:
+            if num_map[word] >= 10000:
+                number += partial_sum * num_map[word]
+                partial_sum = 0
+            else:
+                partial_sum += num_map[word]
+
+    number += partial_sum
+
+    return str(number)
 
 
 def get_selling_area_infos(start_idx, list_to_research):
@@ -416,7 +479,7 @@ def get_site_and_login(start_idx):
         temp_list.append(living_population)
         temp_list.append(living_population_avg_revenue)
         line = "|".join(temp_list)
-        with open("search_analysis_report.txt", "a", encoding="utf-8") as file:
+        with open("../backup_dummy/search_analysis_report.txt", "a", encoding="utf-8") as file:
             file.write(f"{line}\n")
 
     while True:

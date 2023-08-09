@@ -22,7 +22,21 @@ namespace analysis_paris.View {
         }
         #endregion
 
-        // Constructor
+
+        // No Info Constructor
+        public ListItemControl() {
+            InitializeComponent();
+            lblType.Text = "";
+            lblArea.Text = "";
+            lblPOption.Text = "";
+            lblScore.Text = "";
+
+            lblAddr.Text = "검색 결과 없음";
+            lblAddr.Font = new Font(lblAddr.Font.Name, 12, FontStyle.Bold);
+        }
+
+
+        // Paris Constructor
         public ListItemControl(Paris _itemInfo) {
             InitializeComponent();
 
@@ -34,19 +48,37 @@ namespace analysis_paris.View {
             lblScore.Text = $"55";
         }
 
+        // SellingArea Constructor
         public ListItemControl(SellingArea _itemInfo) {
             InitializeComponent();
 
             _sellingArea = _itemInfo;
             lblType.Text = _sellingArea.SELLING_TYPE;
-            //lblAddr.Text = _paris.PARIS_ADDRESS;
-            //lblArea.Text = $"{_paris.AREA_SIZE}m²";
-            //lblPOption.Text = $"{_paris.MONTHLY_SHOP_REVENUE}";
+            lblAddr.Text = _sellingArea.ADDRESS;
+            lblArea.Text = $"{_sellingArea.AREA_SIZE}m²";
             lblScore.Text = $"55";
 
-            // 스타일 적용
+            // 타입별 적용
             if (_sellingArea.SELLING_TYPE == "매매") {
+                if (_sellingArea.SELLING_PRICE < 1)
+                    lblPOption.Text = "협의";
+                lblPOption.Text = $"{_sellingArea.SELLING_PRICE}만원";
                 lblType.ForeColor = Color.FromArgb(254, 206, 0);
+            }
+            else {
+                string deposit = $"{_sellingArea.DEPOSIT}";
+                if (_sellingArea.DEPOSIT < 1)
+                    deposit = "협의";
+
+                string rate = $"{_sellingArea.RATE_PER_MONTH}";
+                if (_sellingArea.RATE_PER_MONTH < 1)
+                    rate = "협의";
+
+                string premium = $"{_sellingArea.PREMIUM}";
+                if (_sellingArea.PREMIUM < 1)
+                    premium = "협의";
+
+                lblPOption.Text = $"보 {deposit}\n월 {rate}\n권 {premium}";
             }
         }
 

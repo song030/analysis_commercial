@@ -57,7 +57,7 @@ def read_txt_file_to_dataFrame():
     ]
 
     lines = None
-    with open("result_report.txt", "r", encoding="utf-8") as file:
+    with open("../backup_dummy/result_report.txt", "r", encoding="utf-8") as file:
         lines = file.read().split("\n")[:-1]
     assert isinstance(lines, list)
 
@@ -75,7 +75,7 @@ def read_txt_file_to_dataFrame():
 
 def convert_txt_file():
     lines = None
-    with open("search_analysis_report.txt", "r", encoding="utf-8") as file:
+    with open("../backup_dummy/search_analysis_report.txt", "r", encoding="utf-8") as file:
         lines = file.read().split("\n")[:-1]
     assert isinstance(lines, list)
     for idx, line in enumerate(lines):
@@ -95,7 +95,7 @@ def convert_txt_file():
                     temp_word = e.replace("개", "").replace(",", "").replace("명", "").replace("건", "").replace("만원",
                                                                                                               "")
                 temp_list.append(temp_word)
-        with open("result_report.txt", "a", encoding="utf-8") as file:
+        with open("../backup_dummy/result_report.txt", "a", encoding="utf-8") as file:
             new_line = "|".join(temp_list)
             file.write(f"{new_line}\n")
 
