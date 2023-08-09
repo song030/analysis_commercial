@@ -59,6 +59,8 @@ class Method:
     get_location_report = 'get_location_report'
     get_location_information = 'get_location_information'
     find_selling_area_by_address = 'find_selling_area_by_address'
+    get_selling_area_by_id = 'get_selling_area_by_id'
+    find_paris_by_address = 'find_paris_by_address'
 
 
 def main():
@@ -74,6 +76,8 @@ def main():
                                Method.get_paris_by_id,
                                Method.get_all_selling_area_list,
                                Method.find_selling_area_by_address,
+                               Method.get_selling_area_by_id,
+                               Method.find_paris_by_address,
                                Method.get_location_information]:
         os.system(f"{path.python_interpreter} {path.db_connector_path} {calling_method_name} {other_parameters}")
 
