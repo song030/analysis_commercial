@@ -22,7 +22,7 @@ def main():
 
 def convert_txt_file():
     lines = None
-    with open("search_analysis_report.txt", "r", encoding="utf-8") as file:
+    with open("../backup_dummy/search_analysis_report.txt", "r", encoding="utf-8") as file:
         lines = file.read().split("\n")[:-1]
     assert isinstance(lines, list)
     for line in lines:
@@ -39,7 +39,7 @@ def convert_txt_file():
                 else:
                     temp_word = e.replace("개", "").replace(",", "").replace("명", "").replace("만원", "").strip()
                 temp_list.append(temp_word)
-        with open("result_report.txt", "a", encoding="utf-8") as file:
+        with open("../backup_dummy/result_report.txt", "a", encoding="utf-8") as file:
             new_line = "|".join(temp_list)
             file.write(f"{new_line}\n")
 
@@ -212,7 +212,7 @@ def get_site_and_login(start_idx):
         temp_list.append(living_population)
         temp_list.append(living_population_avg_revenue)
         line = "|".join(temp_list)
-        with open("search_analysis_report.txt", "a", encoding="utf-8") as file:
+        with open("../backup_dummy/search_analysis_report.txt", "a", encoding="utf-8") as file:
             file.write(f"{line}\n")
 
     while True:
