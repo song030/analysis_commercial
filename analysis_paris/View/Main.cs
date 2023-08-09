@@ -118,7 +118,7 @@ namespace analysis_paris {
 
                 case 2:
                     layoutSearchResult.RowStyles[0].Height = 0;
-                    layoutMapBox.RowStyles[0].Height = 36;
+                    layoutMapBox.RowStyles[0].Height = 60;
                     btnMap.Checked = true;
                     DataBoard_Collapse();
                     splitDataBoard.Panel1Collapsed = true;
