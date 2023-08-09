@@ -27,6 +27,7 @@ import warnings
 
 # 한글 환경 설정
 def setting_styles_basic():
+    rcParams['animation.writer'] = 'pillow'
     rcParams['font.family'] = 'Malgun Gothic'
     rcParams['axes.unicode_minus'] = False
 
@@ -36,8 +37,7 @@ def inch_to_pixel(inch):
 
 
 # 그래프 경고창 무시
-warnings.filterwarnings('ignore')
-
+warnings.filterwarnings(action='ignore')
 
 class Graph:
     # ----- 정보 관련 변수
@@ -194,7 +194,8 @@ class Graph:
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
         # 그래프 애니메이션 생성
         graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame, interval=self.interval, repeat=repeat)
-        graph_ani.save(file_path, writer='.pillowWriter', dpi=100, fps=int(self.interval*1000))
+        # graph_ani.save(file_path, writer='Pillow', dpi=100, fps=int(self.interval*1000))
+        graph_ani.save(file_path, dpi=100, fps=int(self.interval*1000))
         print("그래프 저장 완료")
 
     # 그래프 출력

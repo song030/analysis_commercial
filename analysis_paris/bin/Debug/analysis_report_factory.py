@@ -27,15 +27,15 @@ class ReportMethod:
 
 
 def main():
-    calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
-    # calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
+    # calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    calling_method_name, other_parameters = (ReportMethod.get_selling_area_report, 10)
     factory = MapFactory()
     result = pd.DataFrame
 
     # 가맹점 조회
     if calling_method_name == ReportMethod.get_selling_area_report:
         # ========== 가맹점/매물정보 분기점 만들기
-        selling_area_id = int(other_parameters[0])
+        selling_area_id = int(other_parameters)
         factory.get_selling_area_report(selling_area_id)
         print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
 
@@ -56,6 +56,7 @@ class MapFactory:
         from db_connector import DBConnector
         from python_controller import Path
         self.conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
+        self.file_path = Path().db_connector_path[:-15]
 
     def get_selling_area_report(self, selling_area_id):
         # ----- 검색 결과 가져오기
@@ -67,7 +68,7 @@ class MapFactory:
         kakao_map.create_map(self.result["LATITUDE"][0], self.result["LONGITUDE"][0], level=3, title=self.result["PARIS_NAME"][0])
         kakao_map.set_control(True)
 
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Map\test_map2.html"
+        file_path = self.file_path+r"\Map\test_map2.html"
         kakao_map.save_map(file_path)
 
     def get_location_report(self, latitude, longitude):
@@ -86,7 +87,7 @@ class MapFactory:
         graph = Graph(700, 500)
         graph.set_ticks(ticks)
         graph.set_data(data)
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
+        file_path = self.file_path+r"\Graph\test_bar.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
 
@@ -97,14 +98,14 @@ class MapFactory:
         graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
         graph.set_data(data)
 
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
+        file_path = self.file_path+r"\Graph\test_pie.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
 
 
 if __name__ == '__main__':
-    # main()
-    factory = MapFactory()
+    main()
+    # factory = MapFactory()
     # factory.get_selling_area_report(52)
-    factory.get_location_report(2314.122, 12312.234)
+    # factory.get_location_report(2314.122, 12312.234)
