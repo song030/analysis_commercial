@@ -61,64 +61,69 @@
             // 
             // lblAddr
             // 
-            this.lblAddr.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAddr.AutoSize = true;
+            this.lblAddr.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblAddr.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblAddr.Location = new System.Drawing.Point(45, 19);
+            this.lblAddr.Location = new System.Drawing.Point(45, 0);
             this.lblAddr.Name = "lblAddr";
-            this.lblAddr.Size = new System.Drawing.Size(134, 22);
+            this.lblAddr.Size = new System.Drawing.Size(134, 60);
             this.lblAddr.TabIndex = 1;
             this.lblAddr.Text = "서울특별시 강동구 강일동 고덕강일2지구 성산타워2\r\n";
             this.lblAddr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblAddr.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblArea
             // 
-            this.lblArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblArea.AutoSize = true;
+            this.lblArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblArea.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblArea.Location = new System.Drawing.Point(185, 24);
+            this.lblArea.Location = new System.Drawing.Point(185, 0);
             this.lblArea.Name = "lblArea";
-            this.lblArea.Size = new System.Drawing.Size(57, 11);
+            this.lblArea.Size = new System.Drawing.Size(57, 60);
             this.lblArea.TabIndex = 2;
             this.lblArea.Text = "4198.37m²";
             this.lblArea.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblArea.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblScore
             // 
-            this.lblScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblScore.AutoSize = true;
+            this.lblScore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblScore.Font = new System.Drawing.Font("나눔고딕", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblScore.Location = new System.Drawing.Point(311, 23);
+            this.lblScore.Location = new System.Drawing.Point(311, 0);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(36, 13);
+            this.lblScore.Size = new System.Drawing.Size(36, 60);
             this.lblScore.TabIndex = 4;
             this.lblScore.Text = "총점";
             this.lblScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblScore.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblType
             // 
-            this.lblType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblType.AutoSize = true;
+            this.lblType.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblType.Font = new System.Drawing.Font("나눔고딕", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.lblType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(180)))), ((int)(((byte)(232)))));
-            this.lblType.Location = new System.Drawing.Point(3, 17);
+            this.lblType.Location = new System.Drawing.Point(3, 0);
             this.lblType.Name = "lblType";
-            this.lblType.Size = new System.Drawing.Size(36, 26);
+            this.lblType.Size = new System.Drawing.Size(36, 60);
             this.lblType.TabIndex = 3;
             this.lblType.Text = "월세\r\n매매";
             this.lblType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblType.Click += new System.EventHandler(this.Control_Click);
             // 
             // lblPOption
             // 
-            this.lblPOption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPOption.AutoSize = true;
+            this.lblPOption.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lblPOption.Font = new System.Drawing.Font("나눔고딕", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblPOption.Location = new System.Drawing.Point(248, 8);
+            this.lblPOption.Location = new System.Drawing.Point(248, 0);
             this.lblPOption.Name = "lblPOption";
-            this.lblPOption.Size = new System.Drawing.Size(57, 44);
+            this.lblPOption.Size = new System.Drawing.Size(57, 60);
             this.lblPOption.TabIndex = 5;
             this.lblPOption.Text = "보증금 9000\r\n월세 360\r\n권리금 0";
             this.lblPOption.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblPOption.Click += new System.EventHandler(this.Control_Click);
             // 
             // ListItemControl
             // 

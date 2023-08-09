@@ -32,11 +32,6 @@ namespace analysis_paris.View {
             lblArea.Text = $"{_paris.AREA_SIZE}m²";
             lblPOption.Text = $"{_paris.MONTHLY_SHOP_REVENUE}";
             lblScore.Text = $"55";
-
-            // 스타일 적용
-            //if ( == "매매") {
-            //lblType.ForeColor = Color.FromArgb(254, 206, 0);
-            //}
         }
 
         public ListItemControl(SellingArea _itemInfo) {
@@ -56,27 +51,8 @@ namespace analysis_paris.View {
         }
 
         // 모든 컨트롤에 클릭 이벤트 연결
-        public new event EventHandler Click {
-            add {
-                base.Click += value;
-
-                foreach (Control item in this.Controls) {
-                    item.Click += value;
-                    foreach (Control itemitem in item.Controls) {
-                        itemitem.Click += value;
-                    }
-                }
-            }
-            remove {
-                base.Click -= value;
-
-                foreach (Control item in this.Controls) {
-                    item.Click -= value;
-                    foreach (Control itemitem in item.Controls) {
-                        itemitem.Click -= value;
-                    }
-                }
-            }
+        private void Control_Click(object sender, EventArgs e) {
+            this.OnClick(e);
         }
     }
 }
