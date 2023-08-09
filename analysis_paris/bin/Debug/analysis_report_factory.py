@@ -51,9 +51,8 @@ def main():
         # ----- 지도 생성&업로드
         kakao_map = KakaoMap()
 
-        kakao_map.create_map(result["LATITUDE"][0], result["LONGITUDE"][0], 3)
+        kakao_map.create_map(result["LATITUDE"][0], result["LONGITUDE"][0], level=3, title=result["PARIS_NAME"][0])
         kakao_map.set_control(True)
-        kakao_map.create_main_marker(result["LATITUDE"][0], result["LONGITUDE"][0], result["PARIS_NAME"][0])
 
         file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Map\test_map2.html"
         kakao_map.save_map(file_path)

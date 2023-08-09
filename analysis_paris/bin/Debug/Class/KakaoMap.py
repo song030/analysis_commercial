@@ -8,15 +8,15 @@
 #       ex) kakao_map.set_control(True) : 유저 컨트롤 추가 여부 설정
 #       ex) kakao_map.set_mouse_over(True) : 마우스오버 이벤트 사용 여부 설정
 #       ex) kakao_map.set_map_click(True) : 지도 클릭시 클릭한 위치로 마커 이동 이벤트 사용 여부 설정
+#       ex) kakao_map.create_main_marker() : 메인 마커 생성 → 지도 중심 기준으로 생성됨
 #       ex) kakao_map.create_custom_marker(marker) : 커스텀 마커 생성
 #          → 인자값 자료형 list[dict] : [{"title":"장소명", "LatLng":(36.9824163015563, 126.92003340131)}]
-#       ex) kakao_map.create_main_marker(latitude, longitude, "파리바게뜨 안중현화점", "파리바게뜨 정보입니다.") : 메인 마커 생성
-#          → 인자값 전달 방식은 달라질 수 있음
 #       ex) kakao_map.save_map(file_path) : html 파일로 저장
 # 예상 리턴은 관련 함수를 검색바랍니다.
 # -----------------------------------------------------------
 
 HOST = "song030s.dothome.co.kr"
+
 
 class KakaoMap:
     # [ {"header": "info", "index":{"title":"", "lat":123, "lng":123}} ]
@@ -26,6 +26,9 @@ class KakaoMap:
     control = False
     map_click = False
     mouse_over = False
+
+    main_marker = False
+    map_center = {}
 
     # html 필수 요소 추가후 text생성 하여 반환
     def html(self) -> str:
@@ -87,63 +90,63 @@ class KakaoMap:
                 roadmapControl.className = 'btn';
             }}
         }}
-        
+
         function zoomIn() {{
             map.setLevel(map.getLevel() - 1);
         }}
-        
+
         function zoomOut() {{
             map.setLevel(map.getLevel() + 1);
         }}
         """
+
                 mouse_over_func = f"""
         function makeOverListener(map, marker, infowindow) {{
             return function() {{
                 infowindow.open(map, marker);
             }};
         }}
-        
+
         function makeOutListener(infowindow) {{
             return function() {{
                 infowindow.close();
             }};
         }}
         """
+
                 text = f"""
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>지도 생성하기</title>
-        
+
         <style>
             html, body {{width:100%;height:100%;margin:0;padding:0;}}
             .map_wrap {{position:relative;overflow:hidden;width:100%;height:100%;}}
             {control_style if self.control else ""}
         </style>
     </head>
-    
+
     <body>
     <div class="map_wrap">
         <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
         {control_div if self.control else ""}
-        <div id="clickLatlng"> </div>
+        <div id="clickLatlng">{self.map_center["lat"]} {self.map_center["lng"]}</div>
     </div>
-    
+
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=36e6f8ef91e206312c99c8be04e55526"></script>
     <script>
         {control_func if self.control else ""}
         {mouse_over_func if self.mouse_over else ""}
     """
-                html_text += text
 
-            elif _type == "map":
-                text = f"""
+                text += f"""
         // 지도 생성
         var mapContainer = document.getElementById('map'),
         mapOption = {{
-            center: new kakao.maps.LatLng({_data['lat']}, {_data['lng']}),
-            level: {_data['level']}
+            center: new kakao.maps.LatLng({self.map_center["lat"]}, {self.map_center["lng"]}),
+            level: {self.map_center["level"]}
         }};
         var map = new kakao.maps.Map(mapContainer, mapOption);
         """
@@ -156,14 +159,49 @@ class KakaoMap:
 
             marker.setPosition(latlng);
 
-            var message = latlng.getLat() + ',' + latlng.getLng();
-            
+            var message = latlng.getLat() +  ' ' + latlng.getLng();
+
             var resultDiv = document.getElementById('clickLatlng'); 
             resultDiv.innerHTML = message;
 
             });
                             """
 
+                # --- 타이틀 확인
+                title = ""
+                if self.map_center['title'] != "":
+                    title = "title: '" + self.map_center['title'] + "', "
+
+                # --- 인포 확인
+                content = ""
+                if self.map_center['content'] != "":
+                    content = f"""
+            // 마커의 인포 생성
+            var infowindow = new kakao.maps.InfoWindow({{
+                content: '<div style = "padding:5px;">{self.map_center['content']}</div>'
+                }});
+            """
+                    if self.mouse_over:
+                        content += """
+                kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                            """
+                    else:
+                        content += f"""
+                // 인포를 마커 위에 출력하기
+                infowindow.open(map, marker);
+            """
+
+                text += f"""
+            // 메인 마커 생성
+            var markerPosition = new kakao.maps.LatLng({self.map_center['lat']}, {self.map_center['lng']});
+            var marker = new kakao.maps.Marker({{
+                {title}
+                position: markerPosition
+            }});
+            marker.setMap(map);
+            {content}
+            """
 
                 html_text += text
 
@@ -172,45 +210,6 @@ class KakaoMap:
     </script>
     </body>
 </html>"""
-
-                html_text += text
-
-            elif _type == "main_marker":
-                # --- 타이틀 확인
-                title = ""
-                if _data['title'] != "":
-                    title = "title: '" + _data['title'] + "', "
-
-                # --- 인포 확인
-                content = ""
-                if _data['content'] != "":
-                    content = f"""
-        // 마커의 인포 생성
-        var infowindow = new kakao.maps.InfoWindow({{
-            content: '<div style = "padding:5px;">{_data['content']}</div>'
-            }});
-        """
-                if self.mouse_over:
-                    content += """
-        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-                    """
-                else:
-                    content += f"""
-        // 인포를 마커 위에 출력하기
-        infowindow.open(map, marker);
-        """
-
-                text = f"""
-        // 메인 마커 생성
-        var markerPosition = new kakao.maps.LatLng({_data['lat']}, {_data['lng']});
-        var marker = new kakao.maps.Marker({{
-            {title}
-            position: markerPosition
-        }});
-        marker.setMap(map);
-        {content}
-        """
 
                 html_text += text
 
@@ -253,24 +252,25 @@ class KakaoMap:
             html_file.write(self.html())
 
     # 지도 생성
-    def create_map(self, lat, lng, level: int):
-        self.custom.append({"header": "map", 'index': {"lat": lat, "lng": lng, "level": level}})
+    def create_map(self, lat, lng, level=3, title="", content=""):
+        self.map_center = {"lat": lat, "lng": lng, "title": title, "content": content, "level": level}
 
-    def create_main_marker(self, lat, lng, title="", content=""):
-        self.custom.append({"header": "main_marker", 'index': {"lat": lat, "lng": lng, "title": title, "content": content}})
+    def create_main_marker(self):
+        self.main_marker = True
 
     # 마커 생성
     def create_custom_marker(self, positions: list):
         # "positions": [{"title": "현화중학교", "LatLng": (36.9824163015563, 126.92003340131), "content": "중학교 정보입니다."}]
         self.custom.append({"header": "custom_marker", 'index': {"positions": positions}})
 
-    def set_control(self, control:bool):
+    def set_control(self, control: bool):
         self.control = control
 
-    def set_map_click(self, click:bool):
+    def set_map_click(self, click: bool):
         self.map_click = click
 
-    def set_mouse_over(self, over:bool):
+    def set_mouse_over(self, over: bool):
         self.mouse_over = over
+
 
 
