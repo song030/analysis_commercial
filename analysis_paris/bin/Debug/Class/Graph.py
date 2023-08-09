@@ -18,15 +18,12 @@
 
 
 import matplotlib.pyplot as plt
-import pandas as pd
 from matplotlib import rcParams
-from matplotlib.animation import FuncAnimation, PillowWriter, HTMLWriter
+from matplotlib.animation import FuncAnimation, PillowWriter
 
 import numpy as np
 import warnings
 
-pd.set_option("display.max_columns", None)
-pd.set_option("display.max_rows", None)
 
 # 한글 환경 설정
 def setting_styles_basic():

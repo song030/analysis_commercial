@@ -8,12 +8,10 @@
 # -----------------------------------------------------------
 
 import sys
-import os
 
 import pandas as pd
 
 import common
-import numpy as np
 
 from Class.FTP import *
 from Class.Graph import Graph
