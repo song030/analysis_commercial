@@ -19,7 +19,7 @@
 
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, PillowWriter
 
 import numpy as np
 import warnings
@@ -194,7 +194,7 @@ class Graph:
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
         # 그래프 애니메이션 생성
         graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame, interval=self.interval, repeat=repeat)
-        graph_ani.save(file_path, writer='imagemagick', dpi=100, fps=int(self.interval*1000))
+        graph_ani.save(file_path, writer='.pillowWriter', dpi=100, fps=int(self.interval*1000))
         print("그래프 저장 완료")
 
     # 그래프 출력
