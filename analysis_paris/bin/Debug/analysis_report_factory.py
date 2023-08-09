@@ -86,7 +86,7 @@ class MapFactory:
         graph = Graph(700, 500)
         graph.set_ticks(ticks)
         graph.set_data(data)
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
+        file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Graph\test_bar.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
 
@@ -97,7 +97,7 @@ class MapFactory:
         graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
         graph.set_data(data)
 
-        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
+        file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Graph\test_pie.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
