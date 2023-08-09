@@ -10,6 +10,8 @@
 import sys
 import os
 
+import pandas as pd
+
 import common
 import numpy as np
 
@@ -25,31 +27,35 @@ class ReportMethod:
 
 
 def main():
-    calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    # calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
 
     ftp = FTP()
     ftp.connect()
 
-    directory = os.getcwd()[:-5]
+    from analysis_paris.bin.Debug.db_connector import DBConnector
+    conn = DBConnector(test_option=True)
 
+    result = pd.DataFrame
+
+    # 가맹점 조회
     if calling_method_name == ReportMethod.get_sale_area_report:
-        sale_area_id = int(other_parameters[0])
-        print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 매물 아이디 : {sale_area_id}")
 
-        # ===== 검색 결과 가져오는 부분 추가하기
+        # ========== 가맹정/매물정보 분기점 만들기
+
+        # ----- 검색 결과 가져오기
+        sale_area_id = int(other_parameters)
+        result = conn.find_paris_by_id(sale_area_id)
+        print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 가맹점 아이디 : {sale_area_id}")
 
         # ----- 지도 생성&업로드
-        latitude = 36.9835439723529
-        longitude = 126.920112642654
-
         kakao_map = KakaoMap()
 
-        kakao_map.create_map(latitude, longitude, 3)
+        kakao_map.create_map(result["LATITUDE"][0], result["LONGITUDE"][0], 3)
         kakao_map.set_control(True)
-        kakao_map.set_mouse_over(True)
-        kakao_map.create_main_marker(latitude, longitude, "파리바게뜨 안중현화점", "파리바게뜨 정보입니다.")
+        kakao_map.create_main_marker(result["LATITUDE"][0], result["LONGITUDE"][0], result["PARIS_NAME"][0])
 
-        file_path = directory+"Map\\test_map2.html"
+        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Map\test_map2.html"
         kakao_map.save_map(file_path)
         ftp.save_file(file_path)
 
@@ -57,7 +63,10 @@ def main():
         latitude, longitude = map(float, other_parameters)
         print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
-        # ===== 검색 결과 가져오는 부분 추가하기
+        # ===== 위경도로 검색하도록 수정 하기
+        sale_area_id = int(other_parameters)
+        result = conn.find_paris_by_id(sale_area_id)
+        print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 가맹점 아이디 : {sale_area_id}")
 
     # ----- 그래프 생성&업로드
     # --- bar test
@@ -71,7 +80,7 @@ def main():
     graph = Graph(700, 500)
     graph.set_ticks(ticks)
     graph.set_data(data)
-    file_path = directory + "Graph\\test_bar.gif"
+    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
     graph.save_gif(file_path)
     ftp.save_file(file_path)
 
@@ -82,7 +91,7 @@ def main():
     graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
     graph.set_data(data)
 
-    file_path = directory + "Graph\\test_pie.gif"
+    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
     graph.save_gif(file_path)
     ftp.save_file(file_path)
 
