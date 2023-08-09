@@ -89,6 +89,15 @@ namespace analysis_paris.Factory {
         }
     }
 
+    public class ParisByAddress : ITrigger { // 주소로 매물 검색
+        public override string RunScript(string parameters) {
+            string scriptParameter = $"find_paris_by_address {parameters}";
+            string scriptResult = RunPythonScript(scriptPath, scriptParameter);
+
+            return scriptResult;
+        }
+    }
+
     public class StoreReport : ITrigger { // 리포트 검색
         public override string RunScript(string parameters) {
             Console.WriteLine($"Store Report parameter : {parameters}");
@@ -114,6 +123,7 @@ namespace analysis_paris.Factory {
         ParisById,
         LocationInfo,
         SellingAreaAddress,
+        ParisByAddress,
         StoreReport
     }
 
@@ -132,6 +142,8 @@ namespace analysis_paris.Factory {
                     return new LocationInfo();
                 case TriggerType.SellingAreaAddress:
                     return new SellingAreaAddress();
+                case TriggerType.ParisByAddress:
+                    return new ParisByAddress();
                 case TriggerType.StoreReport:
                     return new StoreReport();
                 default:
@@ -147,7 +159,6 @@ namespace analysis_paris.Factory {
             string scriptResult = trigger.RunScript(otherParameter);
             return scriptResult;
         }
-
     }
 
 }

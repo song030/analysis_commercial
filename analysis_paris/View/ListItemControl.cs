@@ -32,7 +32,7 @@ namespace analysis_paris.View {
             lblScore.Text = "";
 
             lblAddr.Text = "검색 결과 없음";
-            lblAddr.Font = new Font(lblAddr.Font.Name, 12, FontStyle.Bold);
+            lblAddr.Font = new Font(lblAddr.Font.Name, 10, FontStyle.Bold);
         }
 
 
