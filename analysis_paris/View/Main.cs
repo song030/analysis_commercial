@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace analysis_paris {
@@ -34,8 +35,12 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 2580;
+            graphGifTimer.Interval = 1300;
             graphGifTimer.Tick += Graph_Stop;
+
+            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map2.html");
+            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
         }
 
         // 검색 모드 선택 메뉴 영역
@@ -133,8 +138,12 @@ namespace analysis_paris {
 
         // 검색 버튼 클릭 시
         private void SearchButton_Click(object sender, EventArgs e) {
+            //Task t = loading();
+            //await t;
+
             int currentSearchMode = modeIconGroup.CurrentChedckedIndex;
             string searchKeyword = searchBox.Text;
+
 
             flowSearchList.Controls.Clear();
 
@@ -150,6 +159,13 @@ namespace analysis_paris {
                 default:
                     break;
             }
+
+        }
+
+        private async Task loading() {
+            Loading load = new Loading();
+            load.Show();
+            await Task.Delay(3000);
         }
 
         // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
@@ -265,16 +281,19 @@ namespace analysis_paris {
 
         // 선택 항목에 대한 지도 및 차트 갱신
         private void Report_Update(int targetId) {
+            //Task t = loading();
+            //await t;
+
             Console.WriteLine(targetId);
             Percussion.GetScriptResult(TriggerType.StoreReport, targetId.ToString());
 
-            // 맵 브라우저 설정
-            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map2.html");
+            // 맵 브라우저 갱신
             mapBrowser.Refresh();
 
-            // 임시 차트 이미지 설정
-            SetGraphUrl("http://song030s.dothome.co.kr/Graph/test_bar.gif", "http://song030s.dothome.co.kr/Graph/test_pie.gif");
             gifAnimated = false;
+            //graphBoxBar.Refresh();
+            //graphBoxPie.Refresh();
+            Graph_Start();
         }
         #endregion
 
@@ -345,16 +364,16 @@ namespace analysis_paris {
 
         // 그래프 gif 재생 제한
         #region GifTimerEvent
-        // gif Url 설정
-        private void SetGraphUrl(string barUrl, string pieUrl) {
-            graphBoxBar.ImageLocation = "";
-            graphBoxBar.ImageLocation = $"{barUrl}";
-            graphBoxPie.ImageLocation = "";
-            graphBoxPie.ImageLocation = $"{pieUrl}";
-        }
-
         // graph gif 재생
         private void Graph_Start() {
+            graphBoxBar.Refresh();
+            graphBoxPie.Refresh();
+            //graphBoxBar.ImageLocation = "";
+            //graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            //graphBoxPie.ImageLocation = "";
+            //graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
+
+
             if (gifAnimated)
                 return;
 
@@ -366,9 +385,9 @@ namespace analysis_paris {
 
         // 타이머 종료 및 gif 정지
         private void Graph_Stop(object sender, EventArgs e) {
-            graphGifTimer.Stop();
             graphBoxBar.Enabled = false;
             graphBoxPie.Enabled = false;
+            graphGifTimer.Stop();
         }
 
         #endregion

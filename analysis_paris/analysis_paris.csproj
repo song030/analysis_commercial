@@ -93,6 +93,12 @@
     <Compile Include="View\ListItemControl.Designer.cs">
       <DependentUpon>ListItemControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Loading.Designer.cs">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ListItemControl.resx">
       <DependentUpon>ListItemControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -262,6 +271,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\magnifying-glass_stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loading.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

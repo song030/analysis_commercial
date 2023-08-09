@@ -61,7 +61,7 @@ class Graph:
     graph_type = "bar"
     flg = None
     # frame = 26 → 11 → 21
-    total_frame = 21
+    total_frame = 11
     interval = 0.01
     width = 0.25
     add = 0
@@ -81,7 +81,6 @@ class Graph:
         self.graph_type = graph_type
         if graph_type == "bar":
             plt.bar([], [])
-            self.interval = 0.02
 
         elif graph_type == "pie":
 
