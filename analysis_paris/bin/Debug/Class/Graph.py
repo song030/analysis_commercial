@@ -19,7 +19,7 @@
 
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
-from matplotlib.animation import FuncAnimation, PillowWriter
+from matplotlib.animation import FuncAnimation, PillowWriter, HTMLWriter
 
 import numpy as np
 import warnings
@@ -134,15 +134,22 @@ class Graph:
         plt.cla()
 
         if self.graph_type == "bar":
+
+
             index = 0
             # 모델 반복 구간
             for model, values_y in self.original_data.items():
                 # y값 반복 구간
                 pos = self.compute_pos(index)
-                for idx, value in enumerate(values_y):
-                    self.ani_data[model][idx] = self.original_data[model][idx] / self.total_frame * frame
 
-                plt.bar(pos, self.ani_data[model], width=self.width, color=self.colors[index])
+                if frame >= self.total_frame:
+                    plt.bar(pos, self.original_data[model], width=self.width, color=self.colors[index])
+                else:
+                    for idx, value in enumerate(values_y):
+                        self.ani_data[model][idx] = self.original_data[model][idx] / self.total_frame * frame
+
+                    plt.bar(pos, self.ani_data[model], width=self.width, color=self.colors[index])
+
                 index += 1
 
             plt.legend(self.models, loc=(0.0, 1.02), ncol=3)
@@ -175,7 +182,7 @@ class Graph:
                 if size_check:
                     break
 
-            if frame != 100:
+            if frame < 100:
                 autopct = None
                 self.ani_data.append(100 - frame)
                 models = self.models[:len(self.ani_data) - 1]
@@ -188,18 +195,25 @@ class Graph:
                 models = self.models
                 colors = self.colors
 
-            plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)
+            if frame >= self.total_frame * self.add:
+                print(list(self.original_data.values()))
+                print(type(list(self.original_data.values())))
+                plt.pie(list(self.original_data.values()), labels=models, autopct=autopct, shadow=True, colors=colors)
+            else:
+                plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)
+
 
     # gif 저장
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
         # 그래프 애니메이션 생성
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame, interval=self.interval, repeat=repeat)
-        # graph_ani.save(file_path, writer='Pillow', dpi=100, fps=int(self.interval*1000))
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+10, interval=self.interval, repeat=repeat)
         graph_ani.save(file_path, dpi=100, fps=int(self.interval*1000))
+
         print("그래프 저장 완료")
+
 
     # 그래프 출력
     def show_plt(self, repeat=False):
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame, interval=self.interval, repeat=repeat)
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+10, interval=self.interval, repeat=repeat)
         plt.show()
 
