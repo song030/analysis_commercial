@@ -55,7 +55,7 @@ class Method:
     get_all_paris_list = 'get_all_paris_list'
     get_paris_by_id = 'get_paris_by_id'
     get_all_selling_area_list = 'get_all_selling_area_list'
-    get_sale_area_report = 'get_sale_area_report'
+    get_selling_area_report = 'get_selling_area_report'
     get_location_report = 'get_location_report'
     get_location_information = 'get_location_information'
     find_selling_area_by_address = 'find_selling_area_by_address'
@@ -81,7 +81,7 @@ def main():
                                Method.get_location_information]:
         os.system(f"{path.python_interpreter} {path.db_connector_path} {calling_method_name} {other_parameters}")
 
-    elif calling_method_name in [Method.get_sale_area_report, Method.get_location_report]:
+    elif calling_method_name in [Method.get_selling_area_report, Method.get_location_report]:
         os.system(f"{path.python_interpreter} {path.analysis_report_factory} {calling_method_name} {other_parameters}")
 
     else:

@@ -40,7 +40,7 @@ def main():
         print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
 
     elif calling_method_name == ReportMethod.get_location_report:
-        latitude, longitude = map(float, other_parameters)
+        latitude, longitude = map(float, other_parameters[0], other_parameters[1])
         factory.get_location_report(latitude, longitude)
         print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
@@ -60,12 +60,12 @@ class MapFactory:
 
     def get_selling_area_report(self, selling_area_id):
         # ----- 검색 결과 가져오기
-        self.result = self.conn.find_paris_by_id(selling_area_id)
+        self.result = self.conn.get_selling_area_by_id(selling_area_id)
 
         # ----- 지도 생성&업로드
         kakao_map = KakaoMap()
 
-        kakao_map.create_map(self.result["LATITUDE"][0], self.result["LONGITUDE"][0], level=3, title=self.result["PARIS_NAME"][0])
+        kakao_map.create_map(self.result["LATITUDE"][0], self.result["LONGITUDE"][0], level=3, title=self.result["ADDRESS"][0])
         kakao_map.set_control(True)
 
         file_path = self.file_path+r"\Map\test_map2.html"
@@ -103,3 +103,11 @@ class MapFactory:
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
         self.ftp.disconnect()
+
+
+if __name__ == '__main__':
+    main()
+    # factory = MapFactory()
+    # factory.get_selling_area_report(12)
+    # factory.get_location_report(12,345)
+    # factory.get_graph()
