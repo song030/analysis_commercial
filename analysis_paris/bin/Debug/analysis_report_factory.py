@@ -44,9 +44,13 @@ def main():
         factory.get_location_report(latitude, longitude)
         print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
+    factory.get_graph()
+
 
 class MapFactory:
+
     def __init__(self):
+        self.result = None
         self.ftp = FTP()
         self.ftp.connect()
         from db_connector import DBConnector
@@ -55,20 +59,21 @@ class MapFactory:
 
     def get_selling_area_report(self, selling_area_id):
         # ----- 검색 결과 가져오기
-        result = self.conn.find_paris_by_id(selling_area_id)
+        self.result = self.conn.find_paris_by_id(selling_area_id)
 
         # ----- 지도 생성&업로드
         kakao_map = KakaoMap()
 
-        kakao_map.create_map(result["LATITUDE"][0], result["LONGITUDE"][0], level=3, title=result["PARIS_NAME"][0])
+        kakao_map.create_map(self.result["LATITUDE"][0], self.result["LONGITUDE"][0], level=3, title=self.result["PARIS_NAME"][0])
         kakao_map.set_control(True)
 
         file_path = r"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\Map\test_map2.html"
         kakao_map.save_map(file_path)
-        self.ftp.save_file(file_path)
-        self.ftp.disconnect()
 
     def get_location_report(self, latitude, longitude):
+        pass
+
+    def get_graph(self):
         # ----- 그래프 생성&업로드
         # --- bar test
         models = ['model A', 'model B', 'model C']
