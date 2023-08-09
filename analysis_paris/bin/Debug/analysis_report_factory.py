@@ -22,31 +22,40 @@ from Class.KakaoMap import KakaoMap
 
 class ReportMethod:
     ## 함수 이름을 str로 저장해서 씁니다. (오탈자 예방용) calling_method_name_list ##
-    get_sale_area_report = 'get_sale_area_report'
+    get_selling_area_report = 'get_selling_area_report'
     get_location_report = 'get_location_report'
 
 
 def main():
-    # calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
-    calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
-
-    ftp = FTP()
-    ftp.connect()
-
-    from analysis_paris.bin.Debug.db_connector import DBConnector
-    conn = DBConnector(test_option=True)
-
+    calling_method_name, other_parameters = common.split_system_argument_values(sys.argv)
+    # calling_method_name, other_parameters = (ReportMethod.get_sale_area_report, 10)
+    factory = MapFactory()
     result = pd.DataFrame
 
     # 가맹점 조회
-    if calling_method_name == ReportMethod.get_sale_area_report:
+    if calling_method_name == ReportMethod.get_selling_area_report:
+        # ========== 가맹점/매물정보 분기점 만들기
+        selling_area_id = int(other_parameters[0])
+        factory.get_selling_area_report(selling_area_id)
+        print(f"메소드 {ReportMethod.get_selling_area_report} 호출됨. 전달된 가맹점 아이디 : {selling_area_id}")
 
-        # ========== 가맹정/매물정보 분기점 만들기
+    elif calling_method_name == ReportMethod.get_location_report:
+        latitude, longitude = map(float, other_parameters)
+        factory.get_location_report(latitude, longitude)
+        print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
 
+
+class MapFactory:
+    def __init__(self):
+        self.ftp = FTP()
+        self.ftp.connect()
+        from db_connector import DBConnector
+        from python_controller import Path
+        self.conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
+
+    def get_selling_area_report(self, selling_area_id):
         # ----- 검색 결과 가져오기
-        sale_area_id = int(other_parameters)
-        result = conn.find_paris_by_id(sale_area_id)
-        print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 가맹점 아이디 : {sale_area_id}")
+        result = self.conn.find_paris_by_id(selling_area_id)
 
         # ----- 지도 생성&업로드
         kakao_map = KakaoMap()
@@ -56,46 +65,41 @@ def main():
 
         file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Map\test_map2.html"
         kakao_map.save_map(file_path)
-        ftp.save_file(file_path)
+        self.ftp.save_file(file_path)
+        self.ftp.disconnect()
 
-    elif calling_method_name == ReportMethod.get_location_report:
-        latitude, longitude = map(float, other_parameters)
-        print(f"메소드 {ReportMethod.get_location_report} 호출됨. 전달된 위도 : {latitude},  경도 : {longitude}")
+    def get_location_report(self, latitude, longitude):
+        # ----- 그래프 생성&업로드
+        # --- bar test
+        models = ['model A', 'model B', 'model C']
+        ticks = ["횡단보도수", "인근 정거장수", "인근 지하철수", "인근 주거 세대수"]
+        _range = [45, 150, 6, 76]
 
-        # ===== 위경도로 검색하도록 수정 하기
-        sale_area_id = int(other_parameters)
-        result = conn.find_paris_by_id(sale_area_id)
-        print(f"메소드 {ReportMethod.get_sale_area_report} 호출됨. 전달된 가맹점 아이디 : {sale_area_id}")
+        data = dict()
+        for i in range(len(models)):
+            data[models[i]] = np.random.randint(0, _range, size=len(ticks))
+        graph = Graph(700, 500)
+        graph.set_ticks(ticks)
+        graph.set_data(data)
+        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
+        graph.save_gif(file_path)
+        self.ftp.save_file(file_path)
 
-    # ----- 그래프 생성&업로드
-    # --- bar test
-    models = ['model A', 'model B', 'model C']
-    ticks = ["횡단보도수", "인근 정거장수", "인근 지하철수", "인근 주거 세대수"]
-    _range = [45, 150, 6, 76]
+        # --- pie test
+        data = {'Apple': 34, 'Banana': 32, 'Melon': 16, 'Grapes': 18}
 
-    data = dict()
-    for i in range(len(models)):
-        data[models[i]] = np.random.randint(0, _range, size=len(ticks))
-    graph = Graph(700, 500)
-    graph.set_ticks(ticks)
-    graph.set_data(data)
-    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_bar.gif"
-    graph.save_gif(file_path)
-    ftp.save_file(file_path)
+        graph = Graph(700, 500, "pie")
+        graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
+        graph.set_data(data)
 
-    # --- pie test
-    data = {'Apple': 34, 'Banana': 32, 'Melon': 16, 'Grapes': 18}
-
-    graph = Graph(700, 500, "pie")
-    graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
-    graph.set_data(data)
-
-    file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
-    graph.save_gif(file_path)
-    ftp.save_file(file_path)
-
-    ftp.disconnect()
+        file_path = r"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\Graph\test_pie.gif"
+        graph.save_gif(file_path)
+        self.ftp.save_file(file_path)
+        self.ftp.disconnect()
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    factory = MapFactory()
+    # factory.get_selling_area_report(52)
+    factory.get_location_report(2314.122, 12312.234)
