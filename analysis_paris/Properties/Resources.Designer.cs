@@ -63,26 +63,6 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap firstviewback {
-            get {
-                object obj = ResourceManager.GetObject("firstviewback", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_eiffel_b {
-            get {
-                object obj = ResourceManager.GetObject("icon_eiffel_b", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_eiffel_w {
             get {
                 object obj = ResourceManager.GetObject("icon_eiffel_w", resourceCulture);
@@ -103,9 +83,19 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_pin_b {
+        internal static System.Drawing.Bitmap icon_exit_w {
             get {
-                object obj = ResourceManager.GetObject("icon_pin_b", resourceCulture);
+                object obj = ResourceManager.GetObject("icon_exit_w", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_exit_y {
+            get {
+                object obj = ResourceManager.GetObject("icon_exit_y", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,16 +116,6 @@ namespace analysis_paris.Properties {
         internal static System.Drawing.Bitmap icon_pin_y {
             get {
                 object obj = ResourceManager.GetObject("icon_pin_y", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_store_b {
-            get {
-                object obj = ResourceManager.GetObject("icon_store_b", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

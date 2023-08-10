@@ -279,5 +279,20 @@
   <ItemGroup>
     <None Include="Resources\firstviewback.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_exit_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_exit_y.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

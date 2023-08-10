@@ -411,8 +411,13 @@ namespace analysis_paris {
             graphBoxPie.Enabled = false;
             graphGifTimer.Stop();
         }
+
         #endregion
 
+        // 프로그램 종료 버튼 hover event
+        private void btnExit_MouseHover(object sender, EventArgs e) {
+            btnExit.Image = Properties.Resources.icon_exit_y;
 
+        }
     }
 }
