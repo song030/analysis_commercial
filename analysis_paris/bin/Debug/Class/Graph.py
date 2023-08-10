@@ -32,6 +32,7 @@ def setting_styles_basic():
     rcParams['font.family'] = 'Malgun Gothic'
     rcParams['axes.unicode_minus'] = False
 
+
 # 인치 → 픽셀 단위 변경
 def inch_to_pixel(inch):
     return inch * 0.010416666
@@ -39,6 +40,7 @@ def inch_to_pixel(inch):
 
 # 그래프 경고창 무시
 warnings.filterwarnings(action='ignore')
+
 
 class Graph:
     def __init__(self, width: int, height: int, graph_type="bar"):
@@ -85,7 +87,6 @@ class Graph:
             plt.bar([], [])
 
         elif graph_type == "pie":
-
             self.add = 100 // self.total_frame
             if 100 % self.total_frame > 0:
                 self.add += 1
@@ -103,7 +104,7 @@ class Graph:
         self.values_x = [i for i in range(self.ticks_size)]
 
     # 정보 설정
-    def set_data(self, data, columns:list[str]=None):
+    def set_data(self, data, columns: list[str] = None):
         if self.graph_type == "bar":
             # [ df, df, df ]
             data: list[pd.DataFrame]
@@ -113,7 +114,10 @@ class Graph:
             self.max_y = 0
 
             for idx, value in enumerate(data):
-                value:pd.DataFrame
+                value: pd.DataFrame
+                print("value!!!!!")
+                print(value)
+                print(type(value))
                 model = value[columns[0]][0]
                 df = value[columns[1:]]
                 value = df.values[0]
@@ -150,7 +154,6 @@ class Graph:
         plt.cla()
 
         if self.graph_type == "bar":
-
 
             index = 0
             # 모델 반복 구간
@@ -216,17 +219,16 @@ class Graph:
             else:
                 plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)
 
-
     # gif 저장
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
         # 그래프 애니메이션 생성
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+self.delay_frame, interval=self.interval, repeat=repeat)
-        graph_ani.save(file_path, dpi=100, fps=int(self.interval*1000))
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame + self.delay_frame,
+                                  interval=self.interval, repeat=repeat)
+        graph_ani.save(file_path, dpi=100, fps=int(self.interval * 1000))
         print("그래프 저장 완료")
-
 
     # 그래프 출력
     def show_plt(self, repeat=False):
-        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame+self.delay_frame, interval=self.interval, repeat=repeat)
+        graph_ani = FuncAnimation(fig=self.flg, func=self.update, frames=self.total_frame + self.delay_frame,
+                                  interval=self.interval, repeat=repeat)
         plt.show()
-

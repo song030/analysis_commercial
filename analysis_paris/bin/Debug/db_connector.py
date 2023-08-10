@@ -19,7 +19,7 @@
 조건 : 바로 출력할 값과 파이로 출력할 값의 구분이 필요함
 → 내부 값들은 리스트가 좋음 (ex: 파이 그래프 컬럼 리스트 / 파이 그래프 값 리스트)
 """
-
+import pickle
 import traceback
 
 import joblib
@@ -189,26 +189,30 @@ class DBConnector:
 
         df = self.get_data_frame_by_latitude_and_longitude(latitude, longitude)
         if len(df) != 0:
-            return df
-        school_500_count = 0
-        school_1000_count = 0
-        academy_500_count = 0
-        academy_1000_count = 0
-        station_500_count = 0
-        station_1000_count = 0
-        bus_stop_500_count = 0
-        bus_stop_1000_count = 0
-        leisure_500_count = 0
-        leisure_1000_count = 0
+            return df.iloc[len(df) - 1]
+        SCHOOL_COUNT_NEAR_500 = 0
+        SCHOOL_COUNT_NEAR_1000 = 0
+        ACADEMY_COUNT_NEAR_500 = 0
+        ACADEMY_COUNT_NEAR_1000 = 0
+        STATION_COUNT_NEAR_500 = 0
+        STATION_COUNT_NEAR_1000 = 0
+        STOP_COUNT_NEAR_500 = 0
+        STOP_COUNT_NEAR_1000 = 0
+        LEISURE_COUNT_NEAR_500 = 0
+        LEISURE_COUNT_NEAR_1000 = 0
+        RIVAL_COUNT_NEAR_500 = 0
+        RIVAL_COUNT_NEAR_1000 = 0
+        MONTHLY_SHOP_REVENUE = 0
         DAILY_FLOATING_POPULATION = 0
         LIVING_POPULATION = 0
         LIVING_WORKER_AVG_REVENUE = 0
         LIVING_POPULATION_AVG_REVENUE = 0
 
         try:
-            DAILY_FLOATING_POPULATION, LIVING_POPULATION, LIVING_WORKER_AVG_REVENUE, LIVING_POPULATION_AVG_REVENUE = \
+            RIVAL_COUNT_NEAR_500, RIVAL_COUNT_NEAR_1000, MONTHLY_SHOP_REVENUE, DAILY_FLOATING_POPULATION, LIVING_POPULATION, LIVING_WORKER_AVG_REVENUE, LIVING_POPULATION_AVG_REVENUE = \
                 self.crawling_elements_with_address(latitude, longitude)
         except:
+            # todo 에러 처리 어떻게할지
             result_score = -1
             traceback.print_exc()
             return result_score
@@ -217,58 +221,75 @@ class DBConnector:
         col_names = ["LATITUDE", "LONGITUDE"]
         pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_SCHOOL" """
         df_school = pd.read_sql(pstmt, self.engine)[col_names]
-        school_500_count, school_1000_count = self.count_distance(df_school, latitude, longitude)
+        SCHOOL_COUNT_NEAR_500, SCHOOL_COUNT_NEAR_1000 = self.count_distance(df_school, latitude, longitude)
 
         pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_ACADEMY" """
         df_academy = pd.read_sql(pstmt, self.engine)
-        academy_500_count, academy_1000_count = self.count_distance(df_academy, latitude, longitude)
+        ACADEMY_COUNT_NEAR_500, ACADEMY_COUNT_NEAR_1000 = self.count_distance(df_academy, latitude, longitude)
 
         pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_STATION" """
         df_station = pd.read_sql(pstmt, self.engine)
-        station_500_count, station_1000_count = self.count_distance(df_station, latitude, longitude)
+        STATION_COUNT_NEAR_500, STATION_COUNT_NEAR_1000 = self.count_distance(df_station, latitude, longitude)
 
         pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_BUS_STOP" """
         df_bus_stop = pd.read_sql(pstmt, self.engine)
-        bus_stop_500_count, bus_stop_1000_count = self.count_distance(df_bus_stop, latitude, longitude)
+        STOP_COUNT_NEAR_500, STOP_COUNT_NEAR_1000 = self.count_distance(df_bus_stop, latitude, longitude)
 
         pstmt = """ select "위도", "경도" from "TB_LEISURE" """
         df_leisure = pd.read_sql(pstmt, self.engine)  # leisure table 은 column name 수정 필요함
         df_leisure.rename(columns={"위도": "LATITUDE", "경도": "LONGITUDE"}, inplace=True)
-        leisure_500_count, leisure_1000_count = self.count_distance(df_leisure, latitude, longitude)
+        LEISURE_COUNT_NEAR_500, LEISURE_COUNT_NEAR_1000 = self.count_distance(df_leisure, latitude, longitude)
 
         self.end_conn()
 
         result_dict = {
-            "school_500_count": [school_500_count],
-            "school_1000_count": [school_1000_count],
-            "academy_500_count": [academy_500_count],
-            "academy_1000_count": [academy_1000_count],
-            "station_500_count": [station_500_count],
-            "station_1000_count": [station_1000_count],
-            "bus_stop_500_count": [bus_stop_500_count],
-            "bus_stop_1000_count": [bus_stop_1000_count],
-            "leisure_500_count": [leisure_500_count],
-            "leisure_1000_count": [leisure_1000_count],
-            "DAILY_FLOATING_POPULATION": [DAILY_FLOATING_POPULATION],
-            "LIVING_POPULATION": [LIVING_POPULATION],
-            "LIVING_WORKER_AVG_REVENUE": [LIVING_WORKER_AVG_REVENUE],
-            "LIVING_POPULATION_AVG_REVENUE": [LIVING_POPULATION_AVG_REVENUE],
+            "SCHOOL_COUNT_NEAR_500": [int(SCHOOL_COUNT_NEAR_500)],
+            "SCHOOL_COUNT_NEAR_1000": [int(SCHOOL_COUNT_NEAR_1000)],
+            "ACADEMY_COUNT_NEAR_500": [int(ACADEMY_COUNT_NEAR_500)],
+            "ACADEMY_COUNT_NEAR_1000": [int(ACADEMY_COUNT_NEAR_1000)],
+            "STATION_COUNT_NEAR_500": [int(STATION_COUNT_NEAR_500)],
+            "STATION_COUNT_NEAR_1000": [int(STATION_COUNT_NEAR_1000)],
+            "STOP_COUNT_NEAR_500": [int(STOP_COUNT_NEAR_500)],
+            "STOP_COUNT_NEAR_1000": [int(STOP_COUNT_NEAR_1000)],
+            "LEISURE_COUNT_NEAR_500": [int(LEISURE_COUNT_NEAR_500)],
+            "LEISURE_COUNT_NEAR_1000": [int(LEISURE_COUNT_NEAR_1000)],
+            "DAILY_FLOATING_POPULATION": [int(DAILY_FLOATING_POPULATION)],
+            "LIVING_POPULATION": [int(LIVING_POPULATION)],
+            "LIVING_WORKER_AVG_REVENUE": [int(LIVING_WORKER_AVG_REVENUE)],
+            "LIVING_POPULATION_AVG_REVENUE": [int(LIVING_POPULATION_AVG_REVENUE)],
         }
         simulation_df = pd.DataFrame(result_dict)
-        score = self.predict_value_with_model(simulation_df)
-        result_dict.update({"score": score})
-        result_dict.update({"LATITUDE": latitude})
-        result_dict.update({"LONGITUDE": longitude})
+        EXPECTED_SHOP_REVENUE = self.predict_value_with_model(simulation_df)
 
-        simulation_df.to_sql(name='TB_SEARCH_RESULT', con=self.engine, if_exists='replace', index=False)
+        # MONTHLY_SHOP_REVENUE 가 추가되서 Dataset 을 여기서 형성해야함
+        result_dict.update({"MONTHLY_SHOP_REVENUE": [int(MONTHLY_SHOP_REVENUE)]})
+        result_dict.update({"RIVAL_COUNT_NEAR_500": [int(RIVAL_COUNT_NEAR_500)]})
+        result_dict.update({"RIVAL_COUNT_NEAR_1000": [int(RIVAL_COUNT_NEAR_1000)]})
+        simulation_df = pd.DataFrame(result_dict)
+        data_set_dict = MakeDatasets(simulation_df).get_dataset()
+
+        # Score 계산 로직
+        from scoring import Scoring
+        score = Scoring(data_set_dict).get_score()
+
+        # DB에 저장할 데이터들
+        result_dict.update({"score": [int(score)]})
+        result_dict.update({"LATITUDE": [float(latitude)]})
+        result_dict.update({"LONGITUDE": [float(longitude)]})
+        result_dict.update({"EXPECTED_SHOP_REVENUE": [int(EXPECTED_SHOP_REVENUE)]})
+
+        result_df = pd.DataFrame(result_dict)
+        result_df.to_sql(name="TB_SEARCH_RESULT", con=self.engine, if_exists="append", schema="public", index=False)
 
     def get_data_frame_by_latitude_and_longitude(self, latitude, longitude):
-        pstmt = f"""select * from "TB_SEARCH_RESULT" where "LATITUDE" = {latitude}, "LONGITUDE" = {longitude}"""
+        pstmt = f"""select * from "TB_SEARCH_RESULT" where "LATITUDE" = {latitude} and "LONGITUDE" = {longitude}"""
+        self.start_conn()
         try:
             df = pd.read_sql(pstmt, con=self.engine)
         except:
             traceback.print_exc()
             df = pd.DataFrame()
+        self.end_conn()
         return df
 
     @staticmethod
@@ -276,9 +297,25 @@ class DBConnector:
         """
         모델을 이용해 예측값을 내놓습니다.
         """
-        # loaded_model = joblib.load('model.pkl')
-        # predictions = loaded_model.predict(simulation_df)
-        return 10
+        df.rename(columns={
+            'SCHOOL_COUNT_NEAR_500': '학교_500',
+            'SCHOOL_COUNT_NEAR_1000': '학교_1000',
+            'ACADEMY_COUNT_NEAR_500': '학원_500',
+            'ACADEMY_COUNT_NEAR_1000': '학원_1000',
+            'STATION_COUNT_NEAR_500': '지하철역_500',
+            'STATION_COUNT_NEAR_1000': '지하철역_1000',
+            'STOP_COUNT_NEAR_500': '버스정거장_500',
+            'STOP_COUNT_NEAR_1000': '버스정거장_1000',
+            'LEISURE_COUNT_NEAR_500': '여가시설_500',
+            'LEISURE_COUNT_NEAR_1000': '여가시설_1000',
+            'DAILY_FLOATING_POPULATION': '일일유동인구',
+            'LIVING_POPULATION': '거주인구',
+            'LIVING_WORKER_AVG_REVENUE': '거주직장인평균소득',
+            'LIVING_POPULATION_AVG_REVENUE': '거주인구평균소득'
+        }, inplace=True)
+        loaded_model = joblib.load('model_random_forest.pkl')
+        EXPECTED_SHOP_REVENUE = loaded_model.predict(df)
+        return EXPECTED_SHOP_REVENUE[0]
 
     @staticmethod
     def crawling_elements_with_address(latitude, longitude):
@@ -295,7 +332,6 @@ class DBConnector:
         opts.add_argument("--window-size=1300,900")
         # 창 띄우기
         driver = webdriver.Chrome(options=opts)
-        driver.minimize_window()
         driver.implicitly_wait(50)
         driver.get("https://sg.sbiz.or.kr/godo/index.sg")
 
@@ -391,21 +427,29 @@ class DBConnector:
         start_analysis.click()
         time.sleep(5)
         container = driver.find_element(By.ID, "page1")
+        rival_count_near_500 = container.find_element(By.CSS_SELECTOR,
+                                                      "#page1 > div.report-pop-layer > div.analysis-section.analysis-01 > div.analysis-content > div:nth-child(1) > div > div > span").text
+        rival_count_near_500 = rival_count_near_500.replace("개", "").replace(',', '')
+        rival_count_near_1000 = container.find_element(By.CSS_SELECTOR,
+                                                       "#page1 > div.report-pop-layer > div.analysis-section.analysis-01 > div.analysis-content > div:nth-child(3) > div > div > span").text
+        rival_count_near_1000 = rival_count_near_1000.replace("개", "").replace(',', '')
+        monthly_shop_revenue = container.find_element(By.CSS_SELECTOR, "#salesSmryInfoCurSaleAmt").text
+        monthly_shop_revenue = int(monthly_shop_revenue.replace("만원", "0000").replace(',', ''))
         daily_floating_population = container.find_element(By.CSS_SELECTOR, "#flowPopSmryInfoFlowPop").text
-        daily_floating_population = daily_floating_population.replace("명", "")
+        daily_floating_population = daily_floating_population.replace("명", "").replace(',', '')
         living_population = container.find_element(By.CSS_SELECTOR, "#empAbodePopSmryInfoAbodePop").text
-        living_population = living_population.replace("명", "")
+        living_population = living_population.replace("명", "").replace(',', '')
         living_worker_avg_revenue = container.find_element(By.CSS_SELECTOR,
                                                            "#empAbodePopSmryInfoEmpAvgCo").text
-        living_worker_avg_revenue = int(living_worker_avg_revenue.replace("만원", "0000"))
+        living_worker_avg_revenue = int(living_worker_avg_revenue.replace("만원", "0000").replace(',', ''))
         living_worker_avg_revenue = f"{living_worker_avg_revenue}"
         living_population_avg_revenue = container.find_element(By.CSS_SELECTOR,
                                                                "#empAbodePopSmryInfoAbodeAvgCo").text
-        living_population_avg_revenue = int(living_population_avg_revenue.replace("만원", "0000"))
+        living_population_avg_revenue = int(living_population_avg_revenue.replace("만원", "0000").replace(',', ''))
         living_population_avg_revenue = f"{living_population_avg_revenue}"
         driver.quit()
 
-        return daily_floating_population, living_population, living_worker_avg_revenue, \
+        return rival_count_near_500, rival_count_near_1000, monthly_shop_revenue, daily_floating_population, living_population, living_worker_avg_revenue, \
             living_population_avg_revenue
 
     @staticmethod
@@ -424,8 +468,13 @@ class DBConnector:
         response = requests.get(apiurl, params=params)
         if response.status_code == 200:
             json_obj = response.json()
-            address = json_obj['response']['result'][0]['text']
-            return address
+            try:
+                address = json_obj['response']['result'][0]['text']
+                return address
+            except:
+                print(json_obj)
+                traceback.print_exc()
+                return ''
         else:
             raise '주소를 불러올 수 없음 from vworld'
 
@@ -485,10 +534,109 @@ class DBConnector:
         self.end_conn()
         return total_df
 
+    def get_paris_avg(self):
+        self.start_conn()
+        pstmt = """select * from "TB_PARIS" """
+        read_tbl = pd.read_sql(pstmt, con=self.engine)
+        df = pd.DataFrame(read_tbl)
+        df = df[df.columns.difference(['PARIS_ID','PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
+                                 'CITY'])]
+        df = df.mean().astype(int)
+        df['PARIS_ID'] = 999
+        self.end_conn()
+        df = pd.DataFrame(df).transpose()
+        print(df)
+        return df
+    def get_paris_top_10_avg(self):
+        self.start_conn()
+        pstmt = """select * from "TB_PARIS" order by "SCORE" DESC """
+        read_tbl = pd.read_sql(pstmt, con=self.engine)
+        df = pd.DataFrame(read_tbl)
+        df = df[df.columns.difference(['PARIS_ID', 'PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
+                                       'CITY'])]
+        count_10_percent = int(len(df) * 0.1)
+        df = df.head(count_10_percent)
+        df = df.mean().astype(int)
+        df['PARIS_ID'] = 1000
+        self.end_conn()
+        df = pd.DataFrame(df).transpose()
+        return df
+
+
+class MakeDatasets:
+    def __init__(self, df):
+        self.data_df = df
+
+    def get_dataset(self):
+        """
+        self.df.월매출,
+        self.df.거주인구평균소득,
+        self.df.거주직장인평균소득,
+        self.df.거주인구,
+        self.df.일일유동인구,
+        self.df.학원_500,
+        self.df.학원_1000,
+        self.df.학교_500,
+        self.df.학교_1000,
+        self.df.여가시설_500,
+        self.df.여가시설_1000,
+        self.df.지하철역_500,
+        self.df.지하철역_1000,
+        self.df.버스정거장_500,
+        self.df.버스정거장_1000,
+        :return:
+        """
+        RIVAL_500 = self.data_df.RIVAL_COUNT_NEAR_500.to_list()
+        RIVAL_1000 = self.data_df.RIVAL_COUNT_NEAR_1000.to_list()
+        MONTHLY_SHOP_REVENUE = self.data_df.MONTHLY_SHOP_REVENUE.to_list()
+        LIVING_POPULATION_AVG_REVENUE = self.data_df.LIVING_POPULATION_AVG_REVENUE.to_list()
+        LIVING_WORKER_AVG_REVENUE = self.data_df.LIVING_WORKER_AVG_REVENUE.to_list()
+        LIVING_POPULATION = self.data_df.LIVING_POPULATION.to_list()
+        DAILY_FLOATING_POPULATION = self.data_df.DAILY_FLOATING_POPULATION.to_list()
+        ACADEMY_500 = self.data_df.ACADEMY_COUNT_NEAR_500.to_list()
+        ACADEMY_1000 = self.data_df.ACADEMY_COUNT_NEAR_1000.to_list()
+        SCHOOL_500 = self.data_df.SCHOOL_COUNT_NEAR_500.to_list()
+        SCHOOL_1000 = self.data_df.SCHOOL_COUNT_NEAR_1000.to_list()
+        LEISURE_500 = self.data_df.LEISURE_COUNT_NEAR_500.to_list()
+        LEISURE_1000 = self.data_df.LEISURE_COUNT_NEAR_1000.to_list()
+        STATION_500 = self.data_df.STATION_COUNT_NEAR_500.to_list()
+        STATION_1000 = self.data_df.STATION_COUNT_NEAR_1000.to_list()
+        STOP_500 = self.data_df.STOP_COUNT_NEAR_500.to_list()
+        STOP_1000 = self.data_df.STOP_COUNT_NEAR_1000.to_list()
+
+        # 데이터셋 생성
+        datasets = {
+            '경쟁업체_500': RIVAL_500,
+            '경쟁업체_1000': RIVAL_1000,
+            '학교_500': SCHOOL_500,
+            '학교_1000': SCHOOL_1000,
+            '학원_500': ACADEMY_500,
+            '학원_1000': ACADEMY_1000,
+            '지하철역_500': STATION_500,
+            '지하철역_1000': STATION_1000,
+            '버스정거장_500': STOP_500,
+            '버스정거장_1000': STOP_1000,
+            '여가시설_500': LEISURE_500,
+            '여가시설_1000': LEISURE_1000,
+            '일일유동인구': DAILY_FLOATING_POPULATION,
+            '거주인구': LIVING_POPULATION,
+            '거주직장인평균소득': LIVING_WORKER_AVG_REVENUE,
+            '거주인구평균소득': LIVING_POPULATION_AVG_REVENUE,
+            '월매출': MONTHLY_SHOP_REVENUE,
+        }
+        data_set_df = pd.DataFrame(datasets)
+        return data_set_df
+
 
 if __name__ == '__main__':
     main()
     # from python_controller import Path
     #
     # conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
+    # df = conn.get_data_frame_by_latitude_and_longitude(37.2399466516839, 127.214951334731)
+    # print(df)
     # conn.calculate_location_score(37.2399466516839, 127.214951334731)
+    # pd.set_option('display.max_columns', None)
+    # pd.set_option('display.width', 1000)
+    # conn.get_paris_avg()
+    # conn.get_paris_top_10_avg()
