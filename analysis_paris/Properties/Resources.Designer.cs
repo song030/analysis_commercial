@@ -63,39 +63,9 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_back {
+        internal static System.Drawing.Bitmap firstviewback {
             get {
-                object obj = ResourceManager.GetObject("icon_back", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_barchart {
-            get {
-                object obj = ResourceManager.GetObject("icon_barchart", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_broken_computer {
-            get {
-                object obj = ResourceManager.GetObject("icon_broken_computer", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_combo_chart {
-            get {
-                object obj = ResourceManager.GetObject("icon_combo_chart", resourceCulture);
+                object obj = ResourceManager.GetObject("firstviewback", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,26 +96,6 @@ namespace analysis_paris.Properties {
         internal static System.Drawing.Bitmap icon_eiffel_y {
             get {
                 object obj = ResourceManager.GetObject("icon_eiffel_y", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_forward {
-            get {
-                object obj = ResourceManager.GetObject("icon_forward", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap icon_map {
-            get {
-                object obj = ResourceManager.GetObject("icon_map", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,16 +163,6 @@ namespace analysis_paris.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap icon_table {
-            get {
-                object obj = ResourceManager.GetObject("icon_table", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
         internal static System.Drawing.Bitmap loading {
             get {
                 object obj = ResourceManager.GetObject("loading", resourceCulture);
@@ -246,56 +186,6 @@ namespace analysis_paris.Properties {
         internal static System.Drawing.Bitmap magnifying_glass_stop {
             get {
                 object obj = ResourceManager.GetObject("magnifying_glass_stop", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap sample_chart {
-            get {
-                object obj = ResourceManager.GetObject("sample_chart", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap sample_chart_2 {
-            get {
-                object obj = ResourceManager.GetObject("sample_chart_2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap test_bar {
-            get {
-                object obj = ResourceManager.GetObject("test_bar", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap test_pie {
-            get {
-                object obj = ResourceManager.GetObject("test_pie", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap test_pie_21 {
-            get {
-                object obj = ResourceManager.GetObject("test_pie_21", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

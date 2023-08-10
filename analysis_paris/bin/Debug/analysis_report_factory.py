@@ -85,9 +85,9 @@ class MapFactory:
         # graph.set_data([비교대상 df 3개][출력할 컬럼명])
         # df는 원하는 출력순으로 넣어주시면 됩니다.
         # 출력할 컬럼명에 상호 이름(해당 장소를 구분할수 있는 이름)이 와야합니다. 데이터가 dict 형식으로 저장돼
-        graph.set_data([self.result, model1, model2], ['SELLING_AREA_ID', 'RIVAL_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_1000'])
         graph.set_ticks(["학원 500", "버스정거장 500", "횡단보도 500"])
-
+        graph.set_data([self.result, model1, model2], ['SELLING_AREA_ID', 'RIVAL_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_1000'])
+        
         file_path = self.file_path+r"\Graph\test_bar.gif"
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
