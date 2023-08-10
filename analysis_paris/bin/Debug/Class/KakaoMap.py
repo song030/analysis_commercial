@@ -77,7 +77,7 @@ class KakaoMap:
 
         {self.get_map_click_func()}
         {self.get_main_marker()}
-        {self.get_custom_marker()}
+        {self.get_add_marker()}
 
     </script>
     </body>
