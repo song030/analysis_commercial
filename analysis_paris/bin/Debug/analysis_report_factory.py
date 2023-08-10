@@ -93,26 +93,48 @@ class MapFactory:
         pass
 
     def get_graph(self, mode_option):
+        # todo : 소득 또는 인구를 꺾은선..?
         if mode_option == "paris":
-            model1 = self.conn.find_paris_by_id(13)  # 전체 평균
-            model2 = self.conn.find_paris_by_id(25)  # 상위 10% 평균
+            model1 = self.conn.get_paris_avg()  # 전체 평균
+            model2 = self.conn.get_paris_top_10_avg()  # 상위 10% 평균
         else:  # selling area 또는 location일 경우
             model1 = self.conn.get_selling_area_by_id(13)  # 전체 평균
             model2 = self.conn.get_selling_area_by_id(25)  # 상위 10% 평균
 
         # ----- 그래프 생성&업로드
         graph = Graph(700, 500)
+        self.result.at[0, 'PARIS_ID'] = self.result.at[0, 'PARIS_NAME']
+        model1.at[0, 'PARIS_ID'] = "전체 평균"
+        model2.at[0, 'PARIS_ID'] = "상위 10% 평균"
 
         # ========== 그래프데이터 수정하는곳!!
         # graph.set_data([비교대상 df 3개][출력할 컬럼명])
         # df는 원하는 출력순으로 넣어주시면 됩니다.
         # 출력할 컬럼명에 상호 이름(해당 장소를 구분할수 있는 이름)이 와야합니다. 데이터가 dict 형식으로 저장되있습니다.
-        graph.set_ticks(["경쟁 500", "레저 500 개수", "레저 1000 개수"])
-
+        graph.set_ticks(['학교_500',
+                         '학교_1000',
+                         '학원_500',
+                         '학원_1000',
+                         '버스정거장_500',
+                         '버스정거장_1000',
+                         '여가시설_500',
+                         '여가시설_1000'])
         if mode_option == 'paris':
             graph.set_data([self.result, model1, model2],
-                           ['PARIS_ID', 'RIVAL_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_500',
-                            'LEISURE_COUNT_NEAR_1000'])
+                           ['PARIS_ID',
+                            'SCHOOL_COUNT_NEAR_500',
+                            'SCHOOL_COUNT_NEAR_1000',
+                            'ACADEMY_COUNT_NEAR_500',
+                            'ACADEMY_COUNT_NEAR_1000',
+                            'STOP_COUNT_NEAR_500',
+                            'STOP_COUNT_NEAR_1000',
+                            'LEISURE_COUNT_NEAR_500',
+                            'LEISURE_COUNT_NEAR_1000', ])
+
+            # DAILY_FLOATING_POPULATION
+            # LIVING_POPULATION
+            # LIVING_WORKER_AVG_REVENUE
+            # LIVING_POPULATION_AVG_REVENUE
         else:
             graph.set_data([self.result, model1, model2],
                            ['SELLING_AREA_ID', 'RIVAL_COUNT_NEAR_500', 'LEISURE_COUNT_NEAR_500',
@@ -136,3 +158,4 @@ class MapFactory:
 
 if __name__ == '__main__':
     main()
+    # factory = MapFactory()
