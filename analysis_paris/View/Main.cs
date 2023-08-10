@@ -5,11 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace analysis_paris {
     public partial class Main : Form {
+
 
         private bool gifAnimated = false;   // 그래프 GIF 재생 확인
         private System.Windows.Forms.Timer graphGifTimer;   // 그래프 GIf 타이머
@@ -18,10 +19,19 @@ namespace analysis_paris {
         // Constructor
         public Main() {
             InitializeComponent();
+
+            //#region Splash Window Test
+            //int sleepTime = 1000;
+            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            //splashthread.IsBackground = true;
+            //splashthread.Start();
+            //#endregion
         }
 
         // 화면 출력 시 초기화
         private void Main_Load(object sender, EventArgs e) {
+            // 첫 화면
+
             // 모드 리스트 구성
             ModeLabelList.Add(lblSearchStore);
             ModeLabelList.Add(lblSearchEiffel);
@@ -42,6 +52,15 @@ namespace analysis_paris {
             graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
             graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
         }
+
+        // 로딩용 스레드
+        #region Loading Thread
+        private void Loading_Start() {
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
+            splashthread.IsBackground = true;
+            splashthread.Start();
+        }
+        #endregion
 
         // 검색 모드 선택 메뉴 영역
         #region MenuArea
@@ -136,13 +155,6 @@ namespace analysis_paris {
             }
         }
 
-        // 로딩 화면 재생용 Task
-        private async Task loading() {
-            Loading load = new Loading();
-            load.Show();
-            await Task.Delay(3000);
-        }
-
         // 검색 영역 초기화
         private void SearchArea_Clear() {
             searchBox.Text = string.Empty;
@@ -166,6 +178,8 @@ namespace analysis_paris {
             lblSearchAlert.Visible = false;
             flowSearchList.Controls.Clear();
 
+            Loading_Start();    // 로딩 스레드 시작
+
             switch (currentSearchMode) {
                 case 0:
                     SellingArea_Search(searchKeyword);
@@ -176,6 +190,8 @@ namespace analysis_paris {
                 default:
                     break;
             }
+
+            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
         }
 
         // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
@@ -265,10 +281,12 @@ namespace analysis_paris {
 
             flowDetails.Controls.Clear();
 
+            Loading_Start();    // 로딩 스레드 시작
+
             // 기존 매장 항목 클릭 시
             if (target.SellingArea is null) {
-                Console.WriteLine("매장 주변 검색");
                 targetId = target.ParisInfo.PARIS_ID;
+                Report_Update(targetId);
 
                 Dictionary<string, Tuple<string, string>> dictionary_ = target.ParisInfo.GetAttributes();
                 foreach (var item in dictionary_) {
@@ -278,8 +296,8 @@ namespace analysis_paris {
             }
             // 매물 항목 클릭 시
             else {
-                Console.WriteLine("매물 주변 검색");
                 targetId = target.SellingArea.SELLING_AREA_ID;
+                Report_Update(targetId);
 
                 Dictionary<string, Tuple<string, string>> dictionary_ = target.SellingArea.GetAttributes();
                 foreach (var item in dictionary_) {
@@ -287,25 +305,21 @@ namespace analysis_paris {
                     flowDetails.Controls.Add(detail);
                 }
             }
-            Report_Update(targetId);
         }
 
         // 선택 항목에 대한 지도 및 차트 갱신
-        //private async void Report_Update(int targetId) {
-        private async void Report_Update(int targetId) {
-            Task t = loading();
-            await t;
-
+        //private void Report_Update(int targetId) {
+        private void Report_Update(int targetId) {
             Console.WriteLine($"Report_Update : {targetId}");
             Percussion.GetScriptResult(TriggerType.StoreReport, targetId.ToString());
 
-
-            // 맵 브라우저 갱신
+            // 지도 및 그래프 갱신
             mapBrowser.Refresh();
-
-            gifAnimated = false;
             graphBoxBar.Refresh();
             graphBoxPie.Refresh();
+            gifAnimated = false;
+
+            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
 
             if (!splitChart.Panel2Collapsed) {
                 Graph_Start();
@@ -397,8 +411,13 @@ namespace analysis_paris {
             graphBoxPie.Enabled = false;
             graphGifTimer.Stop();
         }
+
         #endregion
 
+        // 프로그램 종료 버튼 hover event
+        private void btnExit_MouseHover(object sender, EventArgs e) {
+            btnExit.Image = Properties.Resources.icon_exit_y;
 
+        }
     }
 }

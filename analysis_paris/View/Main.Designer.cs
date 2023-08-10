@@ -23,6 +23,7 @@
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.splitMainBoard = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -32,12 +33,15 @@
             this.layoutMainBoard = new System.Windows.Forms.TableLayoutPanel();
             this.splitDataBoard = new System.Windows.Forms.SplitContainer();
             this.layoutSearchResult = new System.Windows.Forms.TableLayoutPanel();
-            this.lblSearchResult = new System.Windows.Forms.Label();
             this.layoutSearchBox = new System.Windows.Forms.TableLayoutPanel();
             this.searchBox = new System.Windows.Forms.TextBox();
             this.lblModeName = new System.Windows.Forms.Label();
             this.searchUnderbar = new System.Windows.Forms.Label();
+            this.btnSearchClose = new System.Windows.Forms.Button();
             this.flowSearchList = new System.Windows.Forms.FlowLayoutPanel();
+            this.searchBoxHead = new System.Windows.Forms.TableLayoutPanel();
+            this.lblSearchResult = new System.Windows.Forms.Label();
+            this.lblSearchAlert = new System.Windows.Forms.Label();
             this.splitChart = new System.Windows.Forms.SplitContainer();
             this.splitTableMap = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -49,16 +53,13 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.lblChartTitle = new System.Windows.Forms.Label();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.graphBoxBar = new System.Windows.Forms.PictureBox();
-            this.graphBoxPie = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lblProjectTitle = new System.Windows.Forms.Label();
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
-            this.btnSearchClose = new System.Windows.Forms.Button();
-            this.searchBoxHead = new System.Windows.Forms.TableLayoutPanel();
-            this.lblSearchAlert = new System.Windows.Forms.Label();
+            this.graphBoxBar = new System.Windows.Forms.PictureBox();
+            this.graphBoxPie = new System.Windows.Forms.PictureBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnSearch = new CustomControls.RoundedButton();
             this.mapSearchButton = new analysis_paris.View.GifImageButton();
             this.btnTable = new analysis_paris.View.CheckedButton();
@@ -78,6 +79,7 @@
             this.splitDataBoard.SuspendLayout();
             this.layoutSearchResult.SuspendLayout();
             this.layoutSearchBox.SuspendLayout();
+            this.searchBoxHead.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitChart)).BeginInit();
             this.splitChart.Panel1.SuspendLayout();
             this.splitChart.Panel2.SuspendLayout();
@@ -90,11 +92,10 @@
             this.layoutMapBox.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.graphBoxBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.graphBoxPie)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tblModeMenu.SuspendLayout();
-            this.searchBoxHead.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphBoxBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphBoxPie)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutMain
@@ -261,19 +262,6 @@
             this.layoutSearchResult.Size = new System.Drawing.Size(371, 627);
             this.layoutSearchResult.TabIndex = 0;
             // 
-            // lblSearchResult
-            // 
-            this.lblSearchResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblSearchResult.AutoSize = true;
-            this.lblSearchResult.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblSearchResult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.lblSearchResult.Location = new System.Drawing.Point(0, 10);
-            this.lblSearchResult.Margin = new System.Windows.Forms.Padding(0);
-            this.lblSearchResult.Name = "lblSearchResult";
-            this.lblSearchResult.Size = new System.Drawing.Size(63, 16);
-            this.lblSearchResult.TabIndex = 1;
-            this.lblSearchResult.Text = "검색 결과";
-            // 
             // layoutSearchBox
             // 
             this.layoutSearchBox.ColumnCount = 3;
@@ -339,6 +327,21 @@
             this.searchUnderbar.Size = new System.Drawing.Size(368, 3);
             this.searchUnderbar.TabIndex = 7;
             // 
+            // btnSearchClose
+            // 
+            this.btnSearchClose.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnSearchClose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnSearchClose.FlatAppearance.BorderSize = 2;
+            this.btnSearchClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.btnSearchClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.btnSearchClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSearchClose.Location = new System.Drawing.Point(334, 8);
+            this.btnSearchClose.Name = "btnSearchClose";
+            this.btnSearchClose.Size = new System.Drawing.Size(26, 26);
+            this.btnSearchClose.TabIndex = 8;
+            this.btnSearchClose.UseVisualStyleBackColor = true;
+            this.btnSearchClose.Click += new System.EventHandler(this.btnSearchClose_Click);
+            // 
             // flowSearchList
             // 
             this.flowSearchList.AutoScroll = true;
@@ -354,6 +357,48 @@
             this.flowSearchList.TabIndex = 4;
             this.flowSearchList.WrapContents = false;
             this.flowSearchList.SizeChanged += new System.EventHandler(this.flowSearchList_SizeChanged);
+            // 
+            // searchBoxHead
+            // 
+            this.searchBoxHead.ColumnCount = 2;
+            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxHead.Controls.Add(this.lblSearchResult, 0, 0);
+            this.searchBoxHead.Controls.Add(this.lblSearchAlert, 1, 0);
+            this.searchBoxHead.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchBoxHead.Location = new System.Drawing.Point(3, 101);
+            this.searchBoxHead.Name = "searchBoxHead";
+            this.searchBoxHead.RowCount = 1;
+            this.searchBoxHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.searchBoxHead.Size = new System.Drawing.Size(365, 36);
+            this.searchBoxHead.TabIndex = 5;
+            // 
+            // lblSearchResult
+            // 
+            this.lblSearchResult.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSearchResult.AutoSize = true;
+            this.lblSearchResult.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchResult.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.lblSearchResult.Location = new System.Drawing.Point(0, 10);
+            this.lblSearchResult.Margin = new System.Windows.Forms.Padding(0);
+            this.lblSearchResult.Name = "lblSearchResult";
+            this.lblSearchResult.Size = new System.Drawing.Size(63, 16);
+            this.lblSearchResult.TabIndex = 1;
+            this.lblSearchResult.Text = "검색 결과";
+            // 
+            // lblSearchAlert
+            // 
+            this.lblSearchAlert.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblSearchAlert.AutoSize = true;
+            this.lblSearchAlert.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblSearchAlert.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
+            this.lblSearchAlert.Location = new System.Drawing.Point(86, 10);
+            this.lblSearchAlert.Margin = new System.Windows.Forms.Padding(18, 0, 3, 0);
+            this.lblSearchAlert.Name = "lblSearchAlert";
+            this.lblSearchAlert.Size = new System.Drawing.Size(155, 16);
+            this.lblSearchAlert.TabIndex = 2;
+            this.lblSearchAlert.Text = "! 검색어를 입력해주세요.";
+            this.lblSearchAlert.Visible = false;
             // 
             // splitChart
             // 
@@ -523,26 +568,6 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(655, 319);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
-            // graphBoxBar
-            // 
-            this.graphBoxBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphBoxBar.Location = new System.Drawing.Point(3, 3);
-            this.graphBoxBar.Name = "graphBoxBar";
-            this.graphBoxBar.Size = new System.Drawing.Size(321, 313);
-            this.graphBoxBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.graphBoxBar.TabIndex = 0;
-            this.graphBoxBar.TabStop = false;
-            // 
-            // graphBoxPie
-            // 
-            this.graphBoxPie.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphBoxPie.Location = new System.Drawing.Point(330, 3);
-            this.graphBoxPie.Name = "graphBoxPie";
-            this.graphBoxPie.Size = new System.Drawing.Size(322, 313);
-            this.graphBoxPie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.graphBoxPie.TabIndex = 1;
-            this.graphBoxPie.TabStop = false;
-            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 4;
@@ -598,25 +623,6 @@
             this.tblModeMenu.Size = new System.Drawing.Size(86, 729);
             this.tblModeMenu.TabIndex = 0;
             // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.BorderSize = 0;
-            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.btnExit.Location = new System.Drawing.Point(10, 682);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(66, 33);
-            this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "종료";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // btnMenuCollapse
             // 
             this.btnMenuCollapse.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -636,45 +642,46 @@
             this.btnMenuCollapse.UseVisualStyleBackColor = true;
             this.btnMenuCollapse.Click += new System.EventHandler(this.btnMenuCollapse_Click);
             // 
-            // btnSearchClose
+            // graphBoxBar
             // 
-            this.btnSearchClose.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnSearchClose.Location = new System.Drawing.Point(331, 5);
-            this.btnSearchClose.Name = "btnSearchClose";
-            this.btnSearchClose.Size = new System.Drawing.Size(32, 32);
-            this.btnSearchClose.TabIndex = 8;
-            this.btnSearchClose.Text = "X";
-            this.btnSearchClose.UseVisualStyleBackColor = true;
-            this.btnSearchClose.Click += new System.EventHandler(this.btnSearchClose_Click);
+            this.graphBoxBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphBoxBar.Location = new System.Drawing.Point(3, 3);
+            this.graphBoxBar.Name = "graphBoxBar";
+            this.graphBoxBar.Size = new System.Drawing.Size(321, 313);
+            this.graphBoxBar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.graphBoxBar.TabIndex = 0;
+            this.graphBoxBar.TabStop = false;
             // 
-            // searchBoxHead
+            // graphBoxPie
             // 
-            this.searchBoxHead.ColumnCount = 2;
-            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
-            this.searchBoxHead.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.searchBoxHead.Controls.Add(this.lblSearchResult, 0, 0);
-            this.searchBoxHead.Controls.Add(this.lblSearchAlert, 1, 0);
-            this.searchBoxHead.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchBoxHead.Location = new System.Drawing.Point(3, 101);
-            this.searchBoxHead.Name = "searchBoxHead";
-            this.searchBoxHead.RowCount = 1;
-            this.searchBoxHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.searchBoxHead.Size = new System.Drawing.Size(365, 36);
-            this.searchBoxHead.TabIndex = 5;
+            this.graphBoxPie.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphBoxPie.Location = new System.Drawing.Point(330, 3);
+            this.graphBoxPie.Name = "graphBoxPie";
+            this.graphBoxPie.Size = new System.Drawing.Size(322, 313);
+            this.graphBoxPie.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.graphBoxPie.TabIndex = 1;
+            this.graphBoxPie.TabStop = false;
             // 
-            // lblSearchAlert
+            // btnExit
             // 
-            this.lblSearchAlert.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblSearchAlert.AutoSize = true;
-            this.lblSearchAlert.Font = new System.Drawing.Font("나눔고딕", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblSearchAlert.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(218)))), ((int)(((byte)(36)))));
-            this.lblSearchAlert.Location = new System.Drawing.Point(86, 10);
-            this.lblSearchAlert.Margin = new System.Windows.Forms.Padding(18, 0, 3, 0);
-            this.lblSearchAlert.Name = "lblSearchAlert";
-            this.lblSearchAlert.Size = new System.Drawing.Size(155, 16);
-            this.lblSearchAlert.TabIndex = 2;
-            this.lblSearchAlert.Text = "! 검색어를 입력해주세요.";
-            this.lblSearchAlert.Visible = false;
+            this.btnExit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.BorderSize = 0;
+            this.btnExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("나눔고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(24, 681);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(38, 36);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.btnExit.MouseHover += new System.EventHandler(this.btnExit_MouseHover);
             // 
             // btnSearch
             // 
@@ -717,6 +724,9 @@
             this.btnTable.CheckedForeColor = System.Drawing.Color.White;
             this.btnTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnTable.FlatAppearance.BorderSize = 0;
+            this.btnTable.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnTable.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnTable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnTable.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
@@ -740,6 +750,9 @@
             this.btnMap.CheckedForeColor = System.Drawing.Color.White;
             this.btnMap.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnMap.FlatAppearance.BorderSize = 0;
+            this.btnMap.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMap.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnMap.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMap.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
@@ -763,6 +776,9 @@
             this.btnChart.CheckedForeColor = System.Drawing.Color.White;
             this.btnChart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.btnChart.FlatAppearance.BorderSize = 0;
+            this.btnChart.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnChart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
+            this.btnChart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnChart.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(53)))), ((int)(((byte)(134)))));
@@ -817,6 +833,8 @@
             this.layoutSearchResult.ResumeLayout(false);
             this.layoutSearchBox.ResumeLayout(false);
             this.layoutSearchBox.PerformLayout();
+            this.searchBoxHead.ResumeLayout(false);
+            this.searchBoxHead.PerformLayout();
             this.splitChart.Panel1.ResumeLayout(false);
             this.splitChart.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitChart)).EndInit();
@@ -831,13 +849,11 @@
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.tableLayoutPanel5.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.graphBoxBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.graphBoxPie)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tblModeMenu.ResumeLayout(false);
-            this.searchBoxHead.ResumeLayout(false);
-            this.searchBoxHead.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.graphBoxBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.graphBoxPie)).EndInit();
             this.ResumeLayout(false);
 
         }
