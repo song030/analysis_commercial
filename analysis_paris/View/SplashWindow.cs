@@ -1,13 +1,20 @@
-﻿using System.Windows.Forms;
+﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace analysis_paris.View {
     public partial class SplashWindow : Form {
-
+        // Fields
         delegate void SplashShowCloseDelegate();
         bool CloseSplashScreenFlag = false;
 
+        // Constructor
         public SplashWindow() {
             InitializeComponent();
+        }
+
+        public SplashWindow(Image backImage) {
+            InitializeComponent();
+            pictureSplash.Image = backImage;
         }
 
         public void ShowSplashScreen() {

@@ -1,6 +1,8 @@
 ﻿using analysis_paris.DAO;
 using analysis_paris.Factory;
 using analysis_paris.View;
+using CefSharp;
+using CefSharp.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,26 +13,34 @@ using System.Windows.Forms;
 namespace analysis_paris {
     public partial class Main : Form {
 
-
+        private ChromiumWebBrowser mapBrowser = null;   // 지도 API 연결할 Control
         private bool gifAnimated = false;   // 그래프 GIF 재생 확인
         private System.Windows.Forms.Timer graphGifTimer;   // 그래프 GIf 타이머
         List<Label> ModeLabelList = new List<Label>();  // 검색 모드 라벨 리스트
 
+
         // Constructor
         public Main() {
             InitializeComponent();
-
-            //#region Splash Window Test
-            //int sleepTime = 1000;
-            //Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
-            //splashthread.IsBackground = true;
-            //splashthread.Start();
-            //#endregion
         }
 
         // 화면 출력 시 초기화
         private void Main_Load(object sender, EventArgs e) {
-            // 첫 화면
+            #region Cef Sharp
+            // 객체 생성
+            CefSettings settings = new CefSettings();
+            settings.CachePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\CEF";
+            Cef.Initialize(settings);
+
+            //웹 사이트 이동
+            mapBrowser = new ChromiumWebBrowser("http://song030s.dothome.co.kr/Map/test_map2.html");
+            //한국어 설정
+            mapBrowser.BrowserSettings.AcceptLanguageList = "ko-KR";
+            //Main Form에 CefSharp컨트롤 추가
+            this.layoutMapBox.Controls.Add(mapBrowser, 0, 1);
+            //Main Form 전체 영역에 붙이기
+            mapBrowser.Dock = DockStyle.Fill;
+            #endregion
 
             // 모드 리스트 구성
             ModeLabelList.Add(lblSearchStore);
@@ -48,22 +58,29 @@ namespace analysis_paris {
             graphGifTimer.Interval = 1400;
             graphGifTimer.Tick += Graph_Stop;
 
-            mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/test_map2.html");
             graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
             graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
         }
 
-        // 로딩용 스레드
-        #region Loading Thread
+        // 로딩 화면 출력
         private void Loading_Start() {
             Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowSplashScreen));
             splashthread.IsBackground = true;
             splashthread.Start();
         }
-        #endregion
 
         // 검색 모드 선택 메뉴 영역
         #region MenuArea
+        // 프로그램 종료 버튼 hover event → Gif로 변경 예정
+        private void btnExit_MouseHover(object sender, EventArgs e) {
+            btnExit.Image = Properties.Resources.icon_exit_y;
+            //btnExit.Image = Properties.Resources.export;
+        }
+
+        private void btnExit_MouseLeave(object sender, EventArgs e) {
+            btnExit.Image = Properties.Resources.icon_exit_w;
+        }
+
         // 프로그램을 종료한다.
         private void btnExit_Click(object sender, EventArgs e) {
             this.Close();
@@ -113,12 +130,22 @@ namespace analysis_paris {
         private void SetSearchMode(int modeIndex) {
             SearchArea_Clear();
 
+            btnTable.Enabled = true;
+            btnChart.Enabled = true;
+
             btnTable.Checked = false;
             btnMap.Checked = false;
             btnChart.Checked = false;
 
             layoutMapBox.RowStyles[0].Height = 0;
             layoutSearchResult.RowStyles[0].Height = 98;
+
+            btnGoAhead.Visible = false;
+
+            if (modeIndex != 2)
+                btnMap.Enabled = true;
+
+            mapBrowser.LoadUrl("http://song030s.dothome.co.kr/Map/test_map2.html");
 
             switch (modeIndex) {
                 case 0:
@@ -135,10 +162,13 @@ namespace analysis_paris {
 
                 case 2:
                     // 좌표 검색 화면으로 전환
-                    mapBrowser.Navigate("http://song030s.dothome.co.kr/Map/search.html");
+                    mapBrowser.LoadUrl("http://song030s.dothome.co.kr/search.html");
                     layoutSearchResult.RowStyles[0].Height = 0;
                     layoutMapBox.RowStyles[0].Height = 60;
                     btnMap.Checked = true;
+                    btnTable.Enabled = false;
+                    btnMap.Enabled = false;
+                    btnChart.Enabled = false;
                     DataBoard_Collapse();
                     splitDataBoard.Panel1Collapsed = true;
                     break;
@@ -190,7 +220,6 @@ namespace analysis_paris {
                 default:
                     break;
             }
-
             SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
         }
 
@@ -206,9 +235,17 @@ namespace analysis_paris {
 
         // 검색 박스 닫기 버튼
         private void btnSearchClose_Click(object sender, EventArgs e) {
-            splitDataBoard.Panel2Collapsed = false;
-            splitDataBoard.Panel1Collapsed = true;
+            CheckableButton target = (CheckableButton)sender;
+
+            if (target.Checked) {
+                splitDataBoard.Panel2Collapsed = false;
+                splitDataBoard.Panel1Collapsed = true;
+            }
+            else {
+                splitDataBoard.Panel1Collapsed = false;
+            }
         }
+
         #endregion
 
         // 파이썬 스크립트 실행 후 반환 결과 출력 관련 영역
@@ -260,18 +297,29 @@ namespace analysis_paris {
             }
         }
 
-        // 선택한 좌표로 검색 시 → 검색 결과를 지도에만 띄울지?
-        private void mapSearchButton_Click(object sender, EventArgs e) {
-            try {
-                string targetLocation = mapBrowser.Document.GetElementById("clickLatlng").InnerHtml;
-                string resultString = Percussion.GetScriptResult(TriggerType.LocationInfo, targetLocation);
+        // 선택한 좌표로 검색 시 상세 정보 화면 활성화
+        private async void mapSearchButton_Click(object sender, EventArgs e) {
+            Loading_Start();    // 로딩 스레드 시작
 
-                // 좌표 검색 결과 => 현재 10점 만점에 10점
-                Console.WriteLine(resultString);
-            }
-            catch (Exception ex) {
-                Console.WriteLine(ex);
-            }
+            JavascriptResponse response = await mapBrowser.EvaluateScriptAsync("document.getElementById('clickLatlng').innerHTML");
+            string targetLocation = response.Result.ToString();
+            string resultString = Percussion.GetScriptResult(TriggerType.LocationInfo, targetLocation);
+
+            // 좌표 검색 결과 => 현재 10점 만점에 10점
+            Console.WriteLine(resultString);
+
+            btnTable.Enabled = true;
+            btnChart.Enabled = true;
+
+            btnTable.Checked = true;
+            btnMap.Checked = true;
+            btnChart.Checked = true;
+
+            layoutMapBox.RowStyles[0].Height = 0;
+            mapBrowser.Refresh();
+            DataBoard_Collapse();
+
+            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
         }
 
         // 리스트 아이템 클릭 시 주변 정보 리스트 업데이트
@@ -286,7 +334,7 @@ namespace analysis_paris {
             // 기존 매장 항목 클릭 시
             if (target.SellingArea is null) {
                 targetId = target.ParisInfo.PARIS_ID;
-                Report_Update(targetId);
+                Report_Update(targetId, "paris");
 
                 Dictionary<string, Tuple<string, string>> dictionary_ = target.ParisInfo.GetAttributes();
                 foreach (var item in dictionary_) {
@@ -297,21 +345,23 @@ namespace analysis_paris {
             // 매물 항목 클릭 시
             else {
                 targetId = target.SellingArea.SELLING_AREA_ID;
-                Report_Update(targetId);
+                Report_Update(targetId, "selling_area");
 
                 Dictionary<string, Tuple<string, string>> dictionary_ = target.SellingArea.GetAttributes();
                 foreach (var item in dictionary_) {
                     DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
                     flowDetails.Controls.Add(detail);
                 }
+
+                btnGoAhead.Visible = true;
             }
         }
 
         // 선택 항목에 대한 지도 및 차트 갱신
         //private void Report_Update(int targetId) {
-        private void Report_Update(int targetId) {
+        private void Report_Update(int targetId, string targetType) {
             Console.WriteLine($"Report_Update : {targetId}");
-            Percussion.GetScriptResult(TriggerType.StoreReport, targetId.ToString());
+            Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
             // 지도 및 그래프 갱신
             mapBrowser.Refresh();
@@ -412,12 +462,17 @@ namespace analysis_paris {
             graphGifTimer.Stop();
         }
 
+
         #endregion
 
-        // 프로그램 종료 버튼 hover event
-        private void btnExit_MouseHover(object sender, EventArgs e) {
-            btnExit.Image = Properties.Resources.icon_exit_y;
+        // 진행 시켜 버튼 클릭 이벤트
+        private void btnGoAhead_Click(object sender, EventArgs e) {
 
+            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowGyongYeong));
+            splashthread.IsBackground = true;
+            splashthread.Start();
+            Thread.Sleep(2000);
+            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
         }
     }
 }

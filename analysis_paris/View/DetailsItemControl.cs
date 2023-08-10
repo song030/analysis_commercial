@@ -17,7 +17,6 @@ namespace analysis_paris.View {
             set { _value = value; lblDetailValue.Text = value; }
         }
 
-
         public DetailsItemControl(string aName, string aValue) {
             InitializeComponent();
 
