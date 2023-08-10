@@ -644,13 +644,24 @@ class DBConnector:
 
     def create_TB_rival_business(self):
         df = pd.read_csv(r"crawling_sources/_dummy_src/가맹점 주변 경쟁업체.csv")
-        print(df)
-        # with open(r"crawling_sources/_dummy_src/가맹점 주변 경쟁업체.csv", 'r', encoding='utf-8')
+        df.reset_index(inplace=True)
+        df['index'] = df['index'] + 1
+        df.rename(columns={'index':'RIVAL_NEAR_PARIS_ID'}, inplace=True)
+        df.to_sql("TB_RIVAL_NEAR_PARIS", self.engine, index_label=True, index=True)
+        self.create_PK_query("TB_RIVAL_NEAR_PARIS_PK", "TB_RIVAL_NEAR_PARIS","RIVAL_NEAR_PARIS_ID" )
+
+    def create_TB_leisure(self):
+        df = pd.read_csv(r"crawling_sources/_dummy_src/가맹점 주변 여가업.csv")
+        df.reset_index(inplace=True)
+        df['index'] = df['index'] + 1
+        df.rename(columns={'index': 'LEISURE_ID'}, inplace=True)
+        df.to_sql("TB_LEISURE", self.engine, index_label=True, index=True)
+        self.create_PK_query("TB_LEISURE_PK", "TB_LEISURE","LEISURE_ID" )
+
 
 
 if __name__ == '__main__':
     main()
     conn = DBConnector(test_option=True)
-    conn.create_TB_rival_business()
 
 

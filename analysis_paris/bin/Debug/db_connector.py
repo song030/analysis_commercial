@@ -19,6 +19,10 @@
 조건 : 바로 출력할 값과 파이로 출력할 값의 구분이 필요함
 → 내부 값들은 리스트가 좋음 (ex: 파이 그래프 컬럼 리스트 / 파이 그래프 값 리스트)
 """
+import traceback
+
+import joblib
+
 """ For 팀장님
 public class Paris {
         public int PARIS_ID { get; set; }
@@ -178,6 +182,7 @@ def main():
 class DBConnector:
     # ===================== BASIC ============================ #
     _instance = None
+
     def read_config(self):
         """db 접속 정보는 config file에서 관리함, json으로 읽어서 dictionary 로 반환함 """
         with open(self.CONFIG_PATH, 'r', encoding='utf-8') as config_file:
@@ -272,8 +277,263 @@ class DBConnector:
         self.end_conn()
         return df
 
+    def calculate_(self):
+        pass
+
     def calculate_location_score(self, latitude, longitude):
-        print("10점 만점에 10점")
+        """
+        계산해야할 테이블, 칼럼
+            TB_SCHOOL - 학교 : 500, 1000
+            TB_ACADEMY - 학원 : 500
+            TB_STATION - 지하철역 : 500
+            TB_BUS_STOP - 버스정거장 : 1000
+            TB_LEISURE - 여가시설 : 500 1000
+            CRAWLING - 일일 유동인구, 거주인구, 직장인 평균소득, 거주인구 평균소득
+            'DAILY_FLOATING_POPULATION', 'LIVING_POPULATION', 'LIVING_WORKER_AVG_REVENUE', 'LIVING_POPULATION_AVG_REVENUE'
+        """
+        result_score = 0
+        print(f"입력된 위도:{latitude} 경도: {longitude} ")
+
+        school_500_count = 0
+        school_1000_count = 0
+        academy_500_count = 0
+        academy_1000_count = 0
+        station_500_count = 0
+        station_1000_count = 0
+        bus_stop_500_count = 0
+        bus_stop_1000_count = 0
+        leisure_500_count = 0
+        leisure_1000_count = 0
+        DAILY_FLOATING_POPULATION = 0
+        LIVING_POPULATION = 0
+        LIVING_WORKER_AVG_REVENUE = 0
+        LIVING_POPULATION_AVG_REVENUE = 0
+
+        try:
+            DAILY_FLOATING_POPULATION, LIVING_POPULATION, LIVING_WORKER_AVG_REVENUE, LIVING_POPULATION_AVG_REVENUE = \
+                self.crawling_elements_with_address(latitude, longitude)
+        except:
+            result_score = -1
+            traceback.print_exc()
+            return result_score
+
+        self.start_conn()
+        col_names = ["LATITUDE", "LONGITUDE"]
+        pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_SCHOOL" """
+        df_school = pd.read_sql(pstmt, self.engine)[col_names]
+        school_500_count, school_1000_count = self.count_distance(df_school, latitude, longitude)
+
+        pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_ACADEMY" """
+        df_academy = pd.read_sql(pstmt, self.engine)
+        academy_500_count, academy_1000_count = self.count_distance(df_academy, latitude, longitude)
+
+        pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_STATION" """
+        df_station = pd.read_sql(pstmt, self.engine)
+        station_500_count, station_1000_count = self.count_distance(df_station, latitude, longitude)
+
+        pstmt = """ select "LATITUDE", "LONGITUDE" from "TB_BUS_STOP" """
+        df_bus_stop = pd.read_sql(pstmt, self.engine)
+        bus_stop_500_count, bus_stop_1000_count = self.count_distance(df_bus_stop, latitude, longitude)
+
+        pstmt = """ select "위도", "경도" from "TB_LEISURE" """
+        df_leisure = pd.read_sql(pstmt, self.engine)  # leisure table 은 column name 수정 필요함
+        df_leisure.rename(columns={"위도": "LATITUDE", "경도": "LONGITUDE"}, inplace=True)
+        leisure_500_count, leisure_1000_count = self.count_distance(df_leisure, latitude, longitude)
+
+        self.end_conn()
+
+        result_dict = {
+            "school_500_count": [school_500_count],
+            "school_1000_count": [school_1000_count],
+            "academy_500_count": [academy_500_count],
+            "academy_1000_count": [academy_1000_count],
+            "station_500_count": [station_500_count],
+            "station_1000_count": [station_1000_count],
+            "bus_stop_500_count": [bus_stop_500_count],
+            "bus_stop_1000_count": [bus_stop_1000_count],
+            "leisure_500_count": [leisure_500_count],
+            "leisure_1000_count": [leisure_1000_count],
+            "DAILY_FLOATING_POPULATION": [DAILY_FLOATING_POPULATION],
+            "LIVING_POPULATION": [LIVING_POPULATION],
+            "LIVING_WORKER_AVG_REVENUE": [LIVING_WORKER_AVG_REVENUE],
+            "LIVING_POPULATION_AVG_REVENUE": [LIVING_POPULATION_AVG_REVENUE],
+        }
+        simulation_df = pd.DataFrame(result_dict)
+        score = self.predict_value_with_model(simulation_df)
+        result_dict.update({"score": score})
+
+
+    @staticmethod
+    def predict_value_with_model(df):
+        """
+        모델을 이용해 예측값을 내놓습니다.
+        """
+        # loaded_model = joblib.load('model.pkl')
+        # predictions = loaded_model.predict(simulation_df)
+        return 10
+
+    @staticmethod
+    def crawling_elements_with_address(latitude, longitude):
+        address = DBConnector.get_address_with_latitude_and_longitude(latitude, longitude)
+        from selenium import webdriver
+        from selenium.webdriver import Keys
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver import Chrome, ChromeOptions
+        import time
+        import traceback
+
+        # 화면 작으면 분석 안보임, 크기 키우기
+        opts = ChromeOptions()
+        opts.add_argument("--window-size=1300,900")
+        # 창 띄우기
+        driver = webdriver.Chrome(options=opts)
+        driver.minimize_window()
+        driver.implicitly_wait(50)
+        driver.get("https://sg.sbiz.or.kr/godo/index.sg")
+
+        # 일주일 안보기
+        driver.find_element(By.CSS_SELECTOR, "#help_guide > div > div.foot > div:nth-child(2) > label").click()
+        driver.find_element(By.CSS_SELECTOR, "#help_guide > div > div.foot > a").click()
+
+        # 로그인 버튼화면 이동
+        page_login_btn = driver.find_element(By.CSS_SELECTOR,
+                                             "#menu > div.lay.scrollbarView > div > div.head > div > ul > li > a > span")
+        page_login_btn.click()
+        time.sleep(1)
+
+        login_id = "mun0392"
+        login_pw = "qkrrhkdgus123!"
+        edit_line_id = driver.find_element(By.ID, "id")
+        edit_line_pw = driver.find_element(By.ID, "pass")
+        login_btn = driver.find_element(By.CSS_SELECTOR, "body > div > div.l_content > form > div > input")
+
+        edit_line_id.send_keys(login_id)
+        edit_line_pw.send_keys(login_pw)
+        login_btn.click()
+
+        container = driver.find_element(By.ID, "container")
+        # 첫번째 팝업 끄기
+        try:
+            x_btn = driver.find_element(By.CLASS_NAME, "option-wrap")
+            x_btn.click()
+        except:
+            traceback.print_exc()
+            while True:
+                pass
+        # 상세분석 버튼 클릭
+        detail_btn = container.find_element(By.CSS_SELECTOR, "#toLink > a > h4")
+        detail_btn.click()
+        time.sleep(3)
+
+        # 좌상단 음식 버튼 클릭
+        container = driver.find_element(By.ID, "container")
+        food_btn = container.find_element(By.CSS_SELECTOR, "#upjong > ul > li:nth-child(2)")
+        food_btn.click()
+        time.sleep(0.5)
+
+        # 빵/도넛 클릭
+        container = driver.find_element(By.ID, "container")
+        bread_btn = container.find_element(By.CSS_SELECTOR,
+                                           "#container > div:nth-child(17) > div > div.midd > div.midd > div.searchview.scrollbarView > div > ul > li:nth-child(9) > div > ul > li:nth-child(3) > label > span")
+        bread_btn.click()
+        time.sleep(0.5)
+
+        # 확인 클릭
+        container = driver.find_element(By.ID, "container")
+        confirm_btn = container.find_element(By.CSS_SELECTOR, "#checkTypeConfirm > span")
+        confirm_btn.click()
+        time.sleep(3)
+
+        searching_address = address  # 검색할 주소 부여
+        # 검색창 클릭
+        container = driver.find_element(By.ID, "container")
+        search_box = container.find_element(By.CSS_SELECTOR, "#searchAddress")
+        search_box.clear()
+        search_box.send_keys(f"{searching_address}")
+        search_box.send_keys(Keys.ENTER)
+        time.sleep(1.5)
+
+        # 검색 결과 최상단 선택
+        searched_label = container.find_element(By.CSS_SELECTOR, "#adrsList > li > label > span")
+        searched_label.click()
+
+        # 상권 분석 버튼 클릭
+        analysis_sector_btn = container.find_element(By.CSS_SELECTOR,
+                                                     "#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > ul > li.child > label")
+        analysis_sector_btn.click()
+
+        radius_sector_btn = container.find_element(By.CSS_SELECTOR,
+                                                   "#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(2) > div > ul > li.child > div > ul > li:nth-child(2) > label")
+        radius_sector_btn.click()
+
+        # 500m 클릭
+        distance_btn = container.find_element(By.CSS_SELECTOR,
+                                              "#auto_circle > div > div.midd > ul > li:nth-child(5) > label")
+        distance_btn.click()
+        time.sleep(0.5)
+
+        confirm_btn = container.find_element(By.CSS_SELECTOR,
+                                             "#auto_circle > div > div.foot > a:nth-child(2) > span")
+        confirm_btn.click()
+        time.sleep(0.5)
+
+        # 분석 버튼 클릭
+        start_analysis = container.find_element(By.CSS_SELECTOR,
+                                                "#map > div:nth-child(1) > div > div:nth-child(6) > div:nth-child(3) > img")
+        start_analysis.click()
+        time.sleep(5)
+        container = driver.find_element(By.ID, "page1")
+        daily_floating_population = container.find_element(By.CSS_SELECTOR, "#flowPopSmryInfoFlowPop").text
+        daily_floating_population = daily_floating_population.replace("명", "")
+        living_population = container.find_element(By.CSS_SELECTOR, "#empAbodePopSmryInfoAbodePop").text
+        living_population = living_population.replace("명", "")
+        living_worker_avg_revenue = container.find_element(By.CSS_SELECTOR,
+                                                           "#empAbodePopSmryInfoEmpAvgCo").text
+        living_worker_avg_revenue = int(living_worker_avg_revenue.replace("만원", "0000"))
+        living_worker_avg_revenue = f"{living_worker_avg_revenue}"
+        living_population_avg_revenue = container.find_element(By.CSS_SELECTOR,
+                                                               "#empAbodePopSmryInfoAbodeAvgCo").text
+        living_population_avg_revenue = int(living_population_avg_revenue.replace("만원", "0000"))
+        living_population_avg_revenue = f"{living_population_avg_revenue}"
+        driver.quit()
+
+        return daily_floating_population, living_population, living_worker_avg_revenue, \
+            living_population_avg_revenue
+
+    @staticmethod
+    def get_address_with_latitude_and_longitude(latitude, longitude):
+        import requests
+        apiurl = "http://api.vworld.kr/req/address?"
+        params = {
+            "service": "address",
+            "request": "getaddress",
+            "crs": "epsg:4326",
+            "point": f"{longitude},{latitude}",
+            "format": "json",
+            "type": "road",
+            "key": "9FE80788-D664-31C3-9D9C-219FDABCA26F"
+        }
+        response = requests.get(apiurl, params=params)
+        if response.status_code == 200:
+            json_obj = response.json()
+            address = json_obj['response']['result'][0]['text']
+            return address
+        else:
+            raise '주소를 불러올 수 없음 from vworld'
+
+    @staticmethod
+    def count_distance(data_frame, latitude, longitude):
+        from haversine import haversine
+        count_500 = 0
+        count_1000 = 0
+        for row in data_frame.itertuples():
+            distance = haversine((latitude, longitude), (row.LATITUDE, row.LONGITUDE), unit='m')
+            if distance <= 500:
+                count_500 += 1
+                count_1000 += 1
+            elif 500 < distance <= 1000:
+                count_1000 += 1
+        return count_500, count_1000
 
     @staticmethod
     def search_word_cleaning(word: str) -> list[str]:
@@ -319,7 +579,8 @@ class DBConnector:
 
 
 if __name__ == '__main__':
-    main()
-    # from python_controller import Path
-    # conn = DBConnector(test_option=True,config_path=Path().CONFIG_PATH)
-    # conn.get_selling_area_by_id(11)
+    # main()
+    from python_controller import Path
+
+    conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
+    conn.calculate_location_score(37.2399466516839, 127.214951334731)

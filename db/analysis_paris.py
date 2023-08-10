@@ -1,4 +1,5 @@
 import json
+import pickle
 
 import pandas as pd
 import psycopg2
@@ -378,6 +379,8 @@ class AnalysisController:
 
         model = LinearRegression()
         model.fit(X_train, y_train)
+        pickle.dump(model)
+
         y_pred = model.predict(X_test)
 
         # Evaluate the model's performance
