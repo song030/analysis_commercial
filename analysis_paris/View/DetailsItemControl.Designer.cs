@@ -35,8 +35,8 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52F));
             this.tableLayoutPanel1.Controls.Add(this.lblDetailName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblDetailValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.underBar, 0, 2);
@@ -56,7 +56,7 @@
             this.lblDetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailName.AutoSize = true;
             this.lblDetailName.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailName.Location = new System.Drawing.Point(147, 13);
+            this.lblDetailName.Location = new System.Drawing.Point(134, 13);
             this.lblDetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailName.Name = "lblDetailName";
             this.lblDetailName.Size = new System.Drawing.Size(38, 15);
@@ -69,7 +69,7 @@
             this.lblDetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailValue.AutoSize = true;
             this.lblDetailValue.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailValue.Location = new System.Drawing.Point(466, 13);
+            this.lblDetailValue.Location = new System.Drawing.Point(453, 13);
             this.lblDetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailValue.Name = "lblDetailValue";
             this.lblDetailValue.Size = new System.Drawing.Size(42, 15);

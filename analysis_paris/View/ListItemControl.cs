@@ -32,7 +32,7 @@ namespace analysis_paris.View {
             lblScore.Text = "";
 
             lblAddr.Text = "검색 결과 없음";
-            lblAddr.Font = new Font(lblAddr.Font.Name, 12, FontStyle.Bold);
+            lblAddr.Font = new Font(lblAddr.Font.Name, 10, FontStyle.Bold);
         }
 
 
@@ -60,9 +60,10 @@ namespace analysis_paris.View {
 
             // 타입별 적용
             if (_sellingArea.SELLING_TYPE == "매매") {
-                if (_sellingArea.SELLING_PRICE < 1)
+                if (_sellingArea.SELLING_PRICE == 0)
                     lblPOption.Text = "협의";
-                lblPOption.Text = $"{_sellingArea.SELLING_PRICE}만원";
+                else
+                    lblPOption.Text = $"{_sellingArea.SELLING_PRICE}만원";
                 lblType.ForeColor = Color.FromArgb(254, 206, 0);
             }
             else {

@@ -93,12 +93,6 @@
     <Compile Include="View\ListItemControl.Designer.cs">
       <DependentUpon>ListItemControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Loading.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\Loading.Designer.cs">
-      <DependentUpon>Loading.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +116,13 @@
     <Compile Include="View\RoundedButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="View\SplashScreen.cs" />
+    <Compile Include="View\SplashWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\SplashWindow.Designer.cs">
+      <DependentUpon>SplashWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\TestForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,9 +137,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ListItemControl.resx">
       <DependentUpon>ListItemControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\Loading.resx">
-      <DependentUpon>Loading.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -158,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ModeGroupControl.resx">
       <DependentUpon>ModeGroupControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\SplashWindow.resx">
+      <DependentUpon>SplashWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
@@ -274,6 +275,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\firstviewback.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_exit_w.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_exit_y.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
