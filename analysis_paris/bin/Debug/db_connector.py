@@ -173,9 +173,6 @@ class DBConnector:
         self.end_conn()
         return df
 
-    def calculate_(self):
-        pass
-
     def calculate_location_score(self, latitude, longitude):
         """
         계산해야할 테이블, 칼럼
@@ -187,9 +184,12 @@ class DBConnector:
             CRAWLING - 일일 유동인구, 거주인구, 직장인 평균소득, 거주인구 평균소득
             'DAILY_FLOATING_POPULATION', 'LIVING_POPULATION', 'LIVING_WORKER_AVG_REVENUE', 'LIVING_POPULATION_AVG_REVENUE'
         """
-        result_score = 0
+        score = 0
         print(f"입력된 위도:{latitude} 경도: {longitude} ")
 
+        df = self.get_data_frame_by_latitude_and_longitude(latitude, longitude)
+        if len(df) != 0:
+            return df
         school_500_count = 0
         school_1000_count = 0
         academy_500_count = 0
@@ -257,7 +257,19 @@ class DBConnector:
         simulation_df = pd.DataFrame(result_dict)
         score = self.predict_value_with_model(simulation_df)
         result_dict.update({"score": score})
+        result_dict.update({"LATITUDE": latitude})
+        result_dict.update({"LONGITUDE": longitude})
 
+        simulation_df.to_sql(name='TB_SEARCH_RESULT', con=self.engine, if_exists='replace', index=False)
+
+    def get_data_frame_by_latitude_and_longitude(self, latitude, longitude):
+        pstmt = f"""select * from "TB_SEARCH_RESULT" where "LATITUDE" = {latitude}, "LONGITUDE" = {longitude}"""
+        try:
+            df = pd.read_sql(pstmt, con=self.engine)
+        except:
+            traceback.print_exc()
+            df = pd.DataFrame()
+        return df
 
     @staticmethod
     def predict_value_with_model(df):
@@ -475,8 +487,8 @@ class DBConnector:
 
 
 if __name__ == '__main__':
-    # main()
-    from python_controller import Path
-
-    conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
-    conn.calculate_location_score(37.2399466516839, 127.214951334731)
+    main()
+    # from python_controller import Path
+    #
+    # conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
+    # conn.calculate_location_score(37.2399466516839, 127.214951334731)

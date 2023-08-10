@@ -18,6 +18,7 @@
 
 
 import matplotlib.pyplot as plt
+import pandas as pd
 from matplotlib import rcParams
 from matplotlib.animation import FuncAnimation, PillowWriter
 
@@ -105,13 +106,14 @@ class Graph:
     def set_data(self, data, columns:list[str]=None):
         if self.graph_type == "bar":
             # [ df, df, df ]
-            data: list
+            data: list[pd.DataFrame]
 
-            self.original_data = {}
+            self.original_data = dict()
             self.models = list()
             self.max_y = 0
 
             for idx, value in enumerate(data):
+                value:pd.DataFrame
                 model = value[columns[0]][0]
                 df = value[columns[1:]]
                 value = df.values[0]
