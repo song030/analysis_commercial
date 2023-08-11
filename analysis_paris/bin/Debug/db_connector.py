@@ -539,25 +539,68 @@ class DBConnector:
         pstmt = """select * from "TB_PARIS" """
         read_tbl = pd.read_sql(pstmt, con=self.engine)
         df = pd.DataFrame(read_tbl)
-        df = df[df.columns.difference(['PARIS_ID','PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
-                                 'CITY'])]
+        df = df[df.columns.difference(
+            ['PARIS_ID', 'PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
+             'CITY'])]
         df = df.mean().astype(int)
         df['PARIS_ID'] = 999
         self.end_conn()
         df = pd.DataFrame(df).transpose()
         print(df)
         return df
+
     def get_paris_top_10_avg(self):
         self.start_conn()
         pstmt = """select * from "TB_PARIS" order by "SCORE" DESC """
         read_tbl = pd.read_sql(pstmt, con=self.engine)
         df = pd.DataFrame(read_tbl)
-        df = df[df.columns.difference(['PARIS_ID', 'PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
-                                       'CITY'])]
+        df = df[df.columns.difference(
+            ['PARIS_ID', 'PARIS_NAME', 'PARIS_ADDRESS', 'OPEN_DATE', 'CLOSE_DATE', 'IS_OPEN_STATE',
+             'CITY'])]
         count_10_percent = int(len(df) * 0.1)
         df = df.head(count_10_percent)
         df = df.mean().astype(int)
         df['PARIS_ID'] = 1000
+        self.end_conn()
+        df = pd.DataFrame(df).transpose()
+        return df
+
+    def get_selling_area_avg(self):
+        self.start_conn()
+        pstmt = """select * from "TB_SELLING_AREA" """
+        read_tbl = pd.read_sql(pstmt, con=self.engine)
+        df = pd.DataFrame(read_tbl)
+
+        df = df[df.columns.difference(
+            ["SELLING_TYPE",
+             'BUILDING_TYPE',
+             'CURRENT_STATE',
+             'ADDRESS',
+             'RELATION_LINK', ])]
+        df = df.mean().astype(int)
+        df['SELLING_AREA_ID'] = 999
+        self.end_conn()
+        df = pd.DataFrame(df).transpose()
+        print(df)
+        return df
+
+    def get_selling_area_top_10_avg(self):
+        self.start_conn()
+        pstmt = """select * from "TB_SELLING_AREA" order by "SCORE" DESC """
+        read_tbl = pd.read_sql(pstmt, con=self.engine)
+        df = pd.DataFrame(read_tbl)
+        df = df[
+            df.columns.difference([
+                "SELLING_TYPE",
+                'BUILDING_TYPE',
+                'CURRENT_STATE',
+                'ADDRESS',
+                'RELATION_LINK',
+            ])]
+        count_10_percent = int(len(df) * 0.1)
+        df = df.head(count_10_percent)
+        df = df.mean().astype(int)
+        df['SELLING_AREA_ID'] = 1000
         self.end_conn()
         df = pd.DataFrame(df).transpose()
         return df
@@ -640,3 +683,7 @@ if __name__ == '__main__':
     # pd.set_option('display.width', 1000)
     # conn.get_paris_avg()
     # conn.get_paris_top_10_avg()
+    # df = conn.get_selling_area_avg()
+    # df = conn.get_selling_area_top_10_avg()
+    # print(df.ACADEMY_COUNT_NEAR_500[0])
+    # conn.get_selling_area_by_id(11)
