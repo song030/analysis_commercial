@@ -60,7 +60,7 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 1500;
+            graphGifTimer.Interval = 1570;
             graphGifTimer.Tick += Graph_Stop;
         }
 
@@ -190,6 +190,7 @@ namespace analysis_paris {
         private void SearchArea_Clear() {
             searchBox.Text = string.Empty;
             flowSearchList.Controls.Clear();
+            flowDetails.Controls.Clear();
         }
 
         // 검색 결과 영역이 바뀔 때 컨트롤 사이즈 최적화
@@ -228,12 +229,17 @@ namespace analysis_paris {
 
         // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
         private void flowDetails_SizeChanged(object sender, EventArgs e) {
+            flowDetails_reset();
+        }
+
+        private void flowDetails_reset() {
             flowDetails.SuspendLayout();
             foreach (DetailsItemControl detail in flowDetails.Controls) {
                 detail.Width = flowDetails.Width - 20;
             }
             flowDetails.ResumeLayout();
             // 스크롤 리셋
+            flowDetails.HorizontalScroll.Maximum = 0;
             flowDetails.AutoScroll = false;
             flowDetails.AutoScroll = true;
         }
@@ -333,6 +339,7 @@ namespace analysis_paris {
                     flowDetails.Controls.Add(detail);
                 }
             }
+            flowDetails_reset();
 
             btnTable.Enabled = true;
             btnChart.Enabled = true;
@@ -386,6 +393,8 @@ namespace analysis_paris {
                     flowDetails.Controls.Add(detail);
                 }
             }
+
+            flowDetails_reset();
         }
 
         // 선택 항목에 대한 지도 및 차트 갱신
