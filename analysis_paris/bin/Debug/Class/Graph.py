@@ -57,9 +57,9 @@ class Graph:
         self.values_x = list()  # x 위치
 
         # 값 (Y)
-        self.original_data = {}
+        self.original_data = None
         # 애니메이션용 값 정보
-        self.ani_data = {}
+        self.ani_data = None
         self.max_y = 0
         # 본래 값 정보 리스트
 
@@ -72,6 +72,7 @@ class Graph:
         self.width = 0.25
         self.add = 0
         self.delay_frame = 8
+        self.total_value = 100
 
         # 그래프 표현 색상
         self.colors = ['#181C3F', '#494B6F', '#6B53FF', '#f1A08B', '#eFBC00', '#01DCCD', '#5D99FE', '#2A2D56']
@@ -87,11 +88,6 @@ class Graph:
             plt.bar([], [])
 
         elif graph_type == "pie":
-
-            self.add = 100 // self.total_frame
-            if 100 % self.total_frame > 0:
-                self.add += 1
-
             plt.pie([], [])
 
     # 그래프 데이터 표현 색상 설정
@@ -116,9 +112,6 @@ class Graph:
 
             for idx, value in enumerate(data):
                 value: pd.DataFrame
-                print("value!!!!!")
-                print(value)
-                print(type(value))
                 model = value[columns[0]][0]
                 df = value[columns[1:]]
                 value = df.values[0]
@@ -133,15 +126,21 @@ class Graph:
             plt.ylim(0.1, self.max_y)
             plt.xlim(-1, self.ticks_size * len(self.models))
 
+            self.ani_data = {}
             for i in range(len(self.models)):
                 self.ani_data[self.models[i]] = [0 for _ in range(self.ticks_size)]
 
         elif self.graph_type == "pie":
             data: dict
-            self.original_data = data
             self.models = list(data.keys())
+            self.original_data = list(data.values())
             self.ani_data = list(data.values())
-            plt.pie(self.ani_data, labels=self.models, autopct='%.1f%%', shadow=True)
+            plt.pie(self.ani_data, labels=self.models, shadow=True)
+
+            self.total_value = sum(self.original_data)
+            self.add = self.total_value // self.total_frame
+            if self.total_value % self.total_frame > 0:
+                self.add += 1
 
     # bar graph - 모델, 요소 종류에 따른 위치 계산
     def compute_pos(self, i):
@@ -155,7 +154,6 @@ class Graph:
         plt.cla()
 
         if self.graph_type == "bar":
-
             index = 0
             # 모델 반복 구간
             for model, values_y in self.original_data.items():
@@ -181,45 +179,33 @@ class Graph:
         elif self.graph_type == "pie":
             frame = frame * self.add
 
-            sum = 0
-            limit = 0
-            size_check = False
-            self.ani_data = list()
-            # {'Apple':34, 'Banana':32, 'Melon':16, 'Grapes':18}
-            for model, value in self.original_data.items():
-                if limit == 0:
-                    limit = value
-                elif frame > limit:
-                    limit += value
+            if frame >= self.total_value:
+                plt.pie(self.original_data, labels=self.models, autopct='%.1f%%', shadow=True, colors=self.colors)
+            else:
+                _sum = 0
+                last_value = 0
+                # {'Apple':34, 'Banana':32, 'Melon':16, 'Grapes':18}
+                for idx, value in enumerate(self.original_data):
+                    _sum += value
+                    if frame <= _sum:
+                        last_value = frame - (_sum-value)
+                        self.ani_data = self.original_data[:idx]
+                        break
+                    else:
+                        last_value = value
 
-                if frame <= limit:
-                    value = frame - sum
-                    size_check = True
+                self.ani_data.append(last_value)
+                self.ani_data.append(self.total_value - frame)
 
-                sum += value
-                self.ani_data.append(value)
-
-                if size_check:
-                    break
-
-            if frame < 100:
-                autopct = None
-                self.ani_data.append(100 - frame)
-                models = self.models[:len(self.ani_data) - 1]
+                _len = len(self.ani_data)-1
+                models = self.models[:_len]
                 models.append("")
 
-                colors = self.colors[:len(self.ani_data) - 1]
+                colors = self.colors[:_len]
                 colors.append(self.blank_color)
-            else:
-                autopct = '%.1f%%'
-                models = self.models
-                colors = self.colors
+                plt.pie(self.ani_data, labels=models, shadow=True, colors=colors)
 
-            if frame >= self.total_frame * self.add:
-                plt.title("Score 분석")
-                plt.pie(list(self.original_data.values()), labels=models, autopct=autopct, shadow=True, colors=colors)
-            else:
-                plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)
+            plt.title("Score 분석")
 
     # gif 저장
     def save_gif(self, file_path='graph_ani.gif', repeat=False):
