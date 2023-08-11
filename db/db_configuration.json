@@ -1,9 +1,0 @@
-{
-  "host": "10.10.20.117",
-  "main_database_name": "db_analysis_main",
-  "test_database_name": "db_analysis_test",
-  "origin_database_name": "db_test",
-  "user": "postgres",
-  "password": "1234",
-  "port": "5432"
-}

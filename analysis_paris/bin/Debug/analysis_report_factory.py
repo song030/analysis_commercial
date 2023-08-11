@@ -217,7 +217,7 @@ class MapFactory:
         graph = Graph(700, 500, "pie")
         # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray', 'blue', 'red', 'green', 'purple'])
         # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
-        graph.set_color(self.generate_random_colors(8))
+        graph.set_color(self.generate_random_colors(15))
         graph.set_data(data)
 
         file_path = self.file_path + r"\Graph\test_pie.gif"
