@@ -60,11 +60,8 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 1500;
+            graphGifTimer.Interval = 1550;
             graphGifTimer.Tick += Graph_Stop;
-
-            //graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
-            //graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
         }
 
         // 로딩 화면 출력
@@ -79,7 +76,6 @@ namespace analysis_paris {
         // 프로그램 종료 버튼 hover event → Gif로 변경 예정
         private void btnExit_MouseHover(object sender, EventArgs e) {
             btnExit.Image = Properties.Resources.icon_exit_y;
-            //btnExit.Image = Properties.Resources.export;
         }
 
         private void btnExit_MouseLeave(object sender, EventArgs e) {
@@ -365,10 +361,10 @@ namespace analysis_paris {
             //Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
             mapBrowser.Refresh();
-            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
-            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
             graphBoxBar.Refresh();
             graphBoxPie.Refresh();
+            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
 
             gifAnimated = false;
             btnChart.Enabled = true;
@@ -465,7 +461,6 @@ namespace analysis_paris {
             graphBoxPie.Enabled = false;
             graphGifTimer.Stop();
         }
-
 
         #endregion
 
