@@ -60,7 +60,7 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 1550;
+            graphGifTimer.Interval = 1500;
             graphGifTimer.Tick += Graph_Stop;
         }
 
@@ -133,7 +133,7 @@ namespace analysis_paris {
 
             btnTable.Enabled = true;
             btnChart.Enabled = false;
-
+            btnSearchClose.Enabled = true;
             btnTable.Checked = false;
             btnMap.Checked = false;
             btnChart.Checked = false;
@@ -167,6 +167,7 @@ namespace analysis_paris {
                     layoutSearchResult.RowStyles[0].Height = 0;
                     layoutMapBox.RowStyles[0].Height = 60;
                     btnMap.Checked = true;
+                    btnSearchClose.Enabled = false;
                     btnTable.Enabled = false;
                     btnMap.Enabled = false;
                     DataBoard_Collapse();
@@ -198,7 +199,9 @@ namespace analysis_paris {
                 listItem.Width = flowSearchList.Width - 20;
             }
             flowSearchList.ResumeLayout();
-            Invalidate();   // 화면 갱신
+            // 스크롤 리셋
+            flowSearchList.AutoScroll = false;
+            flowSearchList.AutoScroll = true;
         }
 
         // 검색 버튼 클릭 시
@@ -230,6 +233,9 @@ namespace analysis_paris {
                 detail.Width = flowDetails.Width - 20;
             }
             flowDetails.ResumeLayout();
+            // 스크롤 리셋
+            flowDetails.AutoScroll = false;
+            flowDetails.AutoScroll = true;
         }
 
         // 검색 박스 닫기 버튼
@@ -265,6 +271,9 @@ namespace analysis_paris {
                 flowSearchList.Controls.Add(listItemControl);
             }
             else {
+                if (target.Count > 400)
+                    target = target.GetRange(0, 400);
+
                 foreach (SellingArea item in target) {
                     ListItemControl itemControl = new ListItemControl(item);
                     itemControl.Click += ListItem_Click;
@@ -366,7 +375,14 @@ namespace analysis_paris {
 
             foreach (var item in dictionary_) {
                 if (item.Value.Item2 != "0") {
-                    DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
+                    string value_;
+
+                    if ("매매가(만원)보증금(만원)월세(만원)권리금(만원)".Contains(item.Value.Item1) && (item.Value.Item2 == "0" || item.Value.Item2 == string.Empty))
+                        value_ = "협의";
+                    else {
+                        value_ = item.Value.Item2;
+                    }
+                    DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, value_);
                     flowDetails.Controls.Add(detail);
                 }
             }

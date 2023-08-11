@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -46,8 +45,6 @@ namespace analysis_paris.View {
 
         private void opacityTimer_Tick(object sender, System.EventArgs e) {
             var currentOpacity = this.Opacity;
-
-            Console.WriteLine(currentOpacity);
 
             if (opacityPlus) {
                 currentOpacity += opacityStep;

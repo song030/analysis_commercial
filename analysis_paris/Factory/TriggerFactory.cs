@@ -13,7 +13,7 @@ namespace analysis_paris.Factory {
             string username = Environment.UserName;
             if (username.ToUpper() == "KDT107") {
                 this.scriptPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
-                this.pythonPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
+                this.pythonPath = @"C:\Users\KDT107\Desktop\analysis_commercial\venv\Scripts\python.exe";
             }
             else if (username.ToUpper() == "KDT99") {
                 this.scriptPath = @"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\python_controller.py";

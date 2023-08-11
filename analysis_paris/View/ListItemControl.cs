@@ -44,7 +44,7 @@ namespace analysis_paris.View {
             lblType.Text = _paris.PARIS_NAME;
             lblAddr.Text = _paris.PARIS_ADDRESS;
             lblArea.Text = $"{_paris.AREA_SIZE}m²";
-            lblPOption.Text = $"{_paris.MONTHLY_SHOP_REVENUE}";
+            lblPOption.Text = $"{_paris.MONTHLY_SHOP_REVENUE:#,##}";
             lblScore.Text = $"{_paris.SCORE}";
         }
 
