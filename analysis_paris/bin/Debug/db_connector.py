@@ -208,6 +208,7 @@ class DBConnector:
             data = json.loads(json_string)
             cleaned_data = {key: value["0"] for key, value in data.items()}
             print(cleaned_data)
+            return
         SCHOOL_COUNT_NEAR_500 = 0
         SCHOOL_COUNT_NEAR_1000 = 0
         ACADEMY_COUNT_NEAR_500 = 0
@@ -231,9 +232,8 @@ class DBConnector:
                 self.crawling_elements_with_address(latitude, longitude)
         except:
             # todo 에러 처리 어떻게할지
-            result_score = -1
-            # traceback.print_exc()
-            return result_score
+            print('ADDRESS_ERROR')
+            return
 
         self.start_conn()
         col_names = ["LATITUDE", "LONGITUDE"]
@@ -384,13 +384,9 @@ class DBConnector:
 
         container = driver.find_element(By.ID, "container")
         # 첫번째 팝업 끄기
-        try:
-            x_btn = driver.find_element(By.CLASS_NAME, "option-wrap")
-            x_btn.click()
-        except:
-            traceback.print_exc()
-            while True:
-                pass
+        x_btn = driver.find_element(By.CLASS_NAME, "option-wrap")
+        x_btn.click()
+
         # 상세분석 버튼 클릭
         detail_btn = container.find_element(By.CSS_SELECTOR, "#toLink > a > h4")
         detail_btn.click()
@@ -702,8 +698,8 @@ if __name__ == '__main__':
     # from python_controller import Path
     #
     # conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
-    # conn.calculate_location_score(37.6855315551009, 126.766235181339)
-
+    # conn.calculate_location_score(37.6855315551005, 126.766235181339)
+    #
     # conn.calculate_location_score(37.2399466516839, 127.214951334731)
     # pd.set_option('display.max_columns', None)
     # pd.set_option('display.width', 1000)

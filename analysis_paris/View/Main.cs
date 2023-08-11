@@ -60,7 +60,7 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 1500;
+            graphGifTimer.Interval = 1580;
             graphGifTimer.Tick += Graph_Stop;
         }
 
@@ -131,9 +131,10 @@ namespace analysis_paris {
         private void SetSearchMode(int modeIndex) {
             SearchArea_Clear();
 
+            btnSearchClose.Enabled = true;
             btnTable.Enabled = true;
             btnChart.Enabled = false;
-            btnSearchClose.Enabled = true;
+            btnSearchClose.Checked = false;
             btnTable.Checked = false;
             btnMap.Checked = false;
             btnChart.Checked = false;
@@ -190,6 +191,7 @@ namespace analysis_paris {
         private void SearchArea_Clear() {
             searchBox.Text = string.Empty;
             flowSearchList.Controls.Clear();
+            flowDetails.Controls.Clear();
         }
 
         // 검색 결과 영역이 바뀔 때 컨트롤 사이즈 최적화
@@ -211,7 +213,7 @@ namespace analysis_paris {
             lblSearchAlert.Visible = false;
             flowSearchList.Controls.Clear();
 
-            Loading_Start();    // 로딩 스레드 시작
+
 
             switch (currentSearchMode) {
                 case 0:
@@ -228,12 +230,17 @@ namespace analysis_paris {
 
         // 주변 정보 영역이 바뀔 때 컨트롤 사이즈 최적화
         private void flowDetails_SizeChanged(object sender, EventArgs e) {
+            flowDetails_reset();
+        }
+
+        private void flowDetails_reset() {
             flowDetails.SuspendLayout();
             foreach (DetailsItemControl detail in flowDetails.Controls) {
                 detail.Width = flowDetails.Width - 20;
             }
             flowDetails.ResumeLayout();
             // 스크롤 리셋
+            flowDetails.HorizontalScroll.Maximum = 0;
             flowDetails.AutoScroll = false;
             flowDetails.AutoScroll = true;
         }
@@ -262,6 +269,7 @@ namespace analysis_paris {
                 return;
             }
 
+            Loading_Start();    // 로딩 스레드 시작
             string resultString = Percussion.GetScriptResult(TriggerType.SellingAreaAddress, searchKeyword);
 
             List<SellingArea> target = JSONConverter.JSONConverterSellingArea(resultString);
@@ -289,6 +297,7 @@ namespace analysis_paris {
                 return;
             }
 
+            Loading_Start();    // 로딩 스레드 시작
             string resultString = Percussion.GetScriptResult(TriggerType.ParisByAddress, searchKeyword);
 
             List<Paris> target = JSONConverter.JSONConverterParis(resultString);
@@ -315,7 +324,7 @@ namespace analysis_paris {
             resultString = resultString.Replace(Environment.NewLine, string.Empty);
             resultString.Trim();
 
-            if (resultString.Equals("ADDRESS_ERROR")) {
+            if (resultString.Equals("ADDRESS_ERROR") || resultString.Equals("ADDRESS_ERRORADDRESS_ERROR")) {
                 SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
                 MessageBox.Show("주소를 조회할 수 없습니다.");
                 return;
@@ -333,6 +342,7 @@ namespace analysis_paris {
                     flowDetails.Controls.Add(detail);
                 }
             }
+            flowDetails_reset();
 
             btnTable.Enabled = true;
             btnChart.Enabled = true;
@@ -386,6 +396,7 @@ namespace analysis_paris {
                     flowDetails.Controls.Add(detail);
                 }
             }
+            flowDetails_reset();
         }
 
         // 선택 항목에 대한 지도 및 차트 갱신
@@ -394,6 +405,12 @@ namespace analysis_paris {
                 Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
             mapBrowser.Refresh();
+            if (targetId != -1) {
+                mapBrowser.LoadUrl("http://song030s.dothome.co.kr/Map/test_map2.html");
+            }
+            else {
+                //mapBrowser.LoadUrl("http://song030s.dothome.co.kr/Map/search.html");
+            }
             graphBoxBar.Refresh();
             graphBoxPie.Refresh();
             graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
