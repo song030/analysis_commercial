@@ -164,26 +164,26 @@ class MapFactory:
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
 
-        data = {
-            '유동인구': int(self.result['DAILY_FLOATING_POPULATION'][0]/10000),
-            '거주 인구': int(self.result['LIVING_POPULATION'][0]/10000),
-            '근로자 평균 임금': int(self.result['LIVING_WORKER_AVG_REVENUE'][0]/1000000),
-            '거주자 평균 임금': int(self.result['LIVING_POPULATION_AVG_REVENUE'][0]/1000000),
-            '버스정거장_500': int(self.result['STOP_COUNT_NEAR_500'][0]),
-            '버스정거장_1000': int(self.result['STOP_COUNT_NEAR_1000'][0]),
-            '여가시설_500': int(self.result['LEISURE_COUNT_NEAR_500'][0]),
-            '여가시설_1000': int(self.result['LEISURE_COUNT_NEAR_1000'][0]),
-        }
-        graph = Graph(700, 500, "pie")
-        # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray', 'blue', 'red', 'green', 'purple'])
-        # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
-        graph.set_color(self.generate_random_colors(8))
-        graph.set_data(data)
-
-        file_path = self.file_path + r"\Graph\test_pie.gif"
-        graph.save_gif(file_path)
-        self.ftp.save_file(file_path)
-        self.ftp.disconnect()
+        # data = {
+        #     '유동인구': int(self.result['DAILY_FLOATING_POPULATION'][0]/10000),
+        #     '거주 인구': int(self.result['LIVING_POPULATION'][0]/10000),
+        #     '근로자 평균 임금': int(self.result['LIVING_WORKER_AVG_REVENUE'][0]/1000000),
+        #     '거주자 평균 임금': int(self.result['LIVING_POPULATION_AVG_REVENUE'][0]/1000000),
+        #     '버스정거장_500': int(self.result['STOP_COUNT_NEAR_500'][0]),
+        #     '버스정거장_1000': int(self.result['STOP_COUNT_NEAR_1000'][0]),
+        #     '여가시설_500': int(self.result['LEISURE_COUNT_NEAR_500'][0]),
+        #     '여가시설_1000': int(self.result['LEISURE_COUNT_NEAR_1000'][0]),
+        # }
+        # graph = Graph(700, 500, "pie")
+        # # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray', 'blue', 'red', 'green', 'purple'])
+        # # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
+        # graph.set_color(self.generate_random_colors(8))
+        # graph.set_data(data)
+        #
+        # file_path = self.file_path + r"\Graph\test_pie.gif"
+        # graph.save_gif(file_path)
+        # self.ftp.save_file(file_path)
+        # self.ftp.disconnect()
 
 
 if __name__ == '__main__':

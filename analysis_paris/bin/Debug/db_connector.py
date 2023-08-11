@@ -185,11 +185,13 @@ class DBConnector:
             'DAILY_FLOATING_POPULATION', 'LIVING_POPULATION', 'LIVING_WORKER_AVG_REVENUE', 'LIVING_POPULATION_AVG_REVENUE'
         """
         score = 0
-        print(f"입력된 위도:{latitude} 경도: {longitude} ")
-
         df = self.get_data_frame_by_latitude_and_longitude(latitude, longitude)
         if len(df) != 0:
-            return df.iloc[len(df) - 1]
+            result_df = pd.DataFrame(df.iloc[len(df) - 1]).transpose()
+            json_string = result_df.to_json()
+            data = json.loads(json_string)
+            cleaned_data = {key: value["0"] for key, value in data.items()}
+            print(cleaned_data)
         SCHOOL_COUNT_NEAR_500 = 0
         SCHOOL_COUNT_NEAR_1000 = 0
         ACADEMY_COUNT_NEAR_500 = 0
@@ -214,7 +216,7 @@ class DBConnector:
         except:
             # todo 에러 처리 어떻게할지
             result_score = -1
-            traceback.print_exc()
+            # traceback.print_exc()
             return result_score
 
         self.start_conn()
@@ -278,8 +280,13 @@ class DBConnector:
         result_dict.update({"LONGITUDE": [float(longitude)]})
         result_dict.update({"EXPECTED_SHOP_REVENUE": [int(EXPECTED_SHOP_REVENUE)]})
 
-        result_df = pd.DataFrame(result_dict)
+        result_df = pd.DataFrame.from_dict(result_dict)
         result_df.to_sql(name="TB_SEARCH_RESULT", con=self.engine, if_exists="append", schema="public", index=False)
+
+        json_string = result_df.to_json()
+        data = json.loads(json_string)
+        cleaned_data = {key: value["0"] for key, value in data.items()}
+        print(cleaned_data)
 
     def get_data_frame_by_latitude_and_longitude(self, latitude, longitude):
         pstmt = f"""select * from "TB_SEARCH_RESULT" where "LATITUDE" = {latitude} and "LONGITUDE" = {longitude}"""
@@ -287,7 +294,6 @@ class DBConnector:
         try:
             df = pd.read_sql(pstmt, con=self.engine)
         except:
-            traceback.print_exc()
             df = pd.DataFrame()
         self.end_conn()
         return df
@@ -320,6 +326,9 @@ class DBConnector:
     @staticmethod
     def crawling_elements_with_address(latitude, longitude):
         address = DBConnector.get_address_with_latitude_and_longitude(latitude, longitude)
+        if address == '':
+            print('ADDRESS_ERROR')
+            return
         from selenium import webdriver
         from selenium.webdriver import Keys
         from selenium.webdriver.common.by import By
@@ -330,8 +339,10 @@ class DBConnector:
         # 화면 작으면 분석 안보임, 크기 키우기
         opts = ChromeOptions()
         opts.add_argument("--window-size=1300,900")
+        opts.add_argument('--log-level=3')
         # 창 띄우기
         driver = webdriver.Chrome(options=opts)
+        driver.set_window_position(1200, 1600, windowHandle='current')
         driver.implicitly_wait(50)
         driver.get("https://sg.sbiz.or.kr/godo/index.sg")
 
@@ -465,18 +476,15 @@ class DBConnector:
             "type": "road",
             "key": "9FE80788-D664-31C3-9D9C-219FDABCA26F"
         }
-        response = requests.get(apiurl, params=params)
-        if response.status_code == 200:
-            json_obj = response.json()
-            try:
+
+        try:
+            response = requests.get(apiurl, params=params)
+            if response.status_code == 200:
+                json_obj = response.json()
                 address = json_obj['response']['result'][0]['text']
                 return address
-            except:
-                print(json_obj)
-                traceback.print_exc()
-                return ''
-        else:
-            raise '주소를 불러올 수 없음 from vworld'
+        except:
+            return ''
 
     @staticmethod
     def count_distance(data_frame, latitude, longitude):
@@ -484,7 +492,7 @@ class DBConnector:
         count_500 = 0
         count_1000 = 0
         for row in data_frame.itertuples():
-            distance = haversine((latitude, longitude), (row.LATITUDE, row.LONGITUDE), unit='m')
+            distance = haversine((float(latitude), float(longitude)), (row.LATITUDE, row.LONGITUDE), unit='m')
             if distance <= 500:
                 count_500 += 1
                 count_1000 += 1
@@ -676,8 +684,8 @@ if __name__ == '__main__':
     # from python_controller import Path
     #
     # conn = DBConnector(test_option=True, config_path=Path().CONFIG_PATH)
-    # df = conn.get_data_frame_by_latitude_and_longitude(37.2399466516839, 127.214951334731)
-    # print(df)
+    # conn.calculate_location_score(37.6855315551009, 126.766235181339)
+
     # conn.calculate_location_score(37.2399466516839, 127.214951334731)
     # pd.set_option('display.max_columns', None)
     # pd.set_option('display.width', 1000)

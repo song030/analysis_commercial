@@ -1,7 +1,5 @@
 import pandas as pd
 
-from analysis.make_dataset import MakeParisDatasets, MakeSellingDatasets
-
 class Scoring:
     def __init__(self, df: pd.DataFrame):
         self.df = df
