@@ -209,9 +209,13 @@ class Scoring:
         # concat_df = pd.concat(df_list, axis=1)
         # df_score = concat_df.set_index(keys=['SELLING_AREA_ID'], drop=True)
         df_score = pd.concat(df_list, axis=1)
-
+        df_score.reset_index(inplace=True)
         # 점수 계산
         df_score['SCORE'] = df_score.sum(axis=1)
-        result_score = int(df_score['SCORE'][0])
+        # print("SCORE@@@@@@@@@@@@@@@@@@@@@@@")
+        # print(df_score)
+        # print(type(df_score))
+        # print(type(df_score['SCORE']))
+        result_score = int(df_score.at[len(df_score) - 1, 'SCORE'])
 
         return result_score

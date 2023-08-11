@@ -172,8 +172,6 @@ class MapFactory:
 
         score_data_frame = self.conn.get_dataset_by_latitude_and_longitude(latitude, longitude, mode_option)
 
-        print(score_data_frame)
-
         score_data_frame.rename(columns={
             "RIVAL_COUNT_NEAR_500": '경쟁업체_500',
             "RIVAL_COUNT_NEAR_1000": '경쟁업체_1000',
@@ -196,6 +194,7 @@ class MapFactory:
 
         from scoring import Scoring
         percent_df = Scoring(score_data_frame).get_score_percent_df()
+        percent_df.reset_index(inplace=True)
         data = {
             "월매출": percent_df['월매출'][0],
             "거주인구평균소득": percent_df['거주인구평균소득'][0],
@@ -232,4 +231,6 @@ if __name__ == '__main__':
     # pd.set_option('display.max_columns', None)
     # pd.set_option('display.width', 1000)
     # factory.result = factory.conn.get_dataset_by_latitude_and_longitude(37.8586710313174, 126.785827756748, "location")
+    # factory.result = factory.conn.find_paris_by_id(20)
+    # factory.get_selling_area_report(20, "paris")
     # factory.get_graph('location')
