@@ -23,7 +23,7 @@
         /// 이 메서드의 내용을 코드 편집기로 수정하지 마세요.
         /// </summary>
         private void InitializeComponent() {
-            this.roundedButton = new CustomControls.RoundedButton();
+            this.roundedButton = new analysis_paris.View.RoundedButton();
             this.gifBox = new System.Windows.Forms.PictureBox();
             this.gifButtonTitle = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gifBox)).BeginInit();
@@ -98,7 +98,7 @@
 
         #endregion
 
-        private CustomControls.RoundedButton roundedButton;
+        private analysis_paris.View.RoundedButton roundedButton;
         private System.Windows.Forms.PictureBox gifBox;
         private System.Windows.Forms.Label gifButtonTitle;
     }

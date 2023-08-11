@@ -1,14 +1,11 @@
 ﻿using System;
-
-using System.Windows.Forms;
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.ComponentModel;
+using System.Windows.Forms;
 
-namespace CustomControls
-{
-    public class RoundedButton : Button
-    {
+namespace analysis_paris.View {
+    public class RoundedButton : Button {
         //Fields
         private int borderSize = 0;
         private int borderRadius = 40;
@@ -16,55 +13,46 @@ namespace CustomControls
 
         //Properties
         [Category("RJ Code Advance")]
-        public int BorderSize
-        {
+        public int BorderSize {
             get { return borderSize; }
-            set
-            {
+            set {
                 borderSize = value;
                 this.Invalidate();
             }
         }
 
         [Category("RJ Code Advance")]
-        public int BorderRadius
-        {
+        public int BorderRadius {
             get { return borderRadius; }
-            set
-            {
+            set {
                 borderRadius = value;
                 this.Invalidate();
             }
         }
 
         [Category("RJ Code Advance")]
-        public Color BorderColor
-        {
+        public Color BorderColor {
             get { return borderColor; }
-            set
-            {
+            set {
                 borderColor = value;
                 this.Invalidate();
             }
         }
 
         [Category("RJ Code Advance")]
-        public Color BackgroundColor
-        {
+        public Color BackgroundColor {
             get { return this.BackColor; }
             set { this.BackColor = value; }
         }
 
         [Category("RJ Code Advance")]
-        public Color TextColor
-        {
+        public Color TextColor {
             get { return this.ForeColor; }
             set { this.ForeColor = value; }
         }
 
         //Constructor
-        public RoundedButton()
-        {
+        public RoundedButton() {
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Size = new Size(150, 40);
@@ -74,8 +62,7 @@ namespace CustomControls
         }
 
         //Methods
-        private GraphicsPath GetFigurePath(Rectangle rect, int radius)
-        {
+        private GraphicsPath GetFigurePath(Rectangle rect, int radius) {
             GraphicsPath path = new GraphicsPath();
             float curveSize = radius * 2F;
 
@@ -88,8 +75,7 @@ namespace CustomControls
             return path;
         }
 
-        protected override void OnPaint(PaintEventArgs pevent)
-        {
+        protected override void OnPaint(PaintEventArgs pevent) {
             base.OnPaint(pevent);
 
 
@@ -104,8 +90,7 @@ namespace CustomControls
                 using (GraphicsPath pathSurface = GetFigurePath(rectSurface, borderRadius))
                 using (GraphicsPath pathBorder = GetFigurePath(rectBorder, borderRadius - borderSize))
                 using (Pen penSurface = new Pen(this.Parent.BackColor, smoothSize))
-                using (Pen penBorder = new Pen(borderColor, borderSize))
-                {
+                using (Pen penBorder = new Pen(borderColor, borderSize)) {
                     pevent.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     //Button surface
                     this.Region = new Region(pathSurface);
@@ -124,28 +109,23 @@ namespace CustomControls
                 //Button surface
                 this.Region = new Region(rectSurface);
                 //Button border
-                if (borderSize >= 1)
-                {
-                    using (Pen penBorder = new Pen(borderColor, borderSize))
-                    {
+                if (borderSize >= 1) {
+                    using (Pen penBorder = new Pen(borderColor, borderSize)) {
                         penBorder.Alignment = PenAlignment.Inset;
                         pevent.Graphics.DrawRectangle(penBorder, 0, 0, this.Width - 1, this.Height - 1);
                     }
                 }
             }
         }
-        protected override void OnHandleCreated(EventArgs e)
-        {
+        protected override void OnHandleCreated(EventArgs e) {
             base.OnHandleCreated(e);
             this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
         }
 
-        private void Container_BackColorChanged(object sender, EventArgs e)
-        {
+        private void Container_BackColorChanged(object sender, EventArgs e) {
             this.Invalidate();
         }
-        private void Button_Resize(object sender, EventArgs e)
-        {
+        private void Button_Resize(object sender, EventArgs e) {
             if (borderRadius > this.Height)
                 borderRadius = this.Height;
         }

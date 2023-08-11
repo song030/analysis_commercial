@@ -60,7 +60,7 @@
             this.tblModeMenu = new System.Windows.Forms.TableLayoutPanel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMenuCollapse = new System.Windows.Forms.Button();
-            this.btnSearch = new CustomControls.RoundedButton();
+            this.btnSearch = new analysis_paris.View.RoundedButton();
             this.mapSearchButton = new analysis_paris.View.GifImageButton();
             this.btnTable = new analysis_paris.View.CheckableButton();
             this.btnMap = new analysis_paris.View.CheckableButton();
@@ -929,7 +929,7 @@
         private System.Windows.Forms.TextBox searchBox;
         private System.Windows.Forms.Label lblProjectTitle;
         private System.Windows.Forms.FlowLayoutPanel flowSearchList;
-        private CustomControls.RoundedButton btnSearch;
+        private analysis_paris.View.RoundedButton btnSearch;
         private System.Windows.Forms.Label lblSearchStore;
         private System.Windows.Forms.Label lblSearchEiffel;
         private System.Windows.Forms.Label lblSearchPin;

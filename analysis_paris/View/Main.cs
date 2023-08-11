@@ -1,5 +1,6 @@
 ﻿using analysis_paris.DAO;
 using analysis_paris.Factory;
+using analysis_paris.Resources;
 using analysis_paris.View;
 using CefSharp;
 using CefSharp.WinForms;
@@ -17,7 +18,7 @@ namespace analysis_paris {
         private bool gifAnimated = false;   // 그래프 GIF 재생 확인
         private System.Windows.Forms.Timer graphGifTimer;   // 그래프 GIf 타이머
         List<Label> ModeLabelList = new List<Label>();  // 검색 모드 라벨 리스트
-
+        SellingArea targetArea = null;  // 최종 보고서에 출력할 매물 정보
 
         // Constructor
         public Main() {
@@ -26,6 +27,9 @@ namespace analysis_paris {
 
         // 화면 출력 시 초기화
         private void Main_Load(object sender, EventArgs e) {
+            CoverForm coverForm = new CoverForm();
+            coverForm.ShowDialog();
+
             #region Cef Sharp
             // 객체 생성
             CefSettings settings = new CefSettings();
@@ -50,6 +54,7 @@ namespace analysis_paris {
             // 화면 영역 Collapse 설정
             layoutMapBox.RowStyles[0].Height = 0;
             btnTable.Checked = true;
+            btnChart.Enabled = false;
             splitTableMap.Panel2Collapsed = true;
             splitChart.Panel2Collapsed = true;
 
@@ -58,8 +63,8 @@ namespace analysis_paris {
             graphGifTimer.Interval = 1500;
             graphGifTimer.Tick += Graph_Stop;
 
-            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
-            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
+            //graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            //graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
         }
 
         // 로딩 화면 출력
@@ -90,7 +95,8 @@ namespace analysis_paris {
         private void btnMenuCollapse_Click(object sender, EventArgs e) {
             if (splitMainBoard.Panel1Collapsed) {
                 splitMainBoard.Panel1Collapsed = false;
-            } else {
+            }
+            else {
                 splitMainBoard.Panel1Collapsed = true;
             }
         }
@@ -229,7 +235,6 @@ namespace analysis_paris {
                 detail.Width = flowDetails.Width - 20;
             }
             flowDetails.ResumeLayout();
-            //Invalidate();   // 화면 갱신
         }
 
         // 검색 박스 닫기 버튼
@@ -239,7 +244,8 @@ namespace analysis_paris {
             if (target.Checked) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitDataBoard.Panel1Collapsed = true;
-            } else {
+            }
+            else {
                 splitDataBoard.Panel1Collapsed = false;
             }
         }
@@ -262,7 +268,8 @@ namespace analysis_paris {
             if (target.Count == 0) {
                 ListItemControl listItemControl = new ListItemControl();
                 flowSearchList.Controls.Add(listItemControl);
-            } else {
+            }
+            else {
                 foreach (SellingArea item in target) {
                     ListItemControl itemControl = new ListItemControl(item);
                     itemControl.Click += ListItem_Click;
@@ -284,7 +291,8 @@ namespace analysis_paris {
             if (target.Count == 0) {
                 ListItemControl listItemControl = new ListItemControl();
                 flowSearchList.Controls.Add(listItemControl);
-            } else {
+            }
+            else {
                 foreach (Paris item in target) {
                     ListItemControl itemControl = new ListItemControl(item);
                     itemControl.Click += ListItem_Click;
@@ -325,52 +333,47 @@ namespace analysis_paris {
 
             flowDetails.Controls.Clear();
 
-            Loading_Start();    // 로딩 스레드 시작
+            //Loading_Start();    // 로딩 스레드 시작
+            Dictionary<string, Tuple<string, string>> dictionary_ = null;
 
             // 기존 매장 항목 클릭 시
             if (target.SellingArea is null) {
                 targetId = target.ParisInfo.PARIS_ID;
                 Report_Update(targetId, "paris");
-
-                Dictionary<string, Tuple<string, string>> dictionary_ = target.ParisInfo.GetAttributes();
-                foreach (var item in dictionary_) {
-                    DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
-                    flowDetails.Controls.Add(detail);
-                }
+                dictionary_ = target.ParisInfo.GetAttributes();
             }
             // 매물 항목 클릭 시
             else {
+                btnGoAhead.Visible = true;
+                targetArea = target.SellingArea;
                 targetId = target.SellingArea.SELLING_AREA_ID;
                 Report_Update(targetId, "selling_area");
+                dictionary_ = target.SellingArea.GetAttributes();
+            }
 
-                Dictionary<string, Tuple<string, string>> dictionary_ = target.SellingArea.GetAttributes();
-                foreach (var item in dictionary_) {
+            foreach (var item in dictionary_) {
+                if (!item.Value.Item2.Contains("0")) {
                     DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
                     flowDetails.Controls.Add(detail);
                 }
-
-                btnGoAhead.Visible = true;
             }
         }
 
         // 선택 항목에 대한 지도 및 차트 갱신
-        //private void Report_Update(int targetId) {
         private void Report_Update(int targetId, string targetType) {
             Console.WriteLine($"Report_Update : {targetId}");
-            Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
+            //Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
             mapBrowser.Refresh();
+            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
             graphBoxBar.Refresh();
             graphBoxPie.Refresh();
 
-            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
-            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
-
             gifAnimated = false;
+            btnChart.Enabled = true;
 
-
-
-            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
+            //SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
 
             if (!splitChart.Panel2Collapsed) {
                 Graph_Start();
@@ -401,19 +404,22 @@ namespace analysis_paris {
 
                 // gif 시작!
                 Graph_Start();
-            } else if (chartCheck && !otherCheck) {
+            }
+            else if (chartCheck && !otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = true;
 
                 // gif 시작!
                 Graph_Start();
-            } else if (!chartCheck && otherCheck) {
+            }
+            else if (!chartCheck && otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = false;
                 splitChart.Panel2Collapsed = true;
                 TableMapBoard_Collapse();
-            } else {
+            }
+            else {
                 splitDataBoard.Panel1Collapsed = false;
                 splitDataBoard.Panel2Collapsed = true;
             }
@@ -427,10 +433,12 @@ namespace analysis_paris {
             if (tableCheck && !mapCheck) {
                 splitTableMap.Panel1Collapsed = false;
                 splitTableMap.Panel2Collapsed = true;
-            } else if (!tableCheck && mapCheck) {
+            }
+            else if (!tableCheck && mapCheck) {
                 splitTableMap.Panel2Collapsed = false;
                 splitTableMap.Panel1Collapsed = true;
-            } else {
+            }
+            else {
                 splitTableMap.Panel1Collapsed = false;
                 splitTableMap.Panel2Collapsed = false;
             }
@@ -463,12 +471,8 @@ namespace analysis_paris {
 
         // 진행 시켜 버튼 클릭 이벤트
         private void btnGoAhead_Click(object sender, EventArgs e) {
-
-            Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowGyongYeong));
-            splashthread.IsBackground = true;
-            splashthread.Start();
-            Thread.Sleep(2000);
-            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
+            GoAheadDialog goAheadDialog = new GoAheadDialog();
+            goAheadDialog.ShowDialog();
         }
     }
 }

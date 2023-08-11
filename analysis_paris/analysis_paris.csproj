@@ -70,6 +70,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.Process, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Process.4.3.0\lib\net461\System.Diagnostics.Process.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,6 +92,12 @@
     <Compile Include="View\Animation.cs" />
     <Compile Include="View\CheckableButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="View\CoverForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\CoverForm.Designer.cs">
+      <DependentUpon>CoverForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\DetailsItemControl.cs">
       <SubType>UserControl</SubType>
@@ -148,6 +159,9 @@
     <Compile Include="View\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\CoverForm.resx">
+      <DependentUpon>CoverForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\DetailsItemControl.resx">
       <DependentUpon>DetailsItemControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -315,6 +329,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_exit_y.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first_back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\go_ahead.jpg" />
+    <Content Include="Resources\graph_off.png" />
+    <Content Include="Resources\graph_on.png" />
+    <Content Include="Resources\list_off.png" />
+    <Content Include="Resources\list_on.png" />
+    <Content Include="Resources\map_off.png" />
+    <Content Include="Resources\map_on.png" />
+    <Content Include="Resources\table_off.png" />
+    <Content Include="Resources\table_on.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

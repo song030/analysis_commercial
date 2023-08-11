@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace analysis_paris.Factory {
     // ========================== Product 관련 클래스
@@ -13,15 +14,18 @@ namespace analysis_paris.Factory {
             if (username.ToUpper() == "KDT107") {
                 this.scriptPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
                 this.pythonPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
-            } else if (username.ToUpper() == "KDT99") {
+            }
+            else if (username.ToUpper() == "KDT99") {
                 this.scriptPath = @"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
                 this.pythonPath = @"C:\Users\kdt99\Desktop\analysis_paris\venv\Scripts\python.exe";
 
-            } else if (username.ToUpper() == "KDT117") {
+            }
+            else if (username.ToUpper() == "KDT117") {
                 this.scriptPath = @"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\python_controller.py";
                 this.pythonPath = @"C:\Users\kdt117\AppData\Local\Programs\Python\Python311\python.exe";
 
-            } else if (username.ToUpper() == "KDT112") {
+            }
+            else if (username.ToUpper() == "KDT112") {
                 this.scriptPath = @"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
                 this.pythonPath = @"C:\Users\kdt112\venv\Scripts\python.exe";
             }

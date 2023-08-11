@@ -55,11 +55,11 @@
             // 
             this.lblDetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailName.AutoSize = true;
-            this.lblDetailName.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailName.Location = new System.Drawing.Point(134, 13);
+            this.lblDetailName.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDetailName.Location = new System.Drawing.Point(131, 12);
             this.lblDetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailName.Name = "lblDetailName";
-            this.lblDetailName.Size = new System.Drawing.Size(38, 15);
+            this.lblDetailName.Size = new System.Drawing.Size(44, 17);
             this.lblDetailName.TabIndex = 0;
             this.lblDetailName.Text = "학교?";
             this.lblDetailName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -68,11 +68,11 @@
             // 
             this.lblDetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailValue.AutoSize = true;
-            this.lblDetailValue.Font = new System.Drawing.Font("나눔고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailValue.Location = new System.Drawing.Point(453, 13);
+            this.lblDetailValue.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.lblDetailValue.Location = new System.Drawing.Point(450, 12);
             this.lblDetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailValue.Name = "lblDetailValue";
-            this.lblDetailValue.Size = new System.Drawing.Size(42, 15);
+            this.lblDetailValue.Size = new System.Drawing.Size(48, 17);
             this.lblDetailValue.TabIndex = 1;
             this.lblDetailValue.Text = "몇 개?";
             this.lblDetailValue.TextAlign = System.Drawing.ContentAlignment.MiddleRight;

@@ -23,7 +23,9 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            this.components = new System.ComponentModel.Container();
             this.pictureSplash = new System.Windows.Forms.PictureBox();
+            this.opacityTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureSplash)).BeginInit();
             this.SuspendLayout();
             // 
@@ -39,6 +41,11 @@
             this.pictureSplash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureSplash.TabIndex = 0;
             this.pictureSplash.TabStop = false;
+            // 
+            // opacityTimer
+            // 
+            this.opacityTimer.Interval = 10;
+            this.opacityTimer.Tick += new System.EventHandler(this.opacityTimer_Tick);
             // 
             // SplashWindow
             // 
@@ -63,5 +70,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureSplash;
+        public System.Windows.Forms.Timer opacityTimer;
     }
 }
