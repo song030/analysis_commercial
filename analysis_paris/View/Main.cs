@@ -55,7 +55,7 @@ namespace analysis_paris {
 
             // 그래프 타이머 설정
             graphGifTimer = new System.Windows.Forms.Timer();
-            graphGifTimer.Interval = 1400;
+            graphGifTimer.Interval = 1500;
             graphGifTimer.Tick += Graph_Stop;
 
             graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
@@ -90,8 +90,7 @@ namespace analysis_paris {
         private void btnMenuCollapse_Click(object sender, EventArgs e) {
             if (splitMainBoard.Panel1Collapsed) {
                 splitMainBoard.Panel1Collapsed = false;
-            }
-            else {
+            } else {
                 splitMainBoard.Panel1Collapsed = true;
             }
         }
@@ -240,8 +239,7 @@ namespace analysis_paris {
             if (target.Checked) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitDataBoard.Panel1Collapsed = true;
-            }
-            else {
+            } else {
                 splitDataBoard.Panel1Collapsed = false;
             }
         }
@@ -264,8 +262,7 @@ namespace analysis_paris {
             if (target.Count == 0) {
                 ListItemControl listItemControl = new ListItemControl();
                 flowSearchList.Controls.Add(listItemControl);
-            }
-            else {
+            } else {
                 foreach (SellingArea item in target) {
                     ListItemControl itemControl = new ListItemControl(item);
                     itemControl.Click += ListItem_Click;
@@ -287,8 +284,7 @@ namespace analysis_paris {
             if (target.Count == 0) {
                 ListItemControl listItemControl = new ListItemControl();
                 flowSearchList.Controls.Add(listItemControl);
-            }
-            else {
+            } else {
                 foreach (Paris item in target) {
                     ListItemControl itemControl = new ListItemControl(item);
                     itemControl.Click += ListItem_Click;
@@ -363,11 +359,16 @@ namespace analysis_paris {
             Console.WriteLine($"Report_Update : {targetId}");
             Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
-            // 지도 및 그래프 갱신
             mapBrowser.Refresh();
             graphBoxBar.Refresh();
             graphBoxPie.Refresh();
+
+            graphBoxBar.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_bar.gif";
+            graphBoxPie.ImageLocation = "http://song030s.dothome.co.kr/Graph/test_pie.gif";
+
             gifAnimated = false;
+
+
 
             SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
 
@@ -400,22 +401,19 @@ namespace analysis_paris {
 
                 // gif 시작!
                 Graph_Start();
-            }
-            else if (chartCheck && !otherCheck) {
+            } else if (chartCheck && !otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = true;
 
                 // gif 시작!
                 Graph_Start();
-            }
-            else if (!chartCheck && otherCheck) {
+            } else if (!chartCheck && otherCheck) {
                 splitDataBoard.Panel2Collapsed = false;
                 splitChart.Panel1Collapsed = false;
                 splitChart.Panel2Collapsed = true;
                 TableMapBoard_Collapse();
-            }
-            else {
+            } else {
                 splitDataBoard.Panel1Collapsed = false;
                 splitDataBoard.Panel2Collapsed = true;
             }
@@ -429,12 +427,10 @@ namespace analysis_paris {
             if (tableCheck && !mapCheck) {
                 splitTableMap.Panel1Collapsed = false;
                 splitTableMap.Panel2Collapsed = true;
-            }
-            else if (!tableCheck && mapCheck) {
+            } else if (!tableCheck && mapCheck) {
                 splitTableMap.Panel2Collapsed = false;
                 splitTableMap.Panel1Collapsed = true;
-            }
-            else {
+            } else {
                 splitTableMap.Panel1Collapsed = false;
                 splitTableMap.Panel2Collapsed = false;
             }

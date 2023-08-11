@@ -87,6 +87,7 @@ class Graph:
             plt.bar([], [])
 
         elif graph_type == "pie":
+
             self.add = 100 // self.total_frame
             if 100 % self.total_frame > 0:
                 self.add += 1
@@ -215,6 +216,7 @@ class Graph:
                 colors = self.colors
 
             if frame >= self.total_frame * self.add:
+                plt.title("Score 분석")
                 plt.pie(list(self.original_data.values()), labels=models, autopct=autopct, shadow=True, colors=colors)
             else:
                 plt.pie(self.ani_data, labels=models, autopct=autopct, shadow=True, colors=colors)

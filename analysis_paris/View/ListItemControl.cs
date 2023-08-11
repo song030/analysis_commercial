@@ -65,8 +65,7 @@ namespace analysis_paris.View {
                 else
                     lblPOption.Text = $"{_sellingArea.SELLING_PRICE}만원";
                 lblType.ForeColor = Color.FromArgb(254, 206, 0);
-            }
-            else {
+            } else {
                 string deposit = $"{_sellingArea.DEPOSIT}";
                 if (_sellingArea.DEPOSIT < 1)
                     deposit = "협의";
@@ -86,6 +85,7 @@ namespace analysis_paris.View {
         // 모든 컨트롤에 클릭 이벤트 연결
         private void Control_Click(object sender, EventArgs e) {
             this.OnClick(e);
+
         }
     }
 }
