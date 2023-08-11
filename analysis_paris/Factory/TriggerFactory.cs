@@ -1,18 +1,41 @@
 ﻿using System;
-using System.Diagnostics;
 
 namespace analysis_paris.Factory {
     // ========================== Product 관련 클래스
     #region Product
     // IButton 추상 클래스
+    public class SystemPath {
+
+        public string scriptPath = string.Empty;
+        public string pythonPath = string.Empty;
+        public SystemPath() {
+            string username = Environment.UserName;
+            if (username.ToUpper() == "KDT107") {
+                this.scriptPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
+                this.pythonPath = @"C:\Users\KDT107\Desktop\analysis_commercial\analysis_paris\bin\Debug\python_controller.py";
+            } else if (username.ToUpper() == "KDT99") {
+                this.scriptPath = @"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
+                this.pythonPath = @"C:\Users\kdt99\Desktop\analysis_paris\venv\Scripts\python.exe";
+
+            } else if (username.ToUpper() == "KDT117") {
+                this.scriptPath = @"D:\SMJ\PYTHON\0410\Team\analysis_commericial\analysis_paris\bin\Debug\python_controller.py";
+                this.pythonPath = @"C:\Users\kdt117\AppData\Local\Programs\Python\Python311\python.exe";
+
+            } else if (username.ToUpper() == "KDT112") {
+                this.scriptPath = @"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
+                this.pythonPath = @"C:\Users\kdt112\venv\Scripts\python.exe";
+            }
+        }
+    }
+
     public abstract class ITrigger {
         // 파이썬 스크립트 실행 메소드
-        public string scriptPath = @"C:\Users\kdt99\source\repos\analysis_paris\analysis_paris\bin\Debug\python_controller.py";
+        public string scriptPath = new SystemPath().scriptPath;
 
         public string RunPythonScript(string scriptPath, string parameters) {
             // ProcessStartInfo 생성
             ProcessStartInfo startInfo = new ProcessStartInfo {
-                FileName = @"C:\Users\kdt99\Desktop\analysis_paris\venv\Scripts\python.exe",
+                FileName = new SystemPath().pythonPath,
                 Arguments = $"{scriptPath} {parameters}",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
@@ -38,7 +61,6 @@ namespace analysis_paris.Factory {
                 return output;
             }
         }
-
         // 팩토리에서 override 할 메소드
         public abstract string RunScript(string parameters);
     }
