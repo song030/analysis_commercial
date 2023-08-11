@@ -43,11 +43,11 @@ class Path:
             self.analysis_report_factory = r"D:\SMJ\PYTHON\0410\Analysiscommericial\analysis_paris\bin\Debug\analysis_report_factory.py"
             self.CONFIG_PATH = r"D:\SMJ\PYTHON\0410\Analysiscommericial\analysis_paris\bin\Debug\db_configuration.json"
         elif user_name == "kdt112":
-            self.debug_path = r"C:\Users\kdt112\Desktop\analysis_commercial\analysis_paris\bin\Debug"
-            self.python_interpreter = r"C:\Users\kdt112\AppData\Local\Programs\Python\Python311\python.exe"
-            self.db_connector_path = r"C:\Users\kdt112\Desktop\analysis_commercial\analysis_paris\bin\Debug\db_connector.py"
-            self.analysis_report_factory = r"C:\Users\kdt112\Desktop\analysis_commercial\analysis_paris\bin\Debug\analysis_report_factory.py"
-            self.CONFIG_PATH = r"C:\Users\kdt112\Desktop\analysis_commercial\analysis_paris\bin\Debug\db_configuration.json"
+            self.debug_path = r"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug"
+            self.python_interpreter = r"C:\Users\kdt112\venv\Scripts\python.exe"
+            self.db_connector_path = r"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug\db_connector.py"
+            self.analysis_report_factory = r"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug\analysis_report_factory.py"
+            self.CONFIG_PATH = r"C:\Users\kdt112\source\repos\si-yeon\analysis_paris\analysis_paris\bin\Debug\db_configuration.json"
 
 
 class Method:
