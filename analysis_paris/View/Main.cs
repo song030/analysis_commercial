@@ -330,7 +330,7 @@ namespace analysis_paris {
             flowDetails.Controls.Clear();
 
             //Loading_Start();    // 로딩 스레드 시작
-            Dictionary<string, Tuple<string, string>> dictionary_ = null;
+            Dictionary<string, Tuple<string, string>> dictionary_;
 
             // 기존 매장 항목 클릭 시
             if (target.SellingArea is null) {
