@@ -71,7 +71,7 @@ class Graph:
         self.interval = 0.01
         self.width = 0.25
         self.add = 0
-        self.delay_frame = 8
+        self.delay_frame = 5
         self.total_value = 100
 
         # 그래프 표현 색상
@@ -113,6 +113,8 @@ class Graph:
             for idx, value in enumerate(data):
                 value: pd.DataFrame
                 model = value[columns[0]][0]
+                if len(model) > 15:
+                    model = model[-15:]
                 df = value[columns[1:]]
                 value = df.values[0]
                 self.models.append(model)
@@ -173,7 +175,7 @@ class Graph:
             plt.legend(self.models, loc=(0.0, 1.02), ncol=3)
             plt.xlim(-1, self.ticks_size)
             plt.ylim(0.1, self.max_y)
-            plt.xticks(range(self.ticks_size), labels=self.ticks, fontsize=10, rotation=45)
+            plt.xticks(self.values_x, labels=self.ticks, fontsize=10, rotation=45)
             plt.tight_layout()
 
         elif self.graph_type == "pie":
