@@ -4,7 +4,11 @@ from analysis.make_dataset import MakeParisDatasets, MakeSellingDatasets
 
 class Scoring:
     def __init__(self, df: pd.DataFrame):
-        self.df = df
+        mpd = MakeParisDatasets()
+        datasets = mpd.get_dataset()
+        paris_df = pd.DataFrame(datasets)
+        self.paris_df = paris_df
+
 
     def get_score(self):
         # 점수 부여
@@ -13,22 +17,22 @@ class Scoring:
 
         #  plus 가중치
         plus_independents = [
-            self.df.월매출,
-            self.df.거주인구평균소득,
-            self.df.거주직장인평균소득,
-            self.df.거주인구,
-            self.df.학원_500,
-            self.df.여가시설_1000,
-            self.df.일일유동인구,
-            self.df.학교_1000,
-            self.df.학원_1000,
-            self.df.여가시설_500,
-            self.df.학교_500,
-            self.df.지하철역_500,
-            self.df.지하철역_1000,
-            self.df.버스정거장_500,
-            self.df.버스정거장_1000,
-            self.df.버스정거장_500,
+            self.paris_df.월매출,
+            self.paris_df.거주인구평균소득,
+            self.paris_df.거주직장인평균소득,
+            self.paris_df.거주인구,
+            self.paris_df.학원_500,
+            self.paris_df.여가시설_1000,
+            self.paris_df.일일유동인구,
+            self.paris_df.학교_1000,
+            self.paris_df.학원_1000,
+            self.paris_df.여가시설_500,
+            self.paris_df.학교_500,
+            self.paris_df.지하철역_500,
+            self.paris_df.지하철역_1000,
+            self.paris_df.버스정거장_500,
+            self.paris_df.버스정거장_1000,
+            self.paris_df.버스정거장_500,
         ]
 
         # 가중치 총합 1.2
@@ -59,8 +63,8 @@ class Scoring:
 
         # minus
         minus_independents = [
-            self.df.경쟁업체_500,
-            self.df.경쟁업체_1000
+            self.paris_df.경쟁업체_500,
+            self.paris_df.경쟁업체_1000
         ]
 
         # 가중치 총합 - 0.2
