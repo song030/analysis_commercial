@@ -175,6 +175,20 @@ class DBConnector:
         self.end_conn()
         return df
 
+    def get_dataset_by_latitude_and_longitude(self, latitude, longitude, mode_option):
+        tb_name = ""
+        if mode_option == 'paris':
+            tb_name = "TB_PARIS"
+        elif mode_option == 'selling_area':
+            tb_name = "TB_SELLING_AREA"
+        else:
+            tb_name = "TB_SEARCH_RESULT"
+        self.start_conn()
+        pstmt = f"""select * from "{tb_name}" where "LATITUDE" ={latitude} and "LONGITUDE" ={longitude} """
+        df = pd.read_sql(pstmt, self.engine)
+        self.end_conn()
+        return df
+
     def calculate_location_score(self, latitude, longitude):
         """
         계산해야할 테이블, 칼럼

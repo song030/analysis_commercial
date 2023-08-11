@@ -10,6 +10,7 @@ import random
 import sys
 
 import common
+import pandas as pd
 
 from Class.FTP import *
 from Class.Graph import Graph
@@ -89,16 +90,14 @@ class MapFactory:
 
         # ===== 좌표 검색 DB 함수 추가하기
         # self.result 값만 교체 해주면 됩니다.
-        # self.result = self.conn.get_selling_area_by_id(selling_area_id)
-        pass
+        self.result = self.conn.get_dataset_by_latitude_and_longitude(latitude, longitude, "location")
 
     @staticmethod
     def generate_random_colors(n):
-        colors = []
-        for _ in range(n):
-            random_color = "#" + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)])
-            colors.append(random_color)
-        return colors
+        colors = ["#2D3E50", "#8F44AD", "#2A80B9", "#27AE61", "#16A086", "#F1C40F", "#E77E23",
+                  "#E84C3D", "#C1392B", "#D25400", "#F39C11", "#34495E", "#9B58B5", "#3598DB", "#2DCC70", ]
+        random.shuffle(colors)
+        return colors[:n]
 
     def get_graph(self, mode_option):
         # todo : 소득 또는 인구를 꺾은선..?
@@ -116,7 +115,11 @@ class MapFactory:
             model1.at[0, 'PARIS_ID'] = "전체 평균"
             model2.at[0, 'PARIS_ID'] = "상위 10% 평균"
         else:
-            self.result.at[0, 'SELLING_AREA_ID'] = self.result.at[0, 'ADDRESS']
+            try:
+                self.result.at[0, 'SELLING_AREA_ID'] = self.result.at[0, 'ADDRESS']
+            except:
+                self.result['SELLING_AREA_ID'] = "검색 지역"
+
             model1.at[0, 'SELLING_AREA_ID'] = "전체 평균"
             model2.at[0, 'SELLING_AREA_ID'] = "상위 10% 평균"
 
@@ -164,30 +167,69 @@ class MapFactory:
         graph.save_gif(file_path)
         self.ftp.save_file(file_path)
 
-        # data = {
-        #     '유동인구': int(self.result['DAILY_FLOATING_POPULATION'][0]/10000),
-        #     '거주 인구': int(self.result['LIVING_POPULATION'][0]/10000),
-        #     '근로자 평균 임금': int(self.result['LIVING_WORKER_AVG_REVENUE'][0]/1000000),
-        #     '거주자 평균 임금': int(self.result['LIVING_POPULATION_AVG_REVENUE'][0]/1000000),
-        #     '버스정거장_500': int(self.result['STOP_COUNT_NEAR_500'][0]),
-        #     '버스정거장_1000': int(self.result['STOP_COUNT_NEAR_1000'][0]),
-        #     '여가시설_500': int(self.result['LEISURE_COUNT_NEAR_500'][0]),
-        #     '여가시설_1000': int(self.result['LEISURE_COUNT_NEAR_1000'][0]),
-        # }
-        # graph = Graph(700, 500, "pie")
-        # # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray', 'blue', 'red', 'green', 'purple'])
-        # # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
-        # graph.set_color(self.generate_random_colors(8))
-        # graph.set_data(data)
-        #
-        # file_path = self.file_path + r"\Graph\test_pie.gif"
-        # graph.save_gif(file_path)
-        # self.ftp.save_file(file_path)
-        # self.ftp.disconnect()
+        latitude = self.result.at[0, 'LATITUDE']
+        longitude = self.result.at[0, 'LONGITUDE']
+
+        score_data_frame = self.conn.get_dataset_by_latitude_and_longitude(latitude, longitude, mode_option)
+
+        print(score_data_frame)
+
+        score_data_frame.rename(columns={
+            "RIVAL_COUNT_NEAR_500": '경쟁업체_500',
+            "RIVAL_COUNT_NEAR_1000": '경쟁업체_1000',
+            "SCHOOL_COUNT_NEAR_500": '학교_500',
+            "SCHOOL_COUNT_NEAR_1000": '학교_1000',
+            "ACADEMY_COUNT_NEAR_500": '학원_500',
+            "ACADEMY_COUNT_NEAR_1000": '학원_1000',
+            "STATION_COUNT_NEAR_500": '지하철역_500',
+            "STATION_COUNT_NEAR_1000": '지하철역_1000',
+            "STOP_COUNT_NEAR_500": '버스정거장_500',
+            "STOP_COUNT_NEAR_1000": '버스정거장_1000',
+            "LEISURE_COUNT_NEAR_500": '여가시설_500',
+            "LEISURE_COUNT_NEAR_1000": '여가시설_1000',
+            "DAILY_FLOATING_POPULATION": '일일유동인구',
+            "LIVING_POPULATION": '거주인구',
+            "LIVING_WORKER_AVG_REVENUE": '거주직장인평균소득',
+            "LIVING_POPULATION_AVG_REVENUE": '거주인구평균소득',
+            "MONTHLY_SHOP_REVENUE": '월매출',
+        }, inplace=True)
+
+        from scoring import Scoring
+        percent_df = Scoring(score_data_frame).get_score_percent_df()
+        data = {
+            "월매출": percent_df['월매출'][0],
+            "거주인구평균소득": percent_df['거주인구평균소득'][0],
+            "거주직장인평균소득": percent_df['거주직장인평균소득'][0],
+            "거주인구": percent_df['거주인구'][0],
+            "일일유동인구": percent_df['일일유동인구'][0],
+            "학원_500": percent_df['학원_500'][0],
+            "학원_1000": percent_df['학원_1000'][0],
+            "학교_500": percent_df['학교_500'][0],
+            "학교_1000": percent_df['학교_1000'][0],
+            "여가시설_500": percent_df['여가시설_500'][0],
+            "여가시설_1000": percent_df['여가시설_1000'][0],
+            "지하철역_500": percent_df['지하철역_500'][0],
+            "지하철역_1000": percent_df['지하철역_1000'][0],
+            "버스정거장_500": percent_df['버스정거장_500'][0],
+            "버스정거장_1000": percent_df['버스정거장_1000'][0],
+        }
+
+        graph = Graph(700, 500, "pie")
+        # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray', 'blue', 'red', 'green', 'purple'])
+        # graph.set_color(['silver', 'gold', 'whitesmoke', 'lightgray'])
+        graph.set_color(self.generate_random_colors(8))
+        graph.set_data(data)
+
+        file_path = self.file_path + r"\Graph\test_pie.gif"
+        graph.save_gif(file_path)
+        self.ftp.save_file(file_path)
+        self.ftp.disconnect()
 
 
 if __name__ == '__main__':
     main()
     # factory = MapFactory()
-    # factory.result = factory.conn.get_selling_area_by_id(11)
-    # factory.get_graph('not_paris')
+    # pd.set_option('display.max_columns', None)
+    # pd.set_option('display.width', 1000)
+    # factory.result = factory.conn.get_dataset_by_latitude_and_longitude(37.8586710313174, 126.785827756748, "location")
+    # factory.get_graph('location')
