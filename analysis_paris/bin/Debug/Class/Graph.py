@@ -113,6 +113,8 @@ class Graph:
             for idx, value in enumerate(data):
                 value: pd.DataFrame
                 model = value[columns[0]][0]
+                if len(model) > 15:
+                    model = model[-15:]
                 df = value[columns[1:]]
                 value = df.values[0]
                 self.models.append(model)

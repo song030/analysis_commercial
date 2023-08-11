@@ -65,7 +65,7 @@ namespace analysis_paris.DAO {
             //resultDict.Add("LONGITUDE", new Tuple<string, string>("경도", this.LONGITUDE.ToString()));
             resultDict.Add("AREA_SIZE", new Tuple<string, string>("매장 크기", $"{this.AREA_SIZE}m²"));
             resultDict.Add("OPEN_DATE", new Tuple<string, string>("개업일자", this.OPEN_DATE.ToString()));
-            resultDict.Add("CLOSE_DATE", new Tuple<string, string>("폐업일자", this.CLOSE_DATE.ToString()));
+            //resultDict.Add("CLOSE_DATE", new Tuple<string, string>("폐업일자", this.CLOSE_DATE.ToString()));
             resultDict.Add("IS_OPEN_STATE", new Tuple<string, string>("개점 여부", this.IS_OPEN_STATE.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_500.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_1000.ToString()));

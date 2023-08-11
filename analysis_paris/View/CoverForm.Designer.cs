@@ -35,6 +35,7 @@
             this.BackgroundPic.Margin = new System.Windows.Forms.Padding(0);
             this.BackgroundPic.Name = "BackgroundPic";
             this.BackgroundPic.Size = new System.Drawing.Size(1296, 729);
+            this.BackgroundPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.BackgroundPic.TabIndex = 0;
             this.BackgroundPic.TabStop = false;
             this.BackgroundPic.Click += new System.EventHandler(this.BackgroundPic_Click);

@@ -44,7 +44,7 @@ namespace analysis_paris.Factory {
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
-                CreateNoWindow = false
+                CreateNoWindow = true
             };
 
             // Process 실행
@@ -97,7 +97,7 @@ namespace analysis_paris.Factory {
         }
     }
 
-    public class LocationInfo : ITrigger { // 좌표로 주변 정보?????  검색
+    public class LocationInfo : ITrigger { // 좌표로 주변 정보 검색
         public override string RunScript(string parameters) {
             string scriptParameter = $"get_location_information {parameters}";
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
@@ -115,7 +115,7 @@ namespace analysis_paris.Factory {
         }
     }
 
-    public class ParisByAddress : ITrigger { // 주소로 매물 검색
+    public class ParisByAddress : ITrigger { // 주소로 매장 검색
         public override string RunScript(string parameters) {
             string scriptParameter = $"find_paris_by_address {parameters}";
             string scriptResult = RunPythonScript(scriptPath, scriptParameter);
@@ -137,12 +137,7 @@ namespace analysis_paris.Factory {
     #endregion
 
     // ========================== Factory class
-    // Product (제품) 인터페이스
-    //public interface Trigger {
-    //    void RunScript();
-    //}
-
-    // 버튼 타입 열거형
+    // 트리거 타입 열거형
     public enum TriggerType {
         AllParis,
         AllSellingArea,
