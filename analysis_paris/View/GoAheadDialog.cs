@@ -1,6 +1,7 @@
 ﻿using analysis_paris.DAO;
 using analysis_paris.View;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -8,8 +9,6 @@ using System.Windows.Forms;
 
 namespace analysis_paris.Resources {
     public partial class GoAheadDialog : Form {
-
-        public bool goAhead;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidthEllipse, int nHeightEllipse);
@@ -31,28 +30,31 @@ namespace analysis_paris.Resources {
                 tableLayout.RowStyles[2].Height = 0;
             }
 
-            targetAddr.Text = string.Empty;
-            targetSize.Text = string.Empty;
-            targetPrice.Text = string.Empty;
+            targetAddr.Text = target.ADDRESS;
+            targetSize.Text = $"{target.AREA_SIZE}m²";
+            targetPrice.Text = $"{target.SELLING_PRICE:#,##} 만원";
+            targetDeposit.Text = $"{target.DEPOSIT:#,##} 만원";
+            targetRate.Text = $"{target.RATE_PER_MONTH:#,##} 만원";
+            targetPremium.Text = $"{target.PREMIUM:#,##} 만원";
+            targetRevenue.Text = $"{target.EXPECTED_SHOP_REVENUE:#,##} 원";
+            targetScore.Text = $"{target.SCORE} 점";
+            targetLink.Text = target.RELATION_LINK;
         }
 
         private void GoAheadDialog_Load(object sender, EventArgs e) {
             this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 6, 6));
-
-            goAhead = false;
-
             Thread splashthread = new Thread(new ThreadStart(SplashScreen.ShowGyeongYeong));
             splashthread.IsBackground = true;
             splashthread.Start();
         }
 
         private void btnConfirm_Click(object sender, EventArgs e) {
-            goAhead = true;
+            string url = targetLink.Text;
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
             this.Close();
         }
 
         private void btnCalcel_Click(object sender, EventArgs e) {
-            goAhead = false;
             this.Close();
         }
     }

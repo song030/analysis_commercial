@@ -45,7 +45,7 @@ namespace analysis_paris.View {
             lblAddr.Text = _paris.PARIS_ADDRESS;
             lblArea.Text = $"{_paris.AREA_SIZE}m²";
             lblPOption.Text = $"{_paris.MONTHLY_SHOP_REVENUE}";
-            lblScore.Text = $"55";
+            lblScore.Text = $"{_paris.SCORE}";
         }
 
         // SellingArea Constructor
@@ -56,7 +56,7 @@ namespace analysis_paris.View {
             lblType.Text = _sellingArea.SELLING_TYPE;
             lblAddr.Text = _sellingArea.ADDRESS;
             lblArea.Text = $"{_sellingArea.AREA_SIZE}m²";
-            lblScore.Text = $"55";
+            lblScore.Text = $"{_sellingArea.SCORE}";
 
             // 타입별 적용
             if (_sellingArea.SELLING_TYPE == "매매") {
@@ -65,7 +65,8 @@ namespace analysis_paris.View {
                 else
                     lblPOption.Text = $"{_sellingArea.SELLING_PRICE}만원";
                 lblType.ForeColor = Color.FromArgb(254, 206, 0);
-            } else {
+            }
+            else {
                 string deposit = $"{_sellingArea.DEPOSIT}";
                 if (_sellingArea.DEPOSIT < 1)
                     deposit = "협의";
@@ -85,7 +86,6 @@ namespace analysis_paris.View {
         // 모든 컨트롤에 클릭 이벤트 연결
         private void Control_Click(object sender, EventArgs e) {
             this.OnClick(e);
-
         }
     }
 }

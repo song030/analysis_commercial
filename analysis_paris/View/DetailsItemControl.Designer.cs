@@ -35,8 +35,8 @@
             // 
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55.85023F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44.14977F));
             this.tableLayoutPanel1.Controls.Add(this.lblDetailName, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblDetailValue, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.underBar, 0, 2);
@@ -56,7 +56,7 @@
             this.lblDetailName.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailName.AutoSize = true;
             this.lblDetailName.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailName.Location = new System.Drawing.Point(131, 12);
+            this.lblDetailName.Location = new System.Drawing.Point(157, 12);
             this.lblDetailName.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailName.Name = "lblDetailName";
             this.lblDetailName.Size = new System.Drawing.Size(44, 17);
@@ -69,7 +69,7 @@
             this.lblDetailValue.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lblDetailValue.AutoSize = true;
             this.lblDetailValue.Font = new System.Drawing.Font("나눔고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.lblDetailValue.Location = new System.Drawing.Point(450, 12);
+            this.lblDetailValue.Location = new System.Drawing.Point(475, 12);
             this.lblDetailValue.Margin = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.lblDetailValue.Name = "lblDetailValue";
             this.lblDetailValue.Size = new System.Drawing.Size(48, 17);
@@ -83,10 +83,10 @@
             this.underBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(172)))), ((int)(((byte)(172)))), ((int)(((byte)(172)))));
             this.tableLayoutPanel1.SetColumnSpan(this.underBar, 2);
             this.underBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.underBar.Location = new System.Drawing.Point(20, 35);
-            this.underBar.Margin = new System.Windows.Forms.Padding(20, 0, 0, 0);
+            this.underBar.Location = new System.Drawing.Point(0, 35);
+            this.underBar.Margin = new System.Windows.Forms.Padding(0);
             this.underBar.Name = "underBar";
-            this.underBar.Size = new System.Drawing.Size(621, 1);
+            this.underBar.Size = new System.Drawing.Size(641, 1);
             this.underBar.TabIndex = 2;
             // 
             // upperbar

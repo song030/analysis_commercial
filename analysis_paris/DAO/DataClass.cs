@@ -57,8 +57,8 @@ namespace analysis_paris.DAO {
 
         public Dictionary<string, Tuple<string, string>> GetAttributes() {
             Dictionary<string, Tuple<string, string>> resultDict = new Dictionary<string, Tuple<string, string>>();
-            //resultDict.Add("PARIS_ID", new Tuple<string, string>("파리바게뜨 아이디", this.PARIS_ID.ToString()));
             resultDict.Add("SCORE", new Tuple<string, string>("점수", this.PARIS_NAME.ToString()));
+            //resultDict.Add("PARIS_ID", new Tuple<string, string>("파리바게뜨 아이디", this.PARIS_ID.ToString()));
             resultDict.Add("PARIS_NAME", new Tuple<string, string>("상호명", this.PARIS_NAME.ToString()));
             resultDict.Add("PARIS_ADDRESS", new Tuple<string, string>("주소", this.PARIS_ADDRESS.ToString()));
             //resultDict.Add("LATITUDE", new Tuple<string, string>("위도", this.LATITUDE.ToString()));
@@ -69,13 +69,13 @@ namespace analysis_paris.DAO {
             resultDict.Add("IS_OPEN_STATE", new Tuple<string, string>("개점 여부", this.IS_OPEN_STATE.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_500.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString()));
-            resultDict.Add("MONTHLY_SHOP_SALE_TRANSACTION_COUNT", new Tuple<string, string>("추정 매달 거래 건수(건)", this.MONTHLY_SHOP_SALE_TRANSACTION_COUNT.ToString()));
-            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString()));
-            resultDict.Add("LIVING_WORKER_POPULATION", new Tuple<string, string>("반경 500m 내 거주 근로자 수(명)", this.LIVING_WORKER_POPULATION.ToString()));
-            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString()));
-            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString()));
-            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString()));
+            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString("#,##")));
+            resultDict.Add("MONTHLY_SHOP_SALE_TRANSACTION_COUNT", new Tuple<string, string>("추정 매달 거래 건수(건)", this.MONTHLY_SHOP_SALE_TRANSACTION_COUNT.ToString("#,##")));
+            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_WORKER_POPULATION", new Tuple<string, string>("반경 500m 내 거주 근로자 수(명)", this.LIVING_WORKER_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString("#,##")));
             resultDict.Add("ATTRACTION_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 관광명소 수(개)", this.ATTRACTION_COUNT_NEAR_500.ToString()));
             resultDict.Add("ATTRACTION_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 관광명소 수(개)", this.ATTRACTION_COUNT_NEAR_1000.ToString()));
             resultDict.Add("ACADEMY_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 학원 수(개)", this.ACADEMY_COUNT_NEAR_500.ToString()));
@@ -106,7 +106,7 @@ namespace analysis_paris.DAO {
             resultDict.Add("CROSSWALK_NEAR_DISTANCE", new Tuple<string, string>("가장 가까운 횡단보도 거리(m)", this.CROSSWALK_NEAR_DISTANCE.ToString()));
             resultDict.Add("LEISURE_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 여가시설 수(개)", this.LEISURE_COUNT_NEAR_500.ToString()));
             resultDict.Add("LEISURE_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 여가시설 수(개)", this.LEISURE_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("LEISURE_NEAR_DISTANCE", new Tuple<string, string>("가장 가까운 여가시설 거리(m)", this.LEISURE_NEAR_DISTANCE.ToString()));
+            resultDict.Add("LEISURE_NEAR_DISTANCE", new Tuple<string, string>("가장 가까운 여가시설 거리(m)", this.LEISURE_NEAR_DISTANCE.ToString("#,##")));
             return resultDict;
         }
     }
@@ -166,30 +166,30 @@ namespace analysis_paris.DAO {
         public Dictionary<string, Tuple<string, string>> GetAttributes() {
             Dictionary<string, Tuple<string, string>> resultDict = new Dictionary<string, Tuple<string, string>>();
             resultDict.Add("SCORE", new Tuple<string, string>("점수", this.SCORE.ToString()));
-            resultDict.Add("SELLING_AREA_ID ", new Tuple<string, string>("매물 아이디", this.SELLING_AREA_ID.ToString()));
+            //resultDict.Add("SELLING_AREA_ID ", new Tuple<string, string>("매물 아이디", this.SELLING_AREA_ID.ToString()));
             resultDict.Add("SELLING_TYPE", new Tuple<string, string>("매물 타입", this.SELLING_TYPE.ToString()));
             resultDict.Add("BUILDING_TYPE", new Tuple<string, string>("시설 분류", this.BUILDING_TYPE.ToString()));
-            resultDict.Add("CURRENT_STATE", new Tuple<string, string>("현재 상태", this.CURRENT_STATE.ToString()));
+            resultDict.Add("CURRENT_STATE", new Tuple<string, string>("현재 업종", this.CURRENT_STATE.ToString()));
             resultDict.Add("ADDRESS", new Tuple<string, string>("주소", this.ADDRESS.ToString()));
-            resultDict.Add("AREA_SIZE", new Tuple<string, string>("매물 면적", this.AREA_SIZE.ToString()));
-            resultDict.Add("FLOOR_INFO", new Tuple<string, string>("층수", this.FLOOR_INFO.ToString()));
-            resultDict.Add("TOTAL_FLOOR", new Tuple<string, string>("전체 층수", this.TOTAL_FLOOR.ToString()));
-            resultDict.Add("DEPOSIT", new Tuple<string, string>("보증금", this.DEPOSIT.ToString()));
+            resultDict.Add("AREA_SIZE", new Tuple<string, string>("매물 면적", this.AREA_SIZE.ToString("#,##")));
+            //resultDict.Add("FLOOR_INFO", new Tuple<string, string>("층수", this.FLOOR_INFO.ToString()));
+            //resultDict.Add("TOTAL_FLOOR", new Tuple<string, string>("전체 층수", this.TOTAL_FLOOR.ToString()));
+            resultDict.Add("DEPOSIT", new Tuple<string, string>("보증금", this.DEPOSIT.ToString("#,##")));
             resultDict.Add("RATE_PER_MONTH", new Tuple<string, string>("월세", this.RATE_PER_MONTH.ToString()));
-            resultDict.Add("PREMIUM", new Tuple<string, string>("권리금", this.PREMIUM.ToString()));
-            resultDict.Add("LATITUDE", new Tuple<string, string>("위도", this.LATITUDE.ToString()));
-            resultDict.Add("LONGITUDE", new Tuple<string, string>("경도", this.LONGITUDE.ToString()));
-            resultDict.Add("RELATION_LINK", new Tuple<string, string>("링크", this.RELATION_LINK.ToString()));
-            resultDict.Add("SELLING_PRICE", new Tuple<string, string>("매매가", this.SELLING_PRICE.ToString()));
+            resultDict.Add("PREMIUM", new Tuple<string, string>("권리금", this.PREMIUM.ToString("#,##")));
+            //resultDict.Add("LATITUDE", new Tuple<string, string>("위도", this.LATITUDE.ToString()));
+            //resultDict.Add("LONGITUDE", new Tuple<string, string>("경도", this.LONGITUDE.ToString()));
+            //resultDict.Add("RELATION_LINK", new Tuple<string, string>("링크", this.RELATION_LINK.ToString()));
+            resultDict.Add("SELLING_PRICE", new Tuple<string, string>("매매가", this.SELLING_PRICE.ToString("#,##")));
             resultDict.Add("RIVAL_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_500.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString()));
-            resultDict.Add("MONTHLY_SHOP_SALE_TRANSACTION_COUNT", new Tuple<string, string>("추정 매달 거래 건수(건)", this.MONTHLY_SHOP_SALE_TRANSACTION_COUNT.ToString()));
-            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString()));
-            resultDict.Add("LIVING_WORKER_POPULATION", new Tuple<string, string>("반경 500m 내 거주 근로자 수(명)", this.LIVING_WORKER_POPULATION.ToString()));
-            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString()));
-            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString()));
-            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString()));
+            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString("#,##")));
+            resultDict.Add("MONTHLY_SHOP_SALE_TRANSACTION_COUNT", new Tuple<string, string>("추정 매달 거래 건수(건)", this.MONTHLY_SHOP_SALE_TRANSACTION_COUNT.ToString("#,##")));
+            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_WORKER_POPULATION", new Tuple<string, string>("반경 500m 내 거주 근로자 수(명)", this.LIVING_WORKER_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString("#,##")));
             resultDict.Add("ATTRACTION_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 관광명소 수(개)", this.ATTRACTION_COUNT_NEAR_500.ToString()));
             resultDict.Add("ATTRACTION_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 관광명소 수(개)", this.ATTRACTION_COUNT_NEAR_1000.ToString()));
             resultDict.Add("ACADEMY_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 학원 수(개)", this.ACADEMY_COUNT_NEAR_500.ToString()));
@@ -212,12 +212,12 @@ namespace analysis_paris.DAO {
             resultDict.Add("LEISURE_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 여가시설 수(개)", this.LEISURE_COUNT_NEAR_1000.ToString()));
             resultDict.Add("MART_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 마트 수(개)", this.MART_COUNT_NEAR_500.ToString()));
             resultDict.Add("MART_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 마트 수(개)", this.MART_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("EXPECTED_SHOP_REVENUE", new Tuple<string, string>("예측 추정 월수익(원)", this.EXPECTED_SHOP_REVENUE.ToString()));
+            resultDict.Add("EXPECTED_SHOP_REVENUE", new Tuple<string, string>("예측 추정 월수익(원)", this.EXPECTED_SHOP_REVENUE.ToString("#,##")));
             return resultDict;
         }
     }
 
-    public class LocationInfo {
+    public class LocationInfoDTO {
 
         public int score { get; set; }
         public int SCHOOL_COUNT_NEAR_500 { get; set; }
@@ -254,16 +254,16 @@ namespace analysis_paris.DAO {
             resultDict.Add("STOP_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 버스정류장 수(개)", this.STOP_COUNT_NEAR_1000.ToString()));
             resultDict.Add("LEISURE_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 여가시설 수(개)", this.LEISURE_COUNT_NEAR_500.ToString()));
             resultDict.Add("LEISURE_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 여가시설 수(개)", this.LEISURE_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString()));
-            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString()));
-            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString()));
-            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString()));
-            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString()));
+            resultDict.Add("DAILY_FLOATING_POPULATION", new Tuple<string, string>("일일 유동 인구(명)", this.DAILY_FLOATING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION", new Tuple<string, string>("반경 500m 내 거주 인구(명)", this.LIVING_POPULATION.ToString("#,##")));
+            resultDict.Add("LIVING_WORKER_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 근로자 평균 소득(원)", this.LIVING_WORKER_AVG_REVENUE.ToString("#,##")));
+            resultDict.Add("LIVING_POPULATION_AVG_REVENUE", new Tuple<string, string>("반경 500m 내 거주 인구 평균 소득(원)", this.LIVING_POPULATION_AVG_REVENUE.ToString("#,##")));
+            resultDict.Add("MONTHLY_SHOP_REVENUE", new Tuple<string, string>("추정 매달 수익(원)", this.MONTHLY_SHOP_REVENUE.ToString("#,##")));
             resultDict.Add("RIVAL_COUNT_NEAR_500", new Tuple<string, string>("반경 500m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_500.ToString()));
             resultDict.Add("RIVAL_COUNT_NEAR_1000", new Tuple<string, string>("반경 1000m 내 경쟁업체 수(개)", this.RIVAL_COUNT_NEAR_1000.ToString()));
-            resultDict.Add("LATITUDE", new Tuple<string, string>("위도", this.LATITUDE.ToString()));
-            resultDict.Add("LONGITUDE", new Tuple<string, string>("경도", this.LONGITUDE.ToString()));
-            resultDict.Add("EXPECTED_SHOP_REVENUE", new Tuple<string, string>("예측 추정 월수익(원)", this.EXPECTED_SHOP_REVENUE.ToString()));
+            //resultDict.Add("LATITUDE", new Tuple<string, string>("위도", this.LATITUDE.ToString()));
+            //resultDict.Add("LONGITUDE", new Tuple<string, string>("경도", this.LONGITUDE.ToString()));
+            resultDict.Add("EXPECTED_SHOP_REVENUE", new Tuple<string, string>("예측 추정 월수익(원)", this.EXPECTED_SHOP_REVENUE.ToString("#,##")));
             return resultDict;
         }
     }
@@ -277,9 +277,9 @@ namespace analysis_paris.DAO {
             var sellingAreaList = JsonConvert.DeserializeObject<List<SellingArea>>(json_str);
             return sellingAreaList;
         }
-        public static LocationInfo JSONConverterLocationInfo(string json_str) {
+        public static LocationInfoDTO JSONConverterLocationInfo(string json_str) {
             // todo 
-            var locationInfo = JsonConvert.DeserializeObject<LocationInfo>(json_str);
+            var locationInfo = JsonConvert.DeserializeObject<LocationInfoDTO>(json_str);
             return locationInfo;
         }
 

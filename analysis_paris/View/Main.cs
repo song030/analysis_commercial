@@ -132,7 +132,7 @@ namespace analysis_paris {
             SearchArea_Clear();
 
             btnTable.Enabled = true;
-            btnChart.Enabled = true;
+            btnChart.Enabled = false;
 
             btnTable.Checked = false;
             btnMap.Checked = false;
@@ -163,13 +163,12 @@ namespace analysis_paris {
 
                 case 2:
                     // 좌표 검색 화면으로 전환
-                    mapBrowser.LoadUrl("http://song030s.dothome.co.kr/search.html");
+                    mapBrowser.LoadUrl("http://song030s.dothome.co.kr/Map/search.html");
                     layoutSearchResult.RowStyles[0].Height = 0;
                     layoutMapBox.RowStyles[0].Height = 60;
                     btnMap.Checked = true;
                     btnTable.Enabled = false;
                     btnMap.Enabled = false;
-                    btnChart.Enabled = false;
                     DataBoard_Collapse();
                     splitDataBoard.Panel1Collapsed = true;
                     break;
@@ -304,9 +303,27 @@ namespace analysis_paris {
             JavascriptResponse response = await mapBrowser.EvaluateScriptAsync("document.getElementById('clickLatlng').innerHTML");
             string targetLocation = response.Result.ToString();
             string resultString = Percussion.GetScriptResult(TriggerType.LocationInfo, targetLocation);
+            resultString = resultString.Replace(Environment.NewLine, string.Empty);
+            resultString.Trim();
 
-            // 좌표 검색 결과 => 현재 10점 만점에 10점
-            Console.WriteLine(resultString);
+            if (resultString.Equals("ADDRESS_ERROR")) {
+                SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
+                MessageBox.Show("주소를 조회할 수 없습니다.");
+                return;
+            }
+
+            flowDetails.Controls.Clear();
+
+            // 좌표 검색 결과
+            LocationInfoDTO locationInfo = JSONConverter.JSONConverterLocationInfo(resultString);
+            Dictionary<string, Tuple<string, string>> dictionary_ = locationInfo.GetAttributes();
+
+            foreach (var item in dictionary_) {
+                if (item.Value.Item2 != "0") {
+                    DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
+                    flowDetails.Controls.Add(detail);
+                }
+            }
 
             btnTable.Enabled = true;
             btnChart.Enabled = true;
@@ -319,7 +336,7 @@ namespace analysis_paris {
             mapBrowser.Refresh();
             DataBoard_Collapse();
 
-            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
+            Report_Update(-1, "LocationInfo");
         }
 
         // 리스트 아이템 클릭 시 주변 정보 리스트 업데이트
@@ -329,7 +346,7 @@ namespace analysis_paris {
 
             flowDetails.Controls.Clear();
 
-            //Loading_Start();    // 로딩 스레드 시작
+            Loading_Start();    // 로딩 스레드 시작
             Dictionary<string, Tuple<string, string>> dictionary_;
 
             // 기존 매장 항목 클릭 시
@@ -348,7 +365,7 @@ namespace analysis_paris {
             }
 
             foreach (var item in dictionary_) {
-                if (!item.Value.Item2.Contains("0")) {
+                if (item.Value.Item2 != "0") {
                     DetailsItemControl detail = new DetailsItemControl(item.Value.Item1, item.Value.Item2);
                     flowDetails.Controls.Add(detail);
                 }
@@ -357,8 +374,8 @@ namespace analysis_paris {
 
         // 선택 항목에 대한 지도 및 차트 갱신
         private void Report_Update(int targetId, string targetType) {
-            Console.WriteLine($"Report_Update : {targetId}");
-            //Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
+            if (targetId != -1)
+                Percussion.GetScriptResult(TriggerType.StoreReport, $"{targetId} {targetType}");
 
             mapBrowser.Refresh();
             graphBoxBar.Refresh();
@@ -369,7 +386,7 @@ namespace analysis_paris {
             gifAnimated = false;
             btnChart.Enabled = true;
 
-            //SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
+            SplashScreen.CloseSplashScreen();   // 로딩 스레드 종료
 
             if (!splitChart.Panel2Collapsed) {
                 Graph_Start();
@@ -466,7 +483,7 @@ namespace analysis_paris {
 
         // 진행 시켜 버튼 클릭 이벤트
         private void btnGoAhead_Click(object sender, EventArgs e) {
-            GoAheadDialog goAheadDialog = new GoAheadDialog();
+            GoAheadDialog goAheadDialog = new GoAheadDialog(targetArea);
             goAheadDialog.ShowDialog();
         }
     }
