@@ -143,6 +143,7 @@ class DBConnector:
         self.start_conn()
         pstmt = """select * from "TB_PARIS" """
         df = pd.read_sql(pstmt, self.engine)[:1]
+        df.sort_values(by="SCORE", inplace=True, ascending=False)
         print(df.to_json(orient='records'))
         self.end_conn()
         return df
@@ -169,6 +170,7 @@ class DBConnector:
         self.start_conn()
         pstmt = """select * from "TB_SELLING_AREA" """
         df = pd.read_sql(pstmt, self.engine)
+        df.sort_values(by="SCORE", inplace=True, ascending=False)
         print(df.to_json(orient='records'))
         self.end_conn()
         return df
@@ -523,6 +525,7 @@ class DBConnector:
             df = pd.read_sql(pstmt, self.engine, params=(params,))
             total_df = pd.concat([total_df, df])
             total_df.drop_duplicates(["PARIS_ID"], keep="first")
+        total_df.sort_values(by="SCORE", inplace=True, ascending=False)
         print(total_df.to_json(orient='records'))
         self.end_conn()
         return total_df
@@ -538,6 +541,7 @@ class DBConnector:
             df = pd.read_sql(pstmt, self.engine, params=(params,))
             total_df = pd.concat([total_df, df])
             total_df.drop_duplicates(["SELLING_AREA_ID"], keep="first")
+        total_df.sort_values(by="SCORE", inplace=True, ascending=False)
         print(total_df.to_json(orient='records'))
         self.end_conn()
         return total_df
